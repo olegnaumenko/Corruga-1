@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AM/FM hybrid</key>
+	<string>АМ/ЧМ гибридное растрирование (сочетание частотной и амплитудной модуляций)</string>
+	<key>abhesion</key>
+	<string>абгезия, разделение</string>
+	<key>abhesive</key>
+	<string>абгезивное средство, разделитель</string>
+	<key>abhesive paper</key>
+	<string>неслипаемая бумага</string>
+	<key>ablation mask layer</key>
+	<string>вымывной слой-маска</string>
+	<key>abnormality control</key>
+	<string>контроль аномальных явлений</string>
+	<key>abrade</key>
+	<string>истирать</string>
+	<key>abrading agent</key>
+	<string>абразив</string>
+	<key>abrasion</key>
+	<string>шлифовка</string>
+	<key>abrasion resistance</key>
+	<string>сопротивление истиранию</string>
+	<key>abrasion resistant</key>
+	<string>износоустойчивый</string>
+	<key>abrasive</key>
+	<string>абразив</string>
+	<key>absorbability,absorbency, absortive capacity</key>
+	<string>абсорбционная способность</string>
+	<key>absorbent</key>
+	<string>абсорбент</string>
+	<key>absorption</key>
+	<string>абсорбирование</string>
+	<key>accelerated ageing</key>
+	<string>ускоренное старение</string>
+	<key>accelerated storage test</key>
+	<string>ускоренное испытание на хранение</string>
+	<key>acceleration</key>
+	<string>ускорение</string>
+	<key>accept</key>
+	<string>выход</string>
+	<key>accept discharge</key>
+	<string>выход чистой массы</string>
+	<key>acceptance</key>
+	<string>приемка</string>
+	<key>accepted chips</key>
+	<string>отсортированная щепа</string>
+	<key>accepted stock, accepts</key>
+	<string>отсортированная масса</string>
+	<key>accordion fold, accordion pleat</key>
+	<string>укладка гармошкой</string>
+	<key>achromatic selection of color</key>
+	<string>ахроматический синтез цветов</string>
+	<key>acid </key>
+	<string>кислотный</string>
+	<key>acid size </key>
+	<string>высокосмоляной клей</string>
+	<key>acid-free </key>
+	<string>безкислотный</string>
+	<key>acoustic enclosure </key>
+	<string>звукоизолирующая кабина</string>
+	<key>across the fibre</key>
+	<string>поперек волокон</string>
+	<key>action flow </key>
+	<string>мероприятия</string>
+	<key>activate </key>
+	<string>активизировать</string>
+	<key>active ionization </key>
+	<string>активная ионизация</string>
+	<key>actuate </key>
+	<string>вводить в эксплуатацию</string>
+	<key>actuating switch</key>
+	<string>пусковое устройство</string>
+	<key>adaptive-control system</key>
+	<string>адаптивная система управления</string>
+	<key>add files </key>
+	<string>добавленные файлы</string>
+	<key>additional air </key>
+	<string>добавочный воздух</string>
+	<key>additional load </key>
+	<string>добавочная нагрузка</string>
+	<key>additives </key>
+	<string>добавки</string>
+	<key>adherence </key>
+	<string>клеящая способность</string>
+	<key>adhesion </key>
+	<string>адгезия</string>
+	<key>adhesion strength</key>
+	<string>прочность клеевого соединения</string>
+	<key>adhesive</key>
+	<string>клей, адгезионный слой</string>
+	<key>adhesive and anti-halation layer</key>
+	<string>адгезионный и противоореольный слой</string>
+	<key>adhesive applicator </key>
+	<string>узел нанесения клея</string>
+	<key>adhesive formulation </key>
+	<string>состав клея</string>
+	<key>adhesive joint </key>
+	<string>клеевое соединение</string>
+	<key>adhesive mechanism </key>
+	<string>клеевой узел</string>
+	<key>adhesive saver </key>
+	<string>восстановитель</string>
+	<key>adhesive trap</key>
+	<string>липкая система улавливания пыли</string>
+	<key>adhesives</key>
+	<string>добавки для мокрой части</string>
+	<key>adhessive contamination trap</key>
+	<string>липкая система улавливания пыли</string>
+	<key>adjustable gap</key>
+	<string>регулируемый зазор</string>
+	<key>adjusting screw</key>
+	<string>регулировочный винт</string>
+	<key>advance notification</key>
+	<string>предварительное уведомление</string>
+	<key>afforestation </key>
+	<string>облесение</string>
+	<key>after-shrinkage </key>
+	<string>дополнительная усадка</string>
+	<key>after-treatment </key>
+	<string>последующая обработка</string>
+	<key>ageing resistance </key>
+	<string>сопротивление старению</string>
+	<key>ageing test </key>
+	<string>испытание на старение</string>
+	<key>agitation </key>
+	<string>перемешивание</string>
+	<key>agitator</key>
+	<string>мешалка</string>
+	<key>air </key>
+	<string>воздух</string>
+	<key>air conditioner</key>
+	<string>установка для климатизации</string>
+	<key>air conveyors</key>
+	<string>пневматические транспортеры</string>
+	<key>air cooling</key>
+	<string>охлаждение воздухом</string>
+	<key>air cushion</key>
+	<string>воздушная подушка</string>
+	<key>air cylinder</key>
+	<string>пневмоцилиндр</string>
+	<key>air distributor pipe</key>
+	<string>распределительный воздуховод</string>
+	<key>air dryer</key>
+	<string>сушка воздухом</string>
+	<key>air filter</key>
+	<string>воздушный фильтр</string>
+	<key>air heater</key>
+	<string>нагреватель воздуха</string>
+	<key>air impermeability</key>
+	<string>воздухонепроницаемость</string>
+	<key>air in</key>
+	<string>воздух внутри</string>
+	<key>air intake</key>
+	<string>подача воздуха</string>
+	<key>air jet</key>
+	<string>воздушное сопло</string>
+	<key>air loading system</key>
+	<string>воздушная сиситема нагрузки</string>
+	<key>air make-up</key>
+	<string>приточная вентиляционная установка</string>
+	<key>air nozzle</key>
+	<string>воздушное сопло</string>
+	<key>air permeability</key>
+	<string>воздухопроницаемость</string>
+	<key>air permeability test</key>
+	<string>испытание на воздухопроницаемость</string>
+	<key>air permeability/porosity meter</key>
+	<string>прибор для определения воздухопроницаемости/ пористости</string>
+	<key>air pocket</key>
+	<string>воздушный карман</string>
+	<key>air pollution</key>
+	<string>загрязнение воздуха</string>
+	<key>air preheater</key>
+	<string>воздухоподогреватель</string>
+	<key>air relief</key>
+	<string>удаление воздуха</string>
+	<key>air return system</key>
+	<string>система рециркуляции воздуха</string>
+	<key>air supply</key>
+	<string>подача воздуха</string>
+	<key>air tube</key>
+	<string>воздуховод</string>
+	<key>air valve</key>
+	<string>воздушный клапан</string>
+	<key>air vent</key>
+	<string>воздуховыпускной (воздушный) клапан</string>
+	<key>air-actuated</key>
+	<string>управляемый воздухом</string>
+	<key>air-blade coater</key>
+	<string>меловальный станок с воздушным шабером</string>
+	<key>air-dried</key>
+	<string>высушенный на воздухе</string>
+	<key>air-impingement dryer</key>
+	<string>сопловая сушилка</string>
+	<key>airbag </key>
+	<string>воздушный мешок</string>
+	<key>airlock</key>
+	<string>воздушная разделительная камера</string>
+	<key>airproof</key>
+	<string>воздухонепроницаемый</string>
+	<key>airtight discharge valve</key>
+	<string>герметичный спускной вентиль</string>
+	<key>albatron mask layer</key>
+	<string>адгезионный слой</string>
+	<key>align</key>
+	<string>выравнивать (синхронизировать), «элайнить»</string>
+	<key>aligned sheet</key>
+	<string>отцентрованный лист</string>
+	<key>alignment</key>
+	<string>выравнивание, синхронизация, «элайнмент»</string>
+	<key>alignment element</key>
+	<string>приводочная метка</string>
+	<key>alignment station</key>
+	<string>станция центрирования</string>
+	<key>alkali</key>
+	<string>щелочь</string>
+	<key>alkali ratio</key>
+	<string>соотношение активных щелочей в щелоке</string>
+	<key>alkali-free</key>
+	<string>не содержащий щелочи</string>
+	<key>alkaline</key>
+	<string>щелочной</string>
+	<key>along the fibre</key>
+	<string>вдоль волокон</string>
+	<key>alpha</key>
+	<string>альфа</string>
+	<key>alpha and omega of corrugated board</key>
+	<string>альфа и омега гофрокартона</string>
+	<key>alpha-cellulose</key>
+	<string>альфа-целлюлоза</string>
+	<key>alpha-pulp</key>
+	<string>целлюлоза с высоким содержанием альфа-целлолозы</string>
+	<key>alternating impact test</key>
+	<string>испытание на циклический удар</string>
+	<key>aluminium profile</key>
+	<string>алюминиевый профиль</string>
+	<key>amines</key>
+	<string>амины</string>
+	<key>amplitude modulation (AM) screening</key>
+	<string>амплитудно-модулированное (AM) растрирование</string>
+	<key>analogue</key>
+	<string>аналоговый</string>
+	<key>analyser</key>
+	<string>анализатор</string>
+	<key>analysis</key>
+	<string>анализ</string>
+	<key>anatomy of a barcode</key>
+	<string>структура штрихкода</string>
+	<key>angle and shapes of cells</key>
+	<string>угол и формы ячеек</string>
+	<key>angular correction</key>
+	<string>угловая коррекция</string>
+	<key>aniline printing</key>
+	<string>анилиновая печать</string>
+	<key>anilox roll</key>
+	<string>анилоксовый (растровый) вал</string>
+	<key>anti-foaming agent</key>
+	<string>противопенная добавка</string>
+	<key>antiskid</key>
+	<string>противоскользящий</string>
+	<key>en-US</key>
+	<string>ru-RU</string>
+</dict>
+</plist>
