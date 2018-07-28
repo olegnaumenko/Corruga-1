@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
-        self.coordinator.viewController = (self.window?.rootViewController as! ViewController)
+        self.coordinator.navigationController = (self.window?.rootViewController as! UINavigationController)
         
         self.coordinator.appDidFinishLaunching(application)
         return true

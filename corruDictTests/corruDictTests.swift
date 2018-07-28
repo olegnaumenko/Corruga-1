@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import corruDict
+@testable import Corruga
 
 class corruDictTests: XCTestCase {
 

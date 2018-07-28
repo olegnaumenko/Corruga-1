@@ -31,13 +31,13 @@ class SpeechManager {
     
     private var pauseTimer:Timer?
 
-    init?(localeID:String) {
-        if let sp = SFSpeechRecognizer(locale: Locale(identifier: localeID)) {
-            self.speechRecognizer = sp
-        } else {
-            return nil
-        }
-    }
+//    init?(localeID:String) {
+//        if let sp = SFSpeechRecognizer(locale: Locale(identifier: localeID)) {
+//            self.speechRecognizer = sp
+//        } else {
+//            return nil
+//        }
+//    }
     
     deinit {
         self.pauseTimer?.invalidate()
@@ -119,7 +119,7 @@ class SpeechManager {
             }
             
             let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try audioSession.setMode(AVAudioSessionModeMeasurement)
             try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
             
@@ -190,6 +190,10 @@ class SpeechManager {
             recognitionTask.cancel()
             self.recognitionTask = nil
         }
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(AVAudioSessionCategoryAmbient)
+        try? audioSession.setActive(false)
     }
     
 }

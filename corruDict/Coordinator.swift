@@ -14,14 +14,29 @@ class Coordinator {
     var dictModel:DictModel!
     var dictModels:[DictModel] = []
     var speechManager:SpeechManager?
-    var viewController:ViewController? {
+    
+    var navigationController:UINavigationController? {
         didSet {
-            viewController?.dataSource = DataSource(storage: self.dictModel.storage)
-            viewController?.searchBlock = {
-                self.search(term: $0)
+            if let cnt = navigationController?.viewControllers.count,
+                cnt > 0, let vc = navigationController?.viewControllers[0] {
+                self.viewController = vc as? ViewController
             }
-            viewController?.voiceStartBlock = {
-                self.startVoiceSession()
+        }
+    }
+    
+    private var viewController:ViewController? {
+        didSet {
+            if let vc = viewController {
+                vc.dataSource = DataSource(storage: self.dictModel.storage)
+                vc.searchBlock = {
+                    self.search(term: $0)
+                }
+                vc.voiceStartBlock = {
+                    self.startVoiceSession()
+                }
+                vc.selectPrepareBlock = { indexPath, destinationVC in
+                    self.prepareDetailViewController(indexPath: indexPath, viewController: destinationVC)
+                }
             }
         }
     }
@@ -31,14 +46,19 @@ class Coordinator {
         print(self.dictModel.storage ?? "aaa")
     }
     
-    func startVoiceSession()
-    {
-        self.speechManager = SpeechManager(localeID: "en-US")
+    private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
+        if let dvc = viewController as? DetailViewController,
+            let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
+            dvc.viewModel = DetailViewModel(term:entry.entry, translation:entry.translation)
+        }
+    }
+    
+    private func startVoiceSession() {
+        self.speechManager = SpeechManager()//localeID: "en-US")
         self.speechManager?.startVoiceSession(localeID: "en-US", duration: 5, result: { (result, final) in
             print(result)
             print(final)
-            self.viewController?.searchTextField.text = result
-            self.viewController?.searchTextFieldTerm()
+            self.viewController?.searchTerm = result
         }, completion: { (error) in
             if (error != nil) {
                 print("ERROR!")
@@ -49,8 +69,7 @@ class Coordinator {
         })
     }
     
-    func search(term:String)
-    {
+    private func search(term:String) {
         if term.count > 0 {
             self.viewController?.dataSource?.displayedEntries = self.dictModel.storage.searchForTerms(term: term)
         } else {
