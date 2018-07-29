@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RpL-Pe-Tnq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RpL-Pe-Tnq">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -140,7 +141,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-rw-3bf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-rw-3bf">
                                 <rect key="frame" x="16" y="165.33333333333334" width="343" height="27.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -153,7 +154,7 @@
                                     <constraint firstAttribute="height" constant="1" id="LE2-0u-Og2"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8da-wc-dE1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8da-wc-dE1">
                                 <rect key="frame" x="16" y="238" width="343" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <color key="textColor" red="0.28191757550094332" green="0.28191757550094332" blue="0.28191757550094332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -185,6 +186,7 @@
                             <constraint firstItem="adr-7Y-niW" firstAttribute="leading" secondItem="yPu-2N-DcY" secondAttribute="leading" id="VQa-gk-9cg"/>
                             <constraint firstItem="adr-7Y-niW" firstAttribute="top" secondItem="9XZ-rw-3bf" secondAttribute="bottom" constant="24" id="WJf-hF-Ofj"/>
                             <constraint firstItem="adr-7Y-niW" firstAttribute="centerY" secondItem="pw1-er-5DB" secondAttribute="centerY" multiplier="0.63" id="d5H-zj-CJn"/>
+                            <constraint firstItem="Mc7-6X-afX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8da-wc-dE1" secondAttribute="bottom" constant="10" id="kg9-ee-cEy"/>
                             <constraint firstItem="Mc7-6X-afX" firstAttribute="bottom" secondItem="pw1-er-5DB" secondAttribute="bottom" constant="-16" id="ndF-gl-F50"/>
                             <constraint firstItem="pw1-er-5DB" firstAttribute="trailing" secondItem="Mc7-6X-afX" secondAttribute="trailing" constant="16" id="vDu-6g-fFy"/>
                         </constraints>

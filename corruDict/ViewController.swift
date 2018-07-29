@@ -45,15 +45,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = dataSource
-        self.tableView.delegate = self
         self.searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange), for: .editingChanged)
+        self.tableView.dataSource = dataSource
+        self.tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.selectRow(at: nil, animated: true, scrollPosition: UITableViewScrollPosition.none)
     }
     
     func refresh() {

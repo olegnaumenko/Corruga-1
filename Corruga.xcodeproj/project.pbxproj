@@ -138,6 +138,7 @@
 				7C06CB70210891F300FEEB52 /* Model */,
 				7C5D0049210889060025EF47 /* ViewController.swift */,
 				7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */,
+				7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */,
 				7C5D004B210889060025EF47 /* SecondViewController.swift */,
 				7CE03231210B8066001C9D78 /* en-ru.realm */,
 				7C5D004D210889060025EF47 /* Main.storyboard */,
@@ -145,7 +146,6 @@
 				7C5D0052210889080025EF47 /* LaunchScreen.storyboard */,
 				7C7F71032108CAC500F479DC /* en-ru.plist */,
 				7C5D0055210889080025EF47 /* Info.plist */,
-				7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */,
 			);
 			path = corruDict;
 			sourceTree = "<group>";
