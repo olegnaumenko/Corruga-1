@@ -24,9 +24,9 @@
 		7C5D0054210889080025EF47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5D0052210889080025EF47 /* LaunchScreen.storyboard */; };
 		7C5D005F210889080025EF47 /* corruDictTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D005E210889080025EF47 /* corruDictTests.swift */; };
 		7C7F71042108CAC600F479DC /* en-ru.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F71032108CAC500F479DC /* en-ru.plist */; };
+		7C9BE3A1210F805800E65AAC /* en-ru.realm in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BE3A0210F805800E65AAC /* en-ru.realm */; };
 		7CA4F64B210C51D50094C5B0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
-		7CE03232210B8075001C9D78 /* en-ru.realm in Resources */ = {isa = PBXBuildFile; fileRef = 7CE03231210B8066001C9D78 /* en-ru.realm */; };
 		7CE03234210B83A1001C9D78 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE03233210B83A1001C9D78 /* DataSource.swift */; };
 		7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEDBF96210BAF360087FEB5 /* Media.xcassets */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
@@ -65,9 +65,9 @@
 		7C5D005E210889080025EF47 /* corruDictTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corruDictTests.swift; sourceTree = "<group>"; };
 		7C5D0060210889080025EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C7F71032108CAC500F479DC /* en-ru.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "en-ru.plist"; sourceTree = "<group>"; };
+		7C9BE3A0210F805800E65AAC /* en-ru.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "en-ru.realm"; sourceTree = "<group>"; };
 		7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = corruDict/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		7CE03231210B8066001C9D78 /* en-ru.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "en-ru.realm"; sourceTree = "<group>"; };
 		7CE03233210B83A1001C9D78 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		7CEDBF96210BAF360087FEB5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		9EA1BE279A8F14B1A1D1E275 /* Pods-Corruga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.release.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,10 +140,10 @@
 				7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */,
 				7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */,
 				7C5D004B210889060025EF47 /* SecondViewController.swift */,
-				7CE03231210B8066001C9D78 /* en-ru.realm */,
 				7C5D004D210889060025EF47 /* Main.storyboard */,
 				7C5D0050210889080025EF47 /* Assets.xcassets */,
 				7C5D0052210889080025EF47 /* LaunchScreen.storyboard */,
+				7C9BE3A0210F805800E65AAC /* en-ru.realm */,
 				7C7F71032108CAC500F479DC /* en-ru.plist */,
 				7C5D0055210889080025EF47 /* Info.plist */,
 			);
@@ -271,8 +271,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CE03232210B8075001C9D78 /* en-ru.realm in Resources */,
 				7C7F71042108CAC600F479DC /* en-ru.plist in Resources */,
+				7C9BE3A1210F805800E65AAC /* en-ru.realm in Resources */,
 				7C5D0054210889080025EF47 /* LaunchScreen.storyboard in Resources */,
 				7C5D0051210889080025EF47 /* Assets.xcassets in Resources */,
 				7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */,
