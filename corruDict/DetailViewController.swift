@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     
     var speechSynth:AVSpeechSynthesizer?
     
-    var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US") {
+    var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US", entry: TranslationEntity()) {
         didSet {
             self.update()
         }

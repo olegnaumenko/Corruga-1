@@ -13,4 +13,5 @@ struct DetailViewModel {
     var term = ""
     var translation = ""
     var langID = "en-US"
+    var entry:TranslationEntity
 }

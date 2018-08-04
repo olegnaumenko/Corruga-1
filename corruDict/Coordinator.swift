@@ -54,10 +54,18 @@ class Coordinator {
     }
     
     private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
-        if let dvc = viewController as? DetailViewController,
-            let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
-            let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
-            dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID)
+        if let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
+            if let dvc = viewController as? DetailViewController
+            {
+                let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
+                dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry)
+            }
+            else if let dvc = viewController as? PageViewController
+            {
+                let dataSource = PageViewControllerDatasource(dictModel: self.dictModel)
+                dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
+                dvc.pageDataSource = dataSource
+            }
         }
     }
     

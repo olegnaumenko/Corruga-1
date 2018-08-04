@@ -68,7 +68,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="fyD-WN-vra" kind="show" id="3q5-nf-Ki4"/>
+                                            <segue destination="HG4-LF-zL2" kind="show" id="AkA-gU-McJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -122,45 +122,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZh-fa-sv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-303.19999999999999" y="-664.31784107946032"/>
+            <point key="canvasLocation" x="450" y="-664"/>
         </scene>
-        <!--Translation-->
+        <!--Detail-->
         <scene sceneID="Itr-hS-KQc">
             <objects>
-                <viewController title="Translation" id="fyD-WN-vra" customClass="DetailViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" title="Detail" id="fyD-WN-vra" customClass="DetailViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yPu-2N-DcY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lightweight recycled fluting internal steam distributor piping high pressure steam from boiler" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9XZ-rw-3bf">
-                                <rect key="frame" x="16" y="33" width="343" height="72"/>
+                                <rect key="frame" x="16" y="51" width="343" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adr-7Y-niW">
-                                <rect key="frame" x="0.0" y="129" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="147" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.27033390410958902" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="LE2-0u-Og2"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="744" text="пластина, изготовленная из жидкой фотополимеризационно-способной композиции" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8da-wc-dE1">
-                                <rect key="frame" x="16" y="150" width="343" height="143.5"/>
+                                <rect key="frame" x="16" y="168" width="343" height="143.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.28191757550094332" green="0.28191757550094332" blue="0.28191757550094332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mc7-6X-afX">
-                                <rect key="frame" x="239" y="549" width="120" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="235" y="613" width="124" height="38"/>
+                                <color key="backgroundColor" red="0.929132297" green="0.7777191001" blue="0.46133717369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                                 <state key="normal" title="Pronounce">
-                                    <color key="titleColor" red="0.78368892766497456" green="0.62556208907167099" blue="0.0058596506548291832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.83595732872588824" green="0.69803965834694814" blue="0.41725614236409714" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onPronounceButton:" destination="fyD-WN-vra" eventType="touchUpInside" id="yDx-Ya-fKy"/>
                                 </connections>
@@ -191,7 +197,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zge-04-XMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="-665.02463054187194"/>
+            <point key="canvasLocation" x="1922" y="-664"/>
+        </scene>
+        <!--Translations-->
+        <scene sceneID="uUc-Ns-scZ">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Translations" transitionStyle="scroll" pageSpacing="4" navigationOrientation="horizontal" spineLocation="none" id="HG4-LF-zL2" customClass="PageViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jBL-hM-u7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="-664"/>
         </scene>
     </scenes>
 </document>
