@@ -13,7 +13,7 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
 
     private let dictModel:DictModel
     var displayedEntries:Results<TranslationEntity>?
-    private var currentIndex:Int = 0
+    var currentIndex:Int = 0
     
     init(dictModel:DictModel) {
         self.dictModel = dictModel

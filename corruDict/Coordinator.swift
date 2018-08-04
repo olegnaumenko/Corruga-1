@@ -64,6 +64,7 @@ class Coordinator {
             {
                 let dataSource = PageViewControllerDatasource(dictModel: self.dictModel)
                 dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
+                dataSource.currentIndex = indexPath.row
                 dvc.pageDataSource = dataSource
             }
         }

@@ -21,7 +21,8 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if let vc = (self.dataSource as? PageViewControllerDatasource)?.viewControllerForIndex(index: 0) {
+        let ds = self.dataSource as! PageViewControllerDatasource
+        if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
             self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         }
         
