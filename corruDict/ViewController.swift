@@ -10,17 +10,25 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate {
 
-    @IBOutlet private var tableView:UITableView!
-    @IBOutlet var searchTextField:UITextField!
+    @IBOutlet private var tableView:UITableView?
+    @IBOutlet var searchTextField:UITextField?
     @IBOutlet private var voiceButton:UIButton!
+    @IBOutlet weak var langSwapButton: UIButton?
     
     var searchBlock:((String)->())?
     var voiceStartBlock:(()->())?
+    var languageSwapBlock:(()->())?
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
+    
+    var currentSearchTerm:String? {
+        get {
+            return self.searchTextField != nil ? self.searchTextField?.text : nil
+        }
+    }
     
     var searchTerm:String? {
         didSet {
-            self.searchTextField.text = searchTerm
+            self.searchTextField?.text = searchTerm
             self.searchTextFieldTerm()
         }
     }
@@ -45,10 +53,26 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchTextField.delegate = self
-        self.searchTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange), for: .editingChanged)
-        self.tableView.dataSource = dataSource
-        self.tableView.delegate = self
+        self.searchTextField?.delegate = self
+        self.searchTextField?.addTarget(self, action: #selector(ViewController.textFieldDidChange), for: .editingChanged)
+        self.tableView?.dataSource = dataSource
+        self.tableView?.delegate = self
+        
+        //add mic in search field:
+        /*
+         self.addSearchMicRightButton()
+        */
+    }
+    
+    func addSearchMicRightButton()
+    {
+        let micButton = UIButton(type: .custom)
+        micButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        micButton.setImage(UIImage(named: "Mic"), for: .normal)
+        micButton.backgroundColor = UIColor.lightGray
+        micButton.layer.cornerRadius = 3
+        self.searchTextField?.rightView = micButton
+        self.searchTextField?.rightViewMode = .always
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,11 +82,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.selectRow(at: nil, animated: true, scrollPosition: UITableViewScrollPosition.none)
+        self.tableView?.selectRow(at: nil, animated: true, scrollPosition: UITableViewScrollPosition.none)
     }
     
     func refresh() {
-        self.tableView.reloadData()
+        self.tableView?.reloadData()
+    }
+    
+    func setLanguagesLabel(label:String){
+        self.langSwapButton?.setTitle(label, for: .normal)
     }
 
     func voiceSessionEnded() {
@@ -70,15 +98,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     private func searchTextFieldTerm() {
-        self.searchBlock?(self.searchTextField.text ?? "")
+        self.searchBlock?(self.searchTextField?.text?.lowercased() ?? "")
     }
     
     // MARK: - Actions
     
     @IBAction func onVoiceButton(sender:UIButton) {
         sender.isEnabled = false
-        self.searchTextField.text = nil
-        self.searchTextField.resignFirstResponder()
+        self.searchTextField?.text = nil
+        self.searchTextField?.resignFirstResponder()
         
         self.voiceStartBlock?()
     }
@@ -86,7 +114,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @objc private func textFieldDidChange(sender:UITextField) {
         self.searchTextFieldTerm()
     }
-    
+
+    @IBAction func onLabguageSwapButton(_ sender: UIButton) {
+        self.languageSwapBlock?()
+    }
     
     // MARK: - Text Field Delegate
     
@@ -108,7 +139,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     // MARK: - Table View Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.searchTextField.resignFirstResponder()
+        self.searchTextField?.resignFirstResponder()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -116,7 +147,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell {
-            if let indexPath = self.tableView.indexPath(for: cell) {
+            if let indexPath = self.tableView?.indexPath(for: cell) {
                 self.selectPrepareBlock?(indexPath, segue.destination)
             }
         }

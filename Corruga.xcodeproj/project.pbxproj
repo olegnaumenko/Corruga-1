@@ -10,8 +10,11 @@
 		7C06CB722108923300FEEB52 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		7C06CB742108925800FEEB52 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB732108925800FEEB52 /* SpeechManager.swift */; };
 		7C06CB762108928000FEEB52 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* Coordinator.swift */; };
-		7C15EB62210B7A1300C304AC /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C15EB60210B7A1300C304AC /* Entry.swift */; };
-		7C15EB63210B7A1300C304AC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C15EB61210B7A1300C304AC /* Storage.swift */; };
+		7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */; };
+		7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11772115C7B100FB96A1 /* TermEntity.swift */; };
+		7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */; };
+		7C3A11802115CE3600FB96A1 /* en_US.realm in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A117F2115CE3200FB96A1 /* en_US.realm */; };
+		7C3A11812115CE3900FB96A1 /* ru_RU.realm in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A117E2115CE3200FB96A1 /* ru_RU.realm */; };
 		7C424CCC21088DED00D20563 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCB21088DED00D20563 /* SystemConfiguration.framework */; };
 		7C424CCE21088DF300D20563 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCD21088DF300D20563 /* Speech.framework */; };
 		7C424CD021088DFA00D20563 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCF21088DFA00D20563 /* AVFoundation.framework */; };
@@ -49,6 +52,11 @@
 		7C06CB752108928000FEEB52 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7C15EB60210B7A1300C304AC /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		7C15EB61210B7A1300C304AC /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageStorage.swift; sourceTree = "<group>"; };
+		7C3A11772115C7B100FB96A1 /* TermEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermEntity.swift; sourceTree = "<group>"; };
+		7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
+		7C3A117E2115CE3200FB96A1 /* ru_RU.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = ru_RU.realm; sourceTree = "<group>"; };
+		7C3A117F2115CE3200FB96A1 /* en_US.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = en_US.realm; sourceTree = "<group>"; };
 		7C424CCB21088DED00D20563 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7C424CCD21088DF300D20563 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		7C424CCF21088DFA00D20563 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -100,13 +108,24 @@
 		7C06CB70210891F300FEEB52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C15EB60210B7A1300C304AC /* Entry.swift */,
-				7C15EB61210B7A1300C304AC /* Storage.swift */,
+				7C3A11832115CEEB00FB96A1 /* obsolete */,
+				7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */,
+				7C3A11772115C7B100FB96A1 /* TermEntity.swift */,
+				7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */,
 				7CE03233210B83A1001C9D78 /* DataSource.swift */,
 				7C06CB712108923300FEEB52 /* DictModel.swift */,
 				7C06CB732108925800FEEB52 /* SpeechManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7C3A11832115CEEB00FB96A1 /* obsolete */ = {
+			isa = PBXGroup;
+			children = (
+				7C15EB60210B7A1300C304AC /* Entry.swift */,
+				7C15EB61210B7A1300C304AC /* Storage.swift */,
+			);
+			path = obsolete;
 			sourceTree = "<group>";
 		};
 		7C5D003B210889060025EF47 = {
@@ -143,6 +162,8 @@
 				7C5D004D210889060025EF47 /* Main.storyboard */,
 				7C5D0050210889080025EF47 /* Assets.xcassets */,
 				7C5D0052210889080025EF47 /* LaunchScreen.storyboard */,
+				7C3A117F2115CE3200FB96A1 /* en_US.realm */,
+				7C3A117E2115CE3200FB96A1 /* ru_RU.realm */,
 				7C9BE3A0210F805800E65AAC /* en-ru.realm */,
 				7C7F71032108CAC500F479DC /* en-ru.plist */,
 				7C5D0055210889080025EF47 /* Info.plist */,
@@ -275,8 +296,10 @@
 				7C9BE3A1210F805800E65AAC /* en-ru.realm in Resources */,
 				7C5D0054210889080025EF47 /* LaunchScreen.storyboard in Resources */,
 				7C5D0051210889080025EF47 /* Assets.xcassets in Resources */,
+				7C3A11802115CE3600FB96A1 /* en_US.realm in Resources */,
 				7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */,
 				7C5D004F210889060025EF47 /* Main.storyboard in Resources */,
+				7C3A11812115CE3900FB96A1 /* ru_RU.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,17 +360,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C15EB62210B7A1300C304AC /* Entry.swift in Sources */,
 				7C5D004C210889060025EF47 /* SecondViewController.swift in Sources */,
 				7C06CB742108925800FEEB52 /* SpeechManager.swift in Sources */,
 				7CE03234210B83A1001C9D78 /* DataSource.swift in Sources */,
 				7C06CB762108928000FEEB52 /* Coordinator.swift in Sources */,
 				7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */,
-				7C15EB63210B7A1300C304AC /* Storage.swift in Sources */,
+				7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */,
 				7CA4F64B210C51D50094C5B0 /* DetailViewController.swift in Sources */,
 				7C5D004A210889060025EF47 /* ViewController.swift in Sources */,
+				7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */,
 				7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
+				7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

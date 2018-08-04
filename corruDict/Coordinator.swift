@@ -11,8 +11,8 @@ import UIKit
 
 class Coordinator {
     
-    var dictModel:DictModel!
-    var dictModels:[DictModel] = []
+    var dictModel:DictModel
+    
     var speechManager:SpeechManager?
     
     var navigationController:UINavigationController? {
@@ -27,7 +27,7 @@ class Coordinator {
     private var viewController:ViewController? {
         didSet {
             if let vc = viewController {
-                vc.dataSource = DataSource(storage: self.dictModel.storage)
+                vc.dataSource = DataSource(dictModel: self.dictModel)
                 vc.searchBlock = {
                     self.search(term: $0)
                 }
@@ -37,19 +37,27 @@ class Coordinator {
                 vc.selectPrepareBlock = { indexPath, destinationVC in
                     self.prepareDetailViewController(indexPath: indexPath, viewController: destinationVC)
                 }
+                vc.languageSwapBlock = {
+                    self.dictModel.swapLanguages()
+                    self.search(term: vc.currentSearchTerm)
+                    vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
+                }
+                vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
+                self.search(term: "")
             }
         }
     }
     
     init() {
-        self.dictModel = DictModel(locale: "en-ru")
-        print(self.dictModel.storage ?? "aaa")
+        self.dictModel = DictModel(fromID: "en_US", toID: "ru_RU")
+        print(self.dictModel.fromStorage ?? "aaa")
     }
     
     private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
         if let dvc = viewController as? DetailViewController,
             let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
-            dvc.viewModel = DetailViewModel(term:entry.entry, translation:entry.translation)
+            let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
+            dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID)
         }
     }
     
@@ -69,11 +77,11 @@ class Coordinator {
         })
     }
     
-    private func search(term:String) {
-        if term.count > 0 {
-            self.viewController?.dataSource?.displayedEntries = self.dictModel.storage.searchForTerms(term: term)
+    private func search(term:String?) {
+        if let cnt = term?.count, cnt > 0 {
+            self.viewController?.dataSource?.displayedEntries = self.dictModel.fromStorage.searchForTerms(term: term!)
         } else {
-            self.viewController?.dataSource?.displayedEntries = self.dictModel.storage.allEntries()
+            self.viewController?.dataSource?.displayedEntries = self.dictModel.fromStorage.allTranslationEntities()
         }
         self.viewController?.refresh()
     }

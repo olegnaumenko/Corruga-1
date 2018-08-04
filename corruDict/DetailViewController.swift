@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     
     var speechSynth:AVSpeechSynthesizer?
     
-    var viewModel = DetailViewModel(term:"", translation:"") {
+    var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US") {
         didSet {
             self.update()
         }
@@ -42,7 +42,6 @@ class DetailViewController: UIViewController {
     
     private func pronounce()
     {
-        
         let asession = AVAudioSession.sharedInstance()
         
         do {
@@ -50,12 +49,12 @@ class DetailViewController: UIViewController {
                                      mode:AVAudioSessionModeDefault,
                                      options:[.defaultToSpeaker, .duckOthers])
             try asession.setActive(true, with: .notifyOthersOnDeactivation)
-        } catch {
-            print("could not configure avsession")
+        } catch let error {
+            print("could not configure avsession: \(error.localizedDescription)")
         }
         
         let utt = AVSpeechUtterance(string: self.translationLabel.text!)
-        utt.voice = AVSpeechSynthesisVoice(language: "ru-RU")
+        utt.voice = AVSpeechSynthesisVoice(language: self.viewModel.langID)
         self.speechSynth = AVSpeechSynthesizer.init()
         self.speechSynth?.delegate = self
         self.speechSynth?.speak(utt)

@@ -10,12 +10,33 @@ import Foundation
 
 class DictModel {
 
-    var storage:Storage!
+    var fromStorage:LanguageStorage
+    var toStorage:LanguageStorage
     
-    init(locale:String) {
-        self.storage = Storage(fileName: locale)
+    init(fromID:String, toID:String) {
+        fromStorage = LanguageStorage(fileName: fromID)
+        toStorage = LanguageStorage(fileName: toID)
     }
     
-
+    func swapLanguages()
+    {
+        let fromStorage = self.fromStorage
+        let toStorage = self.toStorage
+        self.fromStorage = toStorage
+        self.toStorage = fromStorage
+        
+//        print(self.toStorage.languageID)
+//        print(self.fromStorage.languageID)
+    }
     
+    func languagesLabel() -> String {
+        
+        if let fromLang = self.fromStorage.languageID.components(separatedBy: "_").first,
+            let toLang = self.toStorage.languageID.components(separatedBy: "_").first
+        {
+            return "\(fromLang.uppercased()) <-> \(toLang.uppercased())"
+        }
+        
+        return "XX <-> YY"
+    }
 }
