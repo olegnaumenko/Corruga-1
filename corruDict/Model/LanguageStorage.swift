@@ -89,7 +89,7 @@ class LanguageStorage
     
     func allTranslationEntities() -> Results<TranslationEntity>
     {
-        return realm.objects(TranslationEntity.self)
+        return realm.objects(TranslationEntity.self).sorted(byKeyPath: "stringValue", ascending: true)
     }
     
     func allEntities<S:Object>() -> Results<S>?

@@ -75,7 +75,6 @@
 		7C5D005E210889080025EF47 /* corruDictTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corruDictTests.swift; sourceTree = "<group>"; };
 		7C5D0060210889080025EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C7F71032108CAC500F479DC /* en-ru.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "en-ru.plist"; sourceTree = "<group>"; };
-		7C9BE3A0210F805800E65AAC /* en-ru.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "en-ru.realm"; sourceTree = "<group>"; };
 		7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = corruDict/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7CDC372B2116206C008B774C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -168,11 +167,9 @@
 				7CDC372B2116206C008B774C /* PageViewController.swift */,
 				7C5D004B210889060025EF47 /* SecondViewController.swift */,
 				7C5D004D210889060025EF47 /* Main.storyboard */,
-				7C5D0050210889080025EF47 /* Assets.xcassets */,
 				7C5D0052210889080025EF47 /* LaunchScreen.storyboard */,
 				7C3A117F2115CE3200FB96A1 /* en_US.realm */,
 				7C3A117E2115CE3200FB96A1 /* ru_RU.realm */,
-				7C9BE3A0210F805800E65AAC /* en-ru.realm */,
 				7C7F71032108CAC500F479DC /* en-ru.plist */,
 				7C5D0055210889080025EF47 /* Info.plist */,
 			);
@@ -191,6 +188,7 @@
 		7CEDBF93210BAEF50087FEB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C5D0050210889080025EF47 /* Assets.xcassets */,
 				7CEDBF96210BAF360087FEB5 /* Media.xcassets */,
 			);
 			path = Resources;
