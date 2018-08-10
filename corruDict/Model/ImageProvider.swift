@@ -33,7 +33,8 @@ class ImageProvider {
     }
     
     func randomImageName() -> String {
-        let index = Int.random(in: 0 ..< self.imageCount())
-        return self.imageNameAtIndex(index: index)
+        let index = Float(arc4random())/Float(UInt32.max) * Float(self.imageCount())
+//        let index = Int.random(in: 0 ..< self.imageCount())
+        return self.imageNameAtIndex(index: Int(index))
     }
 }

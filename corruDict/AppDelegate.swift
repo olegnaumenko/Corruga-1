@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        WSColourScheme.sharedInstance.colourScheme = WSCSchemeEucalyptus
+        WSColourScheme.sharedInstance.colourScheme = WSCSchemeCerulean
         
-        let baseCOlor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+        let baseCOlor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)//UIColor.white// 
         
         self.coordinator.navigationController = (self.window?.rootViewController as! UINavigationController)
         self.coordinator.navigationController?.navigationBar.barTintColor = baseCOlor
