@@ -16,11 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        WSColourScheme.sharedInstance.colourScheme = WSCSchemePicton
+        WSColourScheme.sharedInstance.colourScheme = WSCSchemeEucalyptus
         
-        self.window?.backgroundColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+        let baseCOlor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+        
         self.coordinator.navigationController = (self.window?.rootViewController as! UINavigationController)
-//        self.coordinator.navigationController?.navigationBar.barTintColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourThree)
+        self.coordinator.navigationController?.navigationBar.barTintColor = baseCOlor
+        self.window?.backgroundColor = baseCOlor
+        
         self.coordinator.appDidFinishLaunching(application)
         
         return true

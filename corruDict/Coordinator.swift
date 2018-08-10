@@ -58,7 +58,7 @@ class Coordinator {
             if let dvc = viewController as? DetailViewController
             {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
-                dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry)
+                dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:"")
             }
             else if let dvc = viewController as? PageViewController
             {

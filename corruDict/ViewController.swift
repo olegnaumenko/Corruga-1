@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet var searchTextField:UITextField?
     @IBOutlet private var voiceButton:UIButton!
     @IBOutlet weak var langSwapButton: UIButton?
+    @IBOutlet weak var headerView:UIView!
     
     var searchBlock:((String)->())?
     var voiceStartBlock:(()->())?
@@ -51,8 +52,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         super.init(coder: aDecoder)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = self.navigationController?.navigationBar.barTintColor
+        
         self.searchTextField?.delegate = self
         self.searchTextField?.addTarget(self, action: #selector(ViewController.textFieldDidChange), for: .editingChanged)
         self.tableView?.dataSource = dataSource
@@ -62,6 +70,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         /*
          self.addSearchMicRightButton()
         */
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
+    }
+    
+    @objc private func inputModeDidChange(n:Notification)
+    {
+        if let lang = self.searchTextField?.textInputMode?.primaryLanguage {
+            print(lang)
+        }
     }
     
     func addSearchMicRightButton()

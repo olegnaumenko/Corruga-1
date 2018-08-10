@@ -15,6 +15,8 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
     var displayedEntries:Results<TranslationEntity>?
     var currentIndex:Int = 0
     
+    private let imageProvider = ImageProvider()
+    
     init(dictModel:DictModel) {
         self.dictModel = dictModel
         super.init()
@@ -38,13 +40,13 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
         return nil
     }
     
-//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-//        return self.displayedEntries?.count ?? 0
-//    }
-//    
-//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-//        return currentIndex
-//    }
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return self.displayedEntries?.count ?? 0
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return currentIndex
+    }
     
     func viewControllerForIndex(index:Int) -> DetailViewController?
     {
@@ -54,7 +56,7 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
         let detailViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
         if let entry = self.displayedEntries?[index] {
             let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
-            detailViewController?.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry)
+            detailViewController?.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider.randomImageName())
             currentIndex = index
             return detailViewController
         }

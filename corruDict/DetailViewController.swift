@@ -14,10 +14,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var translationLabel: UILabel!
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var pronounceButton: UIButton!
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var photoLabel: UILabel!
     
     var speechSynth:AVSpeechSynthesizer?
     
-    var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US", entry: TranslationEntity()) {
+    var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US", entry: TranslationEntity(), imagePath:"") {
         didSet {
             self.update()
         }
@@ -25,12 +27,25 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pronounceButton.backgroundColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourFive)
+        self.photoLabel.textColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
         self.update()
     }
     
     private func update() {
         self.termLabel?.text = viewModel.term
         self.translationLabel?.text = viewModel.translation
+        self.photoLabel?.text = viewModel.imageName()
+        
+        if viewModel.imagePath != "" {
+            self.photoImageView?.image = UIImage(contentsOfFile: viewModel.imagePath)
+            self.photoImageView?.sizeToFit()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     @IBAction func onPronounceButton(_ sender: UIButton) {

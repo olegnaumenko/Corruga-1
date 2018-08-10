@@ -27,6 +27,9 @@
 		7C5D0054210889080025EF47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5D0052210889080025EF47 /* LaunchScreen.storyboard */; };
 		7C5D005F210889080025EF47 /* corruDictTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D005E210889080025EF47 /* corruDictTests.swift */; };
 		7C7F71042108CAC600F479DC /* en-ru.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F71032108CAC500F479DC /* en-ru.plist */; };
+		7C954170211CC54E00CDD270 /* CorrugaImages in Resources */ = {isa = PBXBuildFile; fileRef = 7C95416E211CC54E00CDD270 /* CorrugaImages */; };
+		7C954171211CC54E00CDD270 /* CorrugaImageThumbs in Resources */ = {isa = PBXBuildFile; fileRef = 7C95416F211CC54E00CDD270 /* CorrugaImageThumbs */; };
+		7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C954172211CC9AE00CDD270 /* ImageProvider.swift */; };
 		7CA4F64B210C51D50094C5B0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
 		7CDC372C2116206C008B774C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372B2116206C008B774C /* PageViewController.swift */; };
@@ -75,6 +78,9 @@
 		7C5D005E210889080025EF47 /* corruDictTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = corruDictTests.swift; sourceTree = "<group>"; };
 		7C5D0060210889080025EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C7F71032108CAC500F479DC /* en-ru.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "en-ru.plist"; sourceTree = "<group>"; };
+		7C95416E211CC54E00CDD270 /* CorrugaImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CorrugaImages; sourceTree = "<group>"; };
+		7C95416F211CC54E00CDD270 /* CorrugaImageThumbs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CorrugaImageThumbs; sourceTree = "<group>"; };
+		7C954172211CC9AE00CDD270 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = corruDict/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7CDC372B2116206C008B774C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				7CDC372D211620CD008B774C /* PageViewControllerDatasource.swift */,
 				7C06CB712108923300FEEB52 /* DictModel.swift */,
 				7C06CB732108925800FEEB52 /* SpeechManager.swift */,
+				7C954172211CC9AE00CDD270 /* ImageProvider.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,6 +195,8 @@
 		7CEDBF93210BAEF50087FEB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C95416E211CC54E00CDD270 /* CorrugaImages */,
+				7C95416F211CC54E00CDD270 /* CorrugaImageThumbs */,
 				7C5D0050210889080025EF47 /* Assets.xcassets */,
 				7CEDBF96210BAF360087FEB5 /* Media.xcassets */,
 			);
@@ -312,7 +321,9 @@
 				7C3A11802115CE3600FB96A1 /* en_US.realm in Resources */,
 				7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */,
 				7C5D004F210889060025EF47 /* Main.storyboard in Resources */,
+				7C954170211CC54E00CDD270 /* CorrugaImages in Resources */,
 				7C3A11812115CE3900FB96A1 /* ru_RU.realm in Resources */,
+				7C954171211CC54E00CDD270 /* CorrugaImageThumbs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +396,7 @@
 				7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */,
 				7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
+				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,
 				7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */,
