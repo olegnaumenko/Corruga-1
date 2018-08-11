@@ -10,10 +10,11 @@ import UIKit
 
 class PhotoViewController: UIViewController {
 
-    @IBOutlet private var photoImageView:UIImageView!
+    @IBOutlet var photoImageView:UIImageView!
     @IBOutlet private var titleLabel:UILabel!
     @IBOutlet private var descriptionLabel:UILabel!
     @IBOutlet private var closeButton:UIButton!
+    @IBOutlet private var scrollView:UIScrollView!
     
     var photoViewModel:PhotoViewModel = PhotoViewModel(image:nil, title:"", description:"") {
         didSet {
@@ -27,7 +28,7 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.scrollView.delegate = self
         let gr = UISwipeGestureRecognizer(target: self, action: #selector(self.onSwipe(sender:)))
         gr.direction = .down
         self.view.addGestureRecognizer(gr)
@@ -50,3 +51,9 @@ class PhotoViewController: UIViewController {
 
 }
 
+extension PhotoViewController:UIScrollViewDelegate
+{
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.photoImageView
+    }
+}
