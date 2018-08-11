@@ -17,6 +17,15 @@ class PageViewController: UIPageViewController {
         }
     }
     
+    var pageViewCoordinator:PageViewControllerCoordinator?
+    {
+        didSet {
+            self.pageDataSource = pageViewCoordinator?.pageViewDataSource
+        }
+    }
+    
+    private lazy var tapGestureReco = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,9 +34,14 @@ class PageViewController: UIPageViewController {
         if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
             self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         }
-        
+//        self.view.addGestureRecognizer(self.tapGestureReco)
     }
     
+    
+    @objc func onTap(sender: UITapGestureRecognizer)
+    {
+        
+    }
 
     /*
     // MARK: - Navigation

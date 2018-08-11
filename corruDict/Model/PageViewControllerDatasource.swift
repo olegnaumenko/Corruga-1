@@ -17,6 +17,8 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
     
     private let imageProvider = ImageProvider()
     
+    var didCreateDetailViewController:((DetailViewController)->())?
+    
     init(dictModel:DictModel) {
         self.dictModel = dictModel
         super.init()
@@ -53,12 +55,17 @@ class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
         if (index < 0 || index >= (self.displayedEntries?.count)!) {
             return nil
         }
-        let detailViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
-        if let entry = self.displayedEntries?[index] {
-            let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
-            detailViewController?.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider.randomImageName())
-            currentIndex = index
-            return detailViewController
+        if let detailViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+            
+            if let entry = self.displayedEntries?[index] {
+                let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
+                
+                detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider.randomImageName())
+                
+                currentIndex = index
+                self.didCreateDetailViewController?(detailViewController)
+                return detailViewController
+            }
         }
         return nil
     }

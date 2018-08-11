@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate {
+class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate {
 
     @IBOutlet private var tableView:UITableView?
     @IBOutlet var searchTextField:UITextField?
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
     }
     
-    var dataSource:DataSource? {
+    var dataSource:SearchResultTableDataSource? {
         didSet {
             if let tv = self.tableView {
                 tv.dataSource = dataSource
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         self.view.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
         self.searchTextField?.delegate = self
-        self.searchTextField?.addTarget(self, action: #selector(ViewController.textFieldDidChange), for: .editingChanged)
+        self.searchTextField?.addTarget(self, action: #selector(ListViewController.textFieldDidChange), for: .editingChanged)
         self.tableView?.dataSource = dataSource
         self.tableView?.delegate = self
         
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
          self.addSearchMicRightButton()
         */
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
     
     @objc private func inputModeDidChange(n:Notification)

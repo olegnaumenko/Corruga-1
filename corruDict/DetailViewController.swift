@@ -17,6 +17,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var photoLabel: UILabel!
     
+    private lazy var tapGestureReco = UITapGestureRecognizer(target: self, action: #selector(self.onPhotoTap(sender:)))
+    
+    var onPhotoTapped:(UIImage?)->() = {image in}
+    
     var speechSynth:AVSpeechSynthesizer?
     
     var viewModel = DetailViewModel(term:"", translation:"", langID:"en-US", entry: TranslationEntity(), imagePath:"") {
@@ -29,7 +33,18 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         self.pronounceButton.backgroundColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
         self.photoLabel.textColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
+        
+        self.photoImageView.isUserInteractionEnabled = true
+        self.photoImageView.addGestureRecognizer(self.tapGestureReco)
+        
         self.update()
+    }
+    
+    @objc func onPhotoTap(sender: UITapGestureRecognizer)
+    {
+        if (sender.state == .recognized) {
+            self.onPhotoTapped(self.photoImageView.image)
+        }
     }
     
     private func update() {

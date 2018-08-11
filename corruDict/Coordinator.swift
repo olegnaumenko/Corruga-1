@@ -19,15 +19,15 @@ class Coordinator {
         didSet {
             if let cnt = navigationController?.viewControllers.count,
                 cnt > 0, let vc = navigationController?.viewControllers[0] {
-                self.viewController = vc as? ViewController
+                self.viewController = vc as? ListViewController
             }
         }
     }
     
-    private var viewController:ViewController? {
+    private var viewController:ListViewController? {
         didSet {
             if let vc = viewController {
-                vc.dataSource = DataSource(dictModel: self.dictModel)
+                vc.dataSource = SearchResultTableDataSource(dictModel: self.dictModel)
                 vc.searchBlock = {
                     self.search(term: $0)
                 }
@@ -63,9 +63,10 @@ class Coordinator {
             else if let dvc = viewController as? PageViewController
             {
                 let dataSource = PageViewControllerDatasource(dictModel: self.dictModel)
+                let coordinator = PageViewControllerCoordinator(dataSource: dataSource)
                 dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
                 dataSource.currentIndex = indexPath.row
-                dvc.pageDataSource = dataSource
+                dvc.pageViewCoordinator = coordinator
             }
         }
     }
