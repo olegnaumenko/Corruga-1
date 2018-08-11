@@ -31,8 +31,8 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pronounceButton.backgroundColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
-        self.photoLabel.textColor = WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
+        self.pronounceButton.backgroundColor = Appearance.buttonBackgroundColor()
+        self.photoLabel.textColor = Appearance.secondaryTextColor()
         
         self.photoImageView.isUserInteractionEnabled = true
         self.photoImageView.addGestureRecognizer(self.tapGestureReco)

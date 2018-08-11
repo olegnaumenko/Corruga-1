@@ -16,12 +16,16 @@ class ImageProvider {
     private var imageNames:[String] = []
     
     init() {
-        scanImages()
+        self.scanImages()
     }
     
     func scanImages() {
-        let thumbs = Bundle.main.paths(forResourcesOfType: "jpg", inDirectory: ImageProvider.imagesDIR)
-        self.imageNames = thumbs
+        DispatchQueue.global().async {
+            let thumbs = Bundle.main.paths(forResourcesOfType: "jpg", inDirectory: ImageProvider.imagesDIR)
+            DispatchQueue.main.async {
+                self.imageNames = thumbs
+            }
+        }
     }
     
     func imageCount() -> Int {
@@ -33,7 +37,11 @@ class ImageProvider {
     }
     
     func randomImageName() -> String {
-        let index = Float(arc4random())/Float(UInt32.max) * Float(self.imageCount())
+        let imgCount = self.imageCount()
+        if imgCount == 0 {
+            return ""
+        }
+        let index = Float(arc4random())/Float(UInt32.max) * Float(imgCount)
 //        let index = Int.random(in: 0 ..< self.imageCount())
         return self.imageNameAtIndex(index: Int(index))
     }

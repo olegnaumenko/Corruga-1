@@ -15,6 +15,8 @@ class Coordinator {
     
     var speechManager:SpeechManager?
     
+    var imageProvider = ImageProvider()
+    
     var navigationController:UINavigationController? {
         didSet {
             if let cnt = navigationController?.viewControllers.count,
@@ -50,7 +52,6 @@ class Coordinator {
     
     init() {
         self.dictModel = DictModel(fromID: "en_US", toID: "ru_RU")
-        print(self.dictModel.fromStorage ?? "aaa")
     }
     
     private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
@@ -64,6 +65,7 @@ class Coordinator {
             {
                 let dataSource = PageViewControllerDatasource(dictModel: self.dictModel)
                 let coordinator = PageViewControllerCoordinator(dataSource: dataSource)
+                dataSource.imageProvider = self.imageProvider
                 dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
                 dataSource.currentIndex = indexPath.row
                 dvc.pageViewCoordinator = coordinator

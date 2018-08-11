@@ -32,6 +32,7 @@ class PhotoViewController: UIViewController {
         let gr = UISwipeGestureRecognizer(target: self, action: #selector(self.onSwipe(sender:)))
         gr.direction = .down
         self.view.addGestureRecognizer(gr)
+        self.view.backgroundColor = Appearance.darkAppColor()
     }
     
     func onSwipe(sender:UIGestureRecognizer) {

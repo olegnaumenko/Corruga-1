@@ -31,6 +31,7 @@
 		7C954170211CC54E00CDD270 /* CorrugaImages in Resources */ = {isa = PBXBuildFile; fileRef = 7C95416E211CC54E00CDD270 /* CorrugaImages */; };
 		7C954171211CC54E00CDD270 /* CorrugaImageThumbs in Resources */ = {isa = PBXBuildFile; fileRef = 7C95416F211CC54E00CDD270 /* CorrugaImageThumbs */; };
 		7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C954172211CC9AE00CDD270 /* ImageProvider.swift */; };
+		7C978F78211F101F00D1B165 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
 		7CA4F64B210C51D50094C5B0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
 		7CDC372C2116206C008B774C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372B2116206C008B774C /* PageViewController.swift */; };
@@ -84,6 +85,7 @@
 		7C95416E211CC54E00CDD270 /* CorrugaImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CorrugaImages; sourceTree = "<group>"; };
 		7C95416F211CC54E00CDD270 /* CorrugaImageThumbs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CorrugaImageThumbs; sourceTree = "<group>"; };
 		7C954172211CC9AE00CDD270 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		7C978F77211F101F00D1B165 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7CA4F64A210C51D50094C5B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = corruDict/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7CDC372B2116206C008B774C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				7CF5B4C8211634B5004F2FDA /* libs */,
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
+				7C978F77211F101F00D1B165 /* Appearance.swift */,
 				7C06CB752108928000FEEB52 /* Coordinator.swift */,
 				7C06CB70210891F300FEEB52 /* Model */,
 				7C5D0049210889060025EF47 /* ListViewController.swift */,
@@ -413,6 +416,7 @@
 				7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
+				7C978F78211F101F00D1B165 /* Appearance.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,
 				7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */,
