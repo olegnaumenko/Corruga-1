@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class SearchResultTableDataSource:NSObject, UITableViewDataSource
+class SearchTableDataSource:NSObject, UITableViewDataSource
 {
     static private let kCellID = "EntryCell"
     
@@ -28,7 +28,7 @@ class SearchResultTableDataSource:NSObject, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableDataSource.kCellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableDataSource.kCellID, for: indexPath)
         if let entry = self.displayedEntries?[indexPath.row] {
             cell.textLabel?.text = entry.stringValue
             cell.detailTextLabel?.text = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue

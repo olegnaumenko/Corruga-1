@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate {
+class ListViewController: UIViewController {
 
     @IBOutlet private var tableView:UITableView?
     @IBOutlet var searchTextField:UITextField?
@@ -20,6 +20,13 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     var voiceStartBlock:(()->())?
     var languageSwapBlock:(()->())?
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
+    var inputModeChangeBlock:((String)->())?
+    
+    var scrollManager:ScrollManager? {
+        didSet {
+            scrollManager?.delegate = self
+        }
+    }
     
     var currentSearchTerm:String? {
         get {
@@ -34,7 +41,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         }
     }
     
-    var dataSource:SearchResultTableDataSource? {
+    var dataSource:SearchTableDataSource? {
         didSet {
             if let tv = self.tableView {
                 tv.dataSource = dataSource
@@ -63,25 +70,31 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         
         self.searchTextField?.delegate = self
         self.searchTextField?.addTarget(self, action: #selector(ListViewController.textFieldDidChange), for: .editingChanged)
-        self.tableView?.dataSource = dataSource
-        self.tableView?.delegate = self
-        
+        self.tableView?.dataSource = self.dataSource
+
         //add mic in search field:
         /*
          self.addSearchMicRightButton()
         */
+        
+        if let tv = self.tableView, let rs = self.searchTextField {
+            self.scrollManager = ScrollManager(tableView: tv, responder: rs)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
     
     @objc private func inputModeDidChange(n:Notification)
     {
-        if let lang = self.searchTextField?.textInputMode?.primaryLanguage {
-            print(lang)
+        if let lang = self.searchTextField?.textInputMode?.primaryLanguage,
+            let count = self.searchTextField?.text?.count,
+            count == 0 {
+            
+            self.inputModeChangeBlock?(lang)
         }
     }
     
-    func addSearchMicRightButton()
+    private func addSearchMicRightButton()
     {
         let micButton = UIButton(type: .custom)
         micButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
@@ -102,6 +115,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         self.tableView?.selectRow(at: nil, animated: true, scrollPosition: UITableViewScrollPosition.none)
     }
     
+    //MARK: - Public
+    
     func refresh() {
         self.tableView?.reloadData()
     }
@@ -117,6 +132,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     private func searchTextFieldTerm() {
         self.searchBlock?(self.searchTextField?.text?.lowercased() ?? "")
     }
+    
     
     // MARK: - Actions
     
@@ -136,30 +152,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         self.languageSwapBlock?()
     }
     
-    // MARK: - Text Field Delegate
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if let cnt = self.searchTextField.text?.count, cnt == 0 {
-//            self.searchTextField.resignFirstResponder()
-//        }
-//    }
-    
-    // MARK: - Table View Delegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.searchTextField?.resignFirstResponder()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
+ 
     // MARK: - Navigation
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -171,3 +164,26 @@ class ListViewController: UIViewController, UITextFieldDelegate, UITableViewDele
      }
 }
 
+// MARK: - ListScrollManagerDelegate
+
+extension ListViewController : ScrollManagerDelegate {
+    
+    func scrollManagerTableviewCellTapped() {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+}
+
+// MARK: - Text Field Delegate
+
+extension ListViewController : UITextFieldDelegate {
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}

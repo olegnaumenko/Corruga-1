@@ -22,16 +22,16 @@ class PageViewControllerCoordinator
     }
     
     func configure(detailViewController:DetailViewController) {
-        detailViewController.onPhotoTapped = { image in
-            self.imageTappedInDetailView(image: image, callerVC:detailViewController)
+        detailViewController.onPhotoTapped = { imagePath in
+            self.imageTappedInDetailView(imagePath: imagePath, callerVC:detailViewController)
         }
     }
 
-    func imageTappedInDetailView(image:UIImage?, callerVC:UIViewController)
+    func imageTappedInDetailView(imagePath:String, callerVC:UIViewController)
     {
         if let photoVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController
         {
-            photoVC.photoViewModel = PhotoViewModel(image: image, title: "Image", description: "Super wooper description of the above super trooper image")
+            photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
             callerVC.present(photoVC, animated: true) {
                 
             }

@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
     
     private lazy var tapGestureReco = UITapGestureRecognizer(target: self, action: #selector(self.onPhotoTap(sender:)))
     
-    var onPhotoTapped:(UIImage?)->() = {image in}
+    var onPhotoTapped:(String)->() = {imagePath in}
     
     var speechSynth:AVSpeechSynthesizer?
     
@@ -43,7 +43,7 @@ class DetailViewController: UIViewController {
     @objc func onPhotoTap(sender: UITapGestureRecognizer)
     {
         if (sender.state == .recognized) {
-            self.onPhotoTapped(self.photoImageView.image)
+            self.onPhotoTapped(self.viewModel.imagePath)
         }
     }
     

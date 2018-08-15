@@ -29,7 +29,7 @@ class Coordinator {
     private var viewController:ListViewController? {
         didSet {
             if let vc = viewController {
-                vc.dataSource = SearchResultTableDataSource(dictModel: self.dictModel)
+                vc.dataSource = SearchTableDataSource(dictModel: self.dictModel)
                 vc.searchBlock = {
                     self.search(term: $0)
                 }
@@ -43,6 +43,16 @@ class Coordinator {
                     self.dictModel.swapLanguages()
                     self.search(term: vc.currentSearchTerm)
                     vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
+                }
+                vc.inputModeChangeBlock = { locale in
+                    if let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
+                        let bound = range.lowerBound;
+                        if bound == locale.startIndex {
+                            
+                            vc.languageSwapBlock?()
+                        }
+                    }
+            
                 }
                 vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
                 self.search(term: "")

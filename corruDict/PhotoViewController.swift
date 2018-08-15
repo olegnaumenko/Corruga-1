@@ -16,7 +16,7 @@ class PhotoViewController: UIViewController {
     @IBOutlet private var closeButton:UIButton!
     @IBOutlet private var scrollView:UIScrollView!
     
-    var photoViewModel:PhotoViewModel = PhotoViewModel(image:nil, title:"", description:"") {
+    var photoViewModel:PhotoViewModel = PhotoViewModel(imagePath:"", description:"") {
         didSet {
             if (self.view != nil) {
                 photoImageView.image = photoViewModel.photoImage

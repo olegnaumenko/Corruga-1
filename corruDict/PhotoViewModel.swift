@@ -12,31 +12,29 @@ import UIKit
 struct PhotoViewModel {
     
     var photoImage:UIImage? {
-        didSet {
-            
+        get {
+            return UIImage(contentsOfFile: self.photoImagePath)
         }
     }
     
-    var photoTitle:String {
-        didSet {
-            
+    var photoImagePath:String
+    
+    var photoTitle:String
+    {
+        get {
+            return self.photoImagePath.imageNameFromPath()
         }
-        
     }
     
-    var photoDescription:String {
-        didSet {
-            
-        }
-    }
+    var photoDescription:String
     
     var onImageSet:()->() = {}
     var onTitleSet:()->() = {}
     var onDescrSet:()->() = {}
     
-    init(image:UIImage?, title:String, description:String) {
-        photoTitle = title
+    init(imagePath:String, description:String) {
+//        photoTitle = title
         photoDescription = description
-        photoImage = image
+        photoImagePath = imagePath
     }
 }
