@@ -10,32 +10,26 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    var pageDataSource:PageViewDatasource?
-    {
+    var pageDataSource:PageViewDatasource? {
         didSet {
             self.dataSource = pageDataSource
         }
     }
     
-    var pageViewCoordinator:PageViewCoordinator?
-    {
+    var pageViewCoordinator:PageViewCoordinator? {
         didSet {
             self.pageDataSource = pageViewCoordinator?.pageViewDataSource
         }
     }
     
-    private lazy var tapGestureReco = UITapGestureRecognizer(target: self, action: #selector(self.onTap(sender:)))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         let ds = self.dataSource as! PageViewDatasource
         if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
             self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         }
         self.view.backgroundColor = Appearance.basicAppColor()
-//        self.view.addGestureRecognizer(self.tapGestureReco)
     }
     
     

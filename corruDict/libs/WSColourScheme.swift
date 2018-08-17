@@ -705,8 +705,8 @@ private func rgbArrayFromColour(colour: WSCSColour, scheme: WSCScheme) -> Array<
     var rgbString = String(describing: colours[scheme][colour])
     
     //Split the string into seperate red, green, and blue values and return the array
-    return rgbString.characters.split(separator: ",").map(String.init)
-    
+//    return rgbString.characters.split(separator: ",").map(String.init)
+    return rgbString.components(separatedBy: ",")
 }
 
 /*
