@@ -10,14 +10,14 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    var pageDataSource:PageViewControllerDatasource?
+    var pageDataSource:PageViewDatasource?
     {
         didSet {
             self.dataSource = pageDataSource
         }
     }
     
-    var pageViewCoordinator:PageViewControllerCoordinator?
+    var pageViewCoordinator:PageViewCoordinator?
     {
         didSet {
             self.pageDataSource = pageViewCoordinator?.pageViewDataSource
@@ -30,7 +30,7 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let ds = self.dataSource as! PageViewControllerDatasource
+        let ds = self.dataSource as! PageViewDatasource
         if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
             self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         }

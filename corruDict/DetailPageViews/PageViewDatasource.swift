@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class PageViewControllerDatasource: NSObject, UIPageViewControllerDataSource {
+class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
 
     private let dictModel:DictModel
     var displayedEntries:Results<TranslationEntity>?

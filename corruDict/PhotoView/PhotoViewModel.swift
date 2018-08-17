@@ -19,8 +19,7 @@ struct PhotoViewModel {
     
     var photoImagePath:String
     
-    var photoTitle:String
-    {
+    var photoTitle:String {
         get {
             return self.photoImagePath.imageNameFromPath()
         }
@@ -33,7 +32,6 @@ struct PhotoViewModel {
     var onDescrSet:()->() = {}
     
     init(imagePath:String, description:String) {
-//        photoTitle = title
         photoDescription = description
         photoImagePath = imagePath
     }

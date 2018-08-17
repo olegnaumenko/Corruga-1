@@ -20,7 +20,7 @@ class ListViewController: UIViewController {
     var voiceStartBlock:(()->())?
     var languageSwapBlock:(()->())?
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
-    var inputModeChangeBlock:((String)->())?
+    var inputModeChangeBlock:((String, String)->())?
     
     private var keyboardObserver:KeyboardPositionObserver?
     
@@ -95,13 +95,10 @@ class ListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
     
-    @objc private func inputModeDidChange(n:Notification)
-    {
+    @objc private func inputModeDidChange(n:Notification) {
         if let lang = self.searchTextField?.textInputMode?.primaryLanguage,
-            let count = self.searchTextField?.text?.count,
-            count == 0 {
-            
-            self.inputModeChangeBlock?(lang)
+            let text = self.searchTextField?.text {
+            self.inputModeChangeBlock?(lang, text)
         }
     }
     

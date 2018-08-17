@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class PageViewControllerCoordinator
+class PageViewCoordinator
 {
-    let pageViewDataSource:PageViewControllerDatasource
+    let pageViewDataSource:PageViewDatasource
     
-    init(dataSource:PageViewControllerDatasource) {
+    init(dataSource:PageViewDatasource) {
         self.pageViewDataSource = dataSource
         
         dataSource.didCreateDetailViewController =  { dvc in

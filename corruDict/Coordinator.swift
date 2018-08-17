@@ -42,8 +42,8 @@ class Coordinator {
                 vc.languageSwapBlock = {
                     self.swapLanguages(reSearch: true)
                 }
-                vc.inputModeChangeBlock = { locale in
-                    self.inputModeChange(locale: locale)
+                vc.inputModeChangeBlock = { locale, text in
+                    self.inputModeChange(locale: locale, text: text)
                 }
                 self.search(term: self.dictModel.currentSearchTerm)
             }
@@ -72,9 +72,10 @@ class Coordinator {
         }
     }
     
-    private func inputModeChange(locale:String) {
-        if let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
-            let bound = range.lowerBound;
+    private func inputModeChange(locale:String, text:String) {
+        if text.count == 0,
+            let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
+            let bound = range.lowerBound
             if bound == locale.startIndex {
                 self.viewController?.languageSwapBlock?()
             }
@@ -92,8 +93,8 @@ class Coordinator {
             }
             else if let dvc = viewController as? PageViewController
             {
-                let dataSource = PageViewControllerDatasource(dictModel: self.dictModel)
-                let coordinator = PageViewControllerCoordinator(dataSource: dataSource)
+                let dataSource = PageViewDatasource(dictModel: self.dictModel)
+                let coordinator = PageViewCoordinator(dataSource: dataSource)
                 dataSource.imageProvider = self.imageProvider
                 dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
                 dataSource.currentIndex = indexPath.row
