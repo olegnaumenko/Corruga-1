@@ -11,6 +11,7 @@
 		7C06CB742108925800FEEB52 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB732108925800FEEB52 /* SpeechManager.swift */; };
 		7C06CB762108928000FEEB52 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* Coordinator.swift */; };
 		7C29C92F21271FD600D22D66 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 7C29C92E21271FD600D22D66 /* data */; };
+		7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */; };
 		7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */; };
 		7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11772115C7B100FB96A1 /* TermEntity.swift */; };
 		7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */; };
@@ -62,6 +63,7 @@
 		7C15EB60210B7A1300C304AC /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		7C15EB61210B7A1300C304AC /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		7C29C92E21271FD600D22D66 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPositionObserver.swift; sourceTree = "<group>"; };
 		7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageStorage.swift; sourceTree = "<group>"; };
 		7C3A11772115C7B100FB96A1 /* TermEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermEntity.swift; sourceTree = "<group>"; };
 		7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				7C5D0049210889060025EF47 /* ListViewController.swift */,
 				7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */,
 				7C53379221243A9000465EF1 /* ScrollManager.swift */,
+				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
 			);
 			path = SearchList;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */,
 				7CF3B463211EEA1F00CFDFFF /* PhotoViewModel.swift in Sources */,
 				7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */,
+				7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */,
 				7C72D111211EF27B00CDAD47 /* PageViewControllerCoordinator.swift in Sources */,
 				7C5D004A210889060025EF47 /* ListViewController.swift in Sources */,
 				7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */,

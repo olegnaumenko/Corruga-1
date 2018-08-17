@@ -22,6 +22,8 @@ class ListViewController: UIViewController {
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
     var inputModeChangeBlock:((String)->())?
     
+    private var keyboardObserver:KeyboardPositionObserver?
+    
     var scrollManager:ScrollManager? {
         didSet {
             scrollManager?.delegate = self
@@ -65,6 +67,13 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { (height) in
+            if var contentInset = self.tableView?.contentInset {
+                contentInset.bottom = CGFloat(height);
+                self.tableView?.contentInset = contentInset
+            }
+        })
         
         self.view.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
