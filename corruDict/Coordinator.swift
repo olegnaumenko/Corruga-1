@@ -40,32 +40,51 @@ class Coordinator {
                     self.prepareDetailViewController(indexPath: indexPath, viewController: destinationVC)
                 }
                 vc.languageSwapBlock = {
-                    self.dictModel.swapLanguages()
-                    self.search(term: vc.currentSearchTerm)
-                    vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
+                    self.swapLanguages(reSearch: true)
                 }
                 vc.inputModeChangeBlock = { locale in
-                    if let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
-                        let bound = range.lowerBound;
-                        if bound == locale.startIndex {
-                            
-                            vc.languageSwapBlock?()
-                        }
-                    }
-            
+                    self.inputModeChange(locale: locale)
                 }
-                vc.setLanguagesLabel(label: self.dictModel.languagesLabel())
-                self.search(term: "")
+                self.search(term: self.dictModel.currentSearchTerm)
             }
         }
     }
     
+    
     init() {
         self.dictModel = DictModel(fromID: "en_US", toID: "ru_RU")
+        
+        self.dictModel.dictResultsChanged = { results in
+            self.viewController?.dataSource?.displayedEntries = results
+            self.viewController?.refresh()
+        }
+        
+        self.dictModel.dictLanguagesSwapped = {
+            self.viewController?.setLanguagesLabel()
+        }
+    }
+    
+    
+    private func swapLanguages(reSearch:Bool) {
+        self.dictModel.swapLanguages()
+        if (reSearch) {
+            self.search(term: self.dictModel.currentSearchTerm)
+        }
+    }
+    
+    private func inputModeChange(locale:String) {
+        if let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
+            let bound = range.lowerBound;
+            if bound == locale.startIndex {
+                self.viewController?.languageSwapBlock?()
+            }
+        }
     }
     
     private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
+        
         if let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
+            
             if let dvc = viewController as? DetailViewController
             {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
@@ -99,15 +118,9 @@ class Coordinator {
         })
     }
     
-    private func search(term:String?) {
-        if let cnt = term?.count, cnt > 0 {
-            self.viewController?.dataSource?.displayedEntries = self.dictModel.fromStorage.searchForTerms(term: term!)
-        } else {
-            self.viewController?.dataSource?.displayedEntries = self.dictModel.fromStorage.allTranslationEntities()
-        }
-        self.viewController?.refresh()
+    private func search(term:String) {
+        self.dictModel.currentSearchTerm = term
     }
-    
     
     
     

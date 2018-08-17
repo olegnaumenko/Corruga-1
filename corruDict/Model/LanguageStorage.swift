@@ -15,11 +15,16 @@ class LanguageStorage
     var realm:Realm
     
     static let realmExtension = "realm"
+    static let realmDirectory = "data"
     
     init(fileName:String) {
         
         self.languageID = fileName
-        let url = Bundle.main.url(forResource: fileName, withExtension: LanguageStorage.realmExtension)
+        
+        let url = Bundle.main.url(forResource: fileName,
+                                  withExtension: LanguageStorage.realmExtension,
+                                  subdirectory: LanguageStorage.realmDirectory)
+        
         let config = Realm.Configuration.init(fileURL: url, inMemoryIdentifier: nil,
                                               syncConfiguration: nil,
                                               encryptionKey: nil,

@@ -39,5 +39,13 @@ class SearchTableDataSource:NSObject, UITableViewDataSource
         return cell
     }
     
-    
+    func languagesLabel() -> String {
+        if let fromLang = self.dictModel.fromStorage.languageID.components(separatedBy: "_").first,
+            let toLang = self.dictModel.toStorage.languageID.components(separatedBy: "_").first
+        {
+            return "\(fromLang.uppercased()) <-> \(toLang.uppercased())"
+        }
+        
+        return "XX <-> YY"
+    }
 }

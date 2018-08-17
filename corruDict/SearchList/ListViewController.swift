@@ -81,6 +81,8 @@ class ListViewController: UIViewController {
             self.scrollManager = ScrollManager(tableView: tv, responder: rs)
         }
         
+        self.setLanguagesLabel()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
     
@@ -121,8 +123,10 @@ class ListViewController: UIViewController {
         self.tableView?.reloadData()
     }
     
-    func setLanguagesLabel(label:String){
-        self.langSwapButton?.setTitle(label, for: .normal)
+    func setLanguagesLabel() {
+        if let label = self.dataSource?.languagesLabel() {
+            self.langSwapButton?.setTitle(label, for: .normal)
+        }
     }
 
     func voiceSessionEnded() {

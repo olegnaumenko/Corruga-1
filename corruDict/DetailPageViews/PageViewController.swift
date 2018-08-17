@@ -34,6 +34,7 @@ class PageViewController: UIPageViewController {
         if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
             self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         }
+        self.view.backgroundColor = Appearance.basicAppColor()
 //        self.view.addGestureRecognizer(self.tapGestureReco)
     }
     

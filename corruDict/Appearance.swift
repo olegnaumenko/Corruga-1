@@ -29,4 +29,13 @@ class Appearance
     static func buttonBackgroundColor() -> UIColor {
         return  WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
     }
+    
+    static func setPageIndicatorColor() {
+//        let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+        
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = .black
+        appearance.currentPageIndicatorTintColor = .red
+        appearance.backgroundColor = UIColor.darkGray
+    }
 }
