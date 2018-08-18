@@ -10,33 +10,15 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    var pageDataSource:PageViewDatasource? {
-        didSet {
-            self.dataSource = pageDataSource
-        }
-    }
-    
-    var pageViewCoordinator:PageViewCoordinator? {
-        didSet {
-            self.pageDataSource = pageViewCoordinator?.pageViewDataSource
-        }
+    deinit {
+        print("Page Controller deinit")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let ds = self.dataSource as! PageViewDatasource
-        if let vc = ds.viewControllerForIndex(index: ds.currentIndex) {
-            self.setViewControllers([vc], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
-        }
         self.view.backgroundColor = Appearance.basicAppColor()
     }
     
-    
-    @objc func onTap(sender: UITapGestureRecognizer)
-    {
-        
-    }
 
     /*
     // MARK: - Navigation

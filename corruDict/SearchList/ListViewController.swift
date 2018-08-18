@@ -22,7 +22,7 @@ class ListViewController: UIViewController {
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
     var inputModeChangeBlock:((String, String)->())?
 
-    
+    private let footerLabel = UILabel(frame: CGRect.init())
     private var keyboardObserver:KeyboardPositionObserver?
     
     var scrollManager:ScrollManager? {
@@ -47,13 +47,13 @@ class ListViewController: UIViewController {
     
     // MARK: - Init
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -62,33 +62,52 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { (height) in
-            if var contentInset = self.tableView?.contentInset {
-                contentInset.bottom = CGFloat(height);
-                self.tableView?.contentInset = contentInset
-            }
-        })
-        
-        self.view.backgroundColor = self.navigationController?.navigationBar.barTintColor
-        
         self.searchTextField?.delegate = self
         self.searchTextField?.text = searchTerm
-        
         self.searchTextField?.addTarget(self, action: #selector(ListViewController.textFieldDidChange), for: .editingChanged)
+        
         self.tableView?.dataSource = self.dataSource
-
+        self.tableView?.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
+        
+        //colors
+        self.tableView?.backgroundColor = Appearance.basicAppColor()
+        self.view.backgroundColor = Appearance.basicAppColor()
+        
+        self.updateLanguagesLabel()
+        
         //add mic in search field:
         /*
          self.addSearchMicRightButton()
         */
         
+        // listen for scrolling
         if let tv = self.tableView, let rs = self.searchTextField {
             self.scrollManager = ScrollManager(tableView: tv, responder: rs)
         }
-        
-        self.setLanguagesLabel()
-        
+        //listen for keyboard position
+        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: {[weak self] (height) in
+            if var contentInset = self?.tableView?.contentInset {
+                contentInset.bottom = CGFloat(height);
+                self?.tableView?.contentInset = contentInset
+            }
+        })
+        //listen for text input mode change
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
+    }
+    
+    private func configureTableViewFooler(label:UILabel) -> (UIView) {
+        var rect = CGRect.zero
+        rect.size = CGSize(width: self.view.frame.size.width, height: 55)
+        label.frame = rect
+        label.textAlignment = .center
+        label.backgroundColor = Appearance.fooretBackgroundColor()
+        label.textColor = Appearance.footerTextColor()
+        label.font = Appearance.footerFont()
+        return label
+    }
+    
+    private func updateFooter() {
+        self.footerLabel.text = self.dataSource?.footerTotal()
     }
     
     @objc private func inputModeDidChange(n:Notification) {
@@ -98,8 +117,7 @@ class ListViewController: UIViewController {
         }
     }
     
-    private func addSearchMicRightButton()
-    {
+    private func addSearchMicRightButton() {
         let micButton = UIButton(type: .custom)
         micButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         micButton.setImage(UIImage(named: "Mic"), for: .normal)
@@ -123,9 +141,10 @@ class ListViewController: UIViewController {
     
     func refresh() {
         self.tableView?.reloadData()
+        self.updateFooter()
     }
     
-    func setLanguagesLabel() {
+    func updateLanguagesLabel() {
         if let label = self.dataSource?.languagesLabel() {
             self.langSwapButton?.setTitle(label, for: .normal)
         }

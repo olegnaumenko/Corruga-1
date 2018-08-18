@@ -48,8 +48,6 @@ class PhotoViewController: UIViewController {
     func close() {
         self.dismiss(animated: true, completion: nil)
     }
-
-
 }
 
 extension PhotoViewController:UIScrollViewDelegate

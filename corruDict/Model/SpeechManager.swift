@@ -6,10 +6,9 @@
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
-import Foundation
 import Speech
 
-protocol SpeechManagerDelegate {
+protocol SpeechManagerDelegate:class {
     
     func speechManagedDidFailAuth(reason:String)
     func speechManagedDidFail(reason:String)
@@ -20,7 +19,7 @@ protocol SpeechManagerDelegate {
 
 class SpeechManager {
     
-    var delegate:SpeechManagerDelegate?
+    weak var delegate:SpeechManagerDelegate?
     
     private var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -57,12 +56,14 @@ class SpeechManager {
             }
         }
         
-        self.requestMicAccess { (allowed) in
+        self.requestMicAccess { [unowned self] (allowed) in
             if allowed {
-                self.requestAuth { (authorized, errorString) in
+                self.requestAuth { [unowned self] (authorized, errorString) in
                     if (authorized) {
                         do {
-                            try self.startRecordingSession(duration: duration, resultBlock: result, completion: completion)
+                            try self.startRecordingSession(duration: duration,
+                                                           resultBlock: result,
+                                                           completion: completion)
                         } catch {
                             let errorString = "error starting recorder"
                             self.delegate?.speechManagedDidFail(reason: errorString)
@@ -84,7 +85,7 @@ class SpeechManager {
     {
         SFSpeechRecognizer.requestAuthorization { authStatus in
 
-            OperationQueue.main.addOperation {
+            OperationQueue.main.addOperation { [unowned self] in
                 
                 var alertMsg:String? = nil
                 
@@ -134,7 +135,8 @@ class SpeechManager {
             // A recognition task is used for speech recognition sessions
             // A reference for the task is saved so it can be cancelled
             
-            recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest)
+            { [unowned self] result, error in
                 
                 var isFinal = false
                 
@@ -150,9 +152,10 @@ class SpeechManager {
                     self.delegate?.speechManagerFoundResult(result:resultString , final: isFinal)
                     resultBlock(resultString, isFinal)
                     
-                    self.pauseTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                        self.stopVoiceSession()
-                    })
+                    self.pauseTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false)
+                    { [weak self] (_) in
+                        self?.stopVoiceSession()
+                    }
                 }
                 
                 if error != nil || isFinal {
@@ -164,11 +167,13 @@ class SpeechManager {
                     self.delegate?.speechManagerDidStopRecording(error: error)
                     completion(error)
                 }
-                
             }
             
             let recordingFormat = inputNode.outputFormat(forBus: 0)
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            inputNode.installTap(onBus: 0,
+                                 bufferSize: 1024,
+                                 format: recordingFormat)
+            { [unowned self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
                 self.recognitionRequest?.append(buffer)
             }
             
@@ -186,8 +191,8 @@ class SpeechManager {
         audioEngine.stop()
         recognitionRequest?.endAudio()
         // Cancel the previous task if it's running
-        if let recognitionTask = recognitionTask {
-            recognitionTask.cancel()
+        if let recoTask = recognitionTask {
+            recoTask.cancel()
             self.recognitionTask = nil
         }
         

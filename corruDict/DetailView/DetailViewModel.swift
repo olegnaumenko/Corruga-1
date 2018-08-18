@@ -16,8 +16,7 @@ struct DetailViewModel {
     var entry:TranslationEntity
     var imagePath:String = ""
     
-    func imageName() -> String
-    {
+    func imageName() -> String {
         let nsstring = NSString(string: imagePath).lastPathComponent.replacingOccurrences(of: ".jpg", with: "")
         return nsstring
     }

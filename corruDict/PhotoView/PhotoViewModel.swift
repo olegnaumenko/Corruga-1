@@ -6,26 +6,22 @@
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct PhotoViewModel {
     
-    var photoImage:UIImage? {
-        get {
+    var photoImage:UIImage? { get {
             return UIImage(contentsOfFile: self.photoImagePath)
         }
     }
     
-    var photoImagePath:String
-    
-    var photoTitle:String {
-        get {
+    var photoTitle:String { get {
             return self.photoImagePath.imageNameFromPath()
         }
     }
     
-    var photoDescription:String
+    private(set) var photoImagePath:String
+    private(set) var photoDescription:String
     
     var onImageSet:()->() = {}
     var onTitleSet:()->() = {}

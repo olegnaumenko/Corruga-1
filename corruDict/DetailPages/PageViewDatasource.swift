@@ -11,17 +11,21 @@ import RealmSwift
 
 class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
 
+    var currentIndex:Int
+    private var imageProvider:ImageProvider?
+    private let storyboard:UIStoryboard
     private let dictModel:DictModel
-//    var displayedEntries:Results<TranslationEntity>?
-    var currentIndex:Int = 0
     
-    var imageProvider:ImageProvider?
-    
-    var didCreateDetailViewController:((DetailViewController)->())?
-    
-    init(dictModel:DictModel) {
+    init(dictModel:DictModel, storyboard:UIStoryboard, imageProvider:ImageProvider? = nil, currentIndex:Int = 0) {
         self.dictModel = dictModel
+        self.currentIndex = currentIndex
+        self.storyboard = storyboard
+        self.imageProvider = imageProvider
         super.init()
+    }
+    
+    deinit {
+        print("Page Datasource deinit")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -55,18 +59,18 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         if (index < 0 || index >= (self.dictModel.searchResults?.count)!) {
             return nil
         }
-        if let detailViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+        if let detailViewController = self.storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
             
-            if let entry = self.dictModel.searchResults?[index], let imageProvider = self.imageProvider {
+            if let entry = self.dictModel.searchResults?[index] {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
                 
-                detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:imageProvider.randomImageName())
+                detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider?.randomImageName() ?? "")
                 
                 currentIndex = index
-                self.didCreateDetailViewController?(detailViewController)
+//                self.didCreateDetailViewController?(detailViewController)
                 return detailViewController
             }
-        }
+        } else { fatalError() } 
         return nil
     }
     

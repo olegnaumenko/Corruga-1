@@ -6,11 +6,11 @@
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class Appearance
 {
+    static let kMainStoryboardName = "Main"
     
     static func basicAppColor() -> UIColor {
 //        return UIColor(red: 0.25, green: 0.2, blue: 0.2, alpha: 1.0)
@@ -28,6 +28,18 @@ class Appearance
     
     static func buttonBackgroundColor() -> UIColor {
         return  WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+    }
+    
+    static func footerTextColor() -> UIColor {
+        return UIColor.init(white: 0.96, alpha: 1)
+    }
+    
+    static func footerFont() -> UIFont {
+        return UIFont.systemFont(ofSize: 14)
+    }
+    
+    static func fooretBackgroundColor() -> UIColor {
+        return self.basicAppColor()
     }
     
     static func setPageIndicatorColor() {

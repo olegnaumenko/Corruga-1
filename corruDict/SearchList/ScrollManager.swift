@@ -6,10 +6,7 @@
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
-import Foundation
 import UIKit
-
-
 
 protocol ScrollManagerDelegate:class
 {

@@ -33,7 +33,7 @@ class DictModel {
     }
     
     var onDictResultsChanged = {}
-    var onDictLanguagesSwapped:(()->())?
+    var onDictLanguagesSwapped = {}
     
     var currentSearchTerm:String = "" {
         didSet {
@@ -56,19 +56,6 @@ class DictModel {
         self.fromStorage = toStorage
         self.toStorage = fromStorage
         
-        self.onDictLanguagesSwapped?()
-        
-//        print(self.toStorage.languageID)
-//        print(self.fromStorage.languageID)
+        self.onDictLanguagesSwapped()
     }
-    
-//    func languagesLabel() -> String {
-//        if let fromLang = self.fromStorage.languageID.components(separatedBy: "_").first,
-//            let toLang = self.toStorage.languageID.components(separatedBy: "_").first
-//        {
-//            return "\(fromLang.uppercased()) <-> \(toLang.uppercased())"
-//        }
-//        
-//        return "XX <-> YY"
-//    }
 }

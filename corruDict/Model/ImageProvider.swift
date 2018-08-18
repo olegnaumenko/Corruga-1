@@ -10,8 +10,9 @@ import Foundation
 
 class ImageProvider {
     
-    private static let thumbsDIR = "CorrugaImageThumbs"
-    private static let imagesDIR = "CorrugaImages"
+    private let kThumbsDIR = "images/CorrugaImageThumbs"
+    private let kImagesDIR = "images/CorrugaImages"
+    private let kImagesEXT = "jpg"
     
     private var imageNames:[String] = []
     
@@ -21,7 +22,7 @@ class ImageProvider {
     
     func scanImages() {
         DispatchQueue.global().async {
-            let thumbs = Bundle.main.paths(forResourcesOfType: "jpg", inDirectory: ImageProvider.imagesDIR)
+            let thumbs = Bundle.main.paths(forResourcesOfType: self.kImagesEXT, inDirectory: self.kImagesDIR)
             DispatchQueue.main.async {
                 self.imageNames = thumbs
             }
@@ -32,7 +33,7 @@ class ImageProvider {
         return self.imageNames.count
     }
     
-    func imageNameAtIndex(index:Int) -> String {
+    func imageNameAt(index:Int) -> String {
         return self.imageNames[index]
     }
     
@@ -43,6 +44,6 @@ class ImageProvider {
         }
         let index = Float(arc4random())/Float(UInt32.max) * Float(imgCount)
 //        let index = Int.random(in: 0 ..< self.imageCount())
-        return self.imageNameAtIndex(index: Int(index))
+        return self.imageNameAt(index: Int(index))
     }
 }

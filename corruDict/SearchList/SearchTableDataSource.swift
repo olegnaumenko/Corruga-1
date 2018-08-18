@@ -6,7 +6,6 @@
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import RealmSwift
 
@@ -38,6 +37,10 @@ class SearchTableDataSource: NSObject, UITableViewDataSource
             cell.backgroundColor = UIColor.init(white: isEven ? 0.96 : 1.0, alpha: 1)
         }
         return cell
+    }
+    
+    func footerTotal() -> String {
+        return TotalLabelViewModel(total: self.dictModel.searchResults?.count ?? 0).output
     }
     
     func languagesLabel() -> String {

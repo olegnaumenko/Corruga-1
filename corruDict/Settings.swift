@@ -30,23 +30,19 @@ class Settings
         defaults.register(defaults: [kSearchTermKey : kDefaultSearchTerm])
     }
     
-    var searchTerm:String {
-        get {
+    var searchTerm:String { get {
             return (defaults.object(forKey: kSearchTermKey) as? String) ?? kDefaultSearchTerm
-        }
-        set {
+        } set {
             defaults.setValue(newValue, forKey: kSearchTermKey)
         }
     }
     
-    var fromLangID:String {
-        get {
+    var fromLangID:String { get {
             return (defaults.object(forKey: kFromLanguageID) as? String) ?? kDefaultFromLangID
         }
     }
     
-    var toLangID:String {
-        get {
+    var toLangID:String { get {
             return (defaults.object(forKey: kToLanguageID) as? String) ?? kDefaultToLangID
         }
     }

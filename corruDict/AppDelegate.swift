@@ -12,20 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let coordinator:Coordinator = Coordinator()
+    var coordinator:AppCoordinator!
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         WSColourScheme.sharedInstance.colourScheme = WSCSchemeWeldon
-        
         let baseColor = Appearance.basicAppColor()
-        
-        self.coordinator.navigationController = (self.window?.rootViewController as! UINavigationController)
-        self.coordinator.navigationController?.navigationBar.barTintColor = baseColor
         self.window?.backgroundColor = baseColor
         
-        self.coordinator.appDidFinishLaunching(application)
+        let navigationController = (self.window?.rootViewController as! UINavigationController)
+        navigationController.navigationBar.barTintColor = baseColor
         
+        self.coordinator = AppCoordinator(navController: navigationController)
+        self.coordinator.appDidFinishLaunching(application)
         return true
     }
 
