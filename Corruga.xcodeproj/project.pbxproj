@@ -36,6 +36,9 @@
 		7C978F78211F101F00D1B165 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
 		7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB489721271EA6003F97DA /* DetailViewController.swift */; };
+		7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADF82127EAAE009D3B4A /* Settings.swift */; };
+		7CD7ADFB2127FCEC009D3B4A /* SwapLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */; };
+		7CD7ADFD2127FF1C009D3B4A /* ListViewControllerFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */; };
 		7CDC372C2116206C008B774C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372B2116206C008B774C /* PageViewController.swift */; };
 		7CDC372E211620CD008B774C /* PageViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372D211620CD008B774C /* PageViewDatasource.swift */; };
 		7CE03234210B83A1001C9D78 /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */; };
@@ -92,6 +95,9 @@
 		7C978F77211F101F00D1B165 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7CAB489721271EA6003F97DA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7CD7ADF82127EAAE009D3B4A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapLangViewModel.swift; sourceTree = "<group>"; };
+		7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerFinder.swift; sourceTree = "<group>"; };
 		7CDC372B2116206C008B774C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7CDC372D211620CD008B774C /* PageViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewDatasource.swift; sourceTree = "<group>"; };
 		7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
 				7C978F77211F101F00D1B165 /* Appearance.swift */,
 				7C06CB752108928000FEEB52 /* Coordinator.swift */,
+				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				7C06CB70210891F300FEEB52 /* Model */,
 				7CF1266721271D2F0024F099 /* SearchList */,
 				7CECF08621271E6400F63438 /* DetailPageViews */,
@@ -262,6 +269,8 @@
 				7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */,
 				7C53379221243A9000465EF1 /* ScrollManager.swift */,
 				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
+				7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */,
+				7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */,
 			);
 			path = SearchList;
 			sourceTree = "<group>";
@@ -459,12 +468,15 @@
 				7CF3B463211EEA1F00CFDFFF /* PhotoViewModel.swift in Sources */,
 				7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */,
 				7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */,
+				7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */,
 				7C72D111211EF27B00CDAD47 /* PageViewCoordinator.swift in Sources */,
+				7CD7ADFD2127FF1C009D3B4A /* ListViewControllerFinder.swift in Sources */,
 				7C5D004A210889060025EF47 /* ListViewController.swift in Sources */,
 				7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */,
 				7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
+				7CD7ADFB2127FCEC009D3B4A /* SwapLangViewModel.swift in Sources */,
 				7C978F78211F101F00D1B165 /* Appearance.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,

@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class SearchTableDataSource:NSObject, UITableViewDataSource
+class SearchTableDataSource: NSObject, UITableViewDataSource
 {
     static private let kCellID = "EntryCell"
     
     private let dictModel:DictModel
-    var displayedEntries:Results<TranslationEntity>?
+    
+//    var displayedEntries:Results<TranslationEntity>?
     
     init(dictModel:DictModel) {
         self.dictModel = dictModel
@@ -23,13 +24,13 @@ class SearchTableDataSource:NSObject, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  self.displayedEntries?.count ?? 0
+        return  self.dictModel.searchResults?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableDataSource.kCellID, for: indexPath)
-        if let entry = self.displayedEntries?[indexPath.row] {
+        if let entry = self.dictModel.searchResults?[indexPath.row] {
             cell.textLabel?.text = entry.stringValue
             cell.detailTextLabel?.text = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
             
@@ -43,9 +44,9 @@ class SearchTableDataSource:NSObject, UITableViewDataSource
         if let fromLang = self.dictModel.fromStorage.languageID.components(separatedBy: "_").first,
             let toLang = self.dictModel.toStorage.languageID.components(separatedBy: "_").first
         {
-            return "\(fromLang.uppercased()) <-> \(toLang.uppercased())"
+            return "\(fromLang.uppercased()) -> \(toLang.uppercased())"
         }
         
-        return "XX <-> YY"
+        return "XX -> YY"
     }
 }

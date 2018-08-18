@@ -11,107 +11,106 @@ import UIKit
 
 class Coordinator {
     
-    var dictModel:DictModel
+    private var dictModel:DictModel
+    private var imageProvider = ImageProvider()
+    private lazy var speechManager = SpeechManager()
     
-    var speechManager:SpeechManager?
-    
-    var imageProvider = ImageProvider()
-    
-    var navigationController:UINavigationController? {
-        didSet {
-            if let cnt = navigationController?.viewControllers.count,
-                cnt > 0, let vc = navigationController?.viewControllers[0] {
-                self.viewController = vc as? ListViewController
-            }
+    var navigationController:UINavigationController? { didSet {
+            if let nc = navigationController {
+                self.viewController = ListViewControllerFinder(navController: nc).listViewController
+            } else { fatalError() }
         }
     }
     
-    private var viewController:ListViewController? {
-        didSet {
+    private var viewController:ListViewController? { didSet {
             if let vc = viewController {
-                vc.dataSource = SearchTableDataSource(dictModel: self.dictModel)
-                vc.searchBlock = {
-                    self.search(term: $0)
-                }
-                vc.voiceStartBlock = {
-                    self.startVoiceSession()
-                }
-                vc.selectPrepareBlock = { indexPath, destinationVC in
-                    self.prepareDetailViewController(indexPath: indexPath, viewController: destinationVC)
-                }
-                vc.languageSwapBlock = {
-                    self.swapLanguages(reSearch: true)
-                }
-                vc.inputModeChangeBlock = { locale, text in
-                    self.inputModeChange(locale: locale, text: text)
-                }
-                self.search(term: self.dictModel.currentSearchTerm)
-            }
+                self.configureListViewController(vc: vc)
+            } else { fatalError() }
         }
     }
-    
     
     init() {
-        self.dictModel = DictModel(fromID: "en_US", toID: "ru_RU")
-        
-        self.dictModel.dictResultsChanged = { results in
-            self.viewController?.dataSource?.displayedEntries = results
+        self.dictModel = DictModel(fromID: Settings.s.fromLangID, toID: Settings.s.toLangID)
+        self.configureDictModel(dict: self.dictModel)
+    }
+    
+    private func configureDictModel(dict:DictModel) {
+        dict.onDictResultsChanged = {
             self.viewController?.refresh()
         }
-        
-        self.dictModel.dictLanguagesSwapped = {
+        dict.onDictLanguagesSwapped = {
             self.viewController?.setLanguagesLabel()
         }
     }
     
+    private func configureListViewController(vc:ListViewController) {
+        vc.dataSource = SearchTableDataSource(dictModel: self.dictModel)
+        vc.searchBlock = {
+            self.search(term: $0)
+        }
+        vc.voiceStartBlock = {
+            self.startVoiceSession()
+        }
+        vc.selectPrepareBlock = { indexPath, destinationVC in
+            self.prepareDetailViewController(indexPath: indexPath, viewController: destinationVC)
+        }
+        vc.languageSwapBlock = {
+            self.swapLanguages(reSearch: true)
+        }
+        vc.inputModeChangeBlock = { locale, text in
+            self.inputModeChange(locale: locale, text: text)
+        }
+        let searchTerm = Settings.s.searchTerm
+        vc.searchTerm = searchTerm
+        self.search(term: searchTerm)
+    }
     
     private func swapLanguages(reSearch:Bool) {
         self.dictModel.swapLanguages()
+        Settings.s.setLanguages(from: self.dictModel.fromLanguageID, to: self.dictModel.toLanguageID)
         if (reSearch) {
             self.search(term: self.dictModel.currentSearchTerm)
         }
     }
     
     private func inputModeChange(locale:String, text:String) {
-        if text.count == 0,
-            let range = self.dictModel.toStorage.languageID.range(of: locale.substring(to: String.Index(encodedOffset: 1))) {
-            let bound = range.lowerBound
-            if bound == locale.startIndex {
-                self.viewController?.languageSwapBlock?()
-            }
+        if SwapLangViewModel(dict: self.dictModel, text: text, langID: locale).shouldSwap {
+            self.swapLanguages(reSearch: false)
         }
     }
     
     private func prepareDetailViewController(indexPath:IndexPath, viewController:UIViewController) {
-        
-        if let entry = self.viewController?.dataSource?.displayedEntries?[indexPath.row] {
+        if let entry = self.dictModel.searchResults?[indexPath.row] {
             
             if let dvc = viewController as? DetailViewController
             {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
                 dvc.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:"")
             }
-            else if let dvc = viewController as? PageViewController
-            {
-                let dataSource = PageViewDatasource(dictModel: self.dictModel)
-                let coordinator = PageViewCoordinator(dataSource: dataSource)
-                dataSource.imageProvider = self.imageProvider
-                dataSource.displayedEntries = self.viewController?.dataSource?.displayedEntries
-                dataSource.currentIndex = indexPath.row
-                dvc.pageViewCoordinator = coordinator
+            else if let pvc = viewController as? PageViewController {
+                self.configurePageViewController(pvc: pvc, indexPath: indexPath)
             }
         }
     }
     
+    private func configurePageViewController(pvc:PageViewController, indexPath:IndexPath) {
+        let dataSource = PageViewDatasource(dictModel: self.dictModel)
+        let coordinator = PageViewCoordinator(dataSource: dataSource)
+        dataSource.imageProvider = self.imageProvider
+        dataSource.currentIndex = indexPath.row
+        pvc.pageViewCoordinator = coordinator
+    }
+    
     private func startVoiceSession() {
-        self.speechManager = SpeechManager()//localeID: "en-US")
-        self.speechManager?.startVoiceSession(localeID: "en-US", duration: 5, result: { (result, final) in
+        let localeID = self.dictModel.fromLanguageID.replacingOccurrences(of: "_", with: "-")
+        self.speechManager.startVoiceSession(localeID: localeID, duration: 10, result: { (result, final) in
             print(result)
             print(final)
             self.viewController?.searchTerm = result
         }, completion: { (error) in
             if (error != nil) {
-                print("ERROR!")
+                print("ERROR:")
+                print(error!)
             } else {
                 print("COMPLETION")
             }
@@ -121,6 +120,7 @@ class Coordinator {
     
     private func search(term:String) {
         self.dictModel.currentSearchTerm = term
+        Settings.s.searchTerm = term
     }
     
     

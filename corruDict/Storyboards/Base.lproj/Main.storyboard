@@ -212,6 +212,11 @@
                             <constraint firstItem="aXH-lg-EI3" firstAttribute="top" secondItem="yPu-2N-DcY" secondAttribute="top" constant="16" id="bHd-eS-Bat"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pw1-er-5DB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="photoImageView" destination="PGL-rI-Vka" id="IMn-5b-rp9"/>

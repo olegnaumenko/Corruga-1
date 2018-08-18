@@ -12,7 +12,7 @@ import RealmSwift
 class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
 
     private let dictModel:DictModel
-    var displayedEntries:Results<TranslationEntity>?
+//    var displayedEntries:Results<TranslationEntity>?
     var currentIndex:Int = 0
     
     var imageProvider:ImageProvider?
@@ -26,7 +26,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        if let index = self.displayedEntries?.index(of: (viewController as! DetailViewController).viewModel.entry)
+        if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
         {
             return self.viewControllerForIndex(index: index - 1)
         }
@@ -35,7 +35,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if let index = self.displayedEntries?.index(of: (viewController as! DetailViewController).viewModel.entry)
+        if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
         {
             return self.viewControllerForIndex(index: index + 1)
         }
@@ -43,7 +43,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return self.displayedEntries?.count ?? 0
+        return self.dictModel.searchResults?.count ?? 0
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
@@ -52,12 +52,12 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     
     func viewControllerForIndex(index:Int) -> DetailViewController?
     {
-        if (index < 0 || index >= (self.displayedEntries?.count)!) {
+        if (index < 0 || index >= (self.dictModel.searchResults?.count)!) {
             return nil
         }
         if let detailViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
             
-            if let entry = self.displayedEntries?[index], let imageProvider = self.imageProvider {
+            if let entry = self.dictModel.searchResults?[index], let imageProvider = self.imageProvider {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
                 
                 detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:imageProvider.randomImageName())

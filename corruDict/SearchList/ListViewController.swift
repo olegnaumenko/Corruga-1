@@ -21,6 +21,7 @@ class ListViewController: UIViewController {
     var languageSwapBlock:(()->())?
     var selectPrepareBlock:((IndexPath, UIViewController)->())?
     var inputModeChangeBlock:((String, String)->())?
+
     
     private var keyboardObserver:KeyboardPositionObserver?
     
@@ -30,16 +31,9 @@ class ListViewController: UIViewController {
         }
     }
     
-    var currentSearchTerm:String? {
-        get {
-            return self.searchTextField != nil ? self.searchTextField?.text : nil
-        }
-    }
-    
     var searchTerm:String? {
         didSet {
             self.searchTextField?.text = searchTerm
-            self.searchTextFieldTerm()
         }
     }
     
@@ -78,6 +72,8 @@ class ListViewController: UIViewController {
         self.view.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
         self.searchTextField?.delegate = self
+        self.searchTextField?.text = searchTerm
+        
         self.searchTextField?.addTarget(self, action: #selector(ListViewController.textFieldDidChange), for: .editingChanged)
         self.tableView?.dataSource = self.dataSource
 

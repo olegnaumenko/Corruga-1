@@ -14,15 +14,33 @@ class DictModel {
     var fromStorage:LanguageStorage
     var toStorage:LanguageStorage
     
-    var dictResultsChanged:((Results<TranslationEntity>)->())?
-    var dictLanguagesSwapped:(()->())?
+    var fromLanguageID: String {
+        get {
+            return fromStorage.languageID
+        }
+    }
+    
+    var toLanguageID: String {
+        get {
+            return toStorage.languageID
+        }
+    }
+    
+    var searchResults:Results<TranslationEntity>? {
+        didSet {
+            self.onDictResultsChanged()
+        }
+    }
+    
+    var onDictResultsChanged = {}
+    var onDictLanguagesSwapped:(()->())?
     
     var currentSearchTerm:String = "" {
         didSet {
             if (currentSearchTerm == "") {
-                self.dictResultsChanged?(self.fromStorage.allTranslationEntities())
+                self.searchResults = self.fromStorage.allTranslationEntities()
             } else {
-                self.dictResultsChanged?(self.fromStorage.searchForTerms(term: currentSearchTerm))
+                self.searchResults = self.fromStorage.searchForTerms(term: currentSearchTerm)
             }
         }
     }
@@ -38,7 +56,7 @@ class DictModel {
         self.fromStorage = toStorage
         self.toStorage = fromStorage
         
-        self.dictLanguagesSwapped?()
+        self.onDictLanguagesSwapped?()
         
 //        print(self.toStorage.languageID)
 //        print(self.fromStorage.languageID)
