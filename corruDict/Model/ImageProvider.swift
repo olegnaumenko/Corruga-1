@@ -10,7 +10,7 @@ import Foundation
 
 class ImageProvider {
     
-    private let kThumbsDIR = "images/CorrugaImageThumbs"
+//    private let kThumbsDIR = "images/CorrugaImageThumbs"
     private let kImagesDIR = "images/CorrugaImages"
     private let kImagesEXT = "jpg"
     
