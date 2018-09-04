@@ -43,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="122" width="320" height="446"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EntryCell" textLabel="ZiT-aT-exo" detailTextLabel="vVD-fo-6DS" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="gIt-6H-FcW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EntryCell" textLabel="ZiT-aT-exo" detailTextLabel="vVD-fo-6DS" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="gIt-6H-FcW">
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gIt-6H-FcW" id="Ihf-nL-Mil">
@@ -92,7 +92,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onLabguageSwapButton:" destination="kSo-jW-rff" eventType="touchUpInside" id="fAa-yp-z1r"/>
+                                    <action selector="onLanguageSwapButton:" destination="kSo-jW-rff" eventType="touchUpInside" id="fAa-yp-z1r"/>
                                 </connections>
                             </button>
                         </subviews>

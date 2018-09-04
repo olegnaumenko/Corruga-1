@@ -165,6 +165,7 @@
 				7C06CB732108925800FEEB52 /* SpeechManager.swift */,
 				7C954172211CC9AE00CDD270 /* ImageProvider.swift */,
 				7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */,
+				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,13 +313,12 @@
 			children = (
 				7C5D0049210889060025EF47 /* ListViewController.swift */,
 				7CE03233210B83A1001C9D78 /* ListTableDataSource.swift */,
+				7C590FC6213F129400236CD3 /* ListCellViewModel.swift */,
 				7C53379221243A9000465EF1 /* ScrollManager.swift */,
 				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
 				7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */,
 				7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */,
 				7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */,
-				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
-				7C590FC6213F129400236CD3 /* ListCellViewModel.swift */,
 			);
 			path = SearchList;
 			sourceTree = "<group>";

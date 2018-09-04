@@ -179,7 +179,7 @@ class ListViewController: UIViewController {
         self.searchTextFieldTerm()
     }
 
-    @IBAction func onLabguageSwapButton(_ sender: UIButton) {
+    @IBAction func onLanguageSwapButton(_ sender: UIButton) {
         self.languageSwapBlock?()
     }
     
