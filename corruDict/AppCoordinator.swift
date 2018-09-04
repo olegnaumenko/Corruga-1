@@ -29,6 +29,11 @@ class AppCoordinator: NSObject {
         self.configureListViewController(vc: self.viewController)
     }
     
+    func translate(term:String) {
+        self.search(term: term);
+        self.viewController.searchTerm = term
+    }
+    
     private func bindToDictModel(dict:DictModel) {
         dict.onDictResultsChanged = { [unowned self] in
             self.viewController.refresh()

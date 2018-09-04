@@ -20,6 +20,8 @@ class DetailViewController: UIViewController {
     private lazy var tapGestureReco = UITapGestureRecognizer(target: self, action: #selector(self.onPhotoTap(sender:)))
     
     var onPhotoTapped:(String)->() = {imagePath in}
+    var onViewDidAppear:()->() = {}
+
     
     var viewModel = DetailViewModel(term:"", translation:"",
                                     langID:"en-US", entry: TranslationEntity(), imagePath:"") {
@@ -41,6 +43,11 @@ class DetailViewController: UIViewController {
         self.photoImageView.addGestureRecognizer(self.tapGestureReco)
         
         self.update()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.onViewDidAppear()
     }
     
     @objc func onPhotoTap(sender: UITapGestureRecognizer) {

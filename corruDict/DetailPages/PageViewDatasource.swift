@@ -14,7 +14,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     var currentIndex:Int
     private var imageProvider:ImageProvider?
     private let storyboard:UIStoryboard
-    private let dictModel:DictModel
+    let dictModel:DictModel
     
     init(dictModel:DictModel, storyboard:UIStoryboard, imageProvider:ImageProvider? = nil, currentIndex:Int = 0) {
         self.dictModel = dictModel
@@ -54,6 +54,8 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         return currentIndex
     }
     
+    
+    
     func viewControllerForIndex(index:Int) -> DetailViewController?
     {
         if (index < 0 || index >= (self.dictModel.searchResults?.count)!) {
@@ -67,7 +69,9 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
                 detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider?.randomImageName() ?? "")
                 
                 currentIndex = index
-//                self.didCreateDetailViewController?(detailViewController)
+                
+                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
+                
                 return detailViewController
             }
         } else { fatalError() } 

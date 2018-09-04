@@ -104,8 +104,26 @@ class LanguageStorage
     
     func searchForTerms(term:String) -> Results<TranslationEntity>
     {
-        let predicate = NSPredicate(format: "stringValue CONTAINS[c] %@", term)
+//        return self.searchForTerms(term: term).last!
+        let predicate = NSPredicate(format: "stringValue LIKE[c] %@", term + "*")
         return realm.objects(TranslationEntity.self).filter(predicate)
+    }
+    
+    func searchForTerms(term:String) -> [Results<TranslationEntity>]
+    {
+        let pred1 = NSPredicate(format: "stringValue BEGINSWITH[c] %@", term)
+        
+        let objects1 = realm.objects(TranslationEntity.self).filter(pred1)
+        
+        let pred2 = NSPredicate(format: "stringValue CONTAINS[c] %@", term)
+        
+        let compound1 = NSCompoundPredicate(notPredicateWithSubpredicate: pred1)
+        let compound2 = NSCompoundPredicate(andPredicateWithSubpredicates: [pred2, compound1])
+        let compound3 = NSCompoundPredicate(orPredicateWithSubpredicates: [pred1, compound2])
+
+        let objects2 = realm.objects(TranslationEntity.self).filter(compound3)
+        
+        return [objects1, objects2]
     }
     
     func translation(withID termID:String) -> TranslationEntity?

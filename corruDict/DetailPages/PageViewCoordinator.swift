@@ -37,9 +37,14 @@ class PageViewCoordinator
         print("Page Coordinator deinit")
     }
     
-    fileprivate func configure(detailViewController:DetailViewController) {
+    fileprivate func configure(detailViewController:DetailViewController, atIndex:Int) {
         detailViewController.onPhotoTapped = { [unowned self] imagePath in
             self.imageTappedInDetailView(imagePath: imagePath)
+        }
+        detailViewController.onViewDidAppear = {
+            if let entry = self.pageViewDataSource.dictModel.searchResults?[atIndex] {
+                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
+            }
         }
     }
 
@@ -53,8 +58,8 @@ class PageViewCoordinator
 
 extension PageViewCoordinator: PageViewControllerObserverDelegate {
     func willTransitionTo(viewController: UIViewController) {
-        if let dvc = viewController as? DetailViewController {
-            self.configure(detailViewController: dvc)
+        if let dvc = viewController as? DetailViewController, let index = self.pageViewController.viewControllers?.firstIndex(of: dvc) {
+            self.configure(detailViewController: dvc, atIndex: index)
         }
     }
 }
@@ -67,7 +72,7 @@ extension PageViewCoordinator: CoordinatorProtocol {
                                                        direction: .forward,
                                                        animated: false,
                                                        completion: nil)
-            self.configure(detailViewController: dvc)
+            self.configure(detailViewController: dvc, atIndex: index)
         }
     }
 }

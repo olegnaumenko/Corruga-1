@@ -30,7 +30,13 @@ class SearchTableDataSource: NSObject, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableDataSource.kCellID, for: indexPath)
         if let entry = self.dictModel.searchResults?[indexPath.row] {
-            cell.textLabel?.text = entry.stringValue
+            
+            let range = (entry.stringValue as NSString).range(of: self.dictModel.currentSearchTerm)
+            
+            let attrString = NSMutableAttributedString(string: entry.stringValue)
+            attrString.setAttributes([NSBackgroundColorAttributeName : UIColor(red: 1, green: 1, blue: 0, alpha: 0.2)], range: range)
+            
+            cell.textLabel?.attributedText = attrString
             cell.detailTextLabel?.text = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
             
             let isEven = (Int(indexPath.row % 2) == 0)
