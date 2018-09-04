@@ -25,6 +25,7 @@
 		7C4993F4213EBD6A00778429 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993F3213EBD6A00778429 /* MobileCoreServices.framework */; };
 		7C5337912124371000465EF1 /* UIView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* UIView+Name.swift */; };
 		7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53379221243A9000465EF1 /* ScrollManager.swift */; };
+		7C590FC7213F129400236CD3 /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C590FC6213F129400236CD3 /* ListCellViewModel.swift */; };
 		7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0047210889060025EF47 /* AppDelegate.swift */; };
 		7C5D004A210889060025EF47 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0049210889060025EF47 /* ListViewController.swift */; };
 		7C5D004C210889060025EF47 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D004B210889060025EF47 /* PhotoViewController.swift */; };
@@ -50,7 +51,7 @@
 		7CD7ADFD2127FF1C009D3B4A /* ListViewControllerFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */; };
 		7CDC372C2116206C008B774C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372B2116206C008B774C /* PageViewController.swift */; };
 		7CDC372E211620CD008B774C /* PageViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372D211620CD008B774C /* PageViewDatasource.swift */; };
-		7CE03234210B83A1001C9D78 /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */; };
+		7CE03234210B83A1001C9D78 /* ListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE03233210B83A1001C9D78 /* ListTableDataSource.swift */; };
 		7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEDBF96210BAF360087FEB5 /* Media.xcassets */; };
 		7CF3B463211EEA1F00CFDFFF /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF3B462211EEA1F00CFDFFF /* PhotoViewModel.swift */; };
 		7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */; };
@@ -90,6 +91,7 @@
 		7C4993F3213EBD6A00778429 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7C5337902124371000465EF1 /* UIView+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Name.swift"; sourceTree = "<group>"; };
 		7C53379221243A9000465EF1 /* ScrollManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollManager.swift; sourceTree = "<group>"; };
+		7C590FC6213F129400236CD3 /* ListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModel.swift; sourceTree = "<group>"; };
 		7C5D0044210889060025EF47 /* Corruga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corruga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C5D0047210889060025EF47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C5D0049210889060025EF47 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -119,7 +121,7 @@
 		7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerFinder.swift; sourceTree = "<group>"; };
 		7CDC372B2116206C008B774C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7CDC372D211620CD008B774C /* PageViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewDatasource.swift; sourceTree = "<group>"; };
-		7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
+		7CE03233210B83A1001C9D78 /* ListTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableDataSource.swift; sourceTree = "<group>"; };
 		7CEDBF96210BAF360087FEB5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		7CF3B462211EEA1F00CFDFFF /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSColourScheme.swift; sourceTree = "<group>"; };
@@ -309,13 +311,14 @@
 			isa = PBXGroup;
 			children = (
 				7C5D0049210889060025EF47 /* ListViewController.swift */,
-				7CE03233210B83A1001C9D78 /* SearchTableDataSource.swift */,
+				7CE03233210B83A1001C9D78 /* ListTableDataSource.swift */,
 				7C53379221243A9000465EF1 /* ScrollManager.swift */,
 				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
 				7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */,
 				7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */,
 				7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */,
 				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
+				7C590FC6213F129400236CD3 /* ListCellViewModel.swift */,
 			);
 			path = SearchList;
 			sourceTree = "<group>";
@@ -514,9 +517,10 @@
 				7C5D004C210889060025EF47 /* PhotoViewController.swift in Sources */,
 				7C5337912124371000465EF1 /* UIView+Name.swift in Sources */,
 				7C06CB742108925800FEEB52 /* SpeechManager.swift in Sources */,
+				7C590FC7213F129400236CD3 /* ListCellViewModel.swift in Sources */,
 				7CC81CFE212867FB004D555E /* SpeechSynth.swift in Sources */,
 				7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */,
-				7CE03234210B83A1001C9D78 /* SearchTableDataSource.swift in Sources */,
+				7CE03234210B83A1001C9D78 /* ListTableDataSource.swift in Sources */,
 				7C06CB762108928000FEEB52 /* AppCoordinator.swift in Sources */,
 				7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */,
 				7CDC372E211620CD008B774C /* PageViewDatasource.swift in Sources */,

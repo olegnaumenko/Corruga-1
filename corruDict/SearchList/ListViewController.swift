@@ -37,7 +37,7 @@ class ListViewController: UIViewController {
         }
     }
     
-    var dataSource:SearchTableDataSource? {
+    var dataSource:ListTableDataSource? {
         didSet {
             if let tv = self.tableView {
                 tv.dataSource = dataSource
@@ -100,7 +100,7 @@ class ListViewController: UIViewController {
         rect.size = CGSize(width: self.view.frame.size.width, height: 55)
         label.frame = rect
         label.textAlignment = .center
-        label.backgroundColor = Appearance.fooretBackgroundColor()
+        label.backgroundColor = Appearance.footerBackgroundColor()
         label.textColor = Appearance.footerTextColor()
         label.font = Appearance.footerFont()
         return label
@@ -142,6 +142,12 @@ class ListViewController: UIViewController {
     func refresh() {
         self.tableView?.reloadData()
         self.updateFooter()
+    }
+    
+    func scrollToTop(animated:Bool = false) {
+        if let cnt = self.dataSource?.resultsCount(), cnt > 0 {
+            self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
+        }
     }
     
     func updateLanguagesLabel() {

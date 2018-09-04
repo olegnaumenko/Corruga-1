@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class SearchTableDataSource: NSObject, UITableViewDataSource
+class ListTableDataSource: NSObject, UITableViewDataSource
 {
     static private let kCellID = "EntryCell"
     
@@ -22,25 +22,26 @@ class SearchTableDataSource: NSObject, UITableViewDataSource
         super.init()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func resultsCount() -> Int {
         return  self.dictModel.searchResults?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.resultsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableDataSource.kCellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableDataSource.kCellID, for: indexPath)
         if let entry = self.dictModel.searchResults?[indexPath.row] {
             
-            let range = (entry.stringValue as NSString).range(of: self.dictModel.currentSearchTerm)
+            let translation = self.dictModel.toStorage.translation(withID: entry.termID)
             
-            let attrString = NSMutableAttributedString(string: entry.stringValue)
-            attrString.setAttributes([NSBackgroundColorAttributeName : UIColor(red: 1, green: 1, blue: 0, alpha: 0.2)], range: range)
+            let cellViewModel = ListCellViewModel(entry: entry, translation: translation, index: indexPath.row, searchTerm: self.dictModel.currentSearchTerm)
             
-            cell.textLabel?.attributedText = attrString
-            cell.detailTextLabel?.text = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
-            
-            let isEven = (Int(indexPath.row % 2) == 0)
-            cell.backgroundColor = UIColor.init(white: isEven ? 0.96 : 1.0, alpha: 1)
+            cell.textLabel?.attributedText = cellViewModel.title
+            cell.detailTextLabel?.text = cellViewModel.subtitle
+            cell.backgroundColor = cellViewModel.backgroundColor
         }
         return cell
     }

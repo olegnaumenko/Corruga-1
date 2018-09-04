@@ -38,8 +38,16 @@ class Appearance
         return UIFont.systemFont(ofSize: 14)
     }
     
-    static func fooretBackgroundColor() -> UIColor {
+    static func footerBackgroundColor() -> UIColor {
         return self.basicAppColor()
+    }
+    
+    static func highlightedTextColor() -> UIColor {
+        return UIColor(red: 1, green: 1, blue: 0, alpha: 0.2)
+    }
+    
+    static func cellColor(even:Bool) -> UIColor {
+        return UIColor.init(white: even ? 0.96 : 1.0, alpha: 1)
     }
     
     static func setPageIndicatorColor() {

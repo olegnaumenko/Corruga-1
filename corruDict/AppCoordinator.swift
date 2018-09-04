@@ -44,7 +44,7 @@ class AppCoordinator: NSObject {
     }
     
     private func configureListViewController(vc:ListViewController) {
-        vc.dataSource = SearchTableDataSource(dictModel: self.dictModel)
+        vc.dataSource = ListTableDataSource(dictModel: self.dictModel)
         vc.searchBlock = { [unowned self] in
             self.search(term: $0)
         }
@@ -109,8 +109,14 @@ class AppCoordinator: NSObject {
     }
     
     private func search(term:String) {
+        let wasEmpty = (self.dictModel.currentSearchTerm.count == 0)
+        
         self.dictModel.currentSearchTerm = term
         Settings.s.searchTerm = term
+        
+        if (wasEmpty || term.count == 0) {
+            self.viewController.scrollToTop()
+        }
     }
     
     private func clearSearch() {
@@ -118,6 +124,7 @@ class AppCoordinator: NSObject {
         self.dictModel.currentSearchTerm = term
         Settings.s.searchTerm = term
         self.viewController.searchTerm = term
+        self.viewController.scrollToTop()
     }
     
     
