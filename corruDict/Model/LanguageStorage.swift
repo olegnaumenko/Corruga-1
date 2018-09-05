@@ -102,10 +102,10 @@ class LanguageStorage
         return (realm.objects(S.self))
     }
     
-    func searchForTerms(term:String) -> Results<TranslationEntity>
+    func searchFor(term:String) -> Results<TranslationEntity>
     {
 //        return self.searchForTerms(term: term).last!
-        let predicate = NSPredicate(format: "stringValue LIKE[c] %@", term + "*")
+        let predicate = NSPredicate(format: "stringValue LIKE[c] %@", "*" + term + "*")
         return realm.objects(TranslationEntity.self).filter(predicate)
     }
     

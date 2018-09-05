@@ -109,12 +109,12 @@ class AppCoordinator: NSObject {
     }
     
     private func search(term:String) {
-        let wasEmpty = (self.dictModel.currentSearchTerm.count == 0)
+        let oldCount = self.dictModel.currentSearchTerm.count
         
         self.dictModel.currentSearchTerm = term
         Settings.s.searchTerm = term
         
-        if (wasEmpty || term.count == 0) {
+        if (oldCount > self.dictModel.currentSearchTerm.count) {
             self.viewController.scrollToTop()
         }
     }

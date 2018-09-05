@@ -40,7 +40,7 @@ class DictModel {
             if (currentSearchTerm == "") {
                 self.searchResults = self.fromStorage.allTranslationEntities()
             } else {
-                self.searchResults = self.fromStorage.searchForTerms(term: currentSearchTerm)
+                self.searchResults = self.fromStorage.searchFor(term: currentSearchTerm)
             }
         }
     }
