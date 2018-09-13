@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coordinator:AppCoordinator!
+    var coordinator:AppTabCoordinator!// AppCoordinator!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -21,11 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let baseColor = Appearance.basicAppColor()
         self.window?.backgroundColor = baseColor
         
-        let navigationController = (self.window?.rootViewController as! UINavigationController)
-        navigationController.navigationBar.barTintColor = baseColor
+        let tabBarController = (self.window?.rootViewController as! RootTabBarController)
+//        
+//        let navigationController = tabBarController.selectedViewController as! UINavigationController
+////            (self.window?.rootViewController as! UINavigationController)
+//        navigationController.navigationBar.barTintColor = baseColor
         
-        self.coordinator = AppCoordinator(navController: navigationController)
-        self.coordinator.appDidFinishLaunching(application)
+        self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
+//        self.coordinator.appDidFinishLaunching(application)
         return true
     }
 
@@ -35,9 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if let title = userActivity.title {
-            self.coordinator.translate(term: title)
+            self.coordinator.dictionaryCoordinator?.translate(term: title)
         } else if let title = userActivity.contentAttributeSet?.title {
-            self.coordinator.translate(term: title)
+            self.coordinator.dictionaryCoordinator?.translate(term: title)
         }
         return true
     }

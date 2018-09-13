@@ -27,6 +27,7 @@ class AppCoordinator: NSObject {
         navController.delegate = self
         self.bindToDictModel(dict: self.dictModel)
         self.configureListViewController(vc: self.viewController)
+        navController.navigationBar.barTintColor = Appearance.basicAppColor()
     }
     
     func translate(term:String) {
