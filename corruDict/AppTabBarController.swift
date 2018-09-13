@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RootTabBarController: UITabBarController {
+class AppTabBarController: UITabBarController {
     
 
     

@@ -44,6 +44,8 @@ class VideosViewController: UIViewController {
     
     func play(video:VideoViewModel) {
         if let youTubeId = video.youTubeId {
+            
+            AudioSession().activate()
             self.playerView.load(withVideoId: youTubeId)
         }
     }

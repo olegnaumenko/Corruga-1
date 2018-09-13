@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import GDLoadingIndicator
 
 class NewsViewController: UIViewController {
 
     @IBOutlet var webView:UIWebView!
     
-    @IBOutlet var loadingIndicator:GDLoadingIndicator!// = GDLoadingIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 100), circleType: GDCircleType.progress, circleAnimationType: GDCircleAnimationType.running, fillerAnimationType: .none)
+    @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,21 +22,32 @@ class NewsViewController: UIViewController {
         self.webView.scalesPageToFit = true
         self.webView.allowsInlineMediaPlayback = false
         self.webView.mediaPlaybackRequiresUserAction = true
-        let request = URLRequest(url: URL(string: "http://www.gofro.expert/novosti/")!)
-        self.webView.loadRequest(request)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.loadingIndicator.setCircleColor(UIColor.white)
+        self.webView.isHidden = false;
+        
+        let url = URL(string: "http://www.gofro.expert/novosti/")
+        if (self.webView.request?.url != url!) {
+            let request = URLRequest(url: url!)
+            self.webView.loadRequest(request)
+        }
+//        self.view.addSubview(self.webView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.addSubview(self.webView)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.webView.removeFromSuperview()
-        self.webView.stopLoading()
+        self.webView.loadHTMLString("", baseURL: nil);
+//        self.webView.stopLoading()
+//        self.webView.removeFromSuperview()
+        self.webView.isHidden = true
     }
     
 
@@ -56,10 +66,17 @@ class NewsViewController: UIViewController {
 extension NewsViewController:UIWebViewDelegate
 {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        
+        self.loadingIndicator.stopAnimating()
+        self.loadingIndicator.isHidden = true
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        self.loadingIndicator.startAnimating()
+        self.loadingIndicator.isHidden = false
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppCoordinator: NSObject {
+class DictionaryCoordinator: NSObject {
     
     private var dictModel:DictModel
     private var imageProvider = ImageProvider()
@@ -144,7 +144,7 @@ class AppCoordinator: NSObject {
     }
 }
 
-extension AppCoordinator:UINavigationControllerDelegate {
+extension DictionaryCoordinator:UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController,
                               didShow viewController: UIViewController, animated: Bool) {
         guard

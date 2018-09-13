@@ -21,21 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let baseColor = Appearance.basicAppColor()
         self.window?.backgroundColor = baseColor
         
-        let tabBarController = (self.window?.rootViewController as! RootTabBarController)
-//        
-//        let navigationController = tabBarController.selectedViewController as! UINavigationController
-////            (self.window?.rootViewController as! UINavigationController)
-//        navigationController.navigationBar.barTintColor = baseColor
-        
+        let tabBarController = (self.window?.rootViewController as! AppTabBarController)
+
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
-//        self.coordinator.appDidFinishLaunching(application)
+        self.coordinator.appDidFinishLaunching(application)
         return true
     }
 
 //    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
 //
 //    }
-//    
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if let title = userActivity.title {
             self.coordinator.dictionaryCoordinator?.translate(term: title)

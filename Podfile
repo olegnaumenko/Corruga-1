@@ -7,6 +7,5 @@ target 'Corruga' do
   pod 'RealmSwift'
   pod 'youtube-ios-player-helper', '~> 0.1.4'
   pod 'Networking'
-  pod 'GDLoadingIndicator'
 
 end

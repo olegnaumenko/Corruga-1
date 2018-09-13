@@ -11,13 +11,13 @@ import UIKit
 
 class AppTabCoordinator:NSObject {
     
-    let tabBarController:RootTabBarController
-    var dictionaryCoordinator:AppCoordinator?
+    let tabBarController:AppTabBarController
+    var dictionaryCoordinator:DictionaryCoordinator?
     var newsCoordinator:NewsCoordinator?
     var videosCoordinator:VideosCoordinator?
     
-    init(tabBarController:RootTabBarController)
-    {
+    init(tabBarController:AppTabBarController) {
+        
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         tabBarController.tabBar.unselectedItemTintColor = UIColor.white
@@ -25,7 +25,7 @@ class AppTabCoordinator:NSObject {
         super.init()
         self.tabBarController.delegate = self;
         if let firstVC = tabBarController.viewControllers?.first as? UINavigationController {
-            self.dictionaryCoordinator = AppCoordinator(navController:firstVC)
+            self.dictionaryCoordinator = DictionaryCoordinator(navController:firstVC)
         }
     }
 }
@@ -35,8 +35,8 @@ extension AppTabCoordinator:UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if let navVC = viewController as? UINavigationController,
-            let rootViewController = navVC.viewControllers.first
-        {
+            let rootViewController = navVC.viewControllers.first {
+            
             navVC.navigationBar.barTintColor = Appearance.basicAppColor()
             if let newsVC = rootViewController as? NewsViewController {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
