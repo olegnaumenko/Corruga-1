@@ -21,7 +21,7 @@ class AppTabCoordinator:NSObject {
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         tabBarController.tabBar.unselectedItemTintColor = UIColor.white
-        tabBarController.tabBar.tintColor = UIColor.orange
+        tabBarController.tabBar.tintColor = UIColor.lightGray
         super.init()
         self.tabBarController.delegate = self;
         if let firstVC = tabBarController.viewControllers?.first as? UINavigationController {

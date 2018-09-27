@@ -18,11 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         WSColourScheme.sharedInstance.colourScheme = WSCSchemeWeldon
-        let baseColor = Appearance.basicAppColor()
-        self.window?.backgroundColor = baseColor
-        
+        self.window?.backgroundColor = Appearance.basicAppColor()
         let tabBarController = (self.window?.rootViewController as! AppTabBarController)
-
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
         self.coordinator.appDidFinishLaunching(application)
         return true

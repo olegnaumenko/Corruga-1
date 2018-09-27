@@ -72,7 +72,8 @@ class ListViewController: UIViewController {
         //colors
         self.tableView?.backgroundColor = Appearance.basicAppColor()
         self.view.backgroundColor = Appearance.basicAppColor()
-        
+        self.headerView.backgroundColor = Appearance.basicAppColor()
+            
         self.updateLanguagesLabel()
         
         //add mic in search field:
@@ -91,6 +92,14 @@ class ListViewController: UIViewController {
                 self?.tableView?.contentInset = contentInset
             }
         })
+        
+        if var contentInset = self.tableView?.contentInset {
+            contentInset.top = self.headerView.frame.size.height
+            self.tableView?.contentInset = contentInset
+            self.tableView?.contentOffset = CGPoint(x: 0, y: -contentInset.top)
+        }
+        
+        
         //listen for text input mode change
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
     }
@@ -129,7 +138,7 @@ class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,7 +209,7 @@ class ListViewController: UIViewController {
 extension ListViewController : ScrollManagerDelegate {
     
     func scrollManagerTableviewCellTapped() {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
 
