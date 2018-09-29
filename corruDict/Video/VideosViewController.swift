@@ -43,12 +43,12 @@ class VideosViewController: UIViewController {
         }        
         self.tableView.dataSource = self.tableViewDataSource
         self.tableView.delegate = self
+        self.onViewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
-        self.onViewDidLoad()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
