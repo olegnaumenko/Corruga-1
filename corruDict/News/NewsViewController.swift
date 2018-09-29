@@ -61,6 +61,19 @@ class NewsViewController: UIViewController {
     }
     */
 
+    func setupBackButton() {
+        if self.webView.canGoBack {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(onBackButton(_:)))
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        } else {
+            self.navigationItem.leftBarButtonItem = nil
+        }
+    }
+    
+    func onBackButton(_ sender:Any) {
+        self.webView.goBack()
+    }
+    
 }
 
 extension NewsViewController:UIWebViewDelegate
@@ -78,5 +91,6 @@ extension NewsViewController:UIWebViewDelegate
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
+        self.setupBackButton()
     }
 }

@@ -12,8 +12,15 @@ import youtube_ios_player_helper
 class VideosViewController: UIViewController {
 
     @IBOutlet var playerView:YTPlayerView!
+    @IBOutlet var tableView:UITableView!
     
-    var dataSource:VideosDataSource?
+    var tableViewDataSource:VideoTableDataSource?
+    
+    var dataSource:VideosDataSource! {
+        didSet {
+            self.tableViewDataSource = VideoTableDataSource(dataSource: self.dataSource)
+        }
+    }
     
     var onViewDidLoad = {}
     
@@ -23,18 +30,25 @@ class VideosViewController: UIViewController {
         self.view.backgroundColor = Appearance.basicAppColor()
         self.playerView.delegate = self
         
-        self.dataSource?.onVideoListUpdated = {
+        self.dataSource.onVideoListUpdated = {
+            self.tableView.reloadData()
             if let vm = self.dataSource?.viewModels.first {
                 self.play(video: vm)
+                
+                if self.dataSource.videItemsCount > 0,
+                    let index = self.dataSource.indexOf(viewModel: vm) {
+                    self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
+                }
             }
-        }
-        
-        self.onViewDidLoad()
+        }        
+        self.tableView.dataSource = self.tableViewDataSource
+        self.tableView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.tableView.reloadData()
+        self.onViewDidLoad()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,4 +91,14 @@ extension VideosViewController : YTPlayerViewDelegate {
         view.backgroundColor = Appearance.basicAppColor()
         return view
     }
+}
+
+extension VideosViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vm = self.dataSource.videoItemAtIndex(index: indexPath.row)
+        self.playerView.stopVideo()
+        self.play(video: vm)
+    }
+    
 }

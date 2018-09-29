@@ -12,6 +12,14 @@ class VideosDataSource {
     
     var viewModels = [VideoViewModel]()
     
+    var videItemsCount:Int {
+        return viewModels.count
+    }
+    
+    func videoItemAtIndex(index:Int) -> VideoViewModel {
+        return self.viewModels[index]
+    }
+    
     var onVideoListUpdated = {}
     
     func updateVideos(videoDescriptors:[[String:String]])
@@ -26,5 +34,8 @@ class VideosDataSource {
         self.onVideoListUpdated()
     }
     
+    func indexOf(viewModel:VideoViewModel) -> Int? {
+        return self.viewModels.firstIndex(of: viewModel)
+    }
     
 }

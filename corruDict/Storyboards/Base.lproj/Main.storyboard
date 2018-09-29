@@ -81,9 +81,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkm-WT-gIf">
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkm-WT-gIf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="f5i-Jq-Mbc" id="Pv3-4v-Hbn"/>
@@ -91,6 +90,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="trailing" secondItem="vN8-jL-TLV" secondAttribute="trailing" id="7Zl-yC-s99"/>
+                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="bottom" secondItem="vN8-jL-TLV" secondAttribute="bottom" id="OWX-ef-iI9"/>
+                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="top" secondItem="vN8-jL-TLV" secondAttribute="top" id="gcd-56-Jcn"/>
+                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="leading" secondItem="vN8-jL-TLV" secondAttribute="leading" id="vDk-rj-z0E"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vN8-jL-TLV"/>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="W4h-VH-aBc">
@@ -115,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyw-a7-iGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="-478.11094452773619"/>
+            <point key="canvasLocation" x="127" y="-477"/>
         </scene>
         <!--Main-->
         <scene sceneID="4Un-7J-q90">
@@ -466,15 +471,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCw-c5-BvB" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="pQa-Kb-Z9D"/>
+                                </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57A-nZ-nfm">
+                                <rect key="frame" x="0.0" y="264" width="375" height="354"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoItemTableViewCell" id="WJK-r9-9E0" customClass="VideoItemTableViewCell" customModule="Corruga" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WJK-r9-9E0" id="OWC-dR-76F">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-bA-mpu">
+                                                    <rect key="frame" x="31" y="19" width="44" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ba8-bA-mpu" firstAttribute="leading" secondItem="OWC-dR-76F" secondAttribute="leadingMargin" constant="16" id="DE4-Os-wyB"/>
+                                                <constraint firstItem="Ba8-bA-mpu" firstAttribute="centerY" secondItem="OWC-dR-76F" secondAttribute="centerY" id="WK9-RT-OeO"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ba8-bA-mpu" secondAttribute="trailing" constant="16" id="fgo-0F-2N4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="Ba8-bA-mpu" id="7cD-p9-FOT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="57A-nZ-nfm" firstAttribute="bottom" secondItem="p2J-il-zgy" secondAttribute="bottom" id="8y3-aE-RE3"/>
+                            <constraint firstItem="57A-nZ-nfm" firstAttribute="top" secondItem="XCw-c5-BvB" secondAttribute="bottom" id="E6z-rt-Q0W"/>
                             <constraint firstItem="XCw-c5-BvB" firstAttribute="trailing" secondItem="p2J-il-zgy" secondAttribute="trailing" id="MV6-h1-nAN"/>
                             <constraint firstItem="XCw-c5-BvB" firstAttribute="top" secondItem="p2J-il-zgy" secondAttribute="top" id="VYJ-Xy-5rC"/>
-                            <constraint firstItem="XCw-c5-BvB" firstAttribute="bottom" secondItem="p2J-il-zgy" secondAttribute="bottom" id="fqG-80-zlx"/>
+                            <constraint firstItem="57A-nZ-nfm" firstAttribute="trailing" secondItem="p2J-il-zgy" secondAttribute="trailing" id="crH-Hj-trL"/>
+                            <constraint firstItem="57A-nZ-nfm" firstAttribute="leading" secondItem="p2J-il-zgy" secondAttribute="leading" id="r08-AB-sbh"/>
                             <constraint firstItem="XCw-c5-BvB" firstAttribute="leading" secondItem="p2J-il-zgy" secondAttribute="leading" id="tZx-M7-q2J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p2J-il-zgy"/>
@@ -482,16 +523,17 @@
                     <navigationItem key="navigationItem" title="Videos" id="Ify-51-Yjw"/>
                     <connections>
                         <outlet property="playerView" destination="XCw-c5-BvB" id="YPL-3J-W6U"/>
+                        <outlet property="tableView" destination="57A-nZ-nfm" id="h8Z-HN-Qid"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ING-GY-Qkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125.625" y="328.52112676056339"/>
+            <point key="canvasLocation" x="125.59999999999999" y="327.88605697151428"/>
         </scene>
     </scenes>
     <resources>
-        <image name="dict_tab" width="32" height="32"/>
-        <image name="news_tab" width="32" height="32"/>
-        <image name="video_tab" width="32" height="32"/>
+        <image name="dict_tab" width="24" height="24"/>
+        <image name="news_tab" width="24" height="24"/>
+        <image name="video_tab" width="24" height="24"/>
     </resources>
 </document>

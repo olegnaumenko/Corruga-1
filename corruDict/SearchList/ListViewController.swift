@@ -24,6 +24,7 @@ class ListViewController: UIViewController {
 
     private let footerLabel = UILabel(frame: CGRect.init())
     private var keyboardObserver:KeyboardPositionObserver?
+    private var floatingHeaderPresenter:FloatingHeaderPresenter?
     
     var scrollManager:ScrollManager? {
         didSet {
@@ -84,6 +85,8 @@ class ListViewController: UIViewController {
         // listen for scrolling
         if let tv = self.tableView, let rs = self.searchTextField {
             self.scrollManager = ScrollManager(tableView: tv, responder: rs)
+            self.floatingHeaderPresenter = FloatingHeaderPresenter(contentView: self.headerView, shownPositionY: 0.0)
+            self.floatingHeaderPresenter?.scrollView = self.tableView
         }
         //listen for keyboard position
         self.keyboardObserver = KeyboardPositionObserver(onHeightChange: {[weak self] (height) in

@@ -19,10 +19,10 @@ class VideosCoordinator : NSObject {
         
         self.videosViewController.dataSource = VideosDataSource()
         
-        self.videosViewController.onViewDidLoad = { [unowned self] in
-            self.client.getVideos { (data, error) in
+        self.videosViewController.onViewDidLoad = { [weak self] in
+            self?.client.getVideos { (data, error) in
                 if let descriptors = data {
-                    self.videosViewController.dataSource?.updateVideos(videoDescriptors: descriptors)
+                    self?.videosViewController.dataSource?.updateVideos(videoDescriptors: descriptors)
                 } else if error != nil {
                     print(error!)
                 }

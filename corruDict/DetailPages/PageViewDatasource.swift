@@ -28,7 +28,8 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         print("Page Datasource deinit")
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
         {
@@ -37,7 +38,8 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         return nil
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
         {

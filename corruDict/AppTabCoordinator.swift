@@ -21,7 +21,7 @@ class AppTabCoordinator:NSObject {
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         tabBarController.tabBar.unselectedItemTintColor = UIColor.white
-        tabBarController.tabBar.tintColor = UIColor.lightGray
+        tabBarController.tabBar.tintColor = UIColor(white: 0.8, alpha: 1)
         super.init()
         self.tabBarController.delegate = self;
         if let firstVC = tabBarController.viewControllers?.first as? UINavigationController {
@@ -38,9 +38,9 @@ extension AppTabCoordinator:UITabBarControllerDelegate
             let rootViewController = navVC.viewControllers.first {
             
             navVC.navigationBar.barTintColor = Appearance.basicAppColor()
-            if let newsVC = rootViewController as? NewsViewController {
+            if let newsVC = rootViewController as? NewsViewController, self.newsCoordinator == nil {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
-            } else if let newVC = rootViewController as? VideosViewController {
+            } else if let newVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
                 self.videosCoordinator = VideosCoordinator(videosViewController: newVC)
             }
         }
