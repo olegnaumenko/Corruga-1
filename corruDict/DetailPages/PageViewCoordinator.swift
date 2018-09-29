@@ -13,7 +13,7 @@ class PageViewCoordinator
     fileprivate let pageViewDataSource:PageViewDatasource
     fileprivate let pageViewController:UIPageViewController
     private let pageViewControllerObserver = PageViewControllerObserver()
-    private var storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
+//    private var storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
     
     init(pageViewController:UIPageViewController,
          dictModel:DictModel,
@@ -21,7 +21,7 @@ class PageViewCoordinator
          imageProvider:ImageProvider? = nil) {
         
         let dataSource = PageViewDatasource(dictModel: dictModel,
-                                            storyboard:self.storyboard,
+                                            storyboard:nil,
                                             imageProvider: imageProvider,
                                             currentIndex:currentIndex)
         pageViewController.dataSource = dataSource
@@ -41,18 +41,21 @@ class PageViewCoordinator
         detailViewController.onPhotoTapped = { [unowned self] imagePath in
             self.imageTappedInDetailView(imagePath: imagePath)
         }
-        detailViewController.onViewDidAppear = {
-            
+        detailViewController.onViewDidAppear = { [unowned self, unowned detailViewController] in
+
             if let index = self.pageViewController.viewControllers?.firstIndex(of: detailViewController),
                let entry = self.pageViewDataSource.dictModel.searchResults?[index] {
-                
+
                 UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
             }
         }
     }
 
     private func imageTappedInDetailView(imagePath:String) {
-        if let photoVC = self.storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController {
+        
+        let storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
+        
+        if let photoVC = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController {
             photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
             self.pageViewController.present(photoVC, animated: true)
         }

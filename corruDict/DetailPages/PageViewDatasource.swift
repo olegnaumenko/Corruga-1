@@ -13,13 +13,13 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
 
     var currentIndex:Int
     private var imageProvider:ImageProvider?
-    private let storyboard:UIStoryboard
+//    private let storyboard:UIStoryboard
     let dictModel:DictModel
     
-    init(dictModel:DictModel, storyboard:UIStoryboard, imageProvider:ImageProvider? = nil, currentIndex:Int = 0) {
+    init(dictModel:DictModel, storyboard:UIStoryboard?, imageProvider:ImageProvider? = nil, currentIndex:Int = 0) {
         self.dictModel = dictModel
         self.currentIndex = currentIndex
-        self.storyboard = storyboard
+//        self.storyboard = storyboard
         self.imageProvider = imageProvider
         super.init()
     }
@@ -63,7 +63,10 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         if (index < 0 || index >= (self.dictModel.searchResults?.count)!) {
             return nil
         }
-        if let detailViewController = self.storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+        
+        let storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
+        
+        if let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
             
             if let entry = self.dictModel.searchResults?[index] {
                 let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
@@ -72,7 +75,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
                 
                 currentIndex = index
                 
-                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
+//                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
                 
                 return detailViewController
             }
