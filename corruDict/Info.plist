@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>18</string>
+	<string>21</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -26,6 +26,13 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>bazar.gofro.expert</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>gofro.expert</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>

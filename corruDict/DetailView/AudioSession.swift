@@ -15,7 +15,11 @@ struct AudioSession
         let mode = AVAudioSessionModeDefault
         let category = AVAudioSessionCategoryPlayback
         do {
-            try asession.setCategory(category, mode:mode)
+            if #available(iOS 10.0, *) {
+                try asession.setCategory(category, mode:mode)
+            } else {
+                try asession.setCategory(category)
+            }
         } catch let error {
             print("could not set avsession category: \(error)")
         }

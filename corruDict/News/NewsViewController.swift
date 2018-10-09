@@ -14,26 +14,25 @@ class NewsViewController: UIViewController {
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
+    var urlString:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = Appearance.basicAppColor()
-        self.webView.backgroundColor = Appearance.basicAppColor()
+        self.webView.backgroundColor = self.view.backgroundColor
         self.webView.scalesPageToFit = true
         self.webView.allowsInlineMediaPlayback = false
         self.webView.mediaPlaybackRequiresUserAction = true
+        
+        self.loadHome()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.webView.isHidden = false;
+//        self.webView.isHidden = false;
         
-        let url = URL(string: "http://www.gofro.expert/novosti/")
-        if (self.webView.request?.url != url!) {
-            let request = URLRequest(url: url!)
-            self.webView.loadRequest(request)
-        }
 //        self.view.addSubview(self.webView)
     }
     
@@ -44,10 +43,18 @@ class NewsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.webView.loadHTMLString("", baseURL: nil);
+//        self.webView.loadHTMLString("", baseURL: nil);
 //        self.webView.stopLoading()
 //        self.webView.removeFromSuperview()
-        self.webView.isHidden = true
+//        self.webView.isHidden = true
+    }
+    
+    private func loadHome() {
+        let url = URL(string: self.urlString)
+        if (self.webView.request?.url != url!) {
+            let request = URLRequest(url: url!)
+            self.webView.loadRequest(request)
+        }
     }
     
 
@@ -81,11 +88,13 @@ extension NewsViewController:UIWebViewDelegate
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
+        self.setupBackButton()
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {
         self.loadingIndicator.startAnimating()
         self.loadingIndicator.isHidden = false
+        self.setupBackButton()
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

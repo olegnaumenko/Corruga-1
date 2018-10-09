@@ -1,19 +1,22 @@
 //
-//  NewsCoordinator.swift
+//  ClassifiedsCoordinator.swift
 //  Corruga
 //
-//  Created by oleg.naumenko on 9/6/18.
+//  Created by oleg.naumenko on 10/5/18.
 //  Copyright © 2018 oleg.naumenko. All rights reserved.
 //
 
 import UIKit
 
-class NewsCoordinator: NSObject {
+class ClassifiedsCoordinator: NSObject {
+    
+    let boardUrlString = "http://bazar.gofro.expert/"
     
     let newsViewController:NewsViewController
+    
     init(newsViewController:NewsViewController) {
         self.newsViewController = newsViewController
-        self.newsViewController.urlString = "http://novosti.gofro.expert/novosti/"
+        self.newsViewController.urlString = boardUrlString
         super.init()
     }
 }

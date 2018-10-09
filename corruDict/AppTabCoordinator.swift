@@ -15,34 +15,70 @@ class AppTabCoordinator:NSObject {
     var dictionaryCoordinator:DictionaryCoordinator?
     var newsCoordinator:NewsCoordinator?
     var videosCoordinator:VideosCoordinator?
+    var classifiedsCoordinator:ClassifiedsCoordinator?
     
     init(tabBarController:AppTabBarController) {
         
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
-        tabBarController.tabBar.unselectedItemTintColor = UIColor.white
-        tabBarController.tabBar.tintColor = UIColor(white: 0.8, alpha: 1)
+        if #available(iOS 10.0, *) {
+            tabBarController.tabBar.unselectedItemTintColor = UIColor.white
+        } else {
+            // Fallback on earlier versions
+        }
+        tabBarController.tabBar.tintColor = UIColor(red: 1, green: 1, blue: 0.5, alpha: 1)//(white: 0.8, alpha: 1)
         super.init()
         self.tabBarController.delegate = self;
-        if let firstVC = tabBarController.viewControllers?.first as? UINavigationController {
-            self.dictionaryCoordinator = DictionaryCoordinator(navController:firstVC)
+        
+        
+        //TODO: minimize this and tab bar controller delegate method:
+        
+        if let firstNavVC = tabBarController.viewControllers?.first as? UINavigationController,
+            let firstVC = firstNavVC.viewControllers.first {
+            
+            if (firstVC.isKind(of: DictionaryNavViewController.self)) {
+                self.dictionaryCoordinator = DictionaryCoordinator(navController:firstNavVC)
+            } else if (firstVC.isKind(of: NewsViewController.self)) {
+                self.newsCoordinator = NewsCoordinator(newsViewController: firstVC as! NewsViewController)
+            } else if (firstVC.isKind(of: VideosViewController.self)) {
+                self.videosCoordinator = VideosCoordinator(videosViewController: firstVC as! VideosViewController)
+            } else if (firstVC.isKind(of: ClassifiedsViewController.self)) {
+                self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: firstVC as! ClassifiedsViewController)
+            }
+            self.decorateNavbarIn(navcontroller: firstNavVC)
+        }
+    }
+    
+    fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
+        navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
+        if var titleAttribs = navcontroller.navigationBar.titleTextAttributes {
+            titleAttribs[NSForegroundColorAttributeName] = UIColor.white
+            navcontroller.navigationBar.titleTextAttributes = titleAttribs
+        } else {
+            navcontroller.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         }
     }
 }
 
-extension AppTabCoordinator:UITabBarControllerDelegate
-{
+extension AppTabCoordinator:UITabBarControllerDelegate {
+    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        //TODO: minimize this and init method:
         
         if let navVC = viewController as? UINavigationController,
             let rootViewController = navVC.viewControllers.first {
-            
-            navVC.navigationBar.barTintColor = Appearance.basicAppColor()
             if let newsVC = rootViewController as? NewsViewController, self.newsCoordinator == nil {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
             } else if let newVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
                 self.videosCoordinator = VideosCoordinator(videosViewController: newVC)
+            } else if let dictVC = rootViewController as? ListViewController, self.dictionaryCoordinator == nil {
+                self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
+            } else if let classVC = rootViewController as? ClassifiedsViewController, self.classifiedsCoordinator == nil {
+                self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: classVC)
             }
+            
+            self.decorateNavbarIn(navcontroller: navVC)
         }
     }
 }
