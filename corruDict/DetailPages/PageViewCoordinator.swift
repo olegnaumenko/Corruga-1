@@ -57,6 +57,7 @@ class PageViewCoordinator
         
         if let photoVC = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController {
             photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
+            photoVC.modalPresentationStyle = .formSheet
             self.pageViewController.present(photoVC, animated: true)
         }
         Analytics.shared.logEvent(name: "open_image", params: nil)
