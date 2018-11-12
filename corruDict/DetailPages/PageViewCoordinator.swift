@@ -59,6 +59,7 @@ class PageViewCoordinator
             photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
             self.pageViewController.present(photoVC, animated: true)
         }
+        Analytics.shared.logEvent(name: "open_image", params: nil)
     }
 }
 

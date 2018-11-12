@@ -10,7 +10,7 @@ import UIKit
 
 class ClassifiedsCoordinator: NSObject {
     
-    let boardUrlString = "http://bazar.gofro.expert/"
+    let boardUrlString = "http://market.gofro.expert"//"http://bazar.gofro.expert/"
     
     let newsViewController:NewsViewController
     

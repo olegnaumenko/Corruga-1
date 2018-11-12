@@ -81,6 +81,7 @@ class DictionaryCoordinator: NSObject {
         } else {
             self.clearSearch()
         }
+        Analytics.shared.logEvent(name: "swap_lang", params: ["to_lang" : self.dictModel.toLanguageID])
     }
     
     private func inputModeChange(locale:String, text:String) {
@@ -96,6 +97,7 @@ class DictionaryCoordinator: NSObject {
                                                            currentIndex: indexPath.row,
                                                            imageProvider:self.imageProvider)
             self.pageViewCoordinator?.start()
+            Analytics.shared.logEvent(name: "open_dict_page", params: nil)
         }
     }
     

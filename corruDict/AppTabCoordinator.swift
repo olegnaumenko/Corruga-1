@@ -66,18 +66,26 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
         
         //TODO: minimize this and init method:
         
+        var eventName = ""
+        
         if let navVC = viewController as? UINavigationController,
             let rootViewController = navVC.viewControllers.first {
             if let newsVC = rootViewController as? NewsViewController, self.newsCoordinator == nil {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
+                eventName = "open_news"
             } else if let newVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
                 self.videosCoordinator = VideosCoordinator(videosViewController: newVC)
+                eventName = "open_video"
             } else if let dictVC = rootViewController as? ListViewController, self.dictionaryCoordinator == nil {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
+                eventName = "open_dict"
             } else if let classVC = rootViewController as? ClassifiedsViewController, self.classifiedsCoordinator == nil {
                 self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: classVC)
+                eventName = "open_board"
             }
-            
+            if (eventName.count > 0) {
+                Analytics.shared.logEvent(name: eventName, params: nil)
+            }
             self.decorateNavbarIn(navcontroller: navVC)
         }
     }

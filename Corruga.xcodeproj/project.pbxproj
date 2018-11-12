@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C06CB722108923300FEEB52 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		7C06CB762108928000FEEB52 /* DictionaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */; };
+		7C16D3632199E09C00217626 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16D3622199E09C00217626 /* Analytics.swift */; };
 		7C1CD34A21443962006CF4C6 /* VideosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34921443962006CF4C6 /* VideosCoordinator.swift */; };
 		7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */; };
 		7C1CD34E214448DA006CF4C6 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoViewModel.swift */; };
@@ -89,6 +90,7 @@
 		7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCoordinator.swift; sourceTree = "<group>"; };
 		7C15EB60210B7A1300C304AC /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		7C15EB61210B7A1300C304AC /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		7C16D3622199E09C00217626 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		7C1CD34921443962006CF4C6 /* VideosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosCoordinator.swift; sourceTree = "<group>"; };
 		7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		7C1CD34D214448DA006CF4C6 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
 				7CDD61C421417A2E000E864D /* AppTabBarController.swift */,
 				7CDD61C22141797F000E864D /* AppTabCoordinator.swift */,
+				7C16D3622199E09C00217626 /* Analytics.swift */,
 				7C978F77211F101F00D1B165 /* Appearance.swift */,
 				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				7C4B7074214182FE00BC03C3 /* Video */,
@@ -560,6 +563,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Corruga/Pods-Corruga-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -568,6 +573,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -588,6 +595,7 @@
 			files = (
 				7C5D004C210889060025EF47 /* PhotoViewController.swift in Sources */,
 				7CDD61C521417A2E000E864D /* AppTabBarController.swift in Sources */,
+				7C16D3632199E09C00217626 /* Analytics.swift in Sources */,
 				7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */,
 				7C5D73F4216774110022ABBC /* ClassifiedsViewController.swift in Sources */,
 				7C5337912124371000465EF1 /* UIView+Name.swift in Sources */,
