@@ -60,7 +60,7 @@ class PageViewCoordinator
             photoVC.modalPresentationStyle = .formSheet
             self.pageViewController.present(photoVC, animated: true)
         }
-        Analytics.shared.logEvent(name: "open_image", params: nil)
+        AppAnalytics.shared.logEvent(name: "open_image", params: nil)
     }
 }
 

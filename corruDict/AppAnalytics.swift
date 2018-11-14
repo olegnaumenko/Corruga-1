@@ -8,14 +8,15 @@
 
 import Foundation
 import FBSDKCoreKit
+import FirebaseAnalytics
 
-class Analytics {
+class AppAnalytics {
     
-    static var shared = Analytics()
+    static var shared = AppAnalytics()
     private init() {}
     
-    func logEvent(name:String, params:[AnyHashable:Any]?) {
+    func logEvent(name:String, params:[String:Any]?) {
         FBSDKAppEvents.logEvent(name, parameters: params)
+        Analytics.logEvent(name, parameters: params)
     }
-    
 }

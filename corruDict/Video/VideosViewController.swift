@@ -15,10 +15,11 @@ class VideosViewController: UIViewController {
     @IBOutlet var tableView:UITableView!
     
     var indicator:UIActivityIndicatorView?
+    var shouldPlay:Bool = false
     
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     
-    var tableViewModel:VideoTableViewModel?
+    var tableViewModel:VideoTableViewModel!
     
     var dataSource:VideoSource! {
         didSet {
@@ -59,6 +60,7 @@ class VideosViewController: UIViewController {
     
     private func loadOnStart() {
         if let firstVM = self.tableViewModel?.cellViewModel(index: 0) {
+            self.tableViewModel?.currentItemIndex = 0
             self.loadItem(video: firstVM)
         }
     }
@@ -73,6 +75,12 @@ class VideosViewController: UIViewController {
         AudioSession().activate()
         self.playerView.load(withVideoId:  video.videoId)
     }
+    
+    func updateItemSelection() {
+        if let indexPath = self.tableViewModel.selectedIndexPath() {
+            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
 
 }
 
@@ -80,6 +88,10 @@ extension VideosViewController : YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         indicator?.stopAnimating()
+        if shouldPlay {
+            self.playerView.playVideo()
+        }
+        self.updateItemSelection()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
@@ -117,9 +129,10 @@ extension VideosViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vm = self.tableViewModel?.cellViewModel(index: indexPath.row) {
+            self.tableViewModel?.currentItemIndex = indexPath.row
             self.playerView.stopVideo()
+            self.shouldPlay = true
             self.loadItem(video: vm)
-            self.playerView.playVideo()
         }
     }
 }

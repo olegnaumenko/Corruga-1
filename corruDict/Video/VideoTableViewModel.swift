@@ -52,6 +52,13 @@ class VideoTableViewModel: NSObject, ImageCacheDelegate {
 //        }
 //        return nil
     }
+    
+    func selectedIndexPath() -> IndexPath? {
+        if self.currentItemIndex < self.dataSource.videoItemsCount {
+            return IndexPath(row: self.currentItemIndex, section: 0)
+        }
+        return nil
+    }
 }
 
 extension VideoTableViewModel : UITableViewDataSource {

@@ -86,7 +86,7 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
                 eventName = "open_board"
             }
             if (eventName.count > 0) {
-                Analytics.shared.logEvent(name: eventName, params: nil)
+                AppAnalytics.shared.logEvent(name: eventName, params: nil)
             }
             self.decorateNavbarIn(navcontroller: navVC)
         }
