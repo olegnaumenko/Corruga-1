@@ -10,23 +10,22 @@ import Foundation
 
 class VideosCoordinator : NSObject {
     
-    let client = Client()
     let videosViewController:VideosViewController
     
     init(videosViewController:VideosViewController) {
         self.videosViewController = videosViewController
         super.init()
         
-        self.videosViewController.dataSource = VideosDataSource()
+        self.videosViewController.dataSource = VideoSource.shared
         
         self.videosViewController.onViewDidLoad = { [weak self] in
-            self?.client.getVideos { (data, error) in
-                if let descriptors = data {
-                    self?.videosViewController.dataSource?.updateVideos(videoDescriptors: descriptors)
-                } else if error != nil {
-                    print(error!)
-                }
-            }
+//            self?.client.getVideos { (data, error) in
+//                if let descriptors = data {
+//                    self?.videosViewController.dataSource?.updateVideos(videoDescriptors: descriptors)
+//                } else if error != nil {
+//                    print(error!)
+//                }
+//            }
         }
     }
    

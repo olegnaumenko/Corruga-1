@@ -12,6 +12,8 @@ class NewsViewController: UIViewController {
 
     @IBOutlet var webView:UIWebView!
     
+    @IBOutlet var logoLabel:UILabel?
+    
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
     var urlString:String!
@@ -95,11 +97,18 @@ extension NewsViewController:UIWebViewDelegate
         self.loadingIndicator.startAnimating()
         self.loadingIndicator.isHidden = false
         self.setupBackButton()
+        
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
         self.setupBackButton()
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.logoLabel?.alpha = 0
+        }) { (finished) in
+            self.logoLabel?.removeFromSuperview()
+        }
     }
 }

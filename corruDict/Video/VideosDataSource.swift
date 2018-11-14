@@ -22,6 +22,11 @@ class VideosDataSource {
     
     var onVideoListUpdated = {}
     
+    
+    init() {
+        
+    }
+    
     func updateVideos(videoDescriptors:[[String:String]])
     {
         var array = [VideoViewModel]()

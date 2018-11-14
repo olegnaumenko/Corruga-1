@@ -14,11 +14,15 @@ class VideosViewController: UIViewController {
     @IBOutlet var playerView:YTPlayerView!
     @IBOutlet var tableView:UITableView!
     
-    var tableViewDataSource:VideoTableDataSource?
+    var indicator:UIActivityIndicatorView?
     
-    var dataSource:VideosDataSource! {
+    private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
+    
+    var tableViewModel:VideoTableViewModel?
+    
+    var dataSource:VideoSource! {
         didSet {
-            self.tableViewDataSource = VideoTableDataSource(dataSource: self.dataSource)
+            self.tableViewModel = VideoTableViewModel(dataSource: self.dataSource)
         }
     }
     
@@ -30,38 +34,44 @@ class VideosViewController: UIViewController {
         self.view.backgroundColor = Appearance.basicAppColor()
         self.playerView.delegate = self
         
-        self.dataSource.onVideoListUpdated = {
+        self.dataSource.onEntitiesChange = {
             self.tableView.reloadData()
-            if let vm = self.dataSource?.viewModels.first {
-                self.play(video: vm)
-                
-                if self.dataSource.videItemsCount > 0,
-                    let index = self.dataSource.indexOf(viewModel: vm) {
-                    self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
-                }
-            }
-        }        
-        self.tableView.dataSource = self.tableViewDataSource
+//            
+//            let selectedIndex = 0
+//            if let cellViewModel = self.tableViewModel?.cellViewModel(index: selectedIndex) {
+//                
+//            }
+            
+//            if let vm = self.dataSource?.viewModels.first {
+//                self.play(video: vm)
+//
+//                if self.dataSource.videItemsCount > 0,
+//                    let index = self.dataSource.indexOf(viewModel: vm) {
+//                    self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
+//                }
+//            }
+        }
+        self.tableView.dataSource = self.tableViewModel
         self.tableView.delegate = self
+        self.loadOnStart()
         self.onViewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
+    private func loadOnStart() {
+        if let firstVM = self.tableViewModel?.cellViewModel(index: 0) {
+            self.loadItem(video: firstVM)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.playerView.pauseVideo()
     }
+
     
-    func play(video:VideoViewModel) {
-        if let youTubeId = video.youTubeId {
-            
-            AudioSession().activate()
-            self.playerView.load(withVideoId: youTubeId)
-        }
+    func loadItem(video:VideoItemViewModel) {
+        AudioSession().activate()
+        self.playerView.load(withVideoId:  video.videoId)
     }
 
 }
@@ -69,16 +79,15 @@ class VideosViewController: UIViewController {
 extension VideosViewController : YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        
-        self.playerView.playVideo()
+        indicator?.stopAnimating()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        
     }
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
-        print(error)
+        indicator?.stopAnimating()
+        print("YT Player Error: \(error)")
     }
     
     func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
@@ -87,18 +96,30 @@ extension VideosViewController : YTPlayerViewDelegate {
     
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         
-        let view = UIView.init(frame: self.playerView.bounds)
-        view.backgroundColor = Appearance.basicAppColor()
-        return view
+        let loadingView = UIView.init(frame: playerView.bounds)
+        let parentSize = playerView.bounds.size
+        
+        let indi = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        indi.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin,
+                                      .flexibleLeftMargin, .flexibleRightMargin]
+        indi.center = CGPoint(x: parentSize.width / 2, y: parentSize.height / 2)
+        
+        loadingView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        loadingView.backgroundColor = UIColor.black
+        loadingView.addSubview(indi)
+        indi.startAnimating()
+        self.indicator = indi
+        return loadingView
     }
 }
 
 extension VideosViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vm = self.dataSource.videoItemAtIndex(index: indexPath.row)
-        self.playerView.stopVideo()
-        self.play(video: vm)
+        if let vm = self.tableViewModel?.cellViewModel(index: indexPath.row) {
+            self.playerView.stopVideo()
+            self.loadItem(video: vm)
+            self.playerView.playVideo()
+        }
     }
-    
 }

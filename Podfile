@@ -8,5 +8,7 @@ target 'Corruga' do
   pod 'youtube-ios-player-helper', '~> 0.1.4'
   pod 'Networking'
   pod 'FacebookSDK'
+  pod 'Firebase/Core'
+  pod 'SKImageCache'
 
 end
