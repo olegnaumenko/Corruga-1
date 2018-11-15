@@ -10,5 +10,6 @@ target 'Corruga' do
   pod 'FacebookSDK'
   pod 'Firebase/Core'
   pod 'SKImageCache'
+  pod 'SwiftyImageCache'
 
 end

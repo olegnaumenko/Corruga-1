@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import SKImageCache
+//import SKImageCache
+import SwiftyImageCache
 
 class VideoItemTableViewCell: UITableViewCell {
     
@@ -24,17 +25,20 @@ class VideoItemTableViewCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-//        self.configure()
-        
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
+    
+    override func prepareForReuse() {
+        self.thumbImageView.clear()
+        self.thumbImageView.image = nil
     }
     
     func configure() {
@@ -44,9 +48,10 @@ class VideoItemTableViewCell: UITableViewCell {
         self.thumbImageView.layer.cornerRadius = 2.5
         self.thumbImageView.layer.masksToBounds = true
         if let imageURL = URL(string: self.viewModel.smallThumbURL) {
-            self.thumbImageView.setImageFromURL(imageURL, placeholderImageName: nil, directory: VideoItemTableViewCell.cacheDirectory , skipCache: false, completion: nil)
-        } else {
             
+//            self.thumbImageView.setImageFromURL(imageURL, placeholderImageName: nil, directory: VideoItemTableViewCell.cacheDirectory , skipCache: false, completion: nil)
+            
+            self.thumbImageView.setUrl(imageURL, qualityFactor: 1.0, cache: .default, completion: nil)
         }
     }
 

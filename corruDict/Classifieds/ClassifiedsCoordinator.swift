@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClassifiedsCoordinator: NSObject {
+class ClassifiedsCoordinator: BaseFeatureCoordinator {
     
     let boardUrlString = "http://market.gofro.expert"//"http://bazar.gofro.expert/"
     
@@ -18,5 +18,6 @@ class ClassifiedsCoordinator: NSObject {
         self.newsViewController = newsViewController
         self.newsViewController.urlString = boardUrlString
         super.init()
+        self.start(viewController: newsViewController)
     }
 }

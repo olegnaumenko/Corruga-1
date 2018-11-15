@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: BaseFeatureViewController {
 
     @IBOutlet private var tableView:UITableView?
     @IBOutlet var searchTextField:UITextField?

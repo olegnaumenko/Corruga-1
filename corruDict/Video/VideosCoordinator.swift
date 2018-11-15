@@ -8,13 +8,16 @@
 
 import Foundation
 
-class VideosCoordinator : NSObject {
+class VideosCoordinator : BaseFeatureCoordinator {
+    
     
     let videosViewController:VideosViewController
     
     init(videosViewController:VideosViewController) {
         self.videosViewController = videosViewController
         super.init()
+        
+        self.start(viewController: videosViewController)
         
         self.videosViewController.dataSource = VideoSource.shared
         
@@ -30,3 +33,4 @@ class VideosCoordinator : NSObject {
     }
    
 }
+

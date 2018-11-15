@@ -9,7 +9,7 @@
 import UIKit
 import youtube_ios_player_helper
 
-class VideosViewController: UIViewController {
+class VideosViewController: BaseFeatureViewController {
 
     @IBOutlet var playerView:YTPlayerView!
     @IBOutlet var tableView:UITableView!

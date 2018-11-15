@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+class NewsViewController: BaseFeatureViewController {
 
     @IBOutlet var webView:UIWebView!
     

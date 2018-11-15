@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import SKImageCache
+//import SKImageCache
+import SwiftyImageCache
 import Networking
 
-class VideoTableViewModel: NSObject, ImageCacheDelegate {
+class VideoTableViewModel: NSObject/*, ImageCacheDelegate*/ {
     
     let dataSource:VideoSource!
     var currentItemIndex = -1;
@@ -20,38 +21,26 @@ class VideoTableViewModel: NSObject, ImageCacheDelegate {
     init(dataSource:VideoSource) {
         self.dataSource = dataSource
         super.init()
-        ImageCache.shared.useURLPathing = true
-        ImageCache.shared.useLocalStorage = true
-        ImageCache.shared.delegate = self
-//        ImageCache.shared.emptyCache()
+//        ImageCache.shared.useURLPathing = true
+//        ImageCache.shared.useLocalStorage = true
+//        ImageCache.shared.delegate = self
     }
     
-    func loadImageAtURL(_ url: URL, completion: @escaping ImageCache.RemoteImageCompletion) -> URLSessionDataTask? {
-
-        let task = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
-            DispatchQueue.main.async {
-                if (error != nil) {
-                    completion(nil, error!)
-                } else if let data = data, let image = UIImage(data: data) {
-                    completion(image, nil)
-                }
-            }
-        }
-        
-        task.resume()
-        return task
-        
-//        self.client.downloadImage(url.absoluteString) { (imageResult) in
-//            switch imageResult {
-//            case .success(let response):
-//                completion(response.image, nil)
+//    func loadImageAtURL(_ url: URL, completion: @escaping ImageCache.RemoteImageCompletion) -> URLSessionDataTask? {
 //
-//            case .failure(let response):
-//                completion(nil, response.error)
+//        let task = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+//            DispatchQueue.main.async {
+//                if (error != nil) {
+//                    completion(nil, error!)
+//                } else if let data = data, let image = UIImage(data: data) {
+//                    completion(image, nil)
+//                }
 //            }
 //        }
-//        return nil
-    }
+//
+//        task.resume()
+//        return task
+//    }
     
     func selectedIndexPath() -> IndexPath? {
         if self.currentItemIndex < self.dataSource.videoItemsCount {

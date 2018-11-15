@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DictionaryCoordinator: NSObject {
+class DictionaryCoordinator: BaseFeatureCoordinator {
     
     private var dictModel:DictModel
     private var imageProvider = ImageProvider()
@@ -24,6 +24,8 @@ class DictionaryCoordinator: NSObject {
         self.viewController = ListViewControllerFinder(navController: navController).listViewController
         self.dictModel = DictModel(fromID: Settings.s.fromLangID, toID: Settings.s.toLangID)
         super.init()
+        
+        self.start(viewController: viewController)
 //        navController.delegate = self
         self.bindToDictModel(dict: self.dictModel)
         self.configureListViewController(vc: self.viewController)

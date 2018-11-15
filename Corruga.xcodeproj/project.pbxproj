@@ -72,6 +72,9 @@
 		7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEDBF96210BAF360087FEB5 /* Media.xcassets */; };
 		7CF3B463211EEA1F00CFDFFF /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF3B462211EEA1F00CFDFFF /* PhotoViewModel.swift */; };
 		7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */; };
+		7CFFDEB3219D827D006EEB47 /* BaseFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */; };
+		7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */; };
+		7CFFDEB8219D8894006EEB47 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +164,9 @@
 		7CEDBF96210BAF360087FEB5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		7CF3B462211EEA1F00CFDFFF /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WSColourScheme.swift; sourceTree = "<group>"; };
+		7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFeatureViewController.swift; sourceTree = "<group>"; };
+		7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFeatureCoordinator.swift; sourceTree = "<group>"; };
+		7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9EA1BE279A8F14B1A1D1E275 /* Pods-Corruga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.release.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.release.xcconfig"; sourceTree = "<group>"; };
 		F05FA882528DA78405BF5054 /* Pods_Corruga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Corruga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -266,12 +272,15 @@
 		7C5D0046210889060025EF47 /* corruDict */ = {
 			isa = PBXGroup;
 			children = (
+				7CFFDEB6219D887F006EEB47 /* Share */,
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
 				7CDD61C421417A2E000E864D /* AppTabBarController.swift */,
 				7CDD61C22141797F000E864D /* AppTabCoordinator.swift */,
 				7C16D3622199E09C00217626 /* AppAnalytics.swift */,
 				7C978F77211F101F00D1B165 /* Appearance.swift */,
 				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
+				7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */,
+				7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */,
 				7C4B7074214182FE00BC03C3 /* Video */,
 				7C4B7073214182F800BC03C3 /* News */,
 				7C5D73F0216773630022ABBC /* Classifieds */,
@@ -408,6 +417,14 @@
 				7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */,
 			);
 			path = libs;
+			sourceTree = "<group>";
+		};
+		7CFFDEB6219D887F006EEB47 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		E4E8BBBEABF5881617273F5A /* Pods */ = {
@@ -579,6 +596,7 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SKImageCache/SKImageCache.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyImageCache/SwiftyImageCache.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDevice-Hardware/UIDevice_Hardware.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
@@ -592,6 +610,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKImageCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyImageCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDevice_Hardware.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
@@ -638,6 +657,7 @@
 				7CD7ADFD2127FF1C009D3B4A /* ListViewControllerFinder.swift in Sources */,
 				7C5D004A210889060025EF47 /* ListViewController.swift in Sources */,
 				7CEABAD2215F57B70011BB55 /* VideoItemTableViewCell.swift in Sources */,
+				7CFFDEB8219D8894006EEB47 /* ShareViewController.swift in Sources */,
 				7C4993EB213EACE900778429 /* UserActivityFabric.swift in Sources */,
 				7C3A117A2115C7B100FB96A1 /* LanguageStorage.swift in Sources */,
 				7C8EC177212840AF000499C9 /* PageViewControllerObserver.swift in Sources */,
@@ -646,6 +666,7 @@
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
 				7C4B70762141830F00BC03C3 /* NewsCoordinator.swift in Sources */,
+				7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */,
 				7CD7ADFB2127FCEC009D3B4A /* SwapLangViewModel.swift in Sources */,
 				7C978F78211F101F00D1B165 /* Appearance.swift in Sources */,
 				7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */,
@@ -656,6 +677,7 @@
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,
 				7C4993F2213EBC0B00778429 /* SpotlightIndexer.swift in Sources */,
+				7CFFDEB3219D827D006EEB47 /* BaseFeatureViewController.swift in Sources */,
 				7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

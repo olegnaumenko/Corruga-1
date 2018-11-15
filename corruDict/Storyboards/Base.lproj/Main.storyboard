@@ -111,19 +111,27 @@
                         <viewLayoutGuide key="safeArea" id="vN8-jL-TLV"/>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="W4h-VH-aBc">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="hQ3-me-h8y">
-                            <view key="customView" contentMode="scaleToFill" id="bGO-a0-dir">
-                                <rect key="frame" x="272" y="6" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="PVl-Vd-oIK">
-                                        <rect key="frame" x="12" y="6" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="qr_button" id="H9D-Rb-7bX">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="onQRButton:" destination="f5i-Jq-Mbc" id="NCG-jW-esk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="hQ3-me-h8y">
+                                <view key="customView" contentMode="scaleToFill" id="bGO-a0-dir">
+                                    <rect key="frame" x="229" y="6" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="PVl-Vd-oIK">
+                                            <rect key="frame" x="12" y="6" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="loadingIndicator" destination="PVl-Vd-oIK" id="Cdz-2s-DcM"/>
@@ -225,6 +233,12 @@
                                 <action selector="onLanguageSwapButton:" destination="kSo-jW-rff" eventType="touchUpInside" id="fAa-yp-z1r"/>
                             </connections>
                         </button>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="qr_button" id="MAM-Rq-kr6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onQRButton:" destination="kSo-jW-rff" id="PvZ-g7-yLQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="DRM-03-1zz" id="Tum-oG-rrD"/>
@@ -494,6 +508,53 @@
             </objects>
             <point key="canvasLocation" x="-808" y="330"/>
         </scene>
+        <!--Share Corruga-->
+        <scene sceneID="zSs-zk-KyQ">
+            <objects>
+                <viewController storyboardIdentifier="ShareViewController" title="Share Corruga" id="1fV-TK-hQh" customClass="ShareViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UAY-l7-k6f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="748" image="static_qr_code" translatesAutoresizingMaskIntoConstraints="NO" id="thU-HL-DSs">
+                                <rect key="frame" x="16" y="28" width="288" height="456"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="370" id="Zpr-R9-KIb"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsT-AC-hxb">
+                                <rect key="frame" x="45.5" y="488" width="229" height="48"/>
+                                <color key="backgroundColor" red="0.929132297" green="0.7777191001" blue="0.46133717369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="12" maxX="20" maxY="12"/>
+                                <state key="normal" title="Share in social media">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onShare:" destination="1fV-TK-hQh" eventType="touchUpInside" id="CfX-IS-ZXO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dsT-AC-hxb" firstAttribute="centerX" secondItem="aQR-ni-CdI" secondAttribute="centerX" id="Df0-XX-NxR"/>
+                            <constraint firstItem="thU-HL-DSs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aQR-ni-CdI" secondAttribute="leading" constant="16" id="G2r-TT-iOI"/>
+                            <constraint firstItem="dsT-AC-hxb" firstAttribute="top" secondItem="thU-HL-DSs" secondAttribute="bottom" constant="4" id="OX6-57-dY6"/>
+                            <constraint firstItem="aQR-ni-CdI" firstAttribute="bottom" secondItem="dsT-AC-hxb" secondAttribute="bottom" priority="750" constant="32" id="bJP-ZY-ULS"/>
+                            <constraint firstItem="thU-HL-DSs" firstAttribute="centerX" secondItem="aQR-ni-CdI" secondAttribute="centerX" id="lTq-7o-43p"/>
+                            <constraint firstItem="thU-HL-DSs" firstAttribute="top" secondItem="aQR-ni-CdI" secondAttribute="top" constant="8" id="v90-Bz-FG8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aQR-ni-CdI"/>
+                    </view>
+                    <connections>
+                        <outlet property="qrImageView" destination="thU-HL-DSs" id="XTD-gn-CpX"/>
+                        <outlet property="shareButton" destination="dsT-AC-hxb" id="hbf-md-sqI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PjQ-Kz-mUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-798.75" y="999.29577464788736"/>
+        </scene>
         <!--Videos-->
         <scene sceneID="Mu1-tS-qZd">
             <objects>
@@ -522,13 +583,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-bA-mpu">
-                                                    <rect key="frame" x="143" y="13" width="161" height="19.5"/>
+                                                    <rect key="frame" x="143" y="13" width="216" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Ojv-fN-8bP">
-                                                    <rect key="frame" x="143" y="34.5" width="162" height="14.5"/>
+                                                    <rect key="frame" x="143" y="34.5" width="217" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -575,7 +636,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p2J-il-zgy"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Videos" id="Ify-51-Yjw"/>
+                    <navigationItem key="navigationItem" title="Videos" id="Ify-51-Yjw">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="qr_button" id="xa4-nQ-LRr">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onQRButton:" destination="Au4-2j-55G" id="PTH-f8-g81"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="playerView" destination="XCw-c5-BvB" id="YPL-3J-W6U"/>
                         <outlet property="tableView" destination="57A-nZ-nfm" id="h8Z-HN-Qid"/>
@@ -611,19 +679,27 @@
                         <viewLayoutGuide key="safeArea" id="6a0-Xn-ubW"/>
                     </view>
                     <navigationItem key="navigationItem" title="Classifieds" id="0ol-Jr-ht2">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="xRi-jW-XXd">
-                            <view key="customView" contentMode="scaleToFill" id="mPs-dF-eR6">
-                                <rect key="frame" x="272" y="6" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-WT-7QG">
-                                        <rect key="frame" x="12" y="6" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="qr_button" id="1QX-4R-sMi">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="onQRButton:" destination="uJ4-lq-Wp3" id="h7x-1h-NpG"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="xRi-jW-XXd">
+                                <view key="customView" contentMode="scaleToFill" id="mPs-dF-eR6">
+                                    <rect key="frame" x="229" y="6" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-WT-7QG">
+                                            <rect key="frame" x="12" y="6" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="loadingIndicator" destination="XOZ-WT-7QG" id="wFt-w4-MeC"/>
@@ -639,6 +715,8 @@
         <image name="board_tab" width="24" height="24"/>
         <image name="dict_tab" width="24" height="24"/>
         <image name="news_tab" width="24" height="24"/>
+        <image name="qr_button" width="24" height="24"/>
+        <image name="static_qr_code" width="370" height="370"/>
         <image name="video_tab" width="24" height="24"/>
     </resources>
 </document>
