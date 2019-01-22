@@ -10,7 +10,7 @@ import UIKit
 
 class ClassifiedsCoordinator: BaseFeatureCoordinator {
     
-    let boardUrlString = "http://market.gofro.expert"//"http://bazar.gofro.expert/"
+    let boardUrlString = "https://market.gofro.expert"//"http://bazar.gofro.expert/"
     
     let newsViewController:NewsViewController
     

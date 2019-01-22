@@ -10,10 +10,13 @@ import UIKit
 
 class NewsCoordinator: BaseFeatureCoordinator {
     
+    let newsURLString = "https://novosti.gofro.expert/novosti/"
+    
     let newsViewController:NewsViewController
+    
     init(newsViewController:NewsViewController) {
         self.newsViewController = newsViewController
-        self.newsViewController.urlString = "http://novosti.gofro.expert/novosti/"
+        self.newsViewController.urlString = newsURLString
         super.init()
         self.start(viewController: newsViewController)
     }

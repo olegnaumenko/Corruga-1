@@ -99,6 +99,7 @@ extension AppTabCoordinator
     // MARK: App lifecycle
     
     func appDidFinishLaunching(_ application: UIApplication) {
+        videoSource.start()
     }
     
     func appWillResignActive(_ application: UIApplication) {
@@ -108,5 +109,6 @@ extension AppTabCoordinator
     }
     
     func appWillEnterForeground(_ application: UIApplication) {
+        videoSource.start()
     }
 }

@@ -41,14 +41,11 @@ class PageViewCoordinator
         detailViewController.onPhotoTapped = { [unowned self] imagePath in
             self.imageTappedInDetailView(imagePath: imagePath)
         }
-        detailViewController.onViewDidAppear = { [unowned self, unowned detailViewController] in
+//        detailViewController.onViewDidAppear = { [unowned detailViewController] in
 
-            if let index = self.pageViewController.viewControllers?.firstIndex(of: detailViewController),
-               let entry = self.pageViewDataSource.dictModel.searchResults?[index] {
-
-                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
-            }
-        }
+//            let entry = detailViewController.viewModel.entry
+//            UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
+//        }
     }
 
     private func imageTappedInDetailView(imagePath:String) {

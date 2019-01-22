@@ -30,26 +30,26 @@ class NewsViewController: BaseFeatureViewController {
         self.loadHome()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        self.webView.isHidden = false;
-        
-//        self.view.addSubview(self.webView)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+////        self.webView.isHidden = false;
+//
+////        self.view.addSubview(self.webView)
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        self.webView.loadHTMLString("", baseURL: nil);
-//        self.webView.stopLoading()
-//        self.webView.removeFromSuperview()
-//        self.webView.isHidden = true
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+////        self.webView.loadHTMLString("", baseURL: nil);
+////        self.webView.stopLoading()
+////        self.webView.removeFromSuperview()
+////        self.webView.isHidden = true
+//    }
     
     private func loadHome() {
         let url = URL(string: self.urlString)

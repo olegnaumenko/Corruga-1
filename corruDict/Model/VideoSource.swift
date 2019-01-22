@@ -30,7 +30,7 @@ class VideoSource {
     
     private init(){
         try! realm = Realm()
-        self.start()
+//        self.start()
         
         self.videoEntities = self.realm.objects(VideoItemEntity.self)
         self.observeToken = self.videoEntities?.observe({ [unowned self] (change) in

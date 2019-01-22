@@ -11,6 +11,8 @@ import Networking
 
 class Client {
     
+    static let newsURL = "http://novosti.gofro.expert"
+    
     static let YouTubeAPIBaseURL = "https://www.googleapis.com/youtube/v3"
     static let baseURL = "https://usound.in.ua"
     
@@ -18,33 +20,8 @@ class Client {
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
     
     let ytClient = Networking(baseURL: YouTubeAPIBaseURL)
-//    let client = Networking(baseURL: baseURL)
+    let newsClient = Networking(baseURL: newsURL)
     
-    
-//    func getVideos( completion:@escaping ([[String:String]]?, Error?)->())
-//    {
-//        client.get("/videos.json") { (result) in
-//                
-//            switch result {
-//            case .success(let response):
-//                
-//                let json = response.arrayBody
-//                
-//                if let data = json as? [[String:String]] {
-//                    completion(data, nil)
-//                } else {
-//                    completion(nil, NSError(domain: "com.corruga.error", code: 42, userInfo: ["description":"unknown response data"]))
-//                }
-//                
-//            case .failure(let response):
-//                
-//                let json = response.dictionaryBody
-//                print("Error during request:")
-//                print(json)
-//                completion(nil, response.error)
-//            }
-//        }
-//    }
     
     func getPlaylistVideos( completion:@escaping ([String:Any]?, Error?)->())
     {
@@ -70,6 +47,23 @@ class Client {
                 let json = response.dictionaryBody
                 print("Error during request:")
                 print(json)
+                completion(nil, response.error)
+            }
+        }
+    }
+    
+    func getNewsFeed(completion:@escaping (Data?, Error?) -> ()) {
+        
+        newsClient.downloadData("/novosti") { (dataResult) in
+            switch dataResult {
+            case .success(let response):
+                
+                completion(response.data, nil)
+                
+            case .failure(let response):
+                
+                print("Error during news list request:")
+                print(response.error)
                 completion(nil, response.error)
             }
         }
