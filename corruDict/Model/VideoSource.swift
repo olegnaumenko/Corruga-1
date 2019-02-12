@@ -28,9 +28,13 @@ class VideoSource {
     
     var observeToken:NotificationToken?
     
-    private init(){
-        try! realm = Realm()
-//        self.start()
+    private init() {
+        var conf = Realm.Configuration.defaultConfiguration
+        conf.schemaVersion = 4
+        conf.migrationBlock = { migration, oldSchemaVersion in
+            print("Migration from version " + String(oldSchemaVersion))
+        }
+        try! realm = Realm(configuration: conf)
         
         self.videoEntities = self.realm.objects(VideoItemEntity.self)
         self.observeToken = self.videoEntities?.observe({ [unowned self] (change) in
@@ -52,6 +56,8 @@ class VideoSource {
                 if let items = playlistDictionary["items"] as? [[String:Any]] {
                     
                     var entities = [VideoItemEntity]()
+                    entities.reserveCapacity(items.count)
+                    
                     for item in items {
                         entities.append(self.createVideoEntity(dict: item))
                     }

@@ -18,5 +18,12 @@ class NewsItemEntity : Object {
     @objc dynamic var articleURL = ""
     @objc dynamic var titleImageURL = ""
     @objc dynamic var dateAdded = ""
+    
+    //schema version = 4
     @objc dynamic var numberOfViews = 0
+    @objc dynamic var isNew = true
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }

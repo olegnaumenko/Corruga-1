@@ -279,8 +279,8 @@
 			children = (
 				7CFFDEB6219D887F006EEB47 /* Share */,
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
-				7CDD61C421417A2E000E864D /* AppTabBarController.swift */,
 				7CDD61C22141797F000E864D /* AppTabCoordinator.swift */,
+				7CDD61C421417A2E000E864D /* AppTabBarController.swift */,
 				7C16D3622199E09C00217626 /* AppAnalytics.swift */,
 				7C978F77211F101F00D1B165 /* Appearance.swift */,
 				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,

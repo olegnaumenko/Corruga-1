@@ -31,14 +31,6 @@ class DictionaryCoordinator: BaseFeatureCoordinator {
         self.configureListViewController(vc: self.viewController)
     }
     
-//    init(dictViewController:ListViewController) {
-//        self.viewController = dictViewController
-//        self.dictModel = DictModel(fromID: Settings.s.fromLangID, toID: Settings.s.toLangID)
-//        super.init()
-//        self.bindToDictModel(dict: self.dictModel)
-//        self.configureListViewController(vc: self.viewController)
-//    }
-    
     func translate(term:String) {
         self.search(term: term);
         self.viewController.searchTerm = term
@@ -58,9 +50,9 @@ class DictionaryCoordinator: BaseFeatureCoordinator {
         vc.searchBlock = { [unowned self] in
             self.search(term: $0)
         }
-        vc.voiceStartBlock = { [unowned self] in
+//        vc.voiceStartBlock = { [unowned self] in
 //            self.startVoiceSession()
-        }
+//        }
         vc.selectPrepareBlock = { [unowned self] indexPath, destinationVC in
             self.preparePageViewCoordinator(indexPath: indexPath, viewController: destinationVC)
         }
