@@ -212,8 +212,8 @@
 				7C954172211CC9AE00CDD270 /* ImageProvider.swift */,
 				7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */,
 				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
-				7CBB8E6E219C293800560397 /* VideoSource.swift */,
 				7C1CD35121444D0D006CF4C6 /* Client.swift */,
+				7CBB8E6E219C293800560397 /* VideoSource.swift */,
 				7C5BD3AC219EE31400337340 /* NewsSource.swift */,
 			);
 			path = Model;

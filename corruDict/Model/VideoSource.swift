@@ -42,7 +42,8 @@ class VideoSource {
         })
     }
     
-    func start() {
+    func requestListUpdate() {
+        
         self.client.getPlaylistVideos { (playlistDict, error) in
         
             if (error != nil) {

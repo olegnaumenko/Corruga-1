@@ -44,6 +44,11 @@ class VideosViewController: BaseFeatureViewController {
         self.onViewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        videoSource.requestListUpdate()
+    }
+    
     private func loadOnStart() {
         if let firstVM = self.tableViewModel?.cellViewModel(index: 0) {
             self.tableViewModel?.currentItemIndex = 0
