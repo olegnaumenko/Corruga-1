@@ -19,17 +19,7 @@ class VideosCoordinator : BaseFeatureCoordinator {
         
         self.start(viewController: videosViewController)
         
-        self.videosViewController.dataSource = VideoSource.shared
-        
-        self.videosViewController.onViewDidLoad = { [weak self] in
-//            self?.client.getVideos { (data, error) in
-//                if let descriptors = data {
-//                    self?.videosViewController.dataSource?.updateVideos(videoDescriptors: descriptors)
-//                } else if error != nil {
-//                    print(error!)
-//                }
-//            }
-        }
+        self.videosViewController.videoSource = VideoSource.shared
     }
    
 }

@@ -21,9 +21,9 @@ class VideosViewController: BaseFeatureViewController {
     
     var tableViewModel:VideoTableViewModel!
     
-    var dataSource:VideoSource! {
+    var videoSource:VideoSource! {
         didSet {
-            self.tableViewModel = VideoTableViewModel(dataSource: self.dataSource)
+            self.tableViewModel = VideoTableViewModel(dataSource: self.videoSource)
         }
     }
     
@@ -35,22 +35,8 @@ class VideosViewController: BaseFeatureViewController {
         self.view.backgroundColor = Appearance.basicAppColor()
         self.playerView.delegate = self
         
-        self.dataSource.onEntitiesChange = {
-            self.tableView.reloadData()
-//            
-//            let selectedIndex = 0
-//            if let cellViewModel = self.tableViewModel?.cellViewModel(index: selectedIndex) {
-//                
-//            }
-            
-//            if let vm = self.dataSource?.viewModels.first {
-//                self.play(video: vm)
-//
-//                if self.dataSource.videItemsCount > 0,
-//                    let index = self.dataSource.indexOf(viewModel: vm) {
-//                    self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
-//                }
-//            }
+        self.videoSource.onEntitiesChange = { [weak self] in
+            self?.tableView.reloadData()
         }
         self.tableView.dataSource = self.tableViewModel
         self.tableView.delegate = self

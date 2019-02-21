@@ -7,43 +7,22 @@
 //
 
 import UIKit
-//import SKImageCache
-import SwiftyImageCache
 import Networking
 
-class VideoTableViewModel: NSObject/*, ImageCacheDelegate*/ {
+class VideoTableViewModel: NSObject {
     
-    let dataSource:VideoSource!
+    let videoSource:VideoSource!
     var currentItemIndex = -1;
     
     lazy var client = Networking()
     
     init(dataSource:VideoSource) {
-        self.dataSource = dataSource
+        self.videoSource = dataSource
         super.init()
-//        ImageCache.shared.useURLPathing = true
-//        ImageCache.shared.useLocalStorage = true
-//        ImageCache.shared.delegate = self
     }
     
-//    func loadImageAtURL(_ url: URL, completion: @escaping ImageCache.RemoteImageCompletion) -> URLSessionDataTask? {
-//
-//        let task = URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
-//            DispatchQueue.main.async {
-//                if (error != nil) {
-//                    completion(nil, error!)
-//                } else if let data = data, let image = UIImage(data: data) {
-//                    completion(image, nil)
-//                }
-//            }
-//        }
-//
-//        task.resume()
-//        return task
-//    }
-    
     func selectedIndexPath() -> IndexPath? {
-        if self.currentItemIndex < self.dataSource.videoItemsCount {
+        if self.currentItemIndex < self.videoSource.videoItemsCount {
             return IndexPath(row: self.currentItemIndex, section: 0)
         }
         return nil
@@ -53,7 +32,7 @@ class VideoTableViewModel: NSObject/*, ImageCacheDelegate*/ {
 extension VideoTableViewModel : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.videoItemsCount
+        return self.videoSource.videoItemsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,8 +46,8 @@ extension VideoTableViewModel : UITableViewDataSource {
     }
     
     func cellViewModel(index:Int) -> VideoItemViewModel? {
-        if self.dataSource.videoItemsCount > index {
-            return VideoItemViewModel(storageItem: self.dataSource.videoEntityAtIndex(index: index))
+        if self.videoSource.videoItemsCount > index {
+            return VideoItemViewModel(storageItem: self.videoSource.videoEntityAtIndex(index: index))
         }
         return nil
     }

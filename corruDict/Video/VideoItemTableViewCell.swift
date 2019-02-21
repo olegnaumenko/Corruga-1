@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import SKImageCache
 import SwiftyImageCache
 
 class VideoItemTableViewCell: UITableViewCell {
