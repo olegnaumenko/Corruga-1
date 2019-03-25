@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import Firebase
+import Branch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let branch: Branch = Branch.getInstance()
+        branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
+            if error == nil {
+                // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
+                // params will be empty if no data found
+                // ... insert custom logic here ...
+                print("params: %@", params as? [String: AnyObject] ?? {})
+            }
+        })
+        
         
         FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
         
@@ -30,10 +42,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coordinator.appDidFinishLaunching(application)
         return true
     }
-
+    
+//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        // pass the url to the handle deep link call
+//        let branchHandled = Branch.getInstance().application(application,
+//                                                             open: url,
+//                                                             sourceApplication: sourceApplication,
+//                                                             annotation: annotation
+//        )
+//        if (!branchHandled) {
+//            // If not handled by Branch, do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+//        }
+//
+//        // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+//        return true
+//    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        let handled = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        return handled ?? false
+        
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+        let sourceAnnotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        var handled = Branch.getInstance()!.application(app,
+                                                        open: url,
+                                                        options: options)
+        if (!handled) {
+            handled = FBSDKApplicationDelegate.sharedInstance()!.application(app,
+                                                                             open: url,
+                                                                             sourceApplication: sourceApplication,
+                                                                             annotation: sourceAnnotation)
+        }
+        return handled
     }
     
 //    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -41,6 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        
+        Branch.getInstance().continue(userActivity)
+        
         if let title = userActivity.title {
             self.coordinator.dictionaryCoordinator?.translate(term: title)
         } else if let title = userActivity.contentAttributeSet?.title {
@@ -71,6 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        self.coordinator.appDidBecomeActive()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

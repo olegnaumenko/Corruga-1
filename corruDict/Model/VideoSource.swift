@@ -59,9 +59,9 @@ class VideoSource {
                     var entities = [VideoItemEntity]()
                     entities.reserveCapacity(items.count)
                     
-                    for item in items {
+                    items.forEach({ (item) in
                         entities.append(self.createVideoEntity(dict: item))
-                    }
+                    })
                     
                     try! self.realm.write {
                         self.realm.add(entities, update: true)

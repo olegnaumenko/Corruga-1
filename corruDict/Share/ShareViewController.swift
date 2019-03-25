@@ -10,7 +10,7 @@ import UIKit
 
 class ShareViewController: UIViewController {
 
-    let appstoreURLString = "https://itunes.apple.com/us/app/corruga/id1418882646"
+    let shareLink = "https://corrugated.app.link/185TmpFElV"
     
     var swipeReco:UISwipeGestureRecognizer?
     
@@ -63,8 +63,8 @@ class ShareViewController: UIViewController {
     {
         sender.isEnabled = false
         sender.alpha = 0.6
-        let message = "This is link to Corruga app. Tap below to start downloading. For now only iOS. \n"
-        let activityController = UIActivityViewController(activityItems: [message, appstoreURLString], applicationActivities: nil)
+        let message = "This is link to Corruga app download: "
+        let activityController = UIActivityViewController(activityItems: [message, shareLink], applicationActivities: nil)
         activityController.modalPresentationStyle = .popover
         activityController.popoverPresentationController?.sourceView = self.view
         activityController.popoverPresentationController?.sourceRect = sender.frame

@@ -12,5 +12,6 @@ target 'Corruga' do
 #  pod 'SKImageCache'
   pod 'SwiftyImageCache'
   pod 'HTMLReader'
+  pod 'Branch'
 
 end

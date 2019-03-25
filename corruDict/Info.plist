@@ -15,13 +15,14 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
+	<string>1.2.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb261790757869765</string>
+				<string>corruga</string>
 			</array>
 		</dict>
 	</array>
@@ -116,5 +117,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_klSeLPZ7YTYyDhihYnT41biosweqEHYR</string>
+		<key>test</key>
+		<string>key_test_ldLfRNZ39H2BDbla9i8PVligFyazxV26</string>
+	</dict>
 </dict>
 </plist>
