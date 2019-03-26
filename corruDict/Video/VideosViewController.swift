@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import youtube_ios_player_helper
+import youtube_ios_player_helper_swift
 
 class VideosViewController: BaseFeatureViewController {
 
-    @IBOutlet var playerView:YTPlayerView!
+    @IBOutlet var playerView:youtube_ios_player_helper_swift.YTPlayerView!
     @IBOutlet var tableView:UITableView!
     
     var indicator:UIActivityIndicatorView?
@@ -64,7 +64,7 @@ class VideosViewController: BaseFeatureViewController {
     
     func loadItem(video:VideoItemViewModel) {
         AudioSession().activate()
-        self.playerView.load(withVideoId:  video.videoId)
+        _ = self.playerView.load(videoId: video.videoId)
     }
     
     func updateItemSelection() {
@@ -72,7 +72,6 @@ class VideosViewController: BaseFeatureViewController {
             self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
-
 }
 
 extension VideosViewController : YTPlayerViewDelegate {
