@@ -53,11 +53,11 @@ class AppTabCoordinator:NSObject {
     
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
         navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
-        if var titleAttribs = navcontroller.navigationBar.titleTextAttributes {
-            titleAttribs[NSForegroundColorAttributeName] = UIColor.white
-            navcontroller.navigationBar.titleTextAttributes = titleAttribs
+        if var titleAttribs = convertFromOptionalNSAttributedStringKeyDictionary(navcontroller.navigationBar.titleTextAttributes) {
+            titleAttribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = UIColor.white
+            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(titleAttribs)
         } else {
-            navcontroller.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:UIColor.white])
         }
     }
 }
@@ -115,4 +115,21 @@ extension AppTabCoordinator
     func appDidBecomeActive() {
         videoSource.requestListUpdate()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromOptionalNSAttributedStringKeyDictionary(_ input: [NSAttributedString.Key: Any]?) -> [String: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

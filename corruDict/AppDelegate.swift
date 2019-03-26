@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var coordinator:AppTabCoordinator!// AppCoordinator!
 
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let branch: Branch = Branch.getInstance()
         branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
@@ -58,10 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return true
 //    }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-        let sourceAnnotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        let sourceAnnotation = options[UIApplication.OpenURLOptionsKey.annotation]
         var handled = Branch.getInstance()!.application(app,
                                                         open: url,
                                                         options: options)
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //    }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
         
         Branch.getInstance().continue(userActivity)

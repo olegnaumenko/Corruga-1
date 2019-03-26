@@ -31,7 +31,7 @@ class Appearance
     }
     
     static func footerTextColor() -> UIColor {
-        return UIColor.init(white: 0.96, alpha: 1)
+        return UIColor.init(white: 0.16, alpha: 1)
     }
     
     static func footerFont() -> UIFont {
@@ -39,7 +39,7 @@ class Appearance
     }
     
     static func footerBackgroundColor() -> UIColor {
-        return self.basicAppColor()
+        return UIColor.init(white: 0.85, alpha: 1)
     }
     
     static func highlightedTextColor() -> UIColor {

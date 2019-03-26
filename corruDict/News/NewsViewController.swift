@@ -79,7 +79,7 @@ class NewsViewController: BaseFeatureViewController {
         }
     }
     
-    func onBackButton(_ sender:Any) {
+    @objc func onBackButton(_ sender:Any) {
         self.webView.goBack()
     }
     

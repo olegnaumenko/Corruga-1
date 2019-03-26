@@ -22,7 +22,8 @@ struct SwapLangViewModel {
     
     var shouldSwap:Bool {
         get {
-            if let range = self.dict.toStorage.languageID.range(of: langID.substring(to: String.Index(encodedOffset: 1))) {
+            let index = langID.index(langID.startIndex, offsetBy: 1)
+            if let range = self.dict.toStorage.languageID.range(of: langID[...index]) {
                 let bound = range.lowerBound
                 return bound == langID.startIndex
             }

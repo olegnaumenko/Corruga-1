@@ -33,6 +33,7 @@ struct VideoItemViewModel:Equatable {
     let descriptionText:String
     
     let largeTHumbURL:String
+    let mediumThumbURL:String
     let smallThumbURL:String
     
     let videoId:String
@@ -42,6 +43,7 @@ struct VideoItemViewModel:Equatable {
         self.title = storageItem.title
         self.descriptionText = storageItem.descriptionText
         self.videoId = storageItem.videoId
+        self.mediumThumbURL = storageItem.thumbMediumURL
         self.smallThumbURL = storageItem.thumbDefaultURL
         self.largeTHumbURL = storageItem.thumbHighURL
     }

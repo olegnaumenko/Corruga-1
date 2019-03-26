@@ -102,7 +102,7 @@ extension VideosViewController : YTPlayerViewDelegate {
         let loadingView = UIView.init(frame: playerView.bounds)
         let parentSize = playerView.bounds.size
         
-        let indi = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let indi = UIActivityIndicatorView(style: .whiteLarge)
         indi.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin,
                                       .flexibleLeftMargin, .flexibleRightMargin]
         indi.center = CGPoint(x: parentSize.width / 2, y: parentSize.height / 2)

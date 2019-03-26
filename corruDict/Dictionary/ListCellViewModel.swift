@@ -21,11 +21,22 @@ struct ListCellViewModel {
         let range = (entry.stringValue as NSString).range(of: searchTerm)
         
         let attrString = NSMutableAttributedString(string: entry.stringValue)
-        let attrs = [NSBackgroundColorAttributeName : Appearance.highlightedTextColor()]
-        attrString.setAttributes(attrs, range: range)
+        let attrs = [convertFromNSAttributedStringKey(NSAttributedString.Key.backgroundColor) : Appearance.highlightedTextColor()]
+        attrString.setAttributes(convertToOptionalNSAttributedStringKeyDictionary(attrs), range: range)
         
         title = attrString
         subtitle = translation?.stringValue ?? ""
         backgroundColor = Appearance.cellColor(even: (Int(index % 2) == 0))
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

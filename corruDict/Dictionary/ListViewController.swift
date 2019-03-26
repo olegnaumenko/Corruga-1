@@ -67,8 +67,8 @@ class ListViewController: BaseFeatureViewController {
         //colors
         let basicColor = Appearance.basicAppColor()
         self.view.backgroundColor = basicColor
-        self.tableView?.backgroundColor = basicColor
-        self.headerView.backgroundColor = basicColor
+        self.tableView?.backgroundColor = Appearance.footerBackgroundColor()
+        self.headerView.backgroundColor = Appearance.footerBackgroundColor()
             
         self.updateLanguagesLabel()
         
@@ -99,7 +99,7 @@ class ListViewController: BaseFeatureViewController {
         }
         
         //listen for text input mode change
-        NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: NSNotification.Name.UITextInputCurrentInputModeDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
     }
     
     private func configureTableViewFooler(label:UILabel) -> (UIView) {
@@ -140,7 +140,7 @@ class ListViewController: BaseFeatureViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView?.selectRow(at: nil, animated: true, scrollPosition: UITableViewScrollPosition.none)
+        self.tableView?.selectRow(at: nil, animated: true, scrollPosition: UITableView.ScrollPosition.none)
     }
     
     //MARK: - Public

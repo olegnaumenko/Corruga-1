@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import SwiftyImageCache
+import AltHaneke
 
 class VideoItemTableViewCell: UITableViewCell {
     
     static let cellId = "VideoItemTableViewCell"
-    static let cacheDirectory = "thumbCache"
     
     @IBOutlet var titleLabel:UILabel!
     @IBOutlet var decstiprionLabel:UILabel!
@@ -24,10 +23,24 @@ class VideoItemTableViewCell: UITableViewCell {
         }
     }
 
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
+    private func setup() {
+        self.thumbImageView.layer.cornerRadius = 2.5
+        self.thumbImageView.layer.masksToBounds = true
+    }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
@@ -36,7 +49,7 @@ class VideoItemTableViewCell: UITableViewCell {
 //    }
     
     override func prepareForReuse() {
-        self.thumbImageView.clear()
+        self.thumbImageView.hnk_cancelSetImage()
         self.thumbImageView.image = nil
     }
     
@@ -44,14 +57,8 @@ class VideoItemTableViewCell: UITableViewCell {
         
         self.titleLabel.text = self.viewModel.title
         self.decstiprionLabel.text = self.viewModel.descriptionText
-        self.thumbImageView.layer.cornerRadius = 2.5
-        self.thumbImageView.layer.masksToBounds = true
-        if let imageURL = URL(string: self.viewModel.smallThumbURL) {
-            
-//            self.thumbImageView.setImageFromURL(imageURL, placeholderImageName: nil, directory: VideoItemTableViewCell.cacheDirectory , skipCache: false, completion: nil)
-            
-            self.thumbImageView.setUrl(imageURL, qualityFactor: 1.0, cache: .default, completion: nil)
+        if let imageURL = URL(string: self.viewModel.mediumThumbURL) {
+            self.thumbImageView.hnk_setImageFromURL(imageURL)
         }
     }
-
 }

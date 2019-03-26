@@ -20,10 +20,10 @@ class KeyboardPositionObserver:NSObject
         super.init()
         NotificationCenter.default.addObserver(self,
                                selector: #selector(KeyboardPositionObserver.keyboardWillShow(n:)),
-                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+                               name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self,
                                selector: #selector(KeyboardPositionObserver.keyboardWillHide),
-                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     deinit {
@@ -31,14 +31,14 @@ class KeyboardPositionObserver:NSObject
     }
     
     
-    func keyboardWillShow(n:Notification) {
-        if let value = n.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+    @objc func keyboardWillShow(n:Notification) {
+        if let value = n.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue {
             let rect = value.cgRectValue
             self.onKeyboardHeightChange(rect.size.height)
         }
     }
     
-    func keyboardWillHide() {
+    @objc func keyboardWillHide() {
         self.onKeyboardHeightChange(0.0)
     }
 }
