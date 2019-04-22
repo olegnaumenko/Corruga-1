@@ -36,7 +36,7 @@ class VideoSource {
         }
         try! realm = Realm(configuration: conf)
         
-        self.videoEntities = self.realm.objects(VideoItemEntity.self)
+        self.videoEntities = self.realm.objects(VideoItemEntity.self).sorted(byKeyPath: "index")
         self.observeToken = self.videoEntities?.observe({ [unowned self] (change) in
             self.onEntitiesChange()
         })
@@ -59,8 +59,10 @@ class VideoSource {
                     var entities = [VideoItemEntity]()
                     entities.reserveCapacity(items.count)
                     
+                    var index = 0;
                     items.forEach({ (item) in
-                        entities.append(self.createVideoEntity(dict: item))
+                        entities.append(self.createVideoEntity(dict: item, index: index))
+                        index += 1
                     })
                     
                     try! self.realm.write {
@@ -71,7 +73,7 @@ class VideoSource {
         }
     }
     
-    private func createVideoEntity(dict:[String:Any]) -> VideoItemEntity {
+    private func createVideoEntity(dict:[String:Any], index:Int) -> VideoItemEntity {
         
         let videoEntity = VideoItemEntity()
         videoEntity.id = dict["id"] as? String ?? ""
@@ -84,9 +86,12 @@ class VideoSource {
                 videoEntity.resourceVideoId = resourceId["videoId"] ?? ""
             }
             
+            
             videoEntity.playlistId = snippet["playlistId"] as? String ?? ""
             videoEntity.channelTitle = snippet["channelTitle"] as? String ?? ""
             videoEntity.position = snippet["position"] as? Int ?? 0
+            
+            videoEntity.index = videoEntity.position
             
             videoEntity.title = snippet["title"] as? String ?? ""
             videoEntity.channelId = snippet["channelId"] as? String ?? ""

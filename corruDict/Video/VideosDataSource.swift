@@ -22,17 +22,17 @@ class VideosDataSource {
     
     var onVideoListUpdated = {}
     
-    func updateVideos(videoDescriptors:[[String:String]])
-    {
-        var array = [VideoViewModel]()
-        for dict in videoDescriptors {
-            if let model = VideoViewModel(dictionary: dict) {
-                array.append(model)
-            }
-        }
-        self.viewModels = array
-        self.onVideoListUpdated()
-    }
+//    func updateVideos(videoDescriptors:[[String:String]])
+//    {
+//        var array = [VideoViewModel]()
+//        for dict in videoDescriptors {
+//            if let model = VideoViewModel(dictionary: dict) {
+//                array.append(model)
+//            }
+//        }
+//        self.viewModels = array
+//        self.onVideoListUpdated()
+//    }
     
     func indexOf(viewModel:VideoViewModel) -> Int? {
         return self.viewModels.firstIndex(of: viewModel)
