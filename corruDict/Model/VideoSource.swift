@@ -31,6 +31,7 @@ class VideoSource {
     private init() {
         var conf = Realm.Configuration.defaultConfiguration
         conf.schemaVersion = 4
+        conf.inMemoryIdentifier = "videos"
         conf.migrationBlock = { migration, oldSchemaVersion in
             print("Migration from version " + String(oldSchemaVersion))
         }

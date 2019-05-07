@@ -11,7 +11,7 @@ import Networking
 
 class Client {
     
-    static let newsURL = "http://novosti.gofro.expert"
+    static let newsURL = "https://novosti.gofro.expert/wp-json/wp/v2"// http://novosti.gofro.expert"
     
     static let YouTubeAPIBaseURL = "https://www.googleapis.com/youtube/v3"
     static let baseURL = "https://usound.in.ua"
@@ -25,6 +25,9 @@ class Client {
     
     func getPlaylistVideos( completion:@escaping ([String:Any]?, Error?)->())
     {
+        self.getNewsFeed { (data, error) in
+            
+        }
         let bundleId = Bundle.main.bundleIdentifier
         ytClient.headerFields = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
         
@@ -54,8 +57,8 @@ class Client {
     
     func getNewsFeed(completion:@escaping (Data?, Error?) -> ()) {
         
-        newsClient.downloadData("/novosti") { (dataResult) in
-            switch dataResult {
+        newsClient.get("/posts") { (jsonResult) in
+            switch jsonResult {
             case .success(let response):
                 
                 completion(response.data, nil)
@@ -67,5 +70,19 @@ class Client {
                 completion(nil, response.error)
             }
         }
+        
+//        newsClient.downloadData("/posts") { (dataResult) in
+//            switch dataResult {
+//            case .success(let response):
+//
+//                completion(response.data, nil)
+//
+//            case .failure(let response):
+//
+//                print("Error during news list request:")
+//                print(response.error)
+//                completion(nil, response.error)
+//            }
+//        }
     }
 }
