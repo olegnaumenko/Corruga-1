@@ -11,13 +11,12 @@ import youtube_ios_player_helper_swift
 
 class VideosViewController: BaseFeatureViewController {
 
-    @IBOutlet var playerView:youtube_ios_player_helper_swift.YTPlayerView!
-    @IBOutlet var tableView:UITableView!
+    @IBOutlet weak var playerView:youtube_ios_player_helper_swift.YTPlayerView!
+    @IBOutlet weak var tableView:UITableView!
     
+    var isLoaded:Bool = false
     var indicator:UIActivityIndicatorView?
     var shouldPlay:Bool = false
-    
-    private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     
     var tableViewModel:VideoTableViewModel!
     
@@ -27,7 +26,6 @@ class VideosViewController: BaseFeatureViewController {
         }
     }
     
-    var onViewDidLoad = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,38 +38,44 @@ class VideosViewController: BaseFeatureViewController {
         }
         self.tableView.dataSource = self.tableViewModel
         self.tableView.delegate = self
+        
         self.loadOnStart()
-        self.onViewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         videoSource.requestListUpdate()
+//        updateItemSelection()
     }
     
     private func loadOnStart() {
         if let firstVM = self.tableViewModel?.cellViewModel(index: 0) {
-            self.tableViewModel?.currentItemIndex = 0
+            self.tableViewModel?.currentVideoID = firstVM.videoId
             self.loadItem(video: firstVM)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.playerView.pauseVideo()
+        if self.isLoaded == true {
+            self.playerView.pauseVideo()
+        }
     }
 
     
     func loadItem(video:VideoItemViewModel) {
         AudioSession().activate()
-        _ = self.playerView.load(videoId: video.videoId)
-    }
-    
-    func updateItemSelection() {
-        if let indexPath = self.tableViewModel.selectedIndexPath() {
-            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        self.isLoaded = self.playerView.load(videoId: video.videoId)
+        if (isLoaded) {
+            self.tableViewModel.currentVideoID = video.videoId
         }
     }
+    
+//    func updateItemSelection() {
+//        if let indexPath = self.tableViewModel.selectedIndexPath() {
+//            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+//        }
+//    }
 }
 
 extension VideosViewController : YTPlayerViewDelegate {
@@ -81,7 +85,7 @@ extension VideosViewController : YTPlayerViewDelegate {
         if shouldPlay {
             self.playerView.playVideo()
         }
-        self.updateItemSelection()
+//        self.updateItemSelection()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
@@ -96,7 +100,7 @@ extension VideosViewController : YTPlayerViewDelegate {
         return UIColor.black
     }
     
-    func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
+    @objc(playerViewPreferredInitialLoadingView:) func playerViewPreferredInitialLoadingView(_ playerView: YTPlayerView) -> UIView? {
         
         let loadingView = UIView.init(frame: playerView.bounds)
         let parentSize = playerView.bounds.size
@@ -119,10 +123,16 @@ extension VideosViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vm = self.tableViewModel?.cellViewModel(index: indexPath.row) {
-            self.tableViewModel?.currentItemIndex = indexPath.row
-            self.playerView.stopVideo()
+            self.tableViewModel?.currentVideoID = vm.videoId
+            if self.isLoaded {
+                self.playerView.stopVideo()
+            }
             self.shouldPlay = true
             self.loadItem(video: vm)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        
+//    }
 }

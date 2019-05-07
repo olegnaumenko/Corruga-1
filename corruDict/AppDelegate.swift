@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FBSDKCoreKit
+//import FBSDKCoreKit
 import Firebase
 import Branch
 
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         
-        FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+//        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         FirebaseApp.configure()
         
@@ -65,12 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var handled = Branch.getInstance()!.application(app,
                                                         open: url,
                                                         options: options)
-        if (!handled) {
-            handled = FBSDKApplicationDelegate.sharedInstance()!.application(app,
-                                                                             open: url,
-                                                                             sourceApplication: sourceApplication,
-                                                                             annotation: sourceAnnotation)
-        }
+//        if (!handled) {
+//            handled = ApplicationDelegate.shared.application(app,
+//                                                                             open: url,
+//                                                                             sourceApplication: sourceApplication,
+//                                                                             annotation: sourceAnnotation)
+//        }
         return handled
     }
     

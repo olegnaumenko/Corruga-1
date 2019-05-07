@@ -1,0 +1,143 @@
+PODS:
+  - AltHanekeSwift (0.19.0)
+  - Branch (0.27.0):
+    - Branch/Core (= 0.27.0)
+  - Branch/Core (0.27.0)
+  - Firebase/Core (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.8.1)
+  - Firebase/CoreOnly (5.20.2):
+    - FirebaseCore (= 5.4.1)
+  - Firebase/Database (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.1)
+  - FirebaseAnalytics (5.8.1):
+    - FirebaseCore (~> 5.4)
+    - FirebaseInstanceID (~> 3.8)
+    - GoogleAppMeasurement (= 5.8.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (3.8.1):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
+  - GoogleAppMeasurement (5.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities (5.7.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 5.7.0)
+    - GoogleUtilities/Environment (= 5.7.0)
+    - GoogleUtilities/ISASwizzler (= 5.7.0)
+    - GoogleUtilities/Logger (= 5.7.0)
+    - GoogleUtilities/MethodSwizzler (= 5.7.0)
+    - GoogleUtilities/Network (= 5.7.0)
+    - "GoogleUtilities/NSData+zlib (= 5.7.0)"
+    - GoogleUtilities/Reachability (= 5.7.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 5.7.0)
+    - GoogleUtilities/UserDefaults (= 5.7.0)
+  - GoogleUtilities/AppDelegateSwizzler (5.7.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.7.0)
+  - GoogleUtilities/ISASwizzler (5.7.0)
+  - GoogleUtilities/Logger (5.7.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.7.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.7.0)"
+  - GoogleUtilities/Reachability (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/SwizzlerTestHelpers (5.7.0)
+  - GoogleUtilities/UserDefaults (5.7.0):
+    - GoogleUtilities/Logger
+  - HTMLReader (2.1.3)
+  - leveldb-library (1.20)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - Networking (5.0.0)
+  - Realm (3.14.2):
+    - Realm/Headers (= 3.14.2)
+  - Realm/Headers (3.14.2)
+  - RealmSwift (3.14.2):
+    - Realm (= 3.14.2)
+  - UIDevice-Hardware (0.1.13)
+  - youtube-ios-player-helper-swift (1.1)
+
+DEPENDENCIES:
+  - AltHanekeSwift
+  - Branch
+  - Firebase/Core
+  - Firebase/Database
+  - GoogleUtilities (~> 5.7.0)
+  - HTMLReader
+  - Networking
+  - RealmSwift (~> 3.14.1)
+  - UIDevice-Hardware
+  - youtube-ios-player-helper-swift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AltHanekeSwift
+    - Branch
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - HTMLReader
+    - leveldb-library
+    - nanopb
+    - Networking
+    - Realm
+    - RealmSwift
+    - UIDevice-Hardware
+    - youtube-ios-player-helper-swift
+
+SPEC CHECKSUMS:
+  AltHanekeSwift: e65233d73e92197b245fd43720fd7ad37c9ea82e
+  Branch: e4f2a9c361ebdc960c823d16014c187bf19b508c
+  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
+  FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseDatabase: 2c15b0ea6f2c6eb5e57413f9d6340f1e50b81ae3
+  FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
+  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
+  HTMLReader: 34449b95b7c8f50557e8e60a8d892487d4541ae2
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Networking: 8ced5868ab2b5cf0fcc1d3657bf9bb589ae2fe91
+  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
+  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
+  UIDevice-Hardware: c10ce5703fa8de762079b84236c548cf31223531
+  youtube-ios-player-helper-swift: 51a3c5325317c8271d0c7985c1bbe5a252ffb2fd
+
+PODFILE CHECKSUM: 0b40d601c248ef322d58293360cc933960fead91
+
+COCOAPODS: 1.6.1

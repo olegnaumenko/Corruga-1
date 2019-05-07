@@ -23,28 +23,31 @@ class VideoItemTableViewCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
+//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        setup()
+//    }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setup()
-    }
-    
-    private func setup() {
-        self.thumbImageView.layer.cornerRadius = 2.5
-        self.thumbImageView.layer.masksToBounds = true
-    }
+//    private func setup() {
+//    }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //
+//        if self.isSelected {
+//            print("selected")
+//        }
+//        self.backgroundColor = selected ? UIColor.lightGray : UIColor.white
 //        // Configure the view for the selected state
 //    }
     
@@ -54,6 +57,10 @@ class VideoItemTableViewCell: UITableViewCell {
     }
     
     func configure() {
+        
+        self.thumbImageView.layer.cornerRadius = 2.5
+        self.thumbImageView.layer.masksToBounds = true
+        self.selectionStyle = .default
         
         self.titleLabel.text = self.viewModel.title
         self.decstiprionLabel.text = self.viewModel.descriptionText

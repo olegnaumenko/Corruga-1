@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FBSDKCoreKit
+//import FBSDKCoreKit
 import FirebaseAnalytics
 
 class AppAnalytics {
@@ -16,7 +16,11 @@ class AppAnalytics {
     private init() {}
     
     func logEvent(name:String, params:[String:Any]?) {
-        FBSDKAppEvents.logEvent(name, parameters: params)
+//        if let params = params {
+//            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: params)
+//        } else {
+//            AppEvents.logEvent(AppEvents.Name(rawValue: name))
+//        }
         Analytics.logEvent(name, parameters: params)
     }
 }
