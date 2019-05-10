@@ -21,8 +21,9 @@ class Settings
     //default values
     private let kDefaultSearchTerm  = ""
     private let kDefaultFromLangID  = "en_US"
-    private let kDefaultToLangID    = "ru_RU"
+    private let kDefaultToLangID    = "ch_CH"
     
+    let availableLangIDs = ["en_US", "ru_RU", "ch_CH"]
     
     static var s:Settings = Settings()
     

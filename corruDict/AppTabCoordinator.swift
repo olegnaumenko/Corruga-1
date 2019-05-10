@@ -49,6 +49,7 @@ class AppTabCoordinator:NSObject {
             }
             self.decorateNavbarIn(navcontroller: firstNavVC)
         }
+        DictModel.shared.setup()
     }
     
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
@@ -78,7 +79,7 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
             } else if let newVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
                 self.videosCoordinator = VideosCoordinator(videosViewController: newVC)
                 eventName = "open_video"
-            } else if let dictVC = rootViewController as? ListViewController, self.dictionaryCoordinator == nil {
+            } else if let dictVC = rootViewController as? DictionaryViewController, self.dictionaryCoordinator == nil {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
                 eventName = "open_dict"
             } else if let classVC = rootViewController as? ClassifiedsViewController, self.classifiedsCoordinator == nil {

@@ -12,12 +12,12 @@ struct ListViewControllerFinder {
     
     var navController:UINavigationController
     
-    var listViewController:ListViewController {
+    var listViewController:DictionaryViewController {
         get {
             let cnt = navController.viewControllers.count
             if cnt > 0 {
                 let vc = navController.viewControllers[0]
-                return vc as! ListViewController
+                return vc as! DictionaryViewController
             } else {
                 fatalError()
             }

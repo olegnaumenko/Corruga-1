@@ -3,6 +3,8 @@ PODS:
   - Branch (0.27.0):
     - Branch/Core (= 0.27.0)
   - Branch/Core (0.27.0)
+  - Firebase/Analytics (5.20.2):
+    - Firebase/Core
   - Firebase/Core (5.20.2):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.1)
@@ -69,7 +71,6 @@ PODS:
   - GoogleUtilities/SwizzlerTestHelpers (5.7.0)
   - GoogleUtilities/UserDefaults (5.7.0):
     - GoogleUtilities/Logger
-  - HTMLReader (2.1.3)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -88,10 +89,10 @@ PODS:
 DEPENDENCIES:
   - AltHanekeSwift
   - Branch
+  - Firebase/Analytics
   - Firebase/Core
   - Firebase/Database
   - GoogleUtilities (~> 5.7.0)
-  - HTMLReader
   - Networking
   - RealmSwift (~> 3.14.1)
   - UIDevice-Hardware
@@ -109,7 +110,6 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleUtilities
-    - HTMLReader
     - leveldb-library
     - nanopb
     - Networking
@@ -129,7 +129,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
-  HTMLReader: 34449b95b7c8f50557e8e60a8d892487d4541ae2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Networking: 8ced5868ab2b5cf0fcc1d3657bf9bb589ae2fe91
@@ -138,6 +137,6 @@ SPEC CHECKSUMS:
   UIDevice-Hardware: c10ce5703fa8de762079b84236c548cf31223531
   youtube-ios-player-helper-swift: 51a3c5325317c8271d0c7985c1bbe5a252ffb2fd
 
-PODFILE CHECKSUM: 0b40d601c248ef322d58293360cc933960fead91
+PODFILE CHECKSUM: e39f2a6103f5008ad6c3b2c4ea2ee368c2d55d77
 
 COCOAPODS: 1.6.1

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import FBSDKCoreKit
 import Firebase
 import Branch
 
@@ -60,9 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
-        let sourceAnnotation = options[UIApplication.OpenURLOptionsKey.annotation]
-        var handled = Branch.getInstance()!.application(app,
+//        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+//        let sourceAnnotation = options[UIApplication.OpenURLOptionsKey.annotation]
+        let handled = Branch.getInstance()!.application(app,
                                                         open: url,
                                                         options: options)
 //        if (!handled) {

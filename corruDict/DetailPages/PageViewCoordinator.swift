@@ -41,11 +41,6 @@ class PageViewCoordinator
         detailViewController.onPhotoTapped = { [unowned self] imagePath in
             self.imageTappedInDetailView(imagePath: imagePath)
         }
-//        detailViewController.onViewDidAppear = { [unowned detailViewController] in
-
-//            let entry = detailViewController.viewModel.entry
-//            UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
-//        }
     }
 
     private func imageTappedInDetailView(imagePath:String) {
@@ -54,7 +49,7 @@ class PageViewCoordinator
         
         if let photoVC = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController {
             photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
-            photoVC.modalPresentationStyle = .formSheet
+            photoVC.modalPresentationStyle = .pageSheet
             self.pageViewController.present(photoVC, animated: true)
         }
         AppAnalytics.shared.logEvent(name: "open_image", params: nil)

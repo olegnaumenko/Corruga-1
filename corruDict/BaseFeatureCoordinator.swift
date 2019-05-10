@@ -32,9 +32,8 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
         } else {
             navController.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:UIColor.white])
         }
-        
+        navController.modalPresentationStyle = .formSheet
         self.basicViewController?.present(navController, animated: true, completion: nil)
-        
     }
 }
 

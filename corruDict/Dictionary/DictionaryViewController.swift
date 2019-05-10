@@ -8,19 +8,17 @@
 
 import UIKit
 
-class ListViewController: BaseFeatureViewController {
+class DictionaryViewController: BaseFeatureViewController {
 
     @IBOutlet private var tableView:UITableView?
     @IBOutlet var searchTextField:UITextField?
     @IBOutlet private var voiceButton:UIButton!
     @IBOutlet weak var langSwapButton: UIButton?
+    @IBOutlet weak var fromLangButton: UIButton?
+    @IBOutlet weak var toLangButton: UIButton?
     @IBOutlet weak var headerView:UIView!
     
-    var searchBlock:((String)->())?
-    var voiceStartBlock:(()->())?
-    var languageSwapBlock:(()->())?
-    var selectPrepareBlock:((IndexPath, UIViewController)->())?
-    var inputModeChangeBlock:((String, String)->())?
+    var onTermSelectedBlock:((IndexPath, UIViewController)->())?
 
     private let footerLabel = UILabel(frame: CGRect.init())
     private var keyboardObserver:KeyboardPositionObserver?
@@ -32,13 +30,21 @@ class ListViewController: BaseFeatureViewController {
         }
     }
     
-    var searchTerm:String? {
+    var viewModel:DictionaryViewModel! {
         didSet {
-            self.searchTextField?.text = searchTerm
+            viewModel.onDidSearch = { [weak self] searchTerm, shoulldScrollToTop in
+                self?.refreshList()
+                self?.updateSearchFieldTerm()
+            }
+            viewModel.onDidChangeLanguages = { [weak self] in
+                self?.updateLanguagesIndicators()
+                self?.refreshList()
+            }
+            self.dataSource = DictionaryTableDataSource(dictModel: viewModel.dictModel)
         }
     }
     
-    var dataSource:ListTableDataSource? {
+    private var dataSource:DictionaryTableDataSource! {
         didSet {
             if let tv = self.tableView {
                 tv.dataSource = dataSource
@@ -56,9 +62,9 @@ class ListViewController: BaseFeatureViewController {
         super.viewDidLoad()
         
         self.searchTextField?.delegate = self
-        self.searchTextField?.text = searchTerm
+        self.searchTextField?.text = viewModel.searchTerm
         self.searchTextField?.addTarget(self,
-                                        action: #selector(ListViewController.textFieldDidChange),
+                                        action: #selector(DictionaryViewController.textFieldDidChange),
                                         for: .editingChanged)
         
         self.tableView?.dataSource = self.dataSource
@@ -70,7 +76,7 @@ class ListViewController: BaseFeatureViewController {
         self.tableView?.backgroundColor = Appearance.footerBackgroundColor()
         self.headerView.backgroundColor = Appearance.footerBackgroundColor()
             
-        self.updateLanguagesLabel()
+        self.updateLanguagesIndicators()
         
         //add mic in search field:
         /*
@@ -85,7 +91,7 @@ class ListViewController: BaseFeatureViewController {
         }
         
         //listen for keyboard position
-        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: {[weak self] (height) in
+        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { [weak self] (height) in
             if var contentInset = self?.tableView?.contentInset {
                 contentInset.bottom = CGFloat(height);
                 self?.tableView?.contentInset = contentInset
@@ -99,7 +105,7 @@ class ListViewController: BaseFeatureViewController {
         }
         
         //listen for text input mode change
-        NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DictionaryViewController.inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
     }
     
     private func configureTableViewFooler(label:UILabel) -> (UIView) {
@@ -114,13 +120,17 @@ class ListViewController: BaseFeatureViewController {
     }
     
     private func updateFooter() {
-        self.footerLabel.text = self.dataSource?.footerTotal()
+        self.footerLabel.text = self.viewModel.footerTotal()
+    }
+    
+    private func updateSearchFieldTerm() {
+        self.searchTextField?.text = viewModel.searchTerm
     }
     
     @objc private func inputModeDidChange(n:Notification) {
         if let lang = self.searchTextField?.textInputMode?.primaryLanguage,
             let text = self.searchTextField?.text {
-            self.inputModeChangeBlock?(lang, text)
+            self.viewModel.inputModeChange(locale: lang, text: text)
         }
     }
     
@@ -145,7 +155,7 @@ class ListViewController: BaseFeatureViewController {
     
     //MARK: - Public
     
-    func refresh() {
+    func refreshList() {
         self.tableView?.reloadData()
         self.updateFooter()
     }
@@ -156,10 +166,9 @@ class ListViewController: BaseFeatureViewController {
         }
     }
     
-    func updateLanguagesLabel() {
-        if let label = self.dataSource?.languagesLabel() {
-            self.langSwapButton?.setTitle(label, for: .normal)
-        }
+    func updateLanguagesIndicators() {
+        self.fromLangButton?.setTitle(self.viewModel.fromLanguageLabel(), for: .normal)
+        self.toLangButton?.setTitle(self.viewModel.toLanguageLabel(), for: .normal)
     }
 
     func voiceSessionEnded() {
@@ -167,7 +176,7 @@ class ListViewController: BaseFeatureViewController {
     }
     
     private func searchTextFieldTerm() {
-        self.searchBlock?(self.searchTextField?.text?.lowercased() ?? "")
+        self.viewModel.search(term: self.searchTextField?.text?.lowercased() ?? "")
     }
     
     
@@ -177,8 +186,6 @@ class ListViewController: BaseFeatureViewController {
         sender.isEnabled = false
         self.searchTextField?.text = nil
         self.searchTextField?.resignFirstResponder()
-        
-        self.voiceStartBlock?()
     }
     
     @objc private func textFieldDidChange(sender:UITextField) {
@@ -186,16 +193,48 @@ class ListViewController: BaseFeatureViewController {
     }
 
     @IBAction func onLanguageSwapButton(_ sender: UIButton) {
-        self.languageSwapBlock?()
+        self.viewModel.swapLanguages(reSearch: false)
     }
     
+    @IBAction func onFromLangButton(_ sender: UIButton) {
+        self.presentLangSelector(sender, currentLangId:self.viewModel.fromLangId) { (selectedLangId) in
+            self.viewModel.setFromLangId(selectedLangId)
+        }
+    }
+    
+    @IBAction func onToLangButton(_ sender: UIButton) {
+        self.presentLangSelector(sender, currentLangId:self.viewModel.toLangId) { (selectedLangId) in
+            self.viewModel.setToLangId(selectedLangId)
+        }
+    }
+    
+    private func presentLangSelector(_ sender:UIButton, currentLangId:String, completion:@escaping (String)->()) {
+        if let index = Settings.s.availableLangIDs.firstIndex(of: currentLangId) {
+            
+            let langNames = Settings.s.availableLangIDs.compactMap { (langId) in
+                return LanguageModel.longName(langId: langId)
+            }
+            
+            let selectvc = SelectViewController(values: langNames, currentIndex: UInt(index)) { (selectedIndex) in
+                completion(Settings.s.availableLangIDs[selectedIndex])
+                self.dismiss(animated: true, completion: nil)
+                return true
+            }
+            
+            let popoverVC = PopupViewController(title: "", sender: sender, contentViewController: selectvc)
+            popoverVC.preferredWidth = 200
+            popoverVC.titleBarColor = Appearance.basicAppColor()
+            popoverVC.popoverPresentationController?.permittedArrowDirections = .up
+            self.present(popoverVC, animated: true, completion: nil)
+        }
+    }
  
     // MARK: - Navigation
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell {
             if let indexPath = self.tableView?.indexPath(for: cell) {
-                self.selectPrepareBlock?(indexPath, segue.destination)
+                self.onTermSelectedBlock?(indexPath, segue.destination)
             }
         }
      }
@@ -203,7 +242,7 @@ class ListViewController: BaseFeatureViewController {
 
 // MARK: - ListScrollManagerDelegate
 
-extension ListViewController : ScrollManagerDelegate {
+extension DictionaryViewController : ScrollManagerDelegate {
     
     func scrollManagerTableviewCellTapped() {
     }
@@ -211,7 +250,7 @@ extension ListViewController : ScrollManagerDelegate {
 
 // MARK: - Text Field Delegate
 
-extension ListViewController : UITextFieldDelegate {
+extension DictionaryViewController : UITextFieldDelegate {
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         return true

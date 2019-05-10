@@ -11,9 +11,10 @@ target 'Corruga' do
   pod 'GoogleUtilities', '~> 5.7.0'
 #  pod 'FacebookSDK', '~> 4.44.1'
   pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'AltHanekeSwift'
-  pod 'HTMLReader'
+#  pod 'HTMLReader'
   pod 'Branch'
 
 end
@@ -30,9 +31,10 @@ target 'CorrugaTests' do
 #  pod 'FacebookSDK', '~> 4.44.1'
   pod 'GoogleUtilities', '~> 5.7.0'
   pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'AltHanekeSwift'
-  pod 'HTMLReader'
+#  pod 'HTMLReader'
   pod 'Branch'
   
 end

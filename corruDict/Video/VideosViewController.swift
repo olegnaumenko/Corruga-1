@@ -44,7 +44,7 @@ class VideosViewController: BaseFeatureViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        videoSource.requestListUpdate()
+//        videoSource.requestListUpdate()
 //        updateItemSelection()
     }
     

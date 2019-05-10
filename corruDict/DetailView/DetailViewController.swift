@@ -10,8 +10,10 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var translationLabel: UILabel!
+    @IBOutlet weak var transcriptionLabel: UILabel!
     @IBOutlet weak var termLabel: UILabel!
+    @IBOutlet weak var translationLabel: UILabel!
+    @IBOutlet weak var translationTranscriptionLabel: UILabel!
     @IBOutlet weak var pronounceButton: UIButton!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var photoLabel: UILabel!
@@ -22,13 +24,7 @@ class DetailViewController: UIViewController {
     var onPhotoTapped:(String)->() = {imagePath in}
     var onViewDidAppear:()->() = {}
 
-    
-    var viewModel = DetailViewModel(term:"", translation:"",
-                                    langID:"en-US", entry: TranslationEntity(), imagePath:"") {
-        didSet {
-            self.update()
-        }
-    }
+    var viewModel:DetailViewModel! 
     
     deinit {
         print("Detail VC deinit")
@@ -60,6 +56,7 @@ class DetailViewController: UIViewController {
         self.termLabel?.text = viewModel.term
         self.translationLabel?.text = viewModel.translation
         self.photoLabel?.text = viewModel.imageName()
+        self.transcriptionLabel?.text = viewModel.termTranscription
         
         if viewModel.imagePath != "" {
             self.photoImageView?.image = UIImage(contentsOfFile: viewModel.imagePath)
@@ -69,11 +66,12 @@ class DetailViewController: UIViewController {
     
     @IBAction func onPronounceButton(_ sender: UIButton) {
         sender.isEnabled = false
-        let text = viewModel.translation
         let langID = viewModel.langID
-        DispatchQueue.main.async {
-            self.speechSynth.pronounce(text: text, langID: langID) {
-                sender.isEnabled = true
+        if let text = viewModel.translation {
+            DispatchQueue.main.async {
+                self.speechSynth.pronounce(text: text, langID: langID) {
+                    sender.isEnabled = true
+                }
             }
         }
     }

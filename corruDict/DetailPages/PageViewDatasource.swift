@@ -31,7 +31,9 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
+        if let index = self.dictModel.searchResults?.lastIndex(where: { (translationEntryModel) -> Bool in
+            return translationEntryModel.id == (viewController as! DetailViewController).viewModel.entry.id
+        }) //index(of: (viewController as! DetailViewController).viewModel.entry)
         {
             return self.viewControllerForIndex(index: index - 1)
         }
@@ -41,7 +43,9 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
+        if let index = self.dictModel.searchResults?.lastIndex(where: { (translationEntryModel) -> Bool in
+            return translationEntryModel.id == (viewController as! DetailViewController).viewModel.entry.id
+        }) //if let index = self.dictModel.searchResults?.index(of: (viewController as! DetailViewController).viewModel.entry)
         {
             return self.viewControllerForIndex(index: index + 1)
         }
@@ -69,14 +73,13 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
             
             if let entry = self.dictModel.searchResults?[index] {
-                let translationValue = self.dictModel.toStorage.translation(withID: entry.termID)?.stringValue
                 
-                detailViewController.viewModel = DetailViewModel(term:entry.stringValue, translation:translationValue ?? "<no translation>", langID:self.dictModel.toStorage.languageID, entry: entry, imagePath:self.imageProvider?.randomImageName() ?? "")
-                
-                currentIndex = index
-                
-//                UserActivityFabric.create(view: detailViewController.view, title: entry.stringValue, id: entry.termID, lang: entry.languageID)
-                
+                self.dictModel.toLangModel.translation(withID: entry.id) { (translationEntryModel, error) in
+                    
+                    detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName())
+                    
+                    self.currentIndex = index
+                }
                 return detailViewController
             }
         } else { fatalError() } 
