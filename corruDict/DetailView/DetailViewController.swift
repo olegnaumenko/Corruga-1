@@ -57,6 +57,7 @@ class DetailViewController: UIViewController {
         self.translationLabel?.text = viewModel.translation
         self.photoLabel?.text = viewModel.imageName()
         self.transcriptionLabel?.text = viewModel.termTranscription
+        self.translationTranscriptionLabel?.text = viewModel.translationTranscription
         
         if viewModel.imagePath != "" {
             self.photoImageView?.image = UIImage(contentsOfFile: viewModel.imagePath)

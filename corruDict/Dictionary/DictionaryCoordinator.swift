@@ -10,7 +10,6 @@ import UIKit
 
 class DictionaryCoordinator: BaseFeatureCoordinator {
     
-//    private var dictModel:DictModel
     private var imageProvider = ImageProvider()
 //    private lazy var speechManager = SpeechManager()
     

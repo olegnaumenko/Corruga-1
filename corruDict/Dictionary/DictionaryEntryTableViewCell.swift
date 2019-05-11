@@ -35,9 +35,10 @@ class DictionaryEntryTableViewCell: UITableViewCell {
     
     var entryModel:TranslationEntryModel!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.translationLabel.text = ""
+    }
 
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)

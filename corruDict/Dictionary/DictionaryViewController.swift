@@ -33,12 +33,20 @@ class DictionaryViewController: BaseFeatureViewController {
     var viewModel:DictionaryViewModel! {
         didSet {
             viewModel.onDidSearch = { [weak self] searchTerm, shoulldScrollToTop in
-                self?.refreshList()
-                self?.updateSearchFieldTerm()
+                if let the = self {
+                    the.refreshList()
+                    the.updateSearchFieldTerm()
+                }
             }
             viewModel.onDidChangeLanguages = { [weak self] in
-                self?.updateLanguagesIndicators()
-                self?.refreshList()
+                if let the = self {
+                    the.updateLanguagesIndicators()
+//                    the.refreshList()
+//                    DispatchQueue.main.async {
+//
+//                        the.scrollToTop()
+//                    }
+                }
             }
             self.dataSource = DictionaryTableDataSource(dictModel: viewModel.dictModel)
         }
@@ -91,12 +99,12 @@ class DictionaryViewController: BaseFeatureViewController {
         }
         
         //listen for keyboard position
-        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { [weak self] (height) in
-            if var contentInset = self?.tableView?.contentInset {
-                contentInset.bottom = CGFloat(height);
-                self?.tableView?.contentInset = contentInset
-            }
-        })
+//        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { [weak self] (height) in
+//            if var contentInset = self?.tableView?.contentInset {
+//                contentInset.bottom = CGFloat(height);
+//                self?.tableView?.contentInset = contentInset
+//            }
+//        })
         
         if var contentInset = self.tableView?.contentInset {
             contentInset.top = self.headerView.frame.size.height
@@ -156,14 +164,25 @@ class DictionaryViewController: BaseFeatureViewController {
     //MARK: - Public
     
     func refreshList() {
+        //for proper scrolling to top afterwards:
+        self.tableView?.dataSource = nil
         self.tableView?.reloadData()
+        
+        self.tableView?.dataSource = self.dataSource
+        self.tableView?.reloadData()
+        
         self.updateFooter()
+        
+        //need delay, otherwise results in wrong content offset (internally tableview lays out subviews):
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            self.scrollToTop()
+        }
     }
     
+    
     func scrollToTop(animated:Bool = false) {
-        if let cnt = self.dataSource?.resultsCount(), cnt > 0 {
-            self.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
-        }
+        let contentInset = self.tableView!.contentInset
+        self.tableView?.setContentOffset(CGPoint(x: 0, y: -contentInset.top), animated: animated)
     }
     
     func updateLanguagesIndicators() {
@@ -197,22 +216,22 @@ class DictionaryViewController: BaseFeatureViewController {
     }
     
     @IBAction func onFromLangButton(_ sender: UIButton) {
-        self.presentLangSelector(sender, currentLangId:self.viewModel.fromLangId) { (selectedLangId) in
+        self.presentLangSelector(title: "Source language", sender: sender, currentLangId:self.viewModel.fromLangId) { (selectedLangId) in
             self.viewModel.setFromLangId(selectedLangId)
         }
     }
     
     @IBAction func onToLangButton(_ sender: UIButton) {
-        self.presentLangSelector(sender, currentLangId:self.viewModel.toLangId) { (selectedLangId) in
+        self.presentLangSelector(title: "Destination language", sender: sender, currentLangId:self.viewModel.toLangId) { (selectedLangId) in
             self.viewModel.setToLangId(selectedLangId)
         }
     }
     
-    private func presentLangSelector(_ sender:UIButton, currentLangId:String, completion:@escaping (String)->()) {
+    private func presentLangSelector(title:String, sender:UIButton, currentLangId:String, completion:@escaping (String)->()) {
         if let index = Settings.s.availableLangIDs.firstIndex(of: currentLangId) {
             
             let langNames = Settings.s.availableLangIDs.compactMap { (langId) in
-                return LanguageModel.longName(langId: langId)
+                return [LanguageModel.longName(langId: langId), LanguageModel.longNativeName(langId: langId)];
             }
             
             let selectvc = SelectViewController(values: langNames, currentIndex: UInt(index)) { (selectedIndex) in
@@ -221,7 +240,7 @@ class DictionaryViewController: BaseFeatureViewController {
                 return true
             }
             
-            let popoverVC = PopupViewController(title: "", sender: sender, contentViewController: selectvc)
+            let popoverVC = PopupViewController(title:  title, sender: sender, contentViewController: selectvc)
             popoverVC.preferredWidth = 200
             popoverVC.titleBarColor = Appearance.basicAppColor()
             popoverVC.popoverPresentationController?.permittedArrowDirections = .up

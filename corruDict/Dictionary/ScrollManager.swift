@@ -43,6 +43,10 @@ extension ScrollManager : UITableViewDelegate
             self.draggingScrollview == true {
             self.responder.resignFirstResponder()
         }
+//        if scrollView.contentOffset.y == -60 {
+//            
+//        }
+//        print(scrollView.contentOffset)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

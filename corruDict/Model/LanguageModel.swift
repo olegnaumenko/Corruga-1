@@ -53,7 +53,7 @@ class LanguageModel {
         case "ru_RU":
             return "Русский"
         case "ch_CH":
-            return "Chinese"
+            return "中文"
         default:
             return ""
         }

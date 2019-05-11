@@ -10,8 +10,8 @@ import UIKit
 
 class NewsCoordinator: BaseFeatureCoordinator {
     
-    let newsURLString = "https://novosti.gofro.expert/novosti/"
-    
+//    let newsURLString = "https://novosti.gofro.expert/novosti/"
+    let newsURLString = "https://novosti.gofro.expert/wp-json/wp/v2/posts"
     let newsViewController:NewsViewController
     
     init(newsViewController:NewsViewController) {

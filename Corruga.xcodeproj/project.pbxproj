@@ -58,6 +58,7 @@
 		7C978F78211F101F00D1B165 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
 		7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB489721271EA6003F97DA /* DetailViewController.swift */; };
+		7CBAEA7E2286D1990000C8C6 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */; };
 		7CBB8E6D219C18E600560397 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */; };
 		7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6E219C293800560397 /* VideoSource.swift */; };
 		7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
@@ -166,6 +167,7 @@
 		7C978F77211F101F00D1B165 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7CAB489721271EA6003F97DA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CBB8E6E219C293800560397 /* VideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSource.swift; sourceTree = "<group>"; };
 		7CBB8E70219C29E400560397 /* VideoItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoItemEntity.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				7C1CD35121444D0D006CF4C6 /* Client.swift */,
 				7CBB8E6E219C293800560397 /* VideoSource.swift */,
 				7C5BD3AC219EE31400337340 /* NewsSource.swift */,
+				7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				7C8EC17321281A80000499C9 /* TotalLabelViewModel.swift in Sources */,
 				7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
+				7CBAEA7E2286D1990000C8C6 /* NewsModel.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
 				7C4B70762141830F00BC03C3 /* NewsCoordinator.swift in Sources */,
 				7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */,

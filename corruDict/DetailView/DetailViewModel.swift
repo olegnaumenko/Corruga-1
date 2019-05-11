@@ -16,16 +16,20 @@ struct DetailViewModel {
         }
     }
     
-    var translation:String?
+    var translation:String? {
+        get {
+            return translationEntry?.value ?? "<no translation>"
+        }
+    }
     var termTranscription:String? {
         get {
-            return self.transcription(entry.transcription)
+            return self.transcription(entry)
         }
     }
     
     var translationTranscription:String? {
         get {
-            return self.transcription(translationEntry?.transcription)
+            return self.transcription(translationEntry)
         }
     }
     
@@ -36,15 +40,15 @@ struct DetailViewModel {
     private (set) var imagePath:String = ""
     
     init(entry:TranslationEntryModel, translation:TranslationEntryModel?, imagePath:String?) {
-        self.translation = translation?.value ?? "<no translation>"
+//        self.translation = translation?.value ?? "<no translation>"
         self.imagePath = imagePath ?? ""
         self.translationEntry = translation
         self.entry = entry
     }
     
-    private func transcription(_ from:String?) -> String? {
-        if let value = from, value.count > 0 {
-            return String.init(format: "[ %@ ]", entry.transcription)
+    private func transcription(_ fromEntry:TranslationEntryModel?) -> String? {
+        if let transc = fromEntry?.transcription, transc.count > 0 {
+            return String.init(format: "[ %@ ]", transc)
         }
         return nil
     }
