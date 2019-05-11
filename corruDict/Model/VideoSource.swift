@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
 class VideoSource {
     
     static let shared = VideoSource()
     
     let client = Client()
-    let realm:Realm
+//    let realm:Realm
     
     let results = 50
     
@@ -22,25 +22,25 @@ class VideoSource {
     var totalItems:Int = 0
     var resultsPerPage:Int?
     
-    var videoEntities: Results<VideoItemEntity>?
+    var videoEntities = [VideoItemEntity]()// Results<VideoItemEntity>?
     
     var onEntitiesChange = {}
     
-    var observeToken:NotificationToken?
+//    var observeToken:NotificationToken?
     
     private init() {
-        var conf = Realm.Configuration.defaultConfiguration
-        conf.schemaVersion = 4
-        conf.inMemoryIdentifier = "videos"
-        conf.migrationBlock = { migration, oldSchemaVersion in
-            print("Migration from version " + String(oldSchemaVersion))
-        }
-        try! realm = Realm(configuration: conf)
+//        var conf = Realm.Configuration.defaultConfiguration
+//        conf.schemaVersion = 4
+//        conf.inMemoryIdentifier = "videos"
+//        conf.migrationBlock = { migration, oldSchemaVersion in
+//            print("Migration from version " + String(oldSchemaVersion))
+//        }
+//        try! realm = Realm(configuration: conf)
         
-        self.videoEntities = self.realm.objects(VideoItemEntity.self).sorted(byKeyPath: "index")
-        self.observeToken = self.videoEntities?.observe({ [unowned self] (change) in
-            self.onEntitiesChange()
-        })
+//        self.videoEntities = self.realm.objects(VideoItemEntity.self).sorted(byKeyPath: "index")
+//        self.observeToken = self.videoEntities?.observe({ [unowned self] (change) in
+//            self.onEntitiesChange()
+//        })
     }
     
     func requestListUpdate() {
@@ -65,10 +65,8 @@ class VideoSource {
                         entities.append(self.createVideoEntity(dict: item, index: index))
                         index += 1
                     })
-                    
-                    try! self.realm.write {
-                        self.realm.add(entities, update: true)
-                    }
+
+                    self.videoEntities = entities
                 }
             }
         }
@@ -76,7 +74,7 @@ class VideoSource {
     
     private func createVideoEntity(dict:[String:Any], index:Int) -> VideoItemEntity {
         
-        let videoEntity = VideoItemEntity()
+        var videoEntity = VideoItemEntity()
         videoEntity.id = dict["id"] as? String ?? ""
         
         
@@ -86,7 +84,6 @@ class VideoSource {
                 videoEntity.resourceIdKind = resourceId["kind"] ?? ""
                 videoEntity.resourceVideoId = resourceId["videoId"] ?? ""
             }
-            
             
             videoEntity.playlistId = snippet["playlistId"] as? String ?? ""
             videoEntity.channelTitle = snippet["channelTitle"] as? String ?? ""
@@ -122,10 +119,10 @@ class VideoSource {
     }
     
     var videoItemsCount:Int {
-        return self.videoEntities?.count ?? 0
+        return self.videoEntities.count
     }
     
     func videoEntityAtIndex(index:Int) -> VideoItemEntity {
-        return self.videoEntities![index]
+        return self.videoEntities[index]
     }
 }

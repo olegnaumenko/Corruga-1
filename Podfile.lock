@@ -78,11 +78,6 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Networking (5.0.0)
-  - Realm (3.14.2):
-    - Realm/Headers (= 3.14.2)
-  - Realm/Headers (3.14.2)
-  - RealmSwift (3.14.2):
-    - Realm (= 3.14.2)
   - UIDevice-Hardware (0.1.13)
   - youtube-ios-player-helper-swift (1.1)
 
@@ -94,7 +89,6 @@ DEPENDENCIES:
   - Firebase/Database
   - GoogleUtilities (~> 5.7.0)
   - Networking
-  - RealmSwift (~> 3.14.1)
   - UIDevice-Hardware
   - youtube-ios-player-helper-swift
 
@@ -113,8 +107,6 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Networking
-    - Realm
-    - RealmSwift
     - UIDevice-Hardware
     - youtube-ios-player-helper-swift
 
@@ -132,11 +124,9 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Networking: 8ced5868ab2b5cf0fcc1d3657bf9bb589ae2fe91
-  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
-  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
   UIDevice-Hardware: c10ce5703fa8de762079b84236c548cf31223531
   youtube-ios-player-helper-swift: 51a3c5325317c8271d0c7985c1bbe5a252ffb2fd
 
-PODFILE CHECKSUM: e39f2a6103f5008ad6c3b2c4ea2ee368c2d55d77
+PODFILE CHECKSUM: 0ed67036658f3fe4357f16cd0b32ac4d0c2527a6
 
 COCOAPODS: 1.6.1

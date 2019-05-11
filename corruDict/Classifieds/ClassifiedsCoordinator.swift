@@ -12,9 +12,9 @@ class ClassifiedsCoordinator: BaseFeatureCoordinator {
     
     let boardUrlString = "https://market.gofro.expert"//"http://bazar.gofro.expert/"
     
-    let newsViewController:NewsViewController
+    let newsViewController:ClassifiedsViewController
     
-    init(newsViewController:NewsViewController) {
+    init(newsViewController:ClassifiedsViewController) {
         self.newsViewController = newsViewController
         self.newsViewController.urlString = boardUrlString
         super.init()

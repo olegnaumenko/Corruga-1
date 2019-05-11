@@ -7,35 +7,31 @@
 //
 
 import Foundation
-import RealmSwift
 
-class VideoItemEntity : Object, VideoItemStorageModelProtocol {
+struct VideoItemEntity : VideoItemStorageModelProtocol {
 
     var videoId: String {
         return resourceVideoId
     }
     
-    @objc dynamic var index = 0
-    @objc dynamic var id = ""
+    var index = 0
+    var id = ""
     
-    @objc dynamic var publishedAt = ""
-    @objc dynamic var title = ""
-    @objc dynamic var descriptionText = ""
+    var publishedAt = ""
+    var title = ""
+    var descriptionText = ""
     
-    @objc dynamic var thumbDefaultURL = ""
-    @objc dynamic var thumbMediumURL = ""
-    @objc dynamic var thumbHighURL = ""
-    @objc dynamic var thumbStandardURL = ""
-    @objc dynamic var thumbMaxresURL = ""
+    var thumbDefaultURL = ""
+    var thumbMediumURL = ""
+    var thumbHighURL = ""
+    var thumbStandardURL = ""
+    var thumbMaxresURL = ""
     
-    @objc dynamic var channelTitle = ""
-    @objc dynamic var channelId = ""
-    @objc dynamic var playlistId = ""
-    @objc dynamic var position = 0
-    @objc dynamic var resourceIdKind = ""
-    @objc dynamic var resourceVideoId = ""
+    var channelTitle = ""
+    var channelId = ""
+    var playlistId = ""
+    var position = 0
+    var resourceIdKind = ""
+    var resourceVideoId = ""
     
-    override static func primaryKey() -> String? {
-        return "id"
-    }
 }

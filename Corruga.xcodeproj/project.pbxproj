@@ -15,8 +15,6 @@
 		7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */; };
 		7C1CD35221444D0D006CF4C6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD35121444D0D006CF4C6 /* Client.swift */; };
 		7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */; };
-		7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11772115C7B100FB96A1 /* TermEntity.swift */; };
-		7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */; };
 		7C424CCC21088DED00D20563 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCB21088DED00D20563 /* SystemConfiguration.framework */; };
 		7C424CCE21088DF300D20563 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCD21088DF300D20563 /* Speech.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7C424CD021088DFA00D20563 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCF21088DFA00D20563 /* AVFoundation.framework */; };
@@ -53,7 +51,6 @@
 		7C8EC17521282F8D000499C9 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC17421282F8D000499C9 /* CoordinatorProtocol.swift */; };
 		7C8EC177212840AF000499C9 /* PageViewControllerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC176212840AF000499C9 /* PageViewControllerObserver.swift */; };
 		7C8EC17B2128577C000499C9 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7C8EC17A2128577C000499C9 /* images */; };
-		7C8EC17D21285798000499C9 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 7C8EC17C21285798000499C9 /* data */; };
 		7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C954172211CC9AE00CDD270 /* ImageProvider.swift */; };
 		7C978F78211F101F00D1B165 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
@@ -162,7 +159,6 @@
 		7C8EC17421282F8D000499C9 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		7C8EC176212840AF000499C9 /* PageViewControllerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewControllerObserver.swift; sourceTree = "<group>"; };
 		7C8EC17A2128577C000499C9 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../images; sourceTree = "<group>"; };
-		7C8EC17C21285798000499C9 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
 		7C954172211CC9AE00CDD270 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		7C978F77211F101F00D1B165 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
@@ -282,7 +278,6 @@
 				7C5D0046210889060025EF47 /* corruDict */,
 				7C5D005D210889080025EF47 /* corruDictTests */,
 				7C5D0045210889060025EF47 /* Products */,
-				7C8EC17C21285798000499C9 /* data */,
 				7C8EC17A2128577C000499C9 /* images */,
 				7CEDBF93210BAEF50087FEB5 /* Resources */,
 				E4E8BBBEABF5881617273F5A /* Pods */,
@@ -601,7 +596,6 @@
 				7C8EC17B2128577C000499C9 /* images in Resources */,
 				7CBB8E6D219C18E600560397 /* GoogleService-Info.plist in Resources */,
 				7C5D0054210889080025EF47 /* LaunchScreen.storyboard in Resources */,
-				7C8EC17D21285798000499C9 /* data in Resources */,
 				7C5D73EF2167705A0022ABBC /* Assets.xcassets in Resources */,
 				7CEDBF97210BAF360087FEB5 /* Media.xcassets in Resources */,
 				7C5D004F210889060025EF47 /* Main.storyboard in Resources */,
@@ -671,8 +665,6 @@
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDevice-Hardware/UIDevice_Hardware.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -686,8 +678,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDevice_Hardware.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -709,8 +699,6 @@
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDevice-Hardware/UIDevice_Hardware.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -722,8 +710,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDevice_Hardware.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -764,7 +750,6 @@
 				7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */,
 				7CDD61C32141797F000E864D /* AppTabCoordinator.swift in Sources */,
 				7CC81D0021286D24004D555E /* AudioSession.swift in Sources */,
-				7C3A117C2115C7B100FB96A1 /* TranslationEntity.swift in Sources */,
 				7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */,
 				7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */,
 				7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */,
@@ -801,7 +786,6 @@
 				7C4993F2213EBC0B00778429 /* SpotlightIndexer.swift in Sources */,
 				7CFFDEB3219D827D006EEB47 /* BaseFeatureViewController.swift in Sources */,
 				7C5BD3AB219EDCA600337340 /* NewsItemEntity.swift in Sources */,
-				7C3A117B2115C7B100FB96A1 /* TermEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

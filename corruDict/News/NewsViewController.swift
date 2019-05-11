@@ -85,7 +85,7 @@ class NewsViewController: BaseFeatureViewController {
     
 }
 
-extension NewsViewController:UIWebViewDelegate
+extension ClassifiedsViewController:UIWebViewDelegate
 {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.loadingIndicator.stopAnimating()

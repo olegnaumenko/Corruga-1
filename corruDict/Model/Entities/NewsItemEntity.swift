@@ -7,23 +7,19 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
-class NewsItemEntity : Object {
+struct NewsItemEntity {
     
-    @objc dynamic var index = 0
-    @objc dynamic var id = ""
-    @objc dynamic var title = ""
-    @objc dynamic var shortText = ""
-    @objc dynamic var articleURL = ""
-    @objc dynamic var titleImageURL = ""
-    @objc dynamic var dateAdded = ""
+    var index = 0
+    var id = ""
+    var title = ""
+    var shortText = ""
+    var articleURL = ""
+    var titleImageURL = ""
+    var dateAdded = ""
     
-    //schema version = 4
-    @objc dynamic var numberOfViews = 0
-    @objc dynamic var isNew = true
+    var numberOfViews = 0
+    var isNew = true
     
-    override static func primaryKey() -> String? {
-        return "id"
-    }
 }
