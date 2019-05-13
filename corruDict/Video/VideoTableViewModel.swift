@@ -11,14 +11,18 @@ import Networking
 
 class VideoTableViewModel: NSObject {
     
-    let videoSource:VideoSource!
+//    let videoSource:VideoSource!
 //    var currentItemIndex = -1;
     var currentVideoID:String?
     
+    var onNeedRefresh = {}
     
-    init(dataSource:VideoSource) {
-        self.videoSource = dataSource
+//
+    override init() {
         super.init()
+        VideoSource.shared.onEntitiesChange = { [weak self] in
+            self?.onNeedRefresh()
+        }
     }
     
 //    func selectedIndexPath() -> IndexPath? {
@@ -32,7 +36,7 @@ class VideoTableViewModel: NSObject {
 extension VideoTableViewModel : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.videoSource.videoItemsCount
+        return VideoSource.shared.videoItemsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,8 +51,8 @@ extension VideoTableViewModel : UITableViewDataSource {
     }
     
     func cellViewModel(index:Int) -> VideoItemViewModel? {
-        if self.videoSource.videoItemsCount > index {
-            return VideoItemViewModel(storageItem: self.videoSource.videoEntityAtIndex(index: index))
+        if VideoSource.shared.videoItemsCount > index {
+            return VideoItemViewModel(storageItem: VideoSource.shared.videoEntityAtIndex(index: index))
         }
         return nil
     }

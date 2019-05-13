@@ -18,8 +18,6 @@ class VideosCoordinator : BaseFeatureCoordinator {
         super.init()
         
         self.start(viewController: videosViewController)
-        
-        self.videosViewController.videoSource = VideoSource.shared
     }
    
 }

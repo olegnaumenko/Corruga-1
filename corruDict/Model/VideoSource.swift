@@ -13,7 +13,7 @@ class VideoSource {
     
     static let shared = VideoSource()
     
-    let client = Client()
+//    let client = Client()
 //    let realm:Realm
     
     let results = 50
@@ -45,7 +45,7 @@ class VideoSource {
     
     func requestListUpdate() {
         
-        self.client.getPlaylistVideos { (playlistDict, error) in
+        Client.shared.getPlaylistVideos { (playlistDict, error) in
         
             if (error != nil) {
                 print("Error fetching playlist items: " + (error?.localizedDescription ?? "unknown"))

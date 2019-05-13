@@ -1,14 +1,14 @@
 //
-//  ClassifiedsViewController.swift
+//  NewsItemViewController.swift
 //  Corruga
 //
-//  Created by oleg.naumenko on 10/5/18.
-//  Copyright © 2018 oleg.naumenko. All rights reserved.
+//  Created by oleg.naumenko on 5/11/19.
+//  Copyright © 2019 oleg.naumenko. All rights reserved.
 //
 
 import UIKit
 
-class ClassifiedsViewController: BaseFeatureViewController {
+class NewsItemViewController:UIViewController {
     
     @IBOutlet var webView:UIWebView!
     
@@ -26,6 +26,8 @@ class ClassifiedsViewController: BaseFeatureViewController {
         self.webView.scalesPageToFit = true
         self.webView.allowsInlineMediaPlayback = false
         self.webView.mediaPlaybackRequiresUserAction = true
+        
+        self.title = ""
         
         self.loadHome()
     }
@@ -85,7 +87,7 @@ class ClassifiedsViewController: BaseFeatureViewController {
     
 }
 
-extension ClassifiedsViewController:UIWebViewDelegate
+extension NewsItemViewController:UIWebViewDelegate
 {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.loadingIndicator.stopAnimating()

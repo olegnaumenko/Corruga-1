@@ -17,8 +17,6 @@ class AppTabCoordinator:NSObject {
     var videosCoordinator:VideosCoordinator?
     var classifiedsCoordinator:ClassifiedsCoordinator?
     
-    let videoSource = VideoSource.shared
-    
     init(tabBarController:AppTabBarController) {
         
         self.tabBarController = tabBarController
@@ -114,7 +112,8 @@ extension AppTabCoordinator
     }
     
     func appDidBecomeActive() {
-        videoSource.requestListUpdate()
+        VideoSource.shared.requestListUpdate()
+        NewsSource.shared.refreshNews()
     }
 }
 

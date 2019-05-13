@@ -10,7 +10,7 @@ import UIKit
 
 class DictionaryViewController: BaseFeatureViewController {
 
-    @IBOutlet private var tableView:UITableView?
+    @IBOutlet private var tableView:UITableView!
     @IBOutlet var searchTextField:UITextField?
     @IBOutlet private var voiceButton:UIButton!
     @IBOutlet weak var langSwapButton: UIButton?
@@ -75,13 +75,13 @@ class DictionaryViewController: BaseFeatureViewController {
                                         action: #selector(DictionaryViewController.textFieldDidChange),
                                         for: .editingChanged)
         
-        self.tableView?.dataSource = self.dataSource
-        self.tableView?.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
+        self.tableView.dataSource = self.dataSource
+        self.tableView.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
         
         //colors
         let basicColor = Appearance.basicAppColor()
         self.view.backgroundColor = basicColor
-        self.tableView?.backgroundColor = Appearance.footerBackgroundColor()
+        self.tableView.backgroundColor = Appearance.footerBackgroundColor()
         self.headerView.backgroundColor = Appearance.footerBackgroundColor()
             
         self.updateLanguagesIndicators()
@@ -106,11 +106,10 @@ class DictionaryViewController: BaseFeatureViewController {
 //            }
 //        })
         
-        if var contentInset = self.tableView?.contentInset {
-            contentInset.top = self.headerView.frame.size.height
-            self.tableView?.contentInset = contentInset
-            self.tableView?.contentOffset = CGPoint(x: 0, y: -contentInset.top)
-        }
+        var contentInset = self.tableView.contentInset 
+        contentInset.top = self.headerView.frame.size.height
+        self.tableView.contentInset = contentInset
+        self.tableView.contentOffset = CGPoint(x: 0, y: -contentInset.top)
         
         //listen for text input mode change
         NotificationCenter.default.addObserver(self, selector: #selector(DictionaryViewController.inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)

@@ -11,10 +11,12 @@ import Networking
 
 class Client {
     
+    static let shared = Client()
+    
     static let newsURL = "https://novosti.gofro.expert/wp-json/wp/v2"// http://novosti.gofro.expert"
     
     static let YouTubeAPIBaseURL = "https://www.googleapis.com/youtube/v3"
-    static let baseURL = "https://usound.in.ua"
+//    static let baseURL = "https://usound.in.ua"
     
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
@@ -25,9 +27,6 @@ class Client {
     
     func getPlaylistVideos( completion:@escaping ([String:Any]?, Error?)->())
     {
-        self.getNewsFeed { (data, error) in
-            
-        }
         let bundleId = Bundle.main.bundleIdentifier
         ytClient.headerFields = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
         
@@ -55,13 +54,13 @@ class Client {
         }
     }
     
-    func getNewsFeed(completion:@escaping (Data?, Error?) -> ()) {
+    func getNewsFeed(completion:@escaping ([Any]?, Error?) -> ()) {
         
         newsClient.get("/posts") { (jsonResult) in
             switch jsonResult {
             case .success(let response):
                 
-                completion(response.data, nil)
+                completion(response.arrayBody, nil)
                 
             case .failure(let response):
                 

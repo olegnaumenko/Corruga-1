@@ -20,20 +20,16 @@ class VideosViewController: BaseFeatureViewController {
     
     var tableViewModel:VideoTableViewModel!
     
-    var videoSource:VideoSource! {
-        didSet {
-            self.tableViewModel = VideoTableViewModel(dataSource: self.videoSource)
-        }
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableViewModel = VideoTableViewModel()
+        
         self.view.backgroundColor = Appearance.basicAppColor()
         self.playerView.delegate = self
         
-        self.videoSource.onEntitiesChange = { [weak self] in
+        self.tableViewModel.onNeedRefresh = { [weak self] in
             self?.tableView.reloadData()
         }
         self.tableView.dataSource = self.tableViewModel

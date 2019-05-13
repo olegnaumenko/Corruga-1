@@ -10,15 +10,21 @@ import UIKit
 
 class NewsCoordinator: BaseFeatureCoordinator {
     
-//    let newsURLString = "https://novosti.gofro.expert/novosti/"
-    let newsURLString = "https://novosti.gofro.expert/wp-json/wp/v2/posts"
     let newsViewController:NewsViewController
     
     init(newsViewController:NewsViewController) {
         self.newsViewController = newsViewController
-        self.newsViewController.urlString = newsURLString
         super.init()
+        self.newsViewController.navigationDelegate = self
         self.start(viewController: newsViewController)
+    }
+}
+
+extension NewsCoordinator:NewsViewControllerDelegate {
+    func newsViewControllerDidSelect(item url: String) {
+        let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsItemViewController") as! NewsItemViewController
+        itemViewController.urlString = url
+        self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
     }
 }
 

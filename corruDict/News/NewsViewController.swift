@@ -8,57 +8,34 @@
 
 import UIKit
 
+protocol NewsViewControllerDelegate:class {
+    func newsViewControllerDidSelect(item url:String)
+}
+
+
 class NewsViewController: BaseFeatureViewController {
 
-    @IBOutlet var webView:UIWebView!
+    let cellId = "NewsItemTableViewCell"
     
+    @IBOutlet var tableView:UITableView!
     @IBOutlet var logoLabel:UILabel?
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
-    var urlString:String!
+    let viewModel = NewsViewModel()
+    
+    weak var navigationDelegate:NewsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = Appearance.basicAppColor()
-        self.webView.backgroundColor = self.view.backgroundColor
-        self.webView.scalesPageToFit = true
-        self.webView.allowsInlineMediaPlayback = false
-        self.webView.mediaPlaybackRequiresUserAction = true
-        
-        self.loadHome()
-    }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-////        self.webView.isHidden = false;
-//
-////        self.view.addSubview(self.webView)
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//    }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-////        self.webView.loadHTMLString("", baseURL: nil);
-////        self.webView.stopLoading()
-////        self.webView.removeFromSuperview()
-////        self.webView.isHidden = true
-//    }
-    
-    private func loadHome() {
-        let url = URL(string: self.urlString)
-        if (self.webView.request?.url != url!) {
-            let request = URLRequest(url: url!)
-            self.webView.loadRequest(request)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.viewModel.onRefreshNeeded = { [weak self] in
+            self?.tableView.reloadData()
         }
     }
-    
+
 
     /*
     // MARK: - Navigation
@@ -70,45 +47,27 @@ class NewsViewController: BaseFeatureViewController {
     }
     */
 
-    func setupBackButton() {
-        if self.webView.canGoBack {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(onBackButton(_:)))
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-        } else {
-            self.navigationItem.leftBarButtonItem = nil
-        }
+    
+    
+}
+
+extension NewsViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfItems
     }
     
-    @objc func onBackButton(_ sender:Any) {
-        self.webView.goBack()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsItemTableViewCell
+        cell.newsItem = viewModel.item(atIndex: indexPath.row)
+        return cell
+    }
+}
+
+extension NewsViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationDelegate?.newsViewControllerDidSelect(item: viewModel.item(atIndex: indexPath.row).url)
     }
     
 }
 
-extension ClassifiedsViewController:UIWebViewDelegate
-{
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
-        self.setupBackButton()
-    }
-    
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        self.loadingIndicator.startAnimating()
-        self.loadingIndicator.isHidden = false
-        self.setupBackButton()
-        
-    }
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
-        self.setupBackButton()
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.logoLabel?.alpha = 0
-        }) { (finished) in
-            self.logoLabel?.removeFromSuperview()
-        }
-    }
-}
