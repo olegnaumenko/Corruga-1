@@ -22,11 +22,11 @@ class AppTabCoordinator:NSObject {
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         if #available(iOS 10.0, *) {
-            tabBarController.tabBar.unselectedItemTintColor = UIColor.white
+            tabBarController.tabBar.unselectedItemTintColor = Appearance.bottomButtonTint()
         } else {
             // Fallback on earlier versions
         }
-        tabBarController.tabBar.tintColor = UIColor(red: 1, green: 1, blue: 0.5, alpha: 1)//(white: 0.8, alpha: 1)
+        tabBarController.tabBar.tintColor = UIColor.gray// UIColor(red: 1, green: 1, blue: 0.5, alpha: 1)//(white: 0.8, alpha: 1)
         super.init()
         self.tabBarController.delegate = self;
         
@@ -53,10 +53,10 @@ class AppTabCoordinator:NSObject {
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
         navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
         if var titleAttribs = convertFromOptionalNSAttributedStringKeyDictionary(navcontroller.navigationBar.titleTextAttributes) {
-            titleAttribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = UIColor.white
+            titleAttribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = Appearance.navTitleTextColor()
             navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(titleAttribs)
         } else {
-            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:UIColor.white])
+            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:Appearance.navTitleTextColor()])
         }
     }
 }

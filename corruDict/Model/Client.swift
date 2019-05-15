@@ -55,8 +55,8 @@ class Client {
     }
     
     func getNewsFeed(completion:@escaping ([Any]?, Error?) -> ()) {
-        
-        newsClient.get("/posts") { (jsonResult) in
+        let params = ["per_page":100]
+        newsClient.get("/posts", parameters:params) { (jsonResult) in
             switch jsonResult {
             case .success(let response):
                 

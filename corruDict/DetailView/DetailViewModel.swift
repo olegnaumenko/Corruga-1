@@ -39,10 +39,11 @@ struct DetailViewModel {
     
     private (set) var imagePath:String = ""
     
-    init(entry:TranslationEntryModel, translation:TranslationEntryModel?, imagePath:String?) {
+    init(entry:TranslationEntryModel, translation:TranslationEntryModel?, imagePath:String?, langID:String) {
 //        self.translation = translation?.value ?? "<no translation>"
         self.imagePath = imagePath ?? ""
         self.translationEntry = translation
+        self.langID = (langID == "ch_CH" ? "zh_CN" : langID)
         self.entry = entry
     }
     

@@ -76,7 +76,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
                 
                 self.dictModel.toLangModel.translation(withID: entry.id) { (translationEntryModel, error) in
                     
-                    detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName())
+                    detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName(), langID:self.dictModel.toLanguageID)
                     
                     self.currentIndex = index
                 }

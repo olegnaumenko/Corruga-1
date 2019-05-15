@@ -19,12 +19,6 @@ struct TranslationEntryModel {
         self.transcription = transcription ?? "<unknown>"
         self.value = value ?? "<unknown>"
     }
-    
-    init() {
-        id = 0
-        transcription = "<unknown>"
-        value = "<unknown>"
-    }
 }
 
 protocol LanguageModelDelegate:class {
@@ -41,6 +35,8 @@ class LanguageModel {
             return "Russian"
         case "ch_CH":
             return "Chinese"
+        case "zh_CN":
+            return "Chinese"
         default:
             return ""
         }
@@ -54,17 +50,38 @@ class LanguageModel {
             return "Русский"
         case "ch_CH":
             return "中文"
+        case "zh_CN":
+            return "中文"
         default:
             return ""
         }
     }
     
-    private (set) var languageID:String
+    static func shortDisplayName(langId:String) -> String {
+        switch langId {
+        case "en_US":
+            return "EN"
+        case "ru_RU":
+            return "RU"
+        case "ch_CH":
+            return "CH"
+        case "zh_CN":
+            return "CN"
+        default:
+            return ""
+        }
+    }
     
+    var shortName:String {
+        return LanguageModel.shortDisplayName(langId: self.languageID)
+    }
+    
+    weak var delegate:LanguageModelDelegate?
+    
+    private (set) var languageID:String
     private var entryModels = [TranslationEntryModel]()
     private var ref:DatabaseReference!
     
-    weak var delegate:LanguageModelDelegate?
     
     init(languageID:String) {
         self.languageID = languageID
@@ -76,7 +93,6 @@ class LanguageModel {
         ref.removeAllObservers()
     }
     
-    var currentIndex = 0
     
     func read() {
         self.ref.queryOrdered(byChild: "id").observeSingleEvent(of: .value, with: { (dataSnapshot) in

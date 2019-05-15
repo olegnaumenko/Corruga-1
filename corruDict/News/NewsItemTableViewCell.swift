@@ -19,18 +19,19 @@ class NewsItemTableViewCell: UITableViewCell {
             self.titleLabel.text = newsItem.title
             self.dateLabel.text = newsItem.date
             self.excerptLabel.text = newsItem.shortText
+            self.selectionStyle = .gray
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
+//
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
 }

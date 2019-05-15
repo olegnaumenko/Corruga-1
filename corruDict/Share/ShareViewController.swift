@@ -19,6 +19,8 @@ class ShareViewController: UIViewController {
     @IBOutlet var closeButton:UIButton!
     @IBOutlet var qrImageView:UIImageView!
     
+    @IBOutlet var versionLabel:UILabel!
+    
     var onShare = {}
     
     override func viewDidLoad() {
@@ -26,6 +28,7 @@ class ShareViewController: UIViewController {
 
         self.shareButton.layer.cornerRadius = 3
         self.shareButton.layer.masksToBounds = true
+        self.shareButton.backgroundColor = .orange
 //        self.closeButton.layer.cornerRadius = 3
 //        self.closeButton.layer.masksToBounds = true
         
@@ -33,6 +36,9 @@ class ShareViewController: UIViewController {
         swipeReco.direction = .down
         self.view.addGestureRecognizer(swipeReco)
         self.swipeReco = swipeReco
+        
+        let verString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        self.versionLabel.text = String.init(format: "v. %@", verString)
     }
     
     override func viewWillAppear(_ animated: Bool) {
