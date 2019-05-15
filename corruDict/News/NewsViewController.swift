@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewsViewControllerDelegate:class {
-    func newsViewControllerDidSelect(item url:String)
+    func newsViewControllerDidSelect(item:NewsItem)
 }
 
 
@@ -28,15 +28,28 @@ class NewsViewController: BaseFeatureViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Appearance.basicAppColor()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.loadingIndicator.startAnimating()
         self.viewModel.onRefreshNeeded = { [weak self] in
-            self?.tableView.reloadData()
+            if let the = self {
+                the.loadingIndicator.stopAnimating()
+                the.loadingIndicator.isHidden = true
+                the.tableView.separatorColor = Appearance.appTintColor()
+                the.tableView.reloadData()//
+            }
         }
+        self.tableView.separatorColor = UIColor.clear
+        self.view.backgroundColor = Appearance.basicAppColor()
     }
 
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -66,7 +79,7 @@ extension NewsViewController : UITableViewDataSource {
 extension NewsViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationDelegate?.newsViewControllerDidSelect(item: viewModel.item(atIndex: indexPath.row).url)
+        self.navigationDelegate?.newsViewControllerDidSelect(item: viewModel.item(atIndex: indexPath.row))
     }
     
 }

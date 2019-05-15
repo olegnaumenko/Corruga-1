@@ -212,6 +212,10 @@ class DictionaryViewController: BaseFeatureViewController {
 
     @IBAction func onLanguageSwapButton(_ sender: UIButton) {
         self.viewModel.swapLanguages(reSearch: false)
+        sender.isSelected = true
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            sender.isSelected = false
+        }
     }
     
     @IBAction func onFromLangButton(_ sender: UIButton) {

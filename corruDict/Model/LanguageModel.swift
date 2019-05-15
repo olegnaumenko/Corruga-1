@@ -29,13 +29,13 @@ class LanguageModel {
 
     static func longName(langId:String) -> String {
         switch langId {
-        case "en_US":
+        case "en-US":
             return "English"
-        case "ru_RU":
+        case "ru-RU":
             return "Russian"
-        case "ch_CH":
-            return "Chinese"
-        case "zh_CN":
+//        case "ch_CH":
+//            return "Chinese"
+        case "zh-CN":
             return "Chinese"
         default:
             return ""
@@ -44,13 +44,13 @@ class LanguageModel {
     
     static func longNativeName(langId:String) -> String {
         switch langId {
-        case "en_US":
+        case "en-US":
             return "English"
-        case "ru_RU":
+        case "ru-RU":
             return "Русский"
-        case "ch_CH":
-            return "中文"
-        case "zh_CN":
+//        case "ch_CH":
+//            return "中文"
+        case "zh-CN":
             return "中文"
         default:
             return ""
@@ -59,13 +59,13 @@ class LanguageModel {
     
     static func shortDisplayName(langId:String) -> String {
         switch langId {
-        case "en_US":
+        case "en-US":
             return "EN"
-        case "ru_RU":
+        case "ru-RU":
             return "RU"
-        case "ch_CH":
-            return "CH"
-        case "zh_CN":
+//        case "ch_CH":
+//            return "CH"
+        case "zh-CN":
             return "CN"
         default:
             return ""

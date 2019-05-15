@@ -13,20 +13,23 @@ class NewsItemTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var dateLabel:UILabel!
     @IBOutlet weak var excerptLabel:UILabel!
+    @IBOutlet weak var viewsLabel:UILabel!
+    
+    
     
     var newsItem:NewsItem! {
         didSet {
             self.titleLabel.text = newsItem.title
             self.dateLabel.text = newsItem.date
             self.excerptLabel.text = newsItem.shortText
-            self.selectionStyle = .gray
         }
     }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.dateLabel.textColor = Appearance.appTintColor()
+        self.selectionStyle = .gray
+    }
 //
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)

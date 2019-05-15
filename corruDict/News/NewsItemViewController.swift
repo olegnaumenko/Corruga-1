@@ -27,8 +27,6 @@ class NewsItemViewController:UIViewController {
         self.webView.allowsInlineMediaPlayback = false
         self.webView.mediaPlaybackRequiresUserAction = true
         
-        self.title = ""
-        
         self.loadHome()
     }
     
@@ -75,7 +73,7 @@ class NewsItemViewController:UIViewController {
     func setupBackButton() {
         if self.webView.canGoBack {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(onBackButton(_:)))
-            self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+            self.navigationItem.leftBarButtonItem?.tintColor = Appearance.topButtonTint()
         } else {
             self.navigationItem.leftBarButtonItem = nil
         }

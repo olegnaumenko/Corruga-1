@@ -29,8 +29,12 @@ class Appearance
         return UIColor.white
     }
     
-    static func bottomButtonTint() -> UIColor {
+    static func appTintColor() -> UIColor {
         return UIColor(red: 0.7529, green: 0.223529, blue: 0.16862, alpha: 1)
+    }
+    
+    static func topButtonTint() -> UIColor {
+        return UIColor.black
     }
     
     static func navTitleTextColor() -> UIColor {

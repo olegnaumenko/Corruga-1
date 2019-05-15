@@ -21,9 +21,10 @@ class NewsCoordinator: BaseFeatureCoordinator {
 }
 
 extension NewsCoordinator:NewsViewControllerDelegate {
-    func newsViewControllerDidSelect(item url: String) {
+    func newsViewControllerDidSelect(item : NewsItem) {
         let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewsItemViewController") as! NewsItemViewController
-        itemViewController.urlString = url
+        itemViewController.urlString = item.url
+        itemViewController.title = item.title
         self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
     }
 }

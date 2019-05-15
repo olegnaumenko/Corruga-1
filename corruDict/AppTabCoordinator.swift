@@ -22,7 +22,7 @@ class AppTabCoordinator:NSObject {
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         if #available(iOS 10.0, *) {
-            tabBarController.tabBar.unselectedItemTintColor = Appearance.bottomButtonTint()
+            tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintColor()
         } else {
             // Fallback on earlier versions
         }

@@ -32,7 +32,9 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pronounceButton.backgroundColor = Appearance.buttonBackgroundColor()
+        self.pronounceButton.backgroundColor = Appearance.appTintColor()
+        self.pronounceButton.setImage(UIImage(named: "speaker")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        
         self.photoLabel.textColor = Appearance.secondaryTextColor()
         
         self.photoImageView.isUserInteractionEnabled = true

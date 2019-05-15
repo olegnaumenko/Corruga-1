@@ -10,48 +10,69 @@ import Foundation
 
 class Settings
 {
+    static let s:Settings = Settings()
+    
     private let defaults = UserDefaults.standard
     
     //keys
-    private let kSearchTermKey  = "CurrentSearchTerm"
-    private let kFromLanguageID = "FromLanguageID"
-    private let kToLanguageID   = "ToLanguageID"
     
+    enum Keys:String {
+        case searchTerm = "CurrentSearchTerm"
+        case fromLangID = "FromLanguageID"
+        case   toLangID = "ToLanguageID"
+        
+        var key:String {
+            return self.rawValue
+        }
+    }
     
     //default values
     private let kDefaultSearchTerm  = ""
-    private let kDefaultFromLangID  = "en_US"
-    private let kDefaultToLangID    = "ch_CH"
     
-    let availableLangIDs = ["en_US", "ru_RU", "ch_CH"]
-    
-    static var s:Settings = Settings()
+    //all lang ids:
+    let availableLangIDs = ["en-US", "zh-CN", "ru-RU"]
     
     private init() {
-        defaults.register(defaults: [kSearchTermKey : kDefaultSearchTerm])
+        
+        if self.fromLangID.contains("_") || self.toLangID.contains("_") {
+            self.setLanguages(from: self.fromLangID.replacingOccurrences(of: "_", with: "-"), to: self.toLangID.replacingOccurrences(of: "_", with: "-"))
+        }
+        
+        if self.fromLangID == "ch_CH" || self.fromLangID == "ch-CH" {
+            setLanguages(from: "zh-CN", to: self.toLangID)
+        }
+        
+        if self.toLangID == "ch_CH" || self.toLangID == "ch-CH" {
+            setLanguages(from: self.fromLangID, to: "zh-CN")
+        }
+        
+        assert(availableLangIDs.count > 1)//for dafault fromLangID and toLandID:
+        defaults.register(defaults: [Keys.searchTerm.key : kDefaultSearchTerm,
+                                     Keys.fromLangID.key : availableLangIDs[0],
+                                     Keys.toLangID.key : availableLangIDs[1]])
     }
     
-    var searchTerm:String { get {
-            return (defaults.object(forKey: kSearchTermKey) as? String) ?? kDefaultSearchTerm
+    var searchTerm:String {
+        get {
+            return (defaults.object(forKey: Keys.searchTerm.key) as? String) ?? kDefaultSearchTerm
         } set {
-            defaults.setValue(newValue, forKey: kSearchTermKey)
+            defaults.setValue(newValue, forKey: Keys.searchTerm.key)
         }
     }
     
     var fromLangID:String { get {
-            return (defaults.object(forKey: kFromLanguageID) as? String) ?? kDefaultFromLangID
+            return (defaults.object(forKey: Keys.fromLangID.key) as? String) ?? availableLangIDs[0]
         }
     }
     
     var toLangID:String { get {
-            return (defaults.object(forKey: kToLanguageID) as? String) ?? kDefaultToLangID
+            return (defaults.object(forKey: Keys.toLangID.key) as? String) ?? availableLangIDs[1]
         }
     }
     
     func setLanguages(from:String, to:String) {
         assert(from != to)
-        defaults.setValue(from, forKey: kFromLanguageID)
-        defaults.setValue(to,   forKey: kToLanguageID)
+        defaults.setValue(from, forKey: Keys.fromLangID.key)
+        defaults.setValue(to,   forKey: Keys.toLangID.key)
     }
-    
 }
