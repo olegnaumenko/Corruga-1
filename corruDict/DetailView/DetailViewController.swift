@@ -40,6 +40,11 @@ class DetailViewController: UIViewController {
         self.photoImageView.isUserInteractionEnabled = true
         self.photoImageView.addGestureRecognizer(self.tapGestureReco)
         
+        self.termLabel.textColor = Appearance.middleTextColor()
+        self.translationLabel.textColor = Appearance.largeTextColor()
+        self.transcriptionLabel.textColor = Appearance.appTintColor()
+        self.translationTranscriptionLabel.textColor = self.transcriptionLabel.textColor
+        
         self.update()
     }
     

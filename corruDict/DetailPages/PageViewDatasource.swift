@@ -53,7 +53,10 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return self.dictModel.searchResults?.count ?? 0
+        if let actualCount = self.dictModel.searchResults?.count, actualCount < 16 {
+            return actualCount
+        }
+        return 0
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
@@ -77,7 +80,7 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
                 self.dictModel.toLangModel.translation(withID: entry.id) { (translationEntryModel, error) in
                     
                     detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName(), langID:self.dictModel.toLanguageID)
-                    
+                    detailViewController.title = entry.value
                     self.currentIndex = index
                 }
                 return detailViewController

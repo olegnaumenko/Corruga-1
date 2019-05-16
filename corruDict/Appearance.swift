@@ -26,7 +26,7 @@ class Appearance
 //        return UIColor(red: 0.929, green: 0.565, blue: 0.332, alpha: 1)
 //        return UIColor(red: 0.901, green: 0.494, blue: 0.133, alpha: 1)
 //        return UIColor(red: 0.9529, green: 0.6117, blue: 0.0705, alpha: 1)
-        return UIColor.white
+        return .white
     }
     
     static func appTintColor() -> UIColor {
@@ -34,16 +34,24 @@ class Appearance
     }
     
     static func topButtonTint() -> UIColor {
-        return UIColor.black
+        return .black
     }
     
     static func navTitleTextColor() -> UIColor {
-        return UIColor.black
+        return .black
     }
     
     static func darkAppColor() -> UIColor {
         return UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
 //        return WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+    }
+    
+    static func largeTextColor() -> UIColor {
+        return .darkGray
+    }
+    
+    static func middleTextColor() -> UIColor {
+        return UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
     }
     
     static func secondaryTextColor() -> UIColor {
@@ -76,8 +84,8 @@ class Appearance
     
     static func setPageIndicatorColor() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = .black
-        appearance.currentPageIndicatorTintColor = .red
-        appearance.backgroundColor = UIColor.darkGray
+        appearance.pageIndicatorTintColor = .gray
+        appearance.currentPageIndicatorTintColor = appTintColor()
+        appearance.backgroundColor = basicAppColor()
     }
 }

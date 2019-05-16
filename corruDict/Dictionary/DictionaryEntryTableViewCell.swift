@@ -38,8 +38,16 @@ class DictionaryEntryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.translationLabel.text = ""
+        self.valueLabel.textColor = Appearance.middleTextColor()
+        self.transcriptionLabel.textColor = Appearance.appTintColor()
+        self.translationLabel.textColor = Appearance.largeTextColor()
     }
 
+    
+    override func prepareForReuse() {
+        self.transcriptionLabel.text = ""
+        self.transcriptionLabel.text = ""
+    }
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //

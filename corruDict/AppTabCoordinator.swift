@@ -19,6 +19,8 @@ class AppTabCoordinator:NSObject {
     
     init(tabBarController:AppTabBarController) {
         
+        Appearance.setPageIndicatorColor()
+        
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
         if #available(iOS 10.0, *) {

@@ -10,13 +10,13 @@ import UIKit
 
 class DictionaryViewController: BaseFeatureViewController {
 
-    @IBOutlet private var tableView:UITableView!
-    @IBOutlet var searchTextField:UITextField?
-    @IBOutlet private var voiceButton:UIButton!
-    @IBOutlet weak var langSwapButton: UIButton?
-    @IBOutlet weak var fromLangButton: UIButton?
-    @IBOutlet weak var toLangButton: UIButton?
-    @IBOutlet weak var headerView:UIView!
+    @IBOutlet private weak var tableView:UITableView!
+    @IBOutlet private weak var searchTextField:UITextField?
+    @IBOutlet private weak var voiceButton:UIButton!
+    @IBOutlet private weak var langSwapButton: UIButton?
+    @IBOutlet private weak var fromLangButton: UIButton?
+    @IBOutlet private weak var toLangButton: UIButton?
+    @IBOutlet private weak var headerView:UIView!
     
     var onTermSelectedBlock:((IndexPath, UIViewController)->())?
 
@@ -41,11 +41,6 @@ class DictionaryViewController: BaseFeatureViewController {
             viewModel.onDidChangeLanguages = { [weak self] in
                 if let the = self {
                     the.updateLanguagesIndicators()
-//                    the.refreshList()
-//                    DispatchQueue.main.async {
-//
-//                        the.scrollToTop()
-//                    }
                 }
             }
             self.dataSource = DictionaryTableDataSource(dictModel: viewModel.dictModel)
@@ -72,18 +67,19 @@ class DictionaryViewController: BaseFeatureViewController {
         self.searchTextField?.delegate = self
         self.searchTextField?.text = viewModel.searchTerm
         self.searchTextField?.addTarget(self,
-                                        action: #selector(DictionaryViewController.textFieldDidChange),
+                                        action: #selector(textFieldDidChange(sender:)),
                                         for: .editingChanged)
         
         self.tableView.dataSource = self.dataSource
         self.tableView.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
         
         //colors
-        let basicColor = Appearance.basicAppColor()
-        self.view.backgroundColor = basicColor
+        self.view.backgroundColor = Appearance.basicAppColor()
+        self.tableView.separatorColor = Appearance.appTintColor()
         self.tableView.backgroundColor = Appearance.footerBackgroundColor()
         self.headerView.backgroundColor = Appearance.footerBackgroundColor()
-            
+        
+        
         self.updateLanguagesIndicators()
         
         //add mic in search field:
@@ -112,7 +108,7 @@ class DictionaryViewController: BaseFeatureViewController {
         self.tableView.contentOffset = CGPoint(x: 0, y: -contentInset.top)
         
         //listen for text input mode change
-        NotificationCenter.default.addObserver(self, selector: #selector(DictionaryViewController.inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(inputModeDidChange(n:)), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
     }
     
     private func configureTableViewFooler(label:UILabel) -> (UIView) {
@@ -151,10 +147,6 @@ class DictionaryViewController: BaseFeatureViewController {
         self.searchTextField?.rightViewMode = .always
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView?.selectRow(at: nil, animated: true, scrollPosition: UITableView.ScrollPosition.none)
@@ -162,7 +154,7 @@ class DictionaryViewController: BaseFeatureViewController {
     
     //MARK: - Public
     
-    func refreshList() {
+    func refreshList(shouldScrollToTop:Bool = true) {
         //for proper scrolling to top afterwards:
         self.tableView?.dataSource = nil
         self.tableView?.reloadData()
@@ -173,8 +165,10 @@ class DictionaryViewController: BaseFeatureViewController {
         self.updateFooter()
         
         //need delay, otherwise results in wrong content offset (internally tableview lays out subviews):
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            self.scrollToTop()
+        if (shouldScrollToTop) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                self.scrollToTop()
+            }
         }
     }
     
@@ -243,9 +237,9 @@ class DictionaryViewController: BaseFeatureViewController {
                 return true
             }
             
-            let popoverVC = PopupViewController(title:  title, sender: sender, contentViewController: selectvc)
+            let popoverVC = PopupViewController(title: title, sender: sender, contentViewController: selectvc)
             popoverVC.preferredWidth = 200
-            popoverVC.titleBarColor = Appearance.basicAppColor()
+            popoverVC.titleBarColor = Appearance.appTintColor()
             popoverVC.popoverPresentationController?.permittedArrowDirections = .up
             self.present(popoverVC, animated: true, completion: nil)
         }

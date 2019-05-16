@@ -17,6 +17,7 @@ class PageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Appearance.basicAppColor()
+        
     }
     
 
