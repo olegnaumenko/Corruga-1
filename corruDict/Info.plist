@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>39</string>
+	<string>40</string>
 	<key>FacebookAppID</key>
 	<string>261790757869765</string>
 	<key>FacebookDisplayName</key>
@@ -125,7 +125,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<true/>
 	<key>branch_key</key>
 	<dict>
 		<key>live</key>

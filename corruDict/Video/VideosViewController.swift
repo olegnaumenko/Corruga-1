@@ -38,8 +38,24 @@ class VideosViewController: BaseFeatureViewController {
         self.loadOnStart()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return UIApplication.shared.statusBarOrientation.isLandscape
+    }
+    
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
+//    }
+    
+
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        if size.width < size.height && UIApplication.shared.isStatusBarHidden == true {
+//
+//            coordinator.animate(alongsideTransition: { (context) in
+//
+//            }) { (context) in
+//                UIApplication.shared.setStatusBarHidden(false, with: .fade)
+//            }
+//        }
 //    }
     
     private func loadOnStart() {
