@@ -24,13 +24,16 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
         let shareViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
         
         let navController = UINavigationController(rootViewController: shareViewController)
-        navController.navigationBar.barTintColor = UIColor.orange
-        navController.navigationBar.tintColor = UIColor.white
-        if var titleAttribs = convertFromOptionalNSAttributedStringKeyDictionary(navController.navigationBar.titleTextAttributes) {
-            titleAttribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = UIColor.white
-            navController.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(titleAttribs)
+        let navigationBar = navController.navigationBar
+        navigationBar.barTintColor = Appearance.basicAppColor()
+        navigationBar.tintColor = UIColor.white
+        let key = NSAttributedString.Key.foregroundColor
+        let color = Appearance.appTintColor()
+        if var titleAttribs = navigationBar.titleTextAttributes {
+            titleAttribs[key] = color
+            navigationBar.titleTextAttributes = titleAttribs
         } else {
-            navController.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:UIColor.white])
+            navigationBar.titleTextAttributes = [key:color]
         }
         navController.modalPresentationStyle = .formSheet
         self.basicViewController?.present(navController, animated: true, completion: nil)
@@ -38,19 +41,3 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
 }
 
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromOptionalNSAttributedStringKeyDictionary(_ input: [NSAttributedString.Key: Any]?) -> [String: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
-	return input.rawValue
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
-}

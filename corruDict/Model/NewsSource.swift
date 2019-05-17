@@ -21,16 +21,54 @@ class NewsSource: NSObject {
 
     static let shared = NewsSource()
     
+    var currentPageSize = 10
+    var currentPageIndex = 0
+    
     var newsItems = [NewsItem]()
     
     var onItemsChange = {}
     
     func refreshNews() {
+        currentPageIndex = 0;
+        self.newsItems.removeAll()
+        self.onItemsChange()
+        self.getNextItems()
+//        self.getNewsItems(pageIndex: pageIndex, pageItems: pageSize) { [weak self] (newsArray, receivedPageIndex) in
+//            if let na = newsArray {
+//                guard let the = self else {
+//                    return
+//                }
+//                the.newsItems.append(contentsOf: na)
+//                the.onItemsChange()
+//
+//            } else {
+//
+//            }
+//        }
+    }
+    
+    func getNextItems() {
+        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize) { [weak self] (newsArray, receivedPageIndex) in
+            if let na = newsArray {
+                if let self = self {
+                    self.newsItems.append(contentsOf: na)
+                    self.onItemsChange()
+                    self.currentPageIndex = receivedPageIndex + 1
+                    if self.currentPageSize < 50 {
+                        self.currentPageSize = 50
+                    }
+                    self.getNextItems()
+                }
+            } else {
+                print("finished loading news, total: \(self?.currentPageIndex ?? 0 + 1) pages")
+            }
+        }
+    }
+    
+    func getNewsItems(pageIndex:Int, pageItems:Int, completion:@escaping ([NewsItem]?, Int)->()) {
         
-        Client.shared.getNewsFeed { (dataArray, error) in
-            
+        Client.shared.getNewsFeed(pageIndex: pageIndex, itemsInPage: pageItems) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
-                
                 var items = [NewsItem]()
                 items.reserveCapacity(arrayOfDicts.count)
                 
@@ -39,8 +77,9 @@ class NewsSource: NSObject {
                         items.append(item)
                     }
                 })
-                self.newsItems = items
-                self.onItemsChange()
+                completion(items, pageIndex)
+            } else {
+                completion(nil, 0)
             }
         }
     }

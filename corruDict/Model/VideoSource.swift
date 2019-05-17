@@ -16,11 +16,11 @@ class VideoSource {
 //    let client = Client()
 //    let realm:Realm
     
-    let results = 50
+//    let results = 50
     
     var nextPageToken:String?
     var totalItems:Int = 0
-    var resultsPerPage:Int?
+    var currentResultsPerPage = 10
     
     var videoEntities = [VideoItemEntity]()// Results<VideoItemEntity>?
     
@@ -44,16 +44,24 @@ class VideoSource {
     }
     
     func requestListUpdate() {
+        self.nextPageToken  = nil
+        self.videoEntities.removeAll()
+        self.onEntitiesChange()
+        self.getNextVideosPage()
+    }
+    
+    
+    func getNextVideosPage() {
         
-        Client.shared.getPlaylistVideos { (playlistDict, error) in
+        Client.shared.getPlaylistVideos(nextPageToken: self.nextPageToken, resultsPerPage: self.currentResultsPerPage) { (playlistDict, error) in
         
             if (error != nil) {
                 print("Error fetching playlist items: " + (error?.localizedDescription ?? "unknown"))
-            }
-            if let playlistDictionary = playlistDict {
+                
+            } else if let playlistDictionary = playlistDict {
                 
                 self.nextPageToken = playlistDictionary["nextPageToken"] as? String
-                self.resultsPerPage = (playlistDictionary["pageInfo"] as? [String:Any])?["resultsPerPage"] as? Int
+                
                 
                 if let items = playlistDictionary["items"] as? [[String:Any]] {
                     
@@ -66,7 +74,20 @@ class VideoSource {
                         index += 1
                     })
 
-                    self.videoEntities = entities
+                    self.videoEntities.append(contentsOf: entities)
+                    self.onEntitiesChange()
+                    
+                    print("got video items: \(entities.count), total: \(self.videoEntities.count)")
+                    
+                    if let totalResults = (playlistDictionary["pageInfo"] as? [String:Any])?["totalResults"] as? Int,
+                        totalResults <= self.videoEntities.count {
+                        return
+                    }
+                    
+                    if self.currentResultsPerPage < 50 {
+                        self.currentResultsPerPage = 50
+                    }
+                    self.getNextVideosPage()
                 }
             }
         }

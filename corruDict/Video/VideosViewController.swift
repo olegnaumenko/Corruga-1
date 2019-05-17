@@ -38,11 +38,9 @@ class VideosViewController: BaseFeatureViewController {
         self.loadOnStart()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        videoSource.requestListUpdate()
-//        updateItemSelection()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//    }
     
     private func loadOnStart() {
         if let firstVM = self.tableViewModel?.cellViewModel(index: 0) {

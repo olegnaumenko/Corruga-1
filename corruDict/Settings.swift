@@ -34,6 +34,8 @@ class Settings
     
     private init() {
         
+        //to migrate from older app versions:
+        
         if self.fromLangID.contains("_") || self.toLangID.contains("_") {
             self.setLanguages(from: self.fromLangID.replacingOccurrences(of: "_", with: "-"), to: self.toLangID.replacingOccurrences(of: "_", with: "-"))
         }
@@ -46,7 +48,9 @@ class Settings
             setLanguages(from: self.fromLangID, to: "zh-CN")
         }
         
-        assert(availableLangIDs.count > 1)//for dafault fromLangID and toLandID:
+        //end of version migration
+        
+        assert(availableLangIDs.count > 1)//for default fromLangID and toLandID:
         defaults.register(defaults: [Keys.searchTerm.key : kDefaultSearchTerm,
                                      Keys.fromLangID.key : availableLangIDs[0],
                                      Keys.toLangID.key : availableLangIDs[1]])

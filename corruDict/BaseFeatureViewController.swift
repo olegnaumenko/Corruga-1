@@ -21,4 +21,8 @@ class BaseFeatureViewController: UIViewController {
         self.delegate?.baseFeatureWantsShareScreen()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.rightBarButtonItem?.tintColor = Appearance.darkAppColor()
+    }
 }

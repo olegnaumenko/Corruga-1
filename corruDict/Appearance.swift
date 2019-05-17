@@ -42,7 +42,7 @@ class Appearance
     }
     
     static func darkAppColor() -> UIColor {
-        return UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
+        return UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
 //        return WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
     }
     

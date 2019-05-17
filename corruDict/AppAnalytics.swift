@@ -16,11 +16,6 @@ class AppAnalytics {
     private init() {}
     
     func logEvent(name:String, params:[String:Any]?) {
-//        if let params = params {
-//            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: params)
-//        } else {
-//            AppEvents.logEvent(AppEvents.Name(rawValue: name))
-//        }
         Analytics.logEvent(name, parameters: params)
     }
 }

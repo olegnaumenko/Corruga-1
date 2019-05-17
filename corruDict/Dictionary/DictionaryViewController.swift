@@ -64,6 +64,10 @@ class DictionaryViewController: BaseFeatureViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.fromLangButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
+        self.toLangButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
+        self.langSwapButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
+        
         self.searchTextField?.delegate = self
         self.searchTextField?.text = viewModel.searchTerm
         self.searchTextField?.addTarget(self,
@@ -75,9 +79,9 @@ class DictionaryViewController: BaseFeatureViewController {
         
         //colors
         self.view.backgroundColor = Appearance.basicAppColor()
-        self.tableView.separatorColor = Appearance.appTintColor()
+        self.tableView.separatorColor = .gray
         self.tableView.backgroundColor = Appearance.footerBackgroundColor()
-        self.headerView.backgroundColor = Appearance.footerBackgroundColor()
+        self.headerView.backgroundColor = Appearance.appTintColor()
         
         
         self.updateLanguagesIndicators()
@@ -187,10 +191,6 @@ class DictionaryViewController: BaseFeatureViewController {
         self.voiceButton.isEnabled = true
     }
     
-    private func searchTextFieldTerm() {
-        self.viewModel.search(term: self.searchTextField?.text?.lowercased() ?? "")
-    }
-    
     
     // MARK: - Actions
     
@@ -201,15 +201,15 @@ class DictionaryViewController: BaseFeatureViewController {
     }
     
     @objc private func textFieldDidChange(sender:UITextField) {
-        self.searchTextFieldTerm()
+        self.viewModel.search(term: sender.text?.lowercased() ?? "")
     }
 
     @IBAction func onLanguageSwapButton(_ sender: UIButton) {
         self.viewModel.swapLanguages(reSearch: false)
-        sender.isSelected = true
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            sender.isSelected = false
-        }
+//        sender.isSelected = true
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+//            sender.isSelected = false
+//        }
     }
     
     @IBAction func onFromLangButton(_ sender: UIButton) {

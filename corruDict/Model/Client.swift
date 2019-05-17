@@ -25,6 +25,40 @@ class Client {
     let newsClient = Networking(baseURL: newsURL)
     
     
+    func getPlaylistVideos(nextPageToken:String?, resultsPerPage:Int, completion:@escaping ([String:Any]?, Error?)->())
+    {
+        let bundleId = Bundle.main.bundleIdentifier
+        ytClient.headerFields = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
+        
+        var params = [
+            "key" : youTubeV3APIKey,
+            "playlistId" : gofroExpertPlaylistId,
+            "part" : "snippet",
+            "maxResults" : resultsPerPage,
+            ] as [String: AnyObject]
+        
+        if let npt = nextPageToken {
+            params["pageToken"] = npt as AnyObject
+        }
+        
+        ytClient.get("/playlistItems", parameters: params) { (result) in
+            
+            switch result {
+            case .success(let response):
+                
+                completion(response.dictionaryBody, nil)
+                
+            case .failure(let response):
+                
+                let json = response.dictionaryBody
+                print("Error during request:")
+                print(json)
+                completion(nil, response.error)
+            }
+        }
+    }
+    
+    
     func getPlaylistVideos( completion:@escaping ([String:Any]?, Error?)->())
     {
         let bundleId = Bundle.main.bundleIdentifier
@@ -35,6 +69,7 @@ class Client {
             "playlistId" : gofroExpertPlaylistId,
             "part" : "snippet",
             "maxResults" : 50,
+//            "pageToken" : "0"
             ] as [String: AnyObject]
         
         ytClient.get("/playlistItems", parameters: params) { (result) in
@@ -54,8 +89,16 @@ class Client {
         }
     }
     
-    func getNewsFeed(completion:@escaping ([Any]?, Error?) -> ()) {
-        let params = ["per_page":100]
+    func getNewsFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
+        
+        var params = ["per_page":10];
+        
+        if let pgIndex = pageIndex, pgIndex > 0 {
+            params["page"] = pgIndex + 1
+        }
+        if let itemsCount = itemsInPage {
+            params["per_page"] = itemsCount;
+        }
         newsClient.get("/posts", parameters:params) { (jsonResult) in
             switch jsonResult {
             case .success(let response):
@@ -69,6 +112,23 @@ class Client {
                 completion(nil, response.error)
             }
         }
+    }
+        
+//    func getNewsFeed(completion:@escaping ([Any]?, Error?) -> ()) {
+//        let params = ["per_page":100]
+//        newsClient.get("/posts", parameters:params) { (jsonResult) in
+//            switch jsonResult {
+//            case .success(let response):
+//
+//                completion(response.arrayBody, nil)
+//
+//            case .failure(let response):
+//
+//                print("Error during news list request:")
+//                print(response.error)
+//                completion(nil, response.error)
+//            }
+//        }
         
 //        newsClient.downloadData("/posts") { (dataResult) in
 //            switch dataResult {
@@ -83,5 +143,5 @@ class Client {
 //                completion(nil, response.error)
 //            }
 //        }
-    }
+//    }
 }

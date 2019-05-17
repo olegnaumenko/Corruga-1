@@ -23,14 +23,10 @@ class AppTabCoordinator:NSObject {
         
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
-        if #available(iOS 10.0, *) {
-            tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintColor()
-        } else {
-            // Fallback on earlier versions
-        }
-        tabBarController.tabBar.tintColor = UIColor.gray// UIColor(red: 1, green: 1, blue: 0.5, alpha: 1)//(white: 0.8, alpha: 1)
+        tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintColor()
+        tabBarController.tabBar.tintColor = Appearance.darkAppColor()
         super.init()
-        self.tabBarController.delegate = self;
+        tabBarController.delegate = self;
         
         
         //TODO: minimize this and tab bar controller delegate method:
@@ -49,16 +45,18 @@ class AppTabCoordinator:NSObject {
             }
             self.decorateNavbarIn(navcontroller: firstNavVC)
         }
-        DictModel.shared.setup()
     }
     
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
         navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
-        if var titleAttribs = convertFromOptionalNSAttributedStringKeyDictionary(navcontroller.navigationBar.titleTextAttributes) {
-            titleAttribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = Appearance.navTitleTextColor()
-            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(titleAttribs)
+        let navigationBar = navcontroller.navigationBar
+        let key = NSAttributedString.Key.foregroundColor
+        let color = Appearance.appTintColor()
+        if var titleAttribs = navigationBar.titleTextAttributes {
+            titleAttribs[key] = color
+            navigationBar.titleTextAttributes = titleAttribs
         } else {
-            navcontroller.navigationBar.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:Appearance.navTitleTextColor()])
+            navigationBar.titleTextAttributes = [key:color]
         }
     }
 }
@@ -100,7 +98,9 @@ extension AppTabCoordinator
     // MARK: App lifecycle
     
     func appDidFinishLaunching(_ application: UIApplication) {
-//        videoSource.requestListUpdate()
+        DictModel.shared.setup()
+        VideoSource.shared.requestListUpdate()
+        NewsSource.shared.refreshNews()
     }
     
     func appWillResignActive(_ application: UIApplication) {
@@ -110,28 +110,11 @@ extension AppTabCoordinator
     }
     
     func appWillEnterForeground(_ application: UIApplication) {
-//        videoSource.requestListUpdate()
+
     }
     
     func appDidBecomeActive() {
-        VideoSource.shared.requestListUpdate()
-        NewsSource.shared.refreshNews()
+        
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromOptionalNSAttributedStringKeyDictionary(_ input: [NSAttributedString.Key: Any]?) -> [String: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
-	return input.rawValue
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
-}
