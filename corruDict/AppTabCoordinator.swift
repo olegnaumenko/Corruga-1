@@ -99,8 +99,9 @@ extension AppTabCoordinator
     
     func appDidFinishLaunching(_ application: UIApplication) {
         DictModel.shared.setup()
-        VideoSource.shared.requestListUpdate()
-        NewsSource.shared.refreshNews()
+        VideoSource.shared.reload()
+        NewsSource.shared.reload()
+//        BoardSource.shared.reload()
     }
     
     func appWillResignActive(_ application: UIApplication) {

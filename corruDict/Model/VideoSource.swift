@@ -43,7 +43,7 @@ class VideoSource {
 //        })
     }
     
-    func requestListUpdate() {
+    func reload() {
         self.nextPageToken  = nil
         self.videoEntities.removeAll()
         self.onEntitiesChange()

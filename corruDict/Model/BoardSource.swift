@@ -1,14 +1,14 @@
 //
-//  NewsSource.swift
+//  BoardSource.swift
 //  Corruga
 //
-//  Created by oleg.naumenko on 11/16/18.
-//  Copyright © 2018 oleg.naumenko. All rights reserved.
+//  Created by oleg.naumenko on 5/18/19.
+//  Copyright © 2019 oleg.naumenko. All rights reserved.
 //
 
 import Foundation
 
-struct NewsItem {
+struct BoardItem {
     let id:Int
     let title:String
     let shortText:String
@@ -17,29 +17,29 @@ struct NewsItem {
     let url:String
 }
 
-class NewsSource: NSObject {
-
-    static let shared = NewsSource()
+class BoardSource {
+    
+    static let shared = BoardSource()
     
     var currentPageSize = 10
     var currentPageIndex = 0
     
-    var newsItems = [NewsItem]()
+    var boardItems = [BoardItem]()
     
     var onItemsChange = {}
     
     func reload() {
         currentPageIndex = 0;
-        self.newsItems.removeAll()
+        self.boardItems.removeAll()
         self.onItemsChange()
         self.getNextItems()
     }
     
     func getNextItems() {
-        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize) { [weak self] (newsArray, receivedPageIndex) in
+        self.getItems(pageIndex: currentPageIndex, pageItems: currentPageSize) { [weak self] (newsArray, receivedPageIndex) in
             if let na = newsArray {
                 if let self = self {
-                    self.newsItems.append(contentsOf: na)
+                    self.boardItems.append(contentsOf: na)
                     self.onItemsChange()
                     self.currentPageIndex = receivedPageIndex + 1
                     if self.currentPageSize < 50 {
@@ -48,20 +48,20 @@ class NewsSource: NSObject {
                     self.getNextItems()
                 }
             } else {
-                print("finished loading news, total: \(self?.currentPageIndex ?? 0 + 1) pages")
+                print("finished loading board, total: \(self?.currentPageIndex ?? 0 + 1) pages")
             }
         }
     }
     
-    func getNewsItems(pageIndex:Int, pageItems:Int, completion:@escaping ([NewsItem]?, Int)->()) {
+    func getItems(pageIndex:Int, pageItems:Int, completion:@escaping ([BoardItem]?, Int)->()) {
         
         Client.shared.getNewsFeed(pageIndex: pageIndex, itemsInPage: pageItems) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
-                var items = [NewsItem]()
+                var items = [BoardItem]()
                 items.reserveCapacity(arrayOfDicts.count)
                 
                 arrayOfDicts.forEach({ (dict) in
-                    if let item = self.newsItem(dict: dict as! [AnyHashable : Any]) {
+                    if let item = self.boardItem(dict: dict as! [AnyHashable : Any]) {
                         items.append(item)
                     }
                 })
@@ -72,14 +72,14 @@ class NewsSource: NSObject {
         }
     }
     
-    private func newsItem(dict:[AnyHashable:Any]) -> NewsItem? {
+    private func boardItem(dict:[AnyHashable:Any]) -> BoardItem? {
         
         if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
             let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String,
             let date = dict["date_gmt"] as? String,
             let url = dict["link"] as? String,
             let id = dict["id"] as? Int {
-            return NewsItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:filterDate(date), views:0, url:url)
+            return BoardItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:filterDate(date), views:0, url:url)
         }
         return nil;
     }
