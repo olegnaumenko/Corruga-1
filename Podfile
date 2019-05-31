@@ -1,9 +1,9 @@
 use_frameworks!
 
 target 'Corruga' do
-  platform :ios, '10.3'
+  platform :ios, '10.2'
 
-  pod 'UIDevice-Hardware'
+#  pod 'UIDevice-Hardware'
 #  pod 'RealmSwift', '~> 3.14.1'
   pod 'youtube-ios-player-helper-swift'
 #  pod 'youtube-ios-player-helper', '~> 0.1.4'
@@ -21,9 +21,9 @@ end
 
 target 'CorrugaTests' do
   
-  platform :ios, '10.3'
+  platform :ios, '10.2'
   
-  pod 'UIDevice-Hardware'
+#  pod 'UIDevice-Hardware'
 #  pod 'RealmSwift', '~> 3.14.1'
   pod 'youtube-ios-player-helper-swift'
 #  pod 'youtube-ios-player-helper', '~> 0.1.4'
