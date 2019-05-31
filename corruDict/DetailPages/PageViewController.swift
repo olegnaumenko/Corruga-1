@@ -10,9 +10,9 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    deinit {
-        print("Page Controller deinit")
-    }
+//    deinit {
+//        print("Page Controller deinit")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

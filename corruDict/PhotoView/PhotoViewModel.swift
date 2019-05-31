@@ -16,7 +16,7 @@ struct PhotoViewModel {
     }
     
     var photoTitle:String { get {
-            return self.photoImagePath.imageNameFromPath()
+            return self.photoImagePath.imageNameFromJPEGPath()
         }
     }
     

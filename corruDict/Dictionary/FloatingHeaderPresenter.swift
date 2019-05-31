@@ -30,7 +30,6 @@ import UIKit
     var scrollView:UIScrollView? {
         willSet {
             if self.scrollView != nil && self.observerId != nil {
-//                self.scrollView!.bk_removeObservers(withIdentifier: self.observerId)
                 self.scrollView?.removeObserver(self, forKeyPath: "contentOffset")
                 self.observerId = nil
             }

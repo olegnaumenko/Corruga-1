@@ -26,9 +26,9 @@ class DetailViewController: UIViewController {
 
     var viewModel:DetailViewModel! 
     
-    deinit {
-        print("Detail VC deinit")
-    }
+//    deinit {
+//        print("Detail VC deinit")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

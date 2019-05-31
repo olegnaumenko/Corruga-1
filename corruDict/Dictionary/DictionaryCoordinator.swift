@@ -11,6 +11,7 @@ import UIKit
 class DictionaryCoordinator: BaseFeatureCoordinator {
     
     private var imageProvider = ImageProvider()
+    
 //    private lazy var speechManager = SpeechManager()
     
     private let navigationController:UINavigationController
@@ -19,10 +20,9 @@ class DictionaryCoordinator: BaseFeatureCoordinator {
     fileprivate var pageViewCoordinator: CoordinatorProtocol?
     
     init(navController:UINavigationController) {
-        self.navigationController = navController
         
+        self.navigationController = navController
         self.viewController = ListViewControllerFinder(navController: navController).listViewController
-//        self.dictModel = DictModel(fromID: Settings.s.fromLangID, toID: Settings.s.toLangID)
         self.viewController.viewModel = DictionaryViewModel(dictModel: DictModel.shared)
         
         super.init()
@@ -36,10 +36,10 @@ class DictionaryCoordinator: BaseFeatureCoordinator {
     
     override func start(viewController: BaseFeatureViewController) {
         super.start(viewController: viewController)
-        self.configureListViewController(vc: self.viewController)
+        self.configureDictionaryViewController(vc: self.viewController)
     }
     
-    private func configureListViewController(vc:DictionaryViewController) {
+    private func configureDictionaryViewController(vc:DictionaryViewController) {
         vc.onTermSelectedBlock = { [unowned self] indexPath, destinationVC in
             self.preparePageViewCoordinator(indexPath: indexPath, viewController: destinationVC)
         }

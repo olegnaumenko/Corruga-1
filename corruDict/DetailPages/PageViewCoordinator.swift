@@ -33,9 +33,9 @@ class PageViewCoordinator
         self.pageViewControllerObserver.delegate = self
     }
     
-    deinit {
-        print("Page Coordinator deinit")
-    }
+//    deinit {
+//        print("Page Coordinator deinit")
+//    }
     
     fileprivate func configure(detailViewController:DetailViewController) {
         detailViewController.onPhotoTapped = { [unowned self] imagePath in
@@ -45,13 +45,11 @@ class PageViewCoordinator
 
     private func imageTappedInDetailView(imagePath:String) {
         
-        let storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
-        
-        if let photoVC = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoViewController {
-            photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
-            photoVC.modalPresentationStyle = .pageSheet
-            self.pageViewController.present(photoVC, animated: true)
-        }
+        let photoVC = UIStoryboard.photoViewController()
+        photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
+        photoVC.modalPresentationStyle = .pageSheet
+        self.pageViewController.present(photoVC, animated: true)
+
         AppAnalytics.shared.logEvent(name: "open_image", params: nil)
     }
 }

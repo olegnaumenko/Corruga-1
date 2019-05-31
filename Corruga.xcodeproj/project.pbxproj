@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,6 @@
 		7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */; };
 		7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */; };
 		7C1CD35221444D0D006CF4C6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD35121444D0D006CF4C6 /* Client.swift */; };
-		7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */; };
 		7C3FFA9B2286F90B00EDF2BC /* NewsItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */; };
 		7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */; };
 		7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */; };
@@ -50,6 +49,7 @@
 		7C73FDDB2285734200DE4AE2 /* PopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD52285734200DE4AE2 /* PopoverBackgroundView.m */; };
 		7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD62285734200DE4AE2 /* PopupViewController.m */; };
 		7C73FDDF2285ABEF00DE4AE2 /* DictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDDE2285ABEF00DE4AE2 /* DictionaryViewModel.swift */; };
+		7C82620C22A18E260067D653 /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82620B22A18E260067D653 /* UIStoryboard+Main.swift */; };
 		7C8EC17321281A80000499C9 /* TotalLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */; };
 		7C8EC17521282F8D000499C9 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC17421282F8D000499C9 /* CoordinatorProtocol.swift */; };
 		7C8EC177212840AF000499C9 /* PageViewControllerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC176212840AF000499C9 /* PageViewControllerObserver.swift */; };
@@ -162,6 +162,7 @@
 		7C73FDD92285734200DE4AE2 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		7C73FDDD228576A700DE4AE2 /* corruga_bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = corruga_bridging_header.h; sourceTree = "<group>"; };
 		7C73FDDE2285ABEF00DE4AE2 /* DictionaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewModel.swift; sourceTree = "<group>"; };
+		7C82620B22A18E260067D653 /* UIStoryboard+Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Main.swift"; sourceTree = "<group>"; };
 		7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalLabelViewModel.swift; sourceTree = "<group>"; };
 		7C8EC17421282F8D000499C9 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		7C8EC176212840AF000499C9 /* PageViewControllerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewControllerObserver.swift; sourceTree = "<group>"; };
@@ -323,13 +324,14 @@
 				7C4B7073214182F800BC03C3 /* News */,
 				7C5D73F0216773630022ABBC /* Classifieds */,
 				7CF1266721271D2F0024F099 /* Dictionary */,
-				7CAB489A21271EF2003F97DA /* Categories */,
+				7CAB489A21271EF2003F97DA /* Extensions */,
 				7C8EC17821285199000499C9 /* Protocols */,
 				7C06CB70210891F300FEEB52 /* Model */,
 				7CECF08621271E6400F63438 /* DetailPages */,
 				7C8EC179212851BE000499C9 /* DetailView */,
 				7CAB489921271ECC003F97DA /* PhotoView */,
 				7CAB489B21271F32003F97DA /* Storyboards */,
+				7C82620D22A193100067D653 /* Unused */,
 				7CF5B4C8211634B5004F2FDA /* libs */,
 				7C5D0055210889080025EF47 /* Info.plist */,
 				7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */,
@@ -383,6 +385,14 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		7C82620D22A193100067D653 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		7C8EC17821285199000499C9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,12 +421,13 @@
 			path = PhotoView;
 			sourceTree = "<group>";
 		};
-		7CAB489A21271EF2003F97DA /* Categories */ = {
+		7CAB489A21271EF2003F97DA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				7C5337902124371000465EF1 /* UIView+Name.swift */,
+				7C82620B22A18E260067D653 /* UIStoryboard+Main.swift */,
 			);
-			path = Categories;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7CAB489B21271F32003F97DA /* Storyboards */ = {
@@ -460,7 +471,6 @@
 				7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */,
 				7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */,
 				7CEABAD3215F70810011BB55 /* FloatingHeaderPresenter.swift */,
-				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
 				7C53379221243A9000465EF1 /* ScrollManager.swift */,
 				7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */,
 			);
@@ -730,7 +740,6 @@
 				7CDD61C32141797F000E864D /* AppTabCoordinator.swift in Sources */,
 				7CC81D0021286D24004D555E /* AudioSession.swift in Sources */,
 				7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */,
-				7C29C931212722B200D22D66 /* KeyboardPositionObserver.swift in Sources */,
 				7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */,
 				7C72D111211EF27B00CDAD47 /* PageViewCoordinator.swift in Sources */,
 				7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */,
@@ -746,6 +755,7 @@
 				7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */,
 				7C73FDDB2285734200DE4AE2 /* PopoverBackgroundView.m in Sources */,
 				7C5BD3AD219EE31400337340 /* NewsSource.swift in Sources */,
+				7C82620C22A18E260067D653 /* UIStoryboard+Main.swift in Sources */,
 				7C8EC17321281A80000499C9 /* TotalLabelViewModel.swift in Sources */,
 				7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */,
 				7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */,

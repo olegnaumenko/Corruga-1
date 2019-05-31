@@ -10,7 +10,7 @@ import UIKit
 
 extension String {
     
-    func imageNameFromPath() -> String
+    func imageNameFromJPEGPath() -> String
     {
         let nsstring = NSString(string: self).lastPathComponent.replacingOccurrences(of: ".jpg", with: "")
         return nsstring

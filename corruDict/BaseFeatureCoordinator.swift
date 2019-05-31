@@ -21,8 +21,7 @@ class BaseFeatureCoordinator: NSObject {
 extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
     func baseFeatureWantsShareScreen() {
         
-        let shareViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareViewController") as! ShareViewController
-        
+        let shareViewController = UIStoryboard.shareViewController()
         let navController = UINavigationController(rootViewController: shareViewController)
         let navigationBar = navController.navigationBar
         navigationBar.barTintColor = Appearance.basicAppColor()

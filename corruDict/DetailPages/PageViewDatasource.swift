@@ -24,9 +24,9 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
         super.init()
     }
     
-    deinit {
-        print("Page Datasource deinit")
-    }
+//    deinit {
+//        print("Page Datasource deinit")
+//    }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -71,21 +71,16 @@ class PageViewDatasource: NSObject, UIPageViewControllerDataSource {
             return nil
         }
         
-        let storyboard = UIStoryboard.init(name: Appearance.kMainStoryboardName, bundle: nil)
-        
-        if let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
-            
-            if let entry = self.dictModel.searchResults?[index] {
-                
-                self.dictModel.toLangModel.translation(withID: entry.id) { (translationEntryModel, error) in
-                    
-                    detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName(), langID:self.dictModel.toLanguageID)
-                    detailViewController.title = entry.value
-                    self.currentIndex = index
-                }
-                return detailViewController
+        let detailViewController = UIStoryboard.detailViewController()
+        if let entry = self.dictModel.searchResults?[index] {
+            self.dictModel.toLangModel.translation(withID: entry.id) { (translationEntryModel, error) in
+                detailViewController.viewModel = DetailViewModel(entry: entry, translation: translationEntryModel, imagePath: self.imageProvider?.randomImageName(), langID:self.dictModel.toLanguageID)
+                detailViewController.title = entry.value
+                self.currentIndex = index
             }
-        } else { fatalError() } 
+            return detailViewController
+        }
+        
         return nil
     }
     

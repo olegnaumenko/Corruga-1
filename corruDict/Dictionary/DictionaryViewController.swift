@@ -21,7 +21,7 @@ class DictionaryViewController: BaseFeatureViewController {
     var onTermSelectedBlock:((IndexPath, UIViewController)->())?
 
     private let footerLabel = UILabel(frame: CGRect.init())
-    private var keyboardObserver:KeyboardPositionObserver?
+//    private var keyboardObserver:KeyboardPositionObserver?
     private var floatingHeaderPresenter:FloatingHeaderPresenter?
     
     var scrollManager:ScrollManager? {

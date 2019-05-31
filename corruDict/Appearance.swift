@@ -10,7 +10,6 @@ import UIKit
 
 class Appearance
 {
-    static let kMainStoryboardName = "Main"
     
     static func basicAppColor() -> UIColor {
 //        return UIColor(red: 0.25, green: 0.2, blue: 0.2, alpha: 1.0)
