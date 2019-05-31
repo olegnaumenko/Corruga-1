@@ -25,8 +25,16 @@ class NewsSource: NSObject {
     var currentPageIndex = 0
     
     var newsItems = [NewsItem]()
+    var searchItems = [NewsItem]()
+    
+    var searchTerm:String? {
+        didSet {
+            reloadSearch()
+        }
+    }
     
     var onItemsChange = {}
+    var onSearchItemsChange = {}
     
     func reload() {
         currentPageIndex = 0;
@@ -35,10 +43,18 @@ class NewsSource: NSObject {
         self.getNextItems()
     }
     
+    func reloadSearch() {
+        currentPageIndex = 0;
+        currentPageSize = 10;
+        self.searchItems.removeAll()
+        self.onSearchItemsChange()
+        self.getNextSearchItems()
+    }
+    
     func getNextItems() {
-        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize) { [weak self] (newsArray, receivedPageIndex) in
-            if let na = newsArray {
-                if let self = self {
+        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize, search: nil) { [weak self] (newsArray, receivedPageIndex, searchString) in
+            if let self = self {
+                if let na = newsArray {
                     self.newsItems.append(contentsOf: na)
                     self.onItemsChange()
                     self.currentPageIndex = receivedPageIndex + 1
@@ -46,16 +62,36 @@ class NewsSource: NSObject {
                         self.currentPageSize = 50
                     }
                     self.getNextItems()
+                } else {
+                    print("finished loading news, total: \(self.currentPageIndex + 1) pages")
                 }
-            } else {
-                print("finished loading news, total: \(self?.currentPageIndex ?? 0 + 1) pages")
             }
         }
     }
     
-    func getNewsItems(pageIndex:Int, pageItems:Int, completion:@escaping ([NewsItem]?, Int)->()) {
+    func getNextSearchItems() {
+        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize, search: searchTerm) { [weak self] (newsArray, receivedPageIndex, searchString) in
+            if let self = self {
+                if let na = newsArray {
+                    if let ss = searchString, self.searchTerm == ss {
+                        self.searchItems.append(contentsOf: na)
+                        self.onSearchItemsChange()
+                    }
+                    self.currentPageIndex = receivedPageIndex + 1
+                    if self.currentPageSize < 50 {
+                        self.currentPageSize = 50
+                    }
+                    self.getNextSearchItems()
+                } else {
+                    print("finished loading news, total: \(self.currentPageIndex + 1) pages")
+                }
+            }
+        }
+    }
+    
+    func getNewsItems(pageIndex:Int, pageItems:Int, search:String? = nil, completion:@escaping ([NewsItem]?, Int, String?)->()) {
         
-        Client.shared.getNewsFeed(pageIndex: pageIndex, itemsInPage: pageItems) { (dataArray, error) in
+        Client.shared.getNewsFeed(pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
                 var items = [NewsItem]()
                 items.reserveCapacity(arrayOfDicts.count)
@@ -65,9 +101,9 @@ class NewsSource: NSObject {
                         items.append(item)
                     }
                 })
-                completion(items, pageIndex)
+                completion(items, pageIndex, search)
             } else {
-                completion(nil, 0)
+                completion(nil, 0, nil)
             }
         }
     }

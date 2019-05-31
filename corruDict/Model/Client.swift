@@ -62,9 +62,9 @@ class Client {
     }
     
     
-    func getNewsFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
+    func getNewsFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
         
-        var params = ["per_page":10];
+        var params:[String:Any] = ["per_page":10];
         
         if let pgIndex = pageIndex, pgIndex > 0 {
             params["page"] = pgIndex + 1
@@ -72,6 +72,10 @@ class Client {
         if let itemsCount = itemsInPage {
             params["per_page"] = itemsCount;
         }
+        if let searchTerm = search, searchTerm.count > 0 {
+            params["search"] = searchTerm
+        }
+        
         newsClient.get("/posts", parameters:params) { (jsonResult) in
             switch jsonResult {
             case .success(let response):
@@ -86,7 +90,6 @@ class Client {
             }
         }
     }
-    
     
     func getBoardFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
         

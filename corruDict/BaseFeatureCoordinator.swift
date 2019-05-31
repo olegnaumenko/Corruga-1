@@ -35,6 +35,15 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
         } else {
             navigationBar.titleTextAttributes = [key:color]
         }
+        if #available(iOS 11.0, *) {
+            navigationBar.prefersLargeTitles = true
+            if var largeTitleAttribs = navigationBar.largeTitleTextAttributes {
+                largeTitleAttribs[key] = color
+                navigationBar.largeTitleTextAttributes = largeTitleAttribs
+            } else {
+                navigationBar.largeTitleTextAttributes = [key:color]
+            }
+        }
         navController.modalPresentationStyle = .formSheet
         self.basicViewController?.present(navController, animated: true, completion: nil)
     }

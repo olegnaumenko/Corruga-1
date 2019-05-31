@@ -28,6 +28,10 @@ class ClassifiedsViewController: BaseFeatureViewController {
         self.webView.mediaPlaybackRequiresUserAction = true
         
         self.loadHome()
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
     }
     
     //    override func viewWillAppear(_ animated: Bool) {

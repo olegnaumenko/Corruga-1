@@ -13,6 +13,12 @@ class NewsViewModel {
     
     var onRefreshNeeded = {}
     
+    var searchTerm:String? {
+        didSet {
+            NewsSource.shared.searchTerm = self.searchTerm
+        }
+    }
+    
     init() {
         NewsSource.shared.onItemsChange = { [weak self] in
             self?.onRefreshNeeded()

@@ -17,14 +17,16 @@ class NewsViewController: BaseFeatureViewController {
 
     let cellId = "NewsItemTableViewCell"
     
-    @IBOutlet var tableView:UITableView!
-    @IBOutlet var logoLabel:UILabel?
+    @IBOutlet weak var tableView:UITableView!
+    @IBOutlet weak var logoLabel:UILabel?
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
     let viewModel = NewsViewModel()
     
     weak var navigationDelegate:NewsViewControllerDelegate?
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,28 @@ class NewsViewController: BaseFeatureViewController {
         self.loadingIndicator.startAnimating()
         self.viewModel.onRefreshNeeded = { [weak self] in
             if let the = self {
+                the.tableView.separatorColor = Appearance.appTintColor()
                 the.loadingIndicator.stopAnimating()
                 the.loadingIndicator.isHidden = true
-                the.tableView.separatorColor = Appearance.appTintColor()
-                the.tableView.reloadData()//
+                the.tableView.reloadData()
             }
         }
+        self.tableView.estimatedRowHeight = 220.0
         self.tableView.separatorColor = UIColor.clear
         self.view.backgroundColor = Appearance.basicAppColor()
+        
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.searchController = searchController
+        } else {
+            self.tableView.tableHeaderView = searchController.searchBar
+        }
     }
 
 
@@ -62,6 +78,12 @@ class NewsViewController: BaseFeatureViewController {
 
     
     
+}
+
+extension NewsViewController : UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
 }
 
 extension NewsViewController : UITableViewDataSource {

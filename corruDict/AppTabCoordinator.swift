@@ -58,6 +58,15 @@ class AppTabCoordinator:NSObject {
         } else {
             navigationBar.titleTextAttributes = [key:color]
         }
+        
+        if #available(iOS 11.0, *) {
+            if var largeTitleAttribs = navigationBar.largeTitleTextAttributes {
+                largeTitleAttribs[key] = color
+                navigationBar.largeTitleTextAttributes = largeTitleAttribs
+            } else {
+                navigationBar.largeTitleTextAttributes = [key:color]
+            }
+        }
     }
 }
 
