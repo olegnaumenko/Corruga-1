@@ -14,7 +14,7 @@
 		7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */; };
 		7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */; };
 		7C1CD35221444D0D006CF4C6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD35121444D0D006CF4C6 /* Client.swift */; };
-		7C3FFA9B2286F90B00EDF2BC /* NewsItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */; };
+		7C3FFA9B2286F90B00EDF2BC /* WebItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */; };
 		7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */; };
 		7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */; };
 		7C424CCC21088DED00D20563 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCB21088DED00D20563 /* SystemConfiguration.framework */; };
@@ -117,7 +117,7 @@
 		7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageStorage.swift; sourceTree = "<group>"; };
 		7C3A11772115C7B100FB96A1 /* TermEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermEntity.swift; sourceTree = "<group>"; };
 		7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
-		7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemViewController.swift; sourceTree = "<group>"; };
+		7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebItemViewController.swift; sourceTree = "<group>"; };
 		7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
 		7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		7C424CCB21088DED00D20563 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -265,7 +265,7 @@
 				7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */,
 				7C4B70772141835700BC03C3 /* NewsViewController.swift */,
 				7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */,
-				7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */,
+				7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */,
 				7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */,
 			);
 			path = News;
@@ -759,7 +759,7 @@
 				7C8EC17321281A80000499C9 /* TotalLabelViewModel.swift in Sources */,
 				7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */,
 				7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */,
-				7C3FFA9B2286F90B00EDF2BC /* NewsItemViewController.swift in Sources */,
+				7C3FFA9B2286F90B00EDF2BC /* WebItemViewController.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */,
 				7CBAEA7E2286D1990000C8C6 /* NewsModel.swift in Sources */,
@@ -944,7 +944,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corruDict/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -966,7 +966,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corruDict/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment version="4128" identifier="iOS"/>
+        <deployment version="4352" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -82,18 +82,19 @@
         <!--News-->
         <scene sceneID="QU7-qR-1hm">
             <objects>
-                <viewController storyboardIdentifier="NewsItemViewController" title="News" id="f5i-Jq-Mbc" customClass="NewsItemViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsItemViewController" title="News" id="f5i-Jq-Mbc" customClass="WebItemViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vQW-Ng-C4d">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkm-WT-gIf">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS1-iY-5Ev">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="delegate" destination="f5i-Jq-Mbc" id="Pv3-4v-Hbn"/>
-                                </connections>
-                            </webView>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO" allowsPictureInPictureMediaPlayback="NO">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences" javaScriptEnabled="NO"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.25" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yil-6e-Akf">
                                 <rect key="frame" x="32" y="64" width="350" height="640"/>
                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="384"/>
@@ -103,13 +104,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="trailing" secondItem="vN8-jL-TLV" secondAttribute="trailing" id="7Zl-yC-s99"/>
-                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="bottom" secondItem="vN8-jL-TLV" secondAttribute="bottom" id="OWX-ef-iI9"/>
+                            <constraint firstItem="hS1-iY-5Ev" firstAttribute="top" secondItem="vN8-jL-TLV" secondAttribute="top" id="30K-cA-PeB"/>
+                            <constraint firstItem="hS1-iY-5Ev" firstAttribute="bottom" secondItem="vN8-jL-TLV" secondAttribute="bottom" id="I3Y-An-nSh"/>
+                            <constraint firstItem="hS1-iY-5Ev" firstAttribute="leading" secondItem="vN8-jL-TLV" secondAttribute="leading" id="PX4-r8-cIB"/>
                             <constraint firstItem="Yil-6e-Akf" firstAttribute="top" secondItem="vN8-jL-TLV" secondAttribute="top" id="Q5j-l8-d32"/>
                             <constraint firstItem="vN8-jL-TLV" firstAttribute="trailing" secondItem="Yil-6e-Akf" secondAttribute="trailing" constant="32" id="Q9e-Rv-iNO"/>
-                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="top" secondItem="vN8-jL-TLV" secondAttribute="top" id="gcd-56-Jcn"/>
+                            <constraint firstItem="hS1-iY-5Ev" firstAttribute="trailing" secondItem="vN8-jL-TLV" secondAttribute="trailing" id="UYR-mV-E18"/>
                             <constraint firstItem="Yil-6e-Akf" firstAttribute="leading" secondItem="vN8-jL-TLV" secondAttribute="leading" constant="32" id="svN-mb-Zyd"/>
-                            <constraint firstItem="Kkm-WT-gIf" firstAttribute="leading" secondItem="vN8-jL-TLV" secondAttribute="leading" id="vDk-rj-z0E"/>
                             <constraint firstItem="vN8-jL-TLV" firstAttribute="bottom" secondItem="Yil-6e-Akf" secondAttribute="bottom" constant="32" id="zOY-2c-Eu3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vN8-jL-TLV"/>
@@ -133,12 +134,12 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="PVl-Vd-oIK" id="Cdz-2s-DcM"/>
                         <outlet property="logoLabel" destination="Yil-6e-Akf" id="n1b-90-K02"/>
-                        <outlet property="webView" destination="Kkm-WT-gIf" id="9iz-uO-WBt"/>
+                        <outlet property="webView" destination="hS1-iY-5Ev" id="pff-N0-Mb8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyw-a7-iGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="690" y="-477"/>
+            <point key="canvasLocation" x="689.85507246376812" y="-477.71739130434787"/>
         </scene>
         <!--News-->
         <scene sceneID="Zgc-nl-c03">
@@ -340,7 +341,7 @@
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="jcc-M2-73n"/>
                         <view key="titleView" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Aq1-t0-Tm2">
-                            <rect key="frame" x="88" y="7" width="239" height="30"/>
+                            <rect key="frame" x="87.666666666666686" y="7" width="239" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym2-5J-Z48">
@@ -895,7 +896,7 @@
                             </barButtonItem>
                             <barButtonItem id="xRi-jW-XXd">
                                 <view key="customView" contentMode="scaleToFill" id="mPs-dF-eR6">
-                                    <rect key="frame" x="327" y="6" width="32" height="32"/>
+                                    <rect key="frame" x="319" y="6" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-WT-7QG">
