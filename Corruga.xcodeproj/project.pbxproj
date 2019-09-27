@@ -40,8 +40,8 @@
 		7C5D005F210889080025EF47 /* corruDictTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D005E210889080025EF47 /* corruDictTests.swift */; };
 		7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73DF216658BA0022ABBC /* DictionaryNavViewController.swift */; };
 		7C5D73EF2167705A0022ABBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C5D73EE2167705A0022ABBC /* Assets.xcassets */; };
-		7C5D73F22167737F0022ABBC /* ClassifiedsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F12167737F0022ABBC /* ClassifiedsCoordinator.swift */; };
-		7C5D73F4216774110022ABBC /* ClassifiedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F3216774110022ABBC /* ClassifiedsViewController.swift */; };
+		7C5D73F22167737F0022ABBC /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F12167737F0022ABBC /* BoardCoordinator.swift */; };
+		7C5D73F4216774110022ABBC /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F3216774110022ABBC /* BoardViewController.swift */; };
 		7C72D111211EF27B00CDAD47 /* PageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C72D110211EF27B00CDAD47 /* PageViewCoordinator.swift */; };
 		7C73FDD02285713200DE4AE2 /* SelectionPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDCF2285713200DE4AE2 /* SelectionPopoverViewController.swift */; };
 		7C73FDD22285715200DE4AE2 /* SelectionPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD12285715200DE4AE2 /* SelectionPopoverViewModel.swift */; };
@@ -146,8 +146,8 @@
 		7C5D0060210889080025EF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C5D73DF216658BA0022ABBC /* DictionaryNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryNavViewController.swift; sourceTree = "<group>"; };
 		7C5D73EE2167705A0022ABBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7C5D73F12167737F0022ABBC /* ClassifiedsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedsCoordinator.swift; sourceTree = "<group>"; };
-		7C5D73F3216774110022ABBC /* ClassifiedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedsViewController.swift; sourceTree = "<group>"; };
+		7C5D73F12167737F0022ABBC /* BoardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCoordinator.swift; sourceTree = "<group>"; };
+		7C5D73F3216774110022ABBC /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		7C72D110211EF27B00CDAD47 /* PageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewCoordinator.swift; sourceTree = "<group>"; };
 		7C73FDCF2285713200DE4AE2 /* SelectionPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPopoverViewController.swift; sourceTree = "<group>"; };
 		7C73FDD12285715200DE4AE2 /* SelectionPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPopoverViewModel.swift; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 		7C5D73F0216773630022ABBC /* Classifieds */ = {
 			isa = PBXGroup;
 			children = (
-				7C5D73F12167737F0022ABBC /* ClassifiedsCoordinator.swift */,
-				7C5D73F3216774110022ABBC /* ClassifiedsViewController.swift */,
+				7C5D73F12167737F0022ABBC /* BoardCoordinator.swift */,
+				7C5D73F3216774110022ABBC /* BoardViewController.swift */,
 			);
 			path = Classifieds;
 			sourceTree = "<group>";
@@ -717,7 +717,7 @@
 				7CDD61C521417A2E000E864D /* AppTabBarController.swift in Sources */,
 				7C16D3632199E09C00217626 /* AppAnalytics.swift in Sources */,
 				7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */,
-				7C5D73F4216774110022ABBC /* ClassifiedsViewController.swift in Sources */,
+				7C5D73F4216774110022ABBC /* BoardViewController.swift in Sources */,
 				7C5337912124371000465EF1 /* UIView+Name.swift in Sources */,
 				7C73FDDA2285734200DE4AE2 /* SelectViewController.m in Sources */,
 				7CDE18C622844744004D6964 /* DictionaryEntryTableViewCell.swift in Sources */,
@@ -767,7 +767,7 @@
 				7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */,
 				7CEABAD0215F56F80011BB55 /* VideoTableViewModel.swift in Sources */,
 				7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */,
-				7C5D73F22167737F0022ABBC /* ClassifiedsCoordinator.swift in Sources */,
+				7C5D73F22167737F0022ABBC /* BoardCoordinator.swift in Sources */,
 				7CEABAD5215F7A530011BB55 /* FloatingHeaderPresenter.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,

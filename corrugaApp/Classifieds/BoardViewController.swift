@@ -8,6 +8,6 @@
 
 import UIKit
 
-class ClassifiedsViewController: NewsViewController {
+class BoardViewController: NewsViewController {
     
 }

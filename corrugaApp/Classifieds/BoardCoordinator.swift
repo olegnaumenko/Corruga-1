@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClassifiedsCoordinator: BaseFeatureCoordinator {
+class BoardCoordinator: BaseFeatureCoordinator {
     
     let newsViewController:NewsViewController
     
@@ -21,7 +21,7 @@ class ClassifiedsCoordinator: BaseFeatureCoordinator {
     }
 }
 
-extension ClassifiedsCoordinator: NewsViewControllerDelegate {
+extension BoardCoordinator: NewsViewControllerDelegate {
     func newsViewControllerDidSelect(item : NewsItem) {
         let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewsItemViewController") as! WebItemViewController
         itemViewController.urlString = item.url

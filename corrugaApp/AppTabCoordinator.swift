@@ -15,7 +15,7 @@ class AppTabCoordinator:NSObject {
     var dictionaryCoordinator:DictionaryCoordinator?
     var newsCoordinator:NewsCoordinator?
     var videosCoordinator:VideosCoordinator?
-    var classifiedsCoordinator:ClassifiedsCoordinator?
+    var classifiedsCoordinator:BoardCoordinator?
     
 //    var newsSource = NewsSource(itemType: .newsItemType)
 //    var boardSource = NewsSource(itemType: .boardItemType)
@@ -43,8 +43,8 @@ class AppTabCoordinator:NSObject {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
             } else if (firstVC.isKind(of: VideosViewController.self)) {
                 self.videosCoordinator = VideosCoordinator(videosViewController: firstVC as! VideosViewController)
-            } else if (firstVC.isKind(of: ClassifiedsViewController.self)) {
-                self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: firstVC as! ClassifiedsViewController)
+            } else if (firstVC.isKind(of: BoardViewController.self)) {
+                self.classifiedsCoordinator = BoardCoordinator(newsViewController: firstVC as! BoardViewController)
             }
             self.decorateNavbarIn(navcontroller: firstNavVC)
         }
@@ -93,7 +93,7 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
                 eventName = "open_dict"
             } else if let classVC = rootViewController as? NewsViewController, self.classifiedsCoordinator == nil {
-                self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: classVC)
+                self.classifiedsCoordinator = BoardCoordinator(newsViewController: classVC)
                 eventName = "open_board"
             }
             if (eventName.count > 0) {
