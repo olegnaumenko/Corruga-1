@@ -43,7 +43,7 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
                 navigationBar.largeTitleTextAttributes = [key:color]
             }
         }
-        navController.modalPresentationStyle = .formSheet
+        navController.modalPresentationStyle = .fullScreen
         self.basicViewController?.present(navController, animated: true, completion: nil)
     }
 }
