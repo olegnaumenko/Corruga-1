@@ -22,7 +22,21 @@ class NewsViewController: BaseFeatureViewController {
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
-    let viewModel = NewsViewModel()
+    var viewModel:NewsViewModel!// = NewsViewModel(itemSource: NewsSource(itemType: .newsItemType))
+        {
+        didSet {
+            self.viewModel.onRefreshNeeded = { [weak self] in
+                if let the = self {
+                    the.tableView.separatorColor = Appearance.appTintColor()
+                    the.loadingIndicator.stopAnimating()
+                    the.loadingIndicator.isHidden = true
+                    the.tableView.reloadData()
+                }
+            }
+            self.viewModel.viewDidLoad()
+            self.title = self.viewModel.title
+        }
+    }
     
     weak var navigationDelegate:NewsViewControllerDelegate?
     
@@ -30,20 +44,12 @@ class NewsViewController: BaseFeatureViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
         self.loadingIndicator.startAnimating()
-        self.viewModel.onRefreshNeeded = { [weak self] in
-            if let the = self {
-                the.tableView.separatorColor = Appearance.appTintColor()
-                the.loadingIndicator.stopAnimating()
-                the.loadingIndicator.isHidden = true
-                the.tableView.reloadData()
-            }
-        }
+       
         self.tableView.estimatedRowHeight = 220.0
         self.tableView.separatorColor = UIColor.clear
         self.view.backgroundColor = Appearance.basicAppColor()
+        self.definesPresentationContext = true
         
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
@@ -51,38 +57,35 @@ class NewsViewController: BaseFeatureViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationItem.searchController = searchController
-        } else {
-            self.tableView.tableHeaderView = searchController.searchBar
-        }
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.searchController = searchController
+
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.viewWillAppear()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if let indexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.viewModel.viewDidDissapear()
     }
-    */
-
-    
-    
 }
 
 extension NewsViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        self.viewModel.setSearch(term: searchController.searchBar.text)
     }
 }
 

@@ -14,7 +14,7 @@
 		7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */; };
 		7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */; };
 		7C1CD35221444D0D006CF4C6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD35121444D0D006CF4C6 /* Client.swift */; };
-		7C3FFA9B2286F90B00EDF2BC /* NewsItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */; };
+		7C3FFA9B2286F90B00EDF2BC /* WebItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */; };
 		7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */; };
 		7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */; };
 		7C424CCC21088DED00D20563 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C424CCB21088DED00D20563 /* SystemConfiguration.framework */; };
@@ -56,10 +56,8 @@
 		7C8EC17B2128577C000499C9 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7C8EC17A2128577C000499C9 /* images */; };
 		7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C954172211CC9AE00CDD270 /* ImageProvider.swift */; };
 		7C978F78211F101F00D1B165 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
-		7C9D82D8228FDFBB0061DF1E /* BoardSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9D82D7228FDFBB0061DF1E /* BoardSource.swift */; };
 		7CA4F64D210C58410094C5B0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
 		7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB489721271EA6003F97DA /* DetailViewController.swift */; };
-		7CBAEA7E2286D1990000C8C6 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */; };
 		7CBB8E6D219C18E600560397 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */; };
 		7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6E219C293800560397 /* VideoSource.swift */; };
 		7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
@@ -117,7 +115,7 @@
 		7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageStorage.swift; sourceTree = "<group>"; };
 		7C3A11772115C7B100FB96A1 /* TermEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermEntity.swift; sourceTree = "<group>"; };
 		7C3A11782115C7B100FB96A1 /* TranslationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
-		7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemViewController.swift; sourceTree = "<group>"; };
+		7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebItemViewController.swift; sourceTree = "<group>"; };
 		7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewCell.swift; sourceTree = "<group>"; };
 		7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		7C424CCB21088DED00D20563 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -265,7 +263,7 @@
 				7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */,
 				7C4B70772141835700BC03C3 /* NewsViewController.swift */,
 				7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */,
-				7C3FFA9A2286F90B00EDF2BC /* NewsItemViewController.swift */,
+				7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */,
 				7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */,
 			);
 			path = News;
@@ -288,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				7C4993EC213EAE2F00778429 /* Corruga.entitlements */,
-				7C5D0046210889060025EF47 /* corruDict */,
+				7C5D0046210889060025EF47 /* corrugaApp */,
 				7C5D005D210889080025EF47 /* corruDictTests */,
 				7C5D0045210889060025EF47 /* Products */,
 				7C8EC17A2128577C000499C9 /* images */,
@@ -307,7 +305,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7C5D0046210889060025EF47 /* corruDict */ = {
+		7C5D0046210889060025EF47 /* corrugaApp */ = {
 			isa = PBXGroup;
 			children = (
 				7C73FDCE228570F300DE4AE2 /* SelectionPopover */,
@@ -337,7 +335,7 @@
 				7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */,
 				7C73FDDD228576A700DE4AE2 /* corruga_bridging_header.h */,
 			);
-			path = corruDict;
+			path = corrugaApp;
 			sourceTree = "<group>";
 		};
 		7C5D005D210889080025EF47 /* corruDictTests */ = {
@@ -717,7 +715,6 @@
 			files = (
 				7C5D004C210889060025EF47 /* PhotoViewController.swift in Sources */,
 				7CDD61C521417A2E000E864D /* AppTabBarController.swift in Sources */,
-				7C9D82D8228FDFBB0061DF1E /* BoardSource.swift in Sources */,
 				7C16D3632199E09C00217626 /* AppAnalytics.swift in Sources */,
 				7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */,
 				7C5D73F4216774110022ABBC /* ClassifiedsViewController.swift in Sources */,
@@ -759,10 +756,9 @@
 				7C8EC17321281A80000499C9 /* TotalLabelViewModel.swift in Sources */,
 				7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */,
 				7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */,
-				7C3FFA9B2286F90B00EDF2BC /* NewsItemViewController.swift in Sources */,
+				7C3FFA9B2286F90B00EDF2BC /* WebItemViewController.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */,
-				7CBAEA7E2286D1990000C8C6 /* NewsModel.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
 				7C4B70762141830F00BC03C3 /* NewsCoordinator.swift in Sources */,
 				7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */,
@@ -942,16 +938,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
-				INFOPLIST_FILE = corruDict/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				INFOPLIST_FILE = corrugaApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = corruDict/corruga_bridging_header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = corrugaApp/corruga_bridging_header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -964,16 +962,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
-				INFOPLIST_FILE = corruDict/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				INFOPLIST_FILE = corrugaApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = corruDict/corruga_bridging_header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = corrugaApp/corruga_bridging_header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

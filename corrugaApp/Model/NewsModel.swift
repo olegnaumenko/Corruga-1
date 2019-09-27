@@ -6,7 +6,7 @@
 //  Copyright © 2019 oleg.naumenko. All rights reserved.
 //
 
-import UIKit
+//import UIKit
 
 //struct NewsItem {
 //    let title:String

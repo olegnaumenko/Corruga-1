@@ -29,9 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         
-        
-//        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
         FirebaseApp.configure()
         
         WSColourScheme.sharedInstance.colourScheme = WSCSchemeWeldon
@@ -57,19 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return true
 //    }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-//        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
-//        let sourceAnnotation = options[UIApplication.OpenURLOptionsKey.annotation]
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let handled = Branch.getInstance()!.application(app,
                                                         open: url,
                                                         options: options)
-//        if (!handled) {
-//            handled = ApplicationDelegate.shared.application(app,
-//                                                                             open: url,
-//                                                                             sourceApplication: sourceApplication,
-//                                                                             annotation: sourceAnnotation)
-//        }
         return handled
     }
     
@@ -77,8 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //    }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
         Branch.getInstance().continue(userActivity)
         

@@ -17,6 +17,9 @@ class AppTabCoordinator:NSObject {
     var videosCoordinator:VideosCoordinator?
     var classifiedsCoordinator:ClassifiedsCoordinator?
     
+//    var newsSource = NewsSource(itemType: .newsItemType)
+//    var boardSource = NewsSource(itemType: .boardItemType)
+    
     init(tabBarController:AppTabBarController) {
         
         Appearance.setPageIndicatorColor()
@@ -36,8 +39,8 @@ class AppTabCoordinator:NSObject {
             
             if (firstVC.isKind(of: DictionaryNavViewController.self)) {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController:firstNavVC)
-            } else if (firstVC.isKind(of: NewsViewController.self)) {
-                self.newsCoordinator = NewsCoordinator(newsViewController: firstVC as! NewsViewController)
+            } else if let newsVC = firstVC as? NewsViewController {
+                self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
             } else if (firstVC.isKind(of: VideosViewController.self)) {
                 self.videosCoordinator = VideosCoordinator(videosViewController: firstVC as! VideosViewController)
             } else if (firstVC.isKind(of: ClassifiedsViewController.self)) {
@@ -89,7 +92,7 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
             } else if let dictVC = rootViewController as? DictionaryViewController, self.dictionaryCoordinator == nil {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
                 eventName = "open_dict"
-            } else if let classVC = rootViewController as? ClassifiedsViewController, self.classifiedsCoordinator == nil {
+            } else if let classVC = rootViewController as? NewsViewController, self.classifiedsCoordinator == nil {
                 self.classifiedsCoordinator = ClassifiedsCoordinator(newsViewController: classVC)
                 eventName = "open_board"
             }
@@ -109,7 +112,7 @@ extension AppTabCoordinator
     func appDidFinishLaunching(_ application: UIApplication) {
         DictModel.shared.setup()
         VideoSource.shared.reload()
-        NewsSource.shared.reload()
+//        newsSource.reload()
 //        BoardSource.shared.reload()
     }
     

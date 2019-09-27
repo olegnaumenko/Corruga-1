@@ -8,6 +8,22 @@
 
 import Foundation
 
+enum ItemType:Int {
+    case newsItemType
+    case boardItemType
+}
+
+extension ItemType {
+    var title:String {
+        switch self {
+        case .boardItemType:
+            return "Board"
+        default:
+            return "News"
+        }
+    }
+}
+
 struct NewsItem {
     let id:Int
     let title:String
@@ -15,11 +31,16 @@ struct NewsItem {
     let date:String
     let views:Int
     let url:String
+    var imageURL:String?
+}
+
+extension NSNotification.Name {
+    public static let NewsSourceItemsUpdated = NSNotification.Name("NewsSourceItemsUpdated")
 }
 
 class NewsSource: NSObject {
-
-    static let shared = NewsSource()
+    
+    let itemType:ItemType
     
     var currentPageSize = 10
     var currentPageIndex = 0
@@ -29,12 +50,24 @@ class NewsSource: NSObject {
     
     var searchTerm:String? {
         didSet {
-            reloadSearch()
+            if let searchTerm = self.searchTerm, searchTerm.count > 0 {
+                reloadSearch()
+            } 
         }
     }
     
-    var onItemsChange = {}
-    var onSearchItemsChange = {}
+    init(itemType:ItemType) {
+        self.itemType = itemType
+        super.init()
+    }
+    
+    private func onItemsChange() {
+        NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil)
+    }
+    
+    private func onSearchItemsChange() {
+        self.onItemsChange()
+    }
     
     func reload() {
         currentPageIndex = 0;
@@ -58,10 +91,14 @@ class NewsSource: NSObject {
                     self.newsItems.append(contentsOf: na)
                     self.onItemsChange()
                     self.currentPageIndex = receivedPageIndex + 1
-                    if self.currentPageSize < 50 {
-                        self.currentPageSize = 50
+                    let oldPageSize = self.currentPageSize;
+                    if self.currentPageSize < 45 {
+                        self.currentPageSize = 45
                     }
-                    self.getNextItems()
+                    print("got news items: ", receivedPageIndex, na.count)
+                    if na.count == oldPageSize {
+                        self.getNextItems()
+                    }
                 } else {
                     print("finished loading news, total: \(self.currentPageIndex + 1) pages")
                 }
@@ -78,10 +115,13 @@ class NewsSource: NSObject {
                         self.onSearchItemsChange()
                     }
                     self.currentPageIndex = receivedPageIndex + 1
+                    let oldPageSize = self.currentPageSize;
                     if self.currentPageSize < 50 {
                         self.currentPageSize = 50
                     }
-                    self.getNextSearchItems()
+                    if na.count == oldPageSize {
+                        self.getNextSearchItems()
+                    }
                 } else {
                     print("finished loading news, total: \(self.currentPageIndex + 1) pages")
                 }
@@ -91,7 +131,7 @@ class NewsSource: NSObject {
     
     func getNewsItems(pageIndex:Int, pageItems:Int, search:String? = nil, completion:@escaping ([NewsItem]?, Int, String?)->()) {
         
-        Client.shared.getNewsFeed(pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, error) in
+        Client.shared.getFeed(type:itemType, pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
                 var items = [NewsItem]()
                 items.reserveCapacity(arrayOfDicts.count)
@@ -104,8 +144,17 @@ class NewsSource: NSObject {
                 completion(items, pageIndex, search)
             } else {
                 completion(nil, 0, nil)
+                
+                if let error = error {
+                    self.reportError(error: error)
+                }
             }
         }
+    }
+    
+    private func reportError(error:Error) {
+        print("Error during news list request:")
+        print(error)
     }
     
     private func newsItem(dict:[AnyHashable:Any]) -> NewsItem? {

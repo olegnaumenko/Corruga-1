@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Corruga' do
-  platform :ios, '10.2'
+  platform :ios, '11.0'
 
   pod 'youtube-ios-player-helper-swift'
   pod 'Networking'
@@ -23,7 +23,7 @@ end
 
 target 'CorrugaTests' do
   
-  platform :ios, '10.2'
+  platform :ios, '11.0'
   
   pod 'youtube-ios-player-helper-swift'
   pod 'Networking'
