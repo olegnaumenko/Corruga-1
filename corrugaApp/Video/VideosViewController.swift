@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import youtube_ios_player_helper_swift
+import YoutubePlayer_in_WKWebView
+//import youtube_ios_player_helper_swift
 
 class VideosViewController: BaseFeatureViewController {
 
-    @IBOutlet weak var playerView:youtube_ios_player_helper_swift.YTPlayerView!
+    @IBOutlet weak var playerView:WKYTPlayerView!
     @IBOutlet weak var tableView:UITableView!
     
     var isLoaded:Bool = false
@@ -75,7 +76,7 @@ class VideosViewController: BaseFeatureViewController {
     
     func loadItem(video:VideoItemViewModel) {
         AudioSession().activate()
-        self.isLoaded = self.playerView.load(videoId: video.videoId)
+        self.isLoaded = self.playerView.load(withVideoId: video.videoId)
         if (isLoaded) {
             self.tableViewModel.currentVideoID = video.videoId
         }
@@ -88,9 +89,9 @@ class VideosViewController: BaseFeatureViewController {
 //    }
 }
 
-extension VideosViewController : YTPlayerViewDelegate {
+extension VideosViewController : WKYTPlayerViewDelegate {
     
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+    func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
         indicator?.stopAnimating()
         if shouldPlay {
             self.playerView.playVideo()
@@ -98,19 +99,19 @@ extension VideosViewController : YTPlayerViewDelegate {
 //        self.updateItemSelection()
     }
     
-    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+    func playerView(_ playerView: WKYTPlayerView, didChangeTo state: WKYTPlayerState) {
     }
     
-    func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
+    func playerView(_ playerView: WKYTPlayerView, receivedError error: WKYTPlayerError) {
         indicator?.stopAnimating()
         print("YT Player Error: \(error)")
     }
     
-    func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
+    func playerViewPreferredWebViewBackgroundColor(_ playerView: WKYTPlayerView) -> UIColor {
         return UIColor.black
     }
     
-    @objc(playerViewPreferredInitialLoadingView:) func playerViewPreferredInitialLoadingView(_ playerView: YTPlayerView) -> UIView? {
+    @objc(playerViewPreferredInitialLoadingView:) func playerViewPreferredInitialLoading(_ playerView: WKYTPlayerView) -> UIView? {
         
         let loadingView = UIView.init(frame: playerView.bounds)
         let parentSize = playerView.bounds.size

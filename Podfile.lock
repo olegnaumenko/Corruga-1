@@ -93,7 +93,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Networking (5.0.0)
-  - youtube-ios-player-helper-swift (1.1)
+  - YoutubePlayer-in-WKWebView (0.3.3)
 
 DEPENDENCIES:
   - AltHanekeSwift
@@ -103,7 +103,7 @@ DEPENDENCIES:
   - Firebase/Database
   - GoogleUtilities
   - Networking
-  - youtube-ios-player-helper-swift
+  - YoutubePlayer-in-WKWebView (~> 0.3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -124,7 +124,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Networking
-    - youtube-ios-player-helper-swift
+    - YoutubePlayer-in-WKWebView
 
 SPEC CHECKSUMS:
   AltHanekeSwift: 2301ad7729ed2e8432044fb38d683a99fd5e4a06
@@ -144,8 +144,8 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Networking: 8ced5868ab2b5cf0fcc1d3657bf9bb589ae2fe91
-  youtube-ios-player-helper-swift: 51a3c5325317c8271d0c7985c1bbe5a252ffb2fd
+  YoutubePlayer-in-WKWebView: 7694e858c5c3472ed067d6fe34eb9b944845e63c
 
-PODFILE CHECKSUM: e3095c1807a981363b2c6339319c851a9b32d8e4
+PODFILE CHECKSUM: 0aeadc747a772668c8b404234ff2b7d7c7e4d779
 
 COCOAPODS: 1.7.5

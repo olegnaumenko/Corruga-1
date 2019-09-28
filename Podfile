@@ -3,7 +3,8 @@ use_frameworks!
 target 'Corruga' do
   platform :ios, '11.0'
 
-  pod 'youtube-ios-player-helper-swift'
+#  pod 'youtube-ios-player-helper-swift'
+  pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
   pod 'Networking'
   pod 'GoogleUtilities'
   pod 'Firebase/Core'
@@ -25,7 +26,8 @@ target 'CorrugaTests' do
   
   platform :ios, '11.0'
   
-  pod 'youtube-ios-player-helper-swift'
+#  pod 'youtube-ios-player-helper-swift'
+  pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
   pod 'Networking'
   pod 'GoogleUtilities'
   pod 'Firebase/Core'
