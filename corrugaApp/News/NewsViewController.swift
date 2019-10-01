@@ -25,15 +25,14 @@ class NewsViewController: BaseFeatureViewController {
     var viewModel:NewsViewModel!// = NewsViewModel(itemSource: NewsSource(itemType: .newsItemType))
         {
         didSet {
-            self.viewModel.onRefreshNeeded = { [weak self] in
-                if let the = self {
-                    the.tableView.separatorColor = Appearance.appTintColor()
-                    the.loadingIndicator.stopAnimating()
-                    the.loadingIndicator.isHidden = true
-                    the.tableView.reloadData()
-                }
+            self.viewModel.onRefreshNeeded = { [unowned self] in
+                self.refresh()
             }
-            self.viewModel.viewDidLoad()
+            self.viewModel.onReachabilityChange = { [unowned self] in
+                self.setReachabilityIndicator(visible:!self.viewModel.isNetworkReachable)
+            }
+            
+            self.viewModel.onViewDidLoad()
             self.title = self.viewModel.title
         }
     }
@@ -66,7 +65,7 @@ class NewsViewController: BaseFeatureViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.viewWillAppear()
+        self.viewModel.onViewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +78,15 @@ class NewsViewController: BaseFeatureViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.viewModel.viewDidDissapear()
+        self.viewModel.onViewDidDissapear()
+    }
+    
+    
+    private func refresh() {
+        self.tableView.separatorColor = Appearance.appTintColor()
+        self.loadingIndicator.stopAnimating()
+        self.loadingIndicator.isHidden = true
+        self.tableView.reloadData()
     }
 }
 

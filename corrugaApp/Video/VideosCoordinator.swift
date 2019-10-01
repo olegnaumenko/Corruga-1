@@ -10,7 +10,6 @@ import Foundation
 
 class VideosCoordinator : BaseFeatureCoordinator {
     
-    
     let videosViewController:VideosViewController
     
     init(videosViewController:VideosViewController) {
@@ -19,6 +18,5 @@ class VideosCoordinator : BaseFeatureCoordinator {
         
         self.start(viewController: videosViewController)
     }
-   
 }
 

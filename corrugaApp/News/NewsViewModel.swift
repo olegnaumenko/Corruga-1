@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Reachability
 
 class NewsViewModel {
 
     var onRefreshNeeded = {}
+    var onReachabilityChange = {}
     var itemSource:NewsSource
+    var isViewVisible = false
     
     private var searchTerm:String? {
         didSet {
@@ -23,6 +26,51 @@ class NewsViewModel {
         return self.itemSource.itemType.title
     }
     
+    var isNetworkReachable:Bool {
+        get {
+            return Client.shared.isNetworkReachable()
+        }
+    }
+    
+    init(itemSource:NewsSource) {
+        self.itemSource = itemSource
+//        self.subscribe()
+    }
+    
+    deinit {
+        self.unSubscribe()
+    }
+    
+    private func subscribe() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onReachabilityStatus(_:)),
+                                               name: .reachabilityChanged,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onItemsUpdate(_:)),
+                                               name: .NewsSourceItemsUpdated,
+                                               object: nil)
+    }
+    
+    private func unSubscribe() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func onViewDidLoad() {
+    }
+    
+    func onViewWillAppear() {
+        self.onReachabilityChange()
+        self.reloadIfNeeded()
+        self.subscribe()
+        isViewVisible = true
+    }
+    
+    func onViewDidDissapear() {
+        unSubscribe()
+        isViewVisible = false
+    }
+    
     func setSearch(term:String?) {
         if let count = term?.count, count > 0 {
             self.searchTerm = term
@@ -31,30 +79,21 @@ class NewsViewModel {
             self.onRefreshNeeded()
         }
     }
+
+        
+// MARK: - Notification handlers
     
-    init(itemSource:NewsSource) {
-        self.itemSource = itemSource
+    @objc private func onReachabilityStatus(_ n:Notification) {
+        self.reloadIfNeeded()
+        self.onReachabilityChange()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    private func reloadIfNeeded() {
+        if self.isNetworkReachable && self.arrayForDisplay().count == 0 {
+            self.itemSource.reload()
+        }
     }
-    
-    func viewDidLoad() {
-        self.itemSource.reload()
-    }
-    
-    func viewWillAppear() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(onItemsUpdate(_:)),
-                                               name: .NewsSourceItemsUpdated,
-                                               object: nil)
-    }
-    
-    func viewDidDissapear() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
     @objc private func onItemsUpdate(_ n:Notification) {
         self.onRefreshNeeded()
     }

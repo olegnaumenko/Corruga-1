@@ -53,4 +53,5 @@ struct VideoItemViewModel:Equatable {
         return lhs.videoId == rhs.videoId
     }
     
+    
 }

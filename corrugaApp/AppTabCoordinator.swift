@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+//import FTLinearActivityIndicator
 
 class AppTabCoordinator:NSObject {
     
@@ -15,10 +16,13 @@ class AppTabCoordinator:NSObject {
     var dictionaryCoordinator:DictionaryCoordinator?
     var newsCoordinator:NewsCoordinator?
     var videosCoordinator:VideosCoordinator?
-    var classifiedsCoordinator:BoardCoordinator?
+    var boardCoordinator:BoardCoordinator?
     
-//    var newsSource = NewsSource(itemType: .newsItemType)
-//    var boardSource = NewsSource(itemType: .boardItemType)
+//    let tabsDescriptiors = [NewsCoordinator.self, VideosCoordinator.self, DictionaryCoordinator.self, BoardCoordinator.self]
+    
+//    func coordinatorClass(forTabIndex:Int) -> AnyClass {
+//        return tabsDescriptiors[forTabIndex]
+//    }
     
     init(tabBarController:AppTabBarController) {
         
@@ -31,24 +35,13 @@ class AppTabCoordinator:NSObject {
         super.init()
         tabBarController.delegate = self;
         
-        
-        //TODO: minimize this and tab bar controller delegate method:
-        
-        if let firstNavVC = tabBarController.viewControllers?.first as? UINavigationController,
-            let firstVC = firstNavVC.viewControllers.first {
-            
-            if (firstVC.isKind(of: DictionaryNavViewController.self)) {
-                self.dictionaryCoordinator = DictionaryCoordinator(navController:firstNavVC)
-            } else if let newsVC = firstVC as? NewsViewController {
-                self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
-            } else if (firstVC.isKind(of: VideosViewController.self)) {
-                self.videosCoordinator = VideosCoordinator(videosViewController: firstVC as! VideosViewController)
-            } else if (firstVC.isKind(of: BoardViewController.self)) {
-                self.classifiedsCoordinator = BoardCoordinator(newsViewController: firstVC as! BoardViewController)
-            }
+        if let firstNavVC = tabBarController.viewControllers!.first as? UINavigationController,
+            let newsVC = firstNavVC.viewControllers.first as? NewsViewController {
+            self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
             self.decorateNavbarIn(navcontroller: firstNavVC)
         }
     }
+    
     
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
         navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
@@ -82,6 +75,7 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
         var eventName = ""
         
         if let navVC = viewController as? UINavigationController,
+            let index = tabBarController.viewControllers?.firstIndex(of: navVC),
             let rootViewController = navVC.viewControllers.first {
             if let newsVC = rootViewController as? NewsViewController, self.newsCoordinator == nil {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
@@ -92,8 +86,8 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
             } else if let dictVC = rootViewController as? DictionaryViewController, self.dictionaryCoordinator == nil {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
                 eventName = "open_dict"
-            } else if let classVC = rootViewController as? NewsViewController, self.classifiedsCoordinator == nil {
-                self.classifiedsCoordinator = BoardCoordinator(newsViewController: classVC)
+            } else if let classVC = rootViewController as? NewsViewController, index == 3, self.boardCoordinator == nil {
+                self.boardCoordinator = BoardCoordinator(newsViewController: classVC)
                 eventName = "open_board"
             }
             if (eventName.count > 0) {
@@ -110,10 +104,12 @@ extension AppTabCoordinator
     // MARK: App lifecycle
     
     func appDidFinishLaunching(_ application: UIApplication) {
+        
+        //doesn't work well, creates one more window without root vc:
+//        UIApplication.configureLinearNetworkActivityIndicatorIfNeeded()
+        
         DictModel.shared.setup()
         VideoSource.shared.reload()
-//        newsSource.reload()
-//        BoardSource.shared.reload()
     }
     
     func appWillResignActive(_ application: UIApplication) {

@@ -8,25 +8,66 @@
 
 import Foundation
 import Networking
+import Reachability
 
-class Client {
+struct NetworkProgressNotifier {
+    
+    private var openConnections:Int = 0
+    
+    mutating func increment() {
+        openConnections+=1
+        if openConnections == 1 {
+            didChange()
+        }
+    }
+    
+    mutating func decrement() {
+        openConnections-=1
+        if (openConnections <= 0) {
+            openConnections = 0
+            didChange()
+        }
+    }
+    
+    private func didChange() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = (openConnections != 0)
+    }
+}
+
+final class Client {
     
     static let shared = Client()
     
-    static let boardURL = "https://market.gofro.expert/wp-json/wp/v2"
-    static let newsURL  = "https://novosti.gofro.expert/wp-json/wp/v2" //http://novosti.gofro.expert"
+    private let reachability = Reachability()!
     
-    static let YouTubeAPIBaseURL = "https://www.googleapis.com/youtube/v3"
-//    static let baseURL = "https://usound.in.ua"
-    
-    
+    private static let boardAPIURL = "https://market.gofro.expert/wp-json/wp/v2"
+    private static let newsAPIURL  = "https://novosti.gofro.expert/wp-json/wp/v2"
+    private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
+
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
     
-    let ytClient = Networking(baseURL: YouTubeAPIBaseURL)
-    let newsClient = Networking(baseURL: newsURL)
-    let boardClient = Networking(baseURL: boardURL)
+    private let ytClient = Networking(baseURL: youTubeAPIURL)
+    private let newsClient = Networking(baseURL: newsAPIURL)
+    private let boardClient = Networking(baseURL: boardAPIURL)
     
+    private var indicatorNotifier = NetworkProgressNotifier()
+    
+    private init() {
+        do {
+            try self.reachability.startNotifier()
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    deinit {
+        reachability.stopNotifier()
+    }
+    
+    func isNetworkReachable() -> Bool {
+        return self.reachability.connection != .none
+    }
     
     func getPlaylistVideos(nextPageToken:String?, resultsPerPage:Int, completion:@escaping ([String:Any]?, Error?)->())
     {
@@ -44,6 +85,8 @@ class Client {
             params["pageToken"] = npt as AnyObject
         }
         
+        self.indicatorNotifier.increment()
+        
         ytClient.get("/playlistItems", parameters: params) { (result) in
             
             switch result {
@@ -58,10 +101,12 @@ class Client {
                 print(json)
                 completion(nil, response.error)
             }
+            self.indicatorNotifier.decrement()
         }
     }
     
-    func getFeed(type:ItemType, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
+    func getFeed(type:ItemType, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Error?) -> ())
+    {
         var params:[String:Any] = ["per_page":10];
              
         let client = type == .newsItemType ? newsClient : boardClient
@@ -75,6 +120,7 @@ class Client {
         if let searchTerm = search, searchTerm.count > 0 {
             params["search"] = searchTerm
         }
+        self.indicatorNotifier.increment()
         
         client.get("/posts", parameters:params) { (jsonResult) in
             switch jsonResult {
@@ -86,6 +132,7 @@ class Client {
                 
                 completion(nil, response.error)
             }
+            self.indicatorNotifier.decrement()
         }
     }
     

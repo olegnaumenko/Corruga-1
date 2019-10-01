@@ -12,10 +12,15 @@ protocol BaseFeatureViewControllerDelegate:class {
     func baseFeatureWantsShareScreen()
 }
 
+protocol ReachabilityAwareViewController {
+    func setReachabilityIndicator(visible:Bool)
+}
 
-class BaseFeatureViewController: UIViewController {
+class BaseFeatureViewController: UIViewController, ReachabilityAwareViewController {
 
     weak var delegate:BaseFeatureViewControllerDelegate?
+    
+    lazy var connectionIndicatorController = ConnectionIndicatorController(parentViewController: self)
     
     @IBAction func onQRButton(_ sender:UIBarButtonItem) {
         self.delegate?.baseFeatureWantsShareScreen()
@@ -24,5 +29,9 @@ class BaseFeatureViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.rightBarButtonItem?.tintColor = Appearance.darkAppColor()
+    }
+    
+    internal func setReachabilityIndicator(visible:Bool) {
+        self.connectionIndicatorController.set(visibility: visible)
     }
 }

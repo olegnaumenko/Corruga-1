@@ -16,21 +16,54 @@ class VideoTableViewModel: NSObject {
     var currentVideoID:String?
     
     var onNeedRefresh = {}
+    var onReachabilityChange = {}
     
-//
+    var isNetworkReachable:Bool {
+        get {
+            return Client.shared.isNetworkReachable()
+        }
+    }
+    
     override init() {
         super.init()
         VideoSource.shared.onEntitiesChange = { [weak self] in
             self?.onNeedRefresh()
         }
+        subscribe()
     }
     
-//    func selectedIndexPath() -> IndexPath? {
-//        if let currentVID = self.currentVideoID, currentVID == self.videoSource.videoItemsCount {
-//            return IndexPath(row: self.currentItemIndex, section: 0)
-//        }
-//        return nil
-//    }
+    deinit {
+        unSubscribe()
+    }
+    
+    func onViewWillAppear() {
+        self.onReachabilityChange()
+    }
+    
+    private func subscribe() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onReachabilityStatus(_:)),
+                                               name: .reachabilityChanged,
+                                               object: nil)
+    }
+    
+    private func unSubscribe() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Notification handlers
+    
+    var wasUnreachable = false
+    
+    @objc private func onReachabilityStatus(_ n:Notification) {
+        self.onReachabilityChange()
+        let reachable = Client.shared.isNetworkReachable()
+        if reachable && VideoSource.shared.videoItemsCount == 0 {
+            VideoSource.shared.reload()
+        }
+        self.wasUnreachable = !reachable
+    }
+    
 }
 
 extension VideoTableViewModel : UITableViewDataSource {

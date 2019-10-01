@@ -12,8 +12,8 @@ target 'Corruga' do
   pod 'Firebase/Database'
   pod 'AltHanekeSwift'
   pod 'Branch'
-  
-  
+  pod 'ReachabilitySwift'
+  pod 'FTLinearActivityIndicator'
   #  pod 'youtube-ios-player-helper', '~> 0.1.4'
   #  pod 'UIDevice-Hardware'
   #  pod 'RealmSwift', '~> 3.14.1'

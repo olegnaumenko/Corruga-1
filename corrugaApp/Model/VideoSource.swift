@@ -26,6 +26,8 @@ class VideoSource {
     
     var onEntitiesChange = {}
     
+    var loadInProgress = false
+    
 //    var observeToken:NotificationToken?
     
     private init() {
@@ -50,13 +52,18 @@ class VideoSource {
         self.getNextVideosPage()
     }
     
+    private func report(error:Error) {
+        print("Error fetching playlist items: " + error.localizedDescription)
+        
+    }
     
     func getNextVideosPage() {
         
+        loadInProgress = true
         Client.shared.getPlaylistVideos(nextPageToken: self.nextPageToken, resultsPerPage: self.currentResultsPerPage) { (playlistDict, error) in
         
             if (error != nil) {
-                print("Error fetching playlist items: " + (error?.localizedDescription ?? "unknown"))
+                self.report(error: error!)
                 
             } else if let playlistDictionary = playlistDict {
                 
@@ -90,6 +97,7 @@ class VideoSource {
                     self.getNextVideosPage()
                 }
             }
+            self.loadInProgress = false
         }
     }
     

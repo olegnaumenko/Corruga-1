@@ -36,16 +36,25 @@ class VideosViewController: BaseFeatureViewController {
         self.tableView.dataSource = self.tableViewModel
         self.tableView.delegate = self
         
+        self.tableViewModel.onReachabilityChange = { [unowned self] in
+            let reachable = self.tableViewModel.isNetworkReachable
+            self.setReachabilityIndicator(visible:!reachable)
+            if !self.isLoaded && reachable {
+                self.loadOnStart()
+            }
+        }
+        
         self.loadOnStart()
     }
     
     override var prefersStatusBarHidden: Bool {
         return UIApplication.shared.statusBarOrientation.isLandscape
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableViewModel.onViewWillAppear()
+    }
     
 
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

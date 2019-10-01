@@ -48,6 +48,8 @@ class NewsSource: NSObject {
     var newsItems = [NewsItem]()
     var searchItems = [NewsItem]()
     
+    var loadInProgress = false
+    
     var searchTerm:String? {
         didSet {
             if let searchTerm = self.searchTerm, searchTerm.count > 0 {
@@ -70,6 +72,9 @@ class NewsSource: NSObject {
     }
     
     func reload() {
+        if loadInProgress == true {
+            return
+        }
         currentPageIndex = 0;
         self.newsItems.removeAll()
         self.onItemsChange()
@@ -85,6 +90,7 @@ class NewsSource: NSObject {
     }
     
     func getNextItems() {
+        
         self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize, search: nil) { [weak self] (newsArray, receivedPageIndex, searchString) in
             if let self = self {
                 if let na = newsArray {
@@ -95,12 +101,12 @@ class NewsSource: NSObject {
                     if self.currentPageSize < 45 {
                         self.currentPageSize = 45
                     }
-                    print("got news items: ", receivedPageIndex, na.count)
+                    print("got items: ", receivedPageIndex, na.count)
                     if na.count == oldPageSize {
                         self.getNextItems()
                     }
                 } else {
-                    print("finished loading news, total: \(self.currentPageIndex + 1) pages")
+                    print("finished loading items, total: \(self.currentPageIndex + 1) pages")
                 }
             }
         }
@@ -123,7 +129,7 @@ class NewsSource: NSObject {
                         self.getNextSearchItems()
                     }
                 } else {
-                    print("finished loading news, total: \(self.currentPageIndex + 1) pages")
+                    print("finished loading search items, total: \(self.currentPageIndex + 1) pages")
                 }
             }
         }
@@ -131,6 +137,7 @@ class NewsSource: NSObject {
     
     func getNewsItems(pageIndex:Int, pageItems:Int, search:String? = nil, completion:@escaping ([NewsItem]?, Int, String?)->()) {
         
+        loadInProgress = true
         Client.shared.getFeed(type:itemType, pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
                 var items = [NewsItem]()
@@ -149,6 +156,7 @@ class NewsSource: NSObject {
                     self.reportError(error: error)
                 }
             }
+            self.loadInProgress = false
         }
     }
     
@@ -160,10 +168,10 @@ class NewsSource: NSObject {
     private func newsItem(dict:[AnyHashable:Any]) -> NewsItem? {
         
         if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
-            let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String,
-            let date = dict["date_gmt"] as? String,
-            let url = dict["link"] as? String,
             let id = dict["id"] as? Int {
+            let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String ?? ""
+            let date = dict["date_gmt"] as? String ?? ""
+            let url = dict["link"] as? String ?? ""
             return NewsItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:filterDate(date), views:0, url:url)
         }
         return nil;
