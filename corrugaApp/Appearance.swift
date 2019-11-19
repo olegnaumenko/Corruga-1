@@ -25,15 +25,20 @@ class Appearance
 //        return UIColor(red: 0.929, green: 0.565, blue: 0.332, alpha: 1)
 //        return UIColor(red: 0.901, green: 0.494, blue: 0.133, alpha: 1)
 //        return UIColor(red: 0.9529, green: 0.6117, blue: 0.0705, alpha: 1)
-        return .white
+        if #available(iOS 13.0, *) {
+            return UIColor(named: "app-background")!
+        } else {
+            return .white
+        }
     }
     
     static func appTintColor() -> UIColor {
-        return UIColor(red: 0.7529, green: 0.223529, blue: 0.16862, alpha: 1)
+//        return UIColor(red: 0.7529, green: 0.223529, blue: 0.16862, alpha: 1)
+        return UIColor(named: "app-tint")!
     }
     
     static func topButtonTint() -> UIColor {
-        return .black
+        return self.labelSecondaryColor()
     }
     
     static func navTitleTextColor() -> UIColor {
@@ -45,24 +50,24 @@ class Appearance
 //        return WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
     }
     
-    static func largeTextColor() -> UIColor {
-        return .darkGray
+    static func labelColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor(named: "app-label")!
+        } else {
+            return .white
+        }
     }
     
-    static func middleTextColor() -> UIColor {
-        return UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
-    }
-    
-    static func secondaryTextColor() -> UIColor {
-        return WSColourScheme.sharedInstance.getColour(colour: WSCSColourTwo)
-    }
-    
-    static func buttonBackgroundColor() -> UIColor {
-        return  WSColourScheme.sharedInstance.getColour(colour: WSCSColourOne)
+    static func labelSecondaryColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor(named: "app-secondary-label")!
+        } else {
+            return .white
+        }
     }
     
     static func footerTextColor() -> UIColor {
-        return UIColor.init(white: 0.16, alpha: 1)
+        return self.labelSecondaryColor()
     }
     
     static func footerFont() -> UIFont {
@@ -70,16 +75,16 @@ class Appearance
     }
     
     static func footerBackgroundColor() -> UIColor {
-        return UIColor.init(white: 0.85, alpha: 1)
+        return UIColor(named: "footer-background")!
     }
     
     static func highlightedTextColor() -> UIColor {
         return UIColor(red: 1, green: 1, blue: 0, alpha: 0.2)
     }
     
-    static func cellColor(even:Bool) -> UIColor {
-        return UIColor.init(white: even ? 0.96 : 1.0, alpha: 1)
-    }
+//    static func cellColor(even:Bool) -> UIColor {
+//        return UIColor.init(white: even ? 0.96 : 1.0, alpha: 1)
+//    }
     
     static func setPageIndicatorColor() {
         let appearance = UIPageControl.appearance()

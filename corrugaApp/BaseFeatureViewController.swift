@@ -28,7 +28,7 @@ class BaseFeatureViewController: UIViewController, ReachabilityAwareViewControll
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.rightBarButtonItem?.tintColor = Appearance.darkAppColor()
+//        self.navigationItem.rightBarButtonItem?.tintColor = Appearance.darkAppColor()
     }
     
     internal func setReachabilityIndicator(visible:Bool) {

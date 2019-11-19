@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
 		6A149824234234310047BD63 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
+		6A87341E2383447300327EC2 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
 		7C06CB722108923300FEEB52 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		7C06CB762108928000FEEB52 /* DictionaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */; };
 		7C16D3632199E09C00217626 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16D3622199E09C00217626 /* AppAnalytics.swift */; };
@@ -32,7 +33,6 @@
 		7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70772141835700BC03C3 /* NewsViewController.swift */; };
 		7C5337912124371000465EF1 /* UIView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* UIView+Name.swift */; };
 		7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53379221243A9000465EF1 /* ScrollManager.swift */; };
-		7C5BD3AB219EDCA600337340 /* NewsItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD3AA219EDCA600337340 /* NewsItemEntity.swift */; };
 		7C5BD3AD219EE31400337340 /* NewsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD3AC219EE31400337340 /* NewsSource.swift */; };
 		7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0047210889060025EF47 /* AppDelegate.swift */; };
 		7C5D004A210889060025EF47 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0049210889060025EF47 /* DictionaryViewController.swift */; };
@@ -62,7 +62,6 @@
 		7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB489721271EA6003F97DA /* DetailViewController.swift */; };
 		7CBB8E6D219C18E600560397 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6C219C18E600560397 /* GoogleService-Info.plist */; };
 		7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6E219C293800560397 /* VideoSource.swift */; };
-		7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
 		7CC81CFE212867FB004D555E /* SpeechSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC81CFD212867FB004D555E /* SpeechSynth.swift */; };
 		7CC81D0021286D24004D555E /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC81CFF21286D24004D555E /* AudioSession.swift */; };
 		7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADF82127EAAE009D3B4A /* Settings.swift */; };
@@ -760,6 +759,7 @@
 				7C73FDDF2285ABEF00DE4AE2 /* DictionaryViewModel.swift in Sources */,
 				7CD7ADFD2127FF1C009D3B4A /* ListViewControllerFinder.swift in Sources */,
 				7C5D004A210889060025EF47 /* DictionaryViewController.swift in Sources */,
+				6A87341E2383447300327EC2 /* VideoItemEntity.swift in Sources */,
 				7C73FDD22285715200DE4AE2 /* SelectionPopoverViewModel.swift in Sources */,
 				7CEABAD2215F57B70011BB55 /* VideoItemTableViewCell.swift in Sources */,
 				7CFFDEB8219D8894006EEB47 /* ShareViewController.swift in Sources */,
@@ -780,7 +780,6 @@
 				7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */,
 				7CD7ADFB2127FCEC009D3B4A /* SwapLangViewModel.swift in Sources */,
 				7C978F78211F101F00D1B165 /* Appearance.swift in Sources */,
-				7CBB8E71219C29E400560397 /* VideoItemEntity.swift in Sources */,
 				7CEABAD0215F56F80011BB55 /* VideoTableViewModel.swift in Sources */,
 				7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */,
 				7C5D73F22167737F0022ABBC /* BoardCoordinator.swift in Sources */,
@@ -789,7 +788,6 @@
 				7CF5B4CA211634B5004F2FDA /* WSColourScheme.swift in Sources */,
 				7C4993F2213EBC0B00778429 /* SpotlightIndexer.swift in Sources */,
 				7CFFDEB3219D827D006EEB47 /* BaseFeatureViewController.swift in Sources */,
-				7C5BD3AB219EDCA600337340 /* NewsItemEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

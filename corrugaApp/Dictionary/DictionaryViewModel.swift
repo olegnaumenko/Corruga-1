@@ -56,13 +56,11 @@ class DictionaryViewModel {
     }
     
     func fromLanguageLabel() -> String {
-//        return self.dictModel.fromLangModel.languageID.components(separatedBy: "_").first?.uppercased() ?? "XX"
         return self.dictModel.fromLangModel.shortName
     }
     
     
     func toLanguageLabel() -> String {
-//        return self.dictModel.toLangModel.languageID.components(separatedBy: "_").first?.uppercased() ?? "YY"
         return self.dictModel.toLangModel.shortName
     }
     

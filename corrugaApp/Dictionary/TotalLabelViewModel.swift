@@ -15,7 +15,7 @@ struct TotalLabelViewModel {
     var output:String {
         get {
             if (total == 0) {
-                return ""
+                return "No results found. Try again."
             }
             return "Total terms found: \(total)"
         }

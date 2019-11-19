@@ -22,7 +22,7 @@ class NewsViewController: BaseFeatureViewController {
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
-    var viewModel:NewsViewModel!// = NewsViewModel(itemSource: NewsSource(itemType: .newsItemType))
+    var viewModel:NewsViewModel!
         {
         didSet {
             self.viewModel.onRefreshNeeded = { [unowned self] in
@@ -31,8 +31,6 @@ class NewsViewController: BaseFeatureViewController {
             self.viewModel.onReachabilityChange = { [unowned self] in
                 self.setReachabilityIndicator(visible:!self.viewModel.isNetworkReachable)
             }
-            
-            self.viewModel.onViewDidLoad()
             self.title = self.viewModel.title
         }
     }
@@ -47,7 +45,6 @@ class NewsViewController: BaseFeatureViewController {
        
         self.tableView.estimatedRowHeight = 220.0
         self.tableView.separatorColor = UIColor.clear
-        self.view.backgroundColor = Appearance.basicAppColor()
         self.definesPresentationContext = true
         
         searchController.searchResultsUpdater = self

@@ -78,11 +78,11 @@ class DictionaryViewController: BaseFeatureViewController {
         self.tableView.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
         
         //colors
-        self.view.backgroundColor = Appearance.basicAppColor()
         self.tableView.separatorColor = .gray
-        self.tableView.backgroundColor = Appearance.footerBackgroundColor()
-        self.headerView.backgroundColor = Appearance.appTintColor()
+//        self.tableView.backgroundColor = Appearance.footerBackgroundColor()
+//        self.headerView.backgroundColor = Appearance.appTintColor()
         
+//        self.view.backgroundColor = Appearance.basicAppColor()
         
         self.updateLanguagesIndicators()
         
@@ -115,12 +115,17 @@ class DictionaryViewController: BaseFeatureViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(inputModeDidChange(n:)), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateFooter()
+    }
+    
     private func configureTableViewFooler(label:UILabel) -> (UIView) {
         var rect = CGRect.zero
         rect.size = CGSize(width: self.view.frame.size.width, height: 55)
         label.frame = rect
         label.textAlignment = .center
-        label.backgroundColor = Appearance.footerBackgroundColor()
+        
         label.textColor = Appearance.footerTextColor()
         label.font = Appearance.footerFont()
         return label

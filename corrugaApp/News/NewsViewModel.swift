@@ -34,7 +34,6 @@ class NewsViewModel {
     
     init(itemSource:NewsSource) {
         self.itemSource = itemSource
-//        self.subscribe()
     }
     
     deinit {
@@ -54,9 +53,6 @@ class NewsViewModel {
     
     private func unSubscribe() {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    func onViewDidLoad() {
     }
     
     func onViewWillAppear() {

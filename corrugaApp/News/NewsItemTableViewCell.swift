@@ -27,7 +27,6 @@ class NewsItemTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.dateLabel.textColor = Appearance.appTintColor()
         self.selectionStyle = .gray
     }
 //
