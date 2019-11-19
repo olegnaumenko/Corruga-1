@@ -38,11 +38,12 @@ final class Client {
     
     static let shared = Client()
     
-    private let reachability = Reachability()!
     
     private static let boardAPIURL = "https://market.gofro.expert/wp-json/wp/v2"
     private static let newsAPIURL  = "https://novosti.gofro.expert/wp-json/wp/v2"
     private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
+    
+    private let reachability:Reachability!
 
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
@@ -55,18 +56,20 @@ final class Client {
     
     private init() {
         do {
+            try! self.reachability = Reachability()
             try self.reachability.startNotifier()
         } catch let error {
             print(error)
+            fatalError()
         }
     }
     
     deinit {
-        reachability.stopNotifier()
+        reachability?.stopNotifier()
     }
     
     func isNetworkReachable() -> Bool {
-        return self.reachability.connection != .none
+        return self.reachability.connection != .unavailable
     }
     
     func getPlaylistVideos(nextPageToken:String?, resultsPerPage:Int, completion:@escaping ([String:Any]?, Error?)->())
