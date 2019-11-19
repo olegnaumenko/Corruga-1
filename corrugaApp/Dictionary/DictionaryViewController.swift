@@ -245,6 +245,7 @@ class DictionaryViewController: BaseFeatureViewController {
             let popoverVC = PopupViewController(title: title, sender: sender, contentViewController: selectvc)
             popoverVC.preferredWidth = 200
             popoverVC.titleBarColor = Appearance.appTintColor()
+            popoverVC.view.backgroundColor = Appearance.secondaryBackgroundAppColor()
             popoverVC.popoverPresentationController?.permittedArrowDirections = .up
             self.present(popoverVC, animated: true, completion: nil)
         }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import FBSDKCoreKit
 import FirebaseAnalytics
 
 class AppAnalytics {

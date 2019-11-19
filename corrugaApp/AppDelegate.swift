@@ -14,13 +14,14 @@ import Branch
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     var coordinator:AppTabCoordinator!// AppCoordinator!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let branch: Branch = Branch.getInstance()
-        branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
+        branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: { params, error in
             if error == nil {
                 // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
                 // params will be empty if no data found
@@ -31,9 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        WSColourScheme.sharedInstance.colourScheme = WSCSchemeWeldon
-        self.window?.backgroundColor = Appearance.basicAppColor()
-        let tabBarController = (self.window?.rootViewController as! AppTabBarController)
+        guard let window = self.window else {
+            fatalError()
+        }
+        
+        window.backgroundColor = Appearance.backgroundAppColor()
+        let tabBarController = (window.rootViewController as! AppTabBarController)
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
         self.coordinator.appDidFinishLaunching(application)
         return true
@@ -108,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        self.coordinator.appWillTerminate()
     }
 
 

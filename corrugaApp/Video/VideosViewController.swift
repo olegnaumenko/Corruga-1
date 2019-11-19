@@ -27,7 +27,7 @@ class VideosViewController: BaseFeatureViewController {
         
         self.tableViewModel = VideoTableViewModel()
         
-        self.view.backgroundColor = Appearance.basicAppColor()
+        self.view.backgroundColor = Appearance.backgroundAppColor()
         self.playerView.delegate = self
         
         self.tableViewModel.onNeedRefresh = { [weak self] in

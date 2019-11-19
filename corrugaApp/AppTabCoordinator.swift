@@ -29,7 +29,7 @@ class AppTabCoordinator:NSObject {
         Appearance.setPageIndicatorColor()
         
         self.tabBarController = tabBarController
-        tabBarController.tabBar.barTintColor = Appearance.basicAppColor()
+        tabBarController.tabBar.barTintColor = Appearance.backgroundAppColor()
         tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintColor()
         tabBarController.tabBar.tintColor = Appearance.labelSecondaryColor()
         super.init()
@@ -44,7 +44,7 @@ class AppTabCoordinator:NSObject {
     
     
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
-        navcontroller.navigationBar.barTintColor = Appearance.basicAppColor()
+        navcontroller.navigationBar.barTintColor = Appearance.backgroundAppColor()
         let navigationBar = navcontroller.navigationBar
         let key = NSAttributedString.Key.foregroundColor
         let color = Appearance.appTintColor()
@@ -123,6 +123,10 @@ extension AppTabCoordinator
     }
     
     func appDidBecomeActive() {
+        
+    }
+    
+    func appWillTerminate() {
         
     }
 }

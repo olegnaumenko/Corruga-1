@@ -26,10 +26,9 @@ class BaseFeatureViewController: UIViewController, ReachabilityAwareViewControll
         self.delegate?.baseFeatureWantsShareScreen()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.navigationItem.rightBarButtonItem?.tintColor = Appearance.darkAppColor()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//    }
     
     internal func setReachabilityIndicator(visible:Bool) {
         self.connectionIndicatorController.set(visibility: visible)

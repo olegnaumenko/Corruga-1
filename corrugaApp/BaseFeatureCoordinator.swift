@@ -24,8 +24,8 @@ extension BaseFeatureCoordinator : BaseFeatureViewControllerDelegate {
         let shareViewController = UIStoryboard.shareViewController()
         let navController = UINavigationController(rootViewController: shareViewController)
         let navigationBar = navController.navigationBar
-        navigationBar.barTintColor = Appearance.basicAppColor()
-        navigationBar.tintColor = Appearance.labelColor()
+        navigationBar.barTintColor = Appearance.backgroundAppColor()
+        navigationBar.tintColor = Appearance.darkAppColor()
         let key = NSAttributedString.Key.foregroundColor
         let color = Appearance.appTintColor()
         if var titleAttribs = navigationBar.titleTextAttributes {

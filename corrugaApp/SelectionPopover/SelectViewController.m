@@ -98,11 +98,17 @@ NSString * const kSelectableValueCell = @"SelectableValueCell";
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@", value];
     }
-    cell.backgroundColor = UIColor.clearColor;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+
     cell.textLabel.textAlignment = self.cellTextAlignment;
-    cell.textLabel.textColor = UIColor.darkGrayColor;
-    cell.detailTextLabel.textColor = UIColor.grayColor;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+    cell.backgroundColor = UIColor.clearColor;
+    if (@available(iOS 13.0, *)) {
+        cell.textLabel.textColor = UIColor.labelColor;
+        cell.detailTextLabel.textColor = UIColor.secondaryLabelColor;
+    } else {
+        cell.textLabel.textColor = UIColor.darkTextColor;
+        cell.detailTextLabel.textColor = UIColor.grayColor;
+    }
     return cell;
 }
 

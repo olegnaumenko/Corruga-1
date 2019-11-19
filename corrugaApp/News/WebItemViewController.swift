@@ -23,7 +23,7 @@ class WebItemViewController:UIViewController {
         super.viewDidLoad()
         
         self.webView.navigationDelegate = self
-        self.view.backgroundColor = Appearance.basicAppColor()
+        self.view.backgroundColor = Appearance.backgroundAppColor()
         self.webView.backgroundColor = self.view.backgroundColor
         self.loadHome()
     }
