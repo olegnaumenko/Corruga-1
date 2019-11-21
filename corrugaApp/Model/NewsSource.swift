@@ -48,7 +48,12 @@ class NewsSource: NSObject {
     var newsItems = [NewsItem]()
     var searchItems = [NewsItem]()
     
-    var loadInProgress = false
+    private var backgroundTask = BackgroundTask(name:"news.source")
+    private var loadInProgress = false {
+        didSet {
+            backgroundTask.inProgress = loadInProgress
+        }
+    }
     
     var searchTerm:String? {
         didSet {
@@ -76,17 +81,19 @@ class NewsSource: NSObject {
             return
         }
         currentPageIndex = 0;
-        self.newsItems.removeAll()
-        self.onItemsChange()
-        self.getNextItems()
+        newsItems.removeAll()
+        onItemsChange()
+        loadInProgress = true
+        getNextItems()
     }
     
     func reloadSearch() {
         currentPageIndex = 0;
         currentPageSize = 10;
-        self.searchItems.removeAll()
-        self.onSearchItemsChange()
-        self.getNextSearchItems()
+        searchItems.removeAll()
+        onSearchItemsChange()
+        loadInProgress = true
+        getNextSearchItems()
     }
     
     func getNextItems() {
@@ -104,8 +111,11 @@ class NewsSource: NSObject {
                     print("got items: ", receivedPageIndex, na.count)
                     if na.count == oldPageSize {
                         self.getNextItems()
+                    } else {
+                        self.loadInProgress = false
                     }
                 } else {
+                    self.loadInProgress = false
                     print("finished loading items, total: \(self.currentPageIndex + 1) pages")
                 }
             }
@@ -127,8 +137,11 @@ class NewsSource: NSObject {
                     }
                     if na.count == oldPageSize {
                         self.getNextSearchItems()
+                    } else {
+                        self.loadInProgress = false
                     }
                 } else {
+                    self.loadInProgress = false
                     print("finished loading search items, total: \(self.currentPageIndex + 1) pages")
                 }
             }
@@ -137,7 +150,6 @@ class NewsSource: NSObject {
     
     func getNewsItems(pageIndex:Int, pageItems:Int, search:String? = nil, completion:@escaping ([NewsItem]?, Int, String?)->()) {
         
-        loadInProgress = true
         Client.shared.getFeed(type:itemType, pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, error) in
             if let arrayOfDicts = dataArray {
                 var items = [NewsItem]()
@@ -156,7 +168,6 @@ class NewsSource: NSObject {
                     self.reportError(error: error)
                 }
             }
-            self.loadInProgress = false
         }
     }
     

@@ -27,7 +27,6 @@ class VideosViewController: BaseFeatureViewController {
         
         self.tableViewModel = VideoTableViewModel()
         
-        self.view.backgroundColor = Appearance.backgroundAppColor()
         self.playerView.delegate = self
         
         self.tableViewModel.onNeedRefresh = { [weak self] in
@@ -45,6 +44,11 @@ class VideosViewController: BaseFeatureViewController {
         }
         
         self.loadOnStart()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.view.backgroundColor = Appearance.backgroundAppColor()
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -32,20 +32,17 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pronounceButton.backgroundColor = Appearance.appTintColor()
         self.pronounceButton.setImage(UIImage(named: "speaker")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        
-        self.photoLabel.textColor = Appearance.labelSecondaryColor()
-        
         self.photoImageView.isUserInteractionEnabled = true
         self.photoImageView.addGestureRecognizer(self.tapGestureReco)
         
-//        self.termLabel.textColor = Appearance.labelColor()
-//        self.translationLabel.textColor = Appearance.labelColor()
-//        self.transcriptionLabel.textColor = Appearance.appTintColor()
-//        self.translationTranscriptionLabel.textColor = self.transcriptionLabel.textColor
-        
         self.update()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.pronounceButton.backgroundColor = Appearance.appTintLargeColor()
+        self.photoLabel.textColor = Appearance.labelSecondaryColor()
     }
     
     override func viewDidAppear(_ animated: Bool) {

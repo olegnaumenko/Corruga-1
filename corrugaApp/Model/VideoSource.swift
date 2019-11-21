@@ -13,22 +13,20 @@ class VideoSource {
     
     static let shared = VideoSource()
     
-//    let client = Client()
 //    let realm:Realm
-    
-//    let results = 50
-    
-    var nextPageToken:String?
-    var totalItems:Int = 0
-    var currentResultsPerPage = 10
-    
-    var videoEntities = [VideoItemEntity]()// Results<VideoItemEntity>?
-    
-    var onEntitiesChange = {}
-    
-    var loadInProgress = false
-    
 //    var observeToken:NotificationToken?
+    
+    private var backgroundTask = BackgroundTask(name: "videos.source")
+    private var loadInProgress = false {
+        didSet {
+            backgroundTask.inProgress = loadInProgress
+        }
+    }
+    private var nextPageToken:String?
+    private var currentResultsPerPage = 10
+    var totalItems:Int = 0
+    var videoEntities = [VideoItemEntity]()// Results<VideoItemEntity>?
+    var onEntitiesChange = {}
     
     private init() {
 //        var conf = Realm.Configuration.defaultConfiguration
@@ -88,6 +86,7 @@ class VideoSource {
                     
                     if let totalResults = (playlistDictionary["pageInfo"] as? [String:Any])?["totalResults"] as? Int,
                         totalResults <= self.videoEntities.count {
+                        self.loadInProgress = false
                         return
                     }
                     
@@ -97,7 +96,6 @@ class VideoSource {
                     self.getNextVideosPage()
                 }
             }
-            self.loadInProgress = false
         }
     }
     

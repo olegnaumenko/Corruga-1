@@ -23,6 +23,10 @@ import UIKit
         return UIColor(named: "app-tint")!
     }
     
+    static func appTintLargeColor() -> UIColor {
+        return UIColor(named: "app-tint-large")!
+    }
+    
     static func topButtonTint() -> UIColor {
         return self.labelSecondaryColor()
     }

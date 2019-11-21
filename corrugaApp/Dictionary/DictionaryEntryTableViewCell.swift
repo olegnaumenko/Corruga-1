@@ -38,9 +38,6 @@ class DictionaryEntryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.translationLabel.text = ""
-//        self.valueLabel.textColor = Appearance.middleTextColor()
-//        self.transcriptionLabel.textColor = Appearance.appTintColor()
-//        self.translationLabel.textColor = Appearance.largeTextColor()
     }
 
     

@@ -64,9 +64,6 @@ class DictionaryViewController: BaseFeatureViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.fromLangButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
-        self.toLangButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
-        self.langSwapButton?.setTitleColor(Appearance.appTintColor(), for: .normal)
         
         self.searchTextField?.delegate = self
         self.searchTextField?.text = viewModel.searchTerm
@@ -76,13 +73,6 @@ class DictionaryViewController: BaseFeatureViewController {
         
         self.tableView.dataSource = self.dataSource
         self.tableView.tableFooterView = self.configureTableViewFooler(label: self.footerLabel)
-        
-        //colors
-        self.tableView.separatorColor = .gray
-//        self.tableView.backgroundColor = Appearance.footerBackgroundColor()
-//        self.headerView.backgroundColor = Appearance.appTintColor()
-        
-//        self.view.backgroundColor = Appearance.basicAppColor()
         
         self.updateLanguagesIndicators()
         
@@ -113,6 +103,16 @@ class DictionaryViewController: BaseFeatureViewController {
         
         //listen for text input mode change
         NotificationCenter.default.addObserver(self, selector: #selector(inputModeDidChange(n:)), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        //colors
+        self.tableView.separatorColor = .gray
+        let appTintColor = Appearance.appTintColor()
+        self.fromLangButton?.setTitleColor(appTintColor, for: .normal)
+        self.toLangButton?.setTitleColor(appTintColor, for: .normal)
+        self.langSwapButton?.setTitleColor(appTintColor, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

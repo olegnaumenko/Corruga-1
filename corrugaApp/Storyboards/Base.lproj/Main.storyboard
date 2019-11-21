@@ -123,6 +123,7 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PVl-Vd-oIK">
                                         <rect key="frame" x="12" y="6" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="color" name="app-label"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -222,12 +223,13 @@
                             </barButtonItem>
                             <barButtonItem id="YCz-kb-ZCp">
                                 <view key="customView" contentMode="scaleToFill" id="hkZ-bz-tQl">
-                                    <rect key="frame" x="284" y="6" width="32" height="32"/>
+                                    <rect key="frame" x="260" y="6" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cUf-52-GtH">
                                             <rect key="frame" x="12" y="6" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <color key="color" name="app-label"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -710,7 +712,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalCompressionResistancePriority="748" image="static_qr_code" translatesAutoresizingMaskIntoConstraints="NO" id="thU-HL-DSs">
-                                <rect key="frame" x="37.5" y="56" width="300" height="300"/>
+                                <rect key="frame" x="-112.5" y="56" width="600" height="600"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="370" id="Zpr-R9-KIb"/>
                                 </constraints>
@@ -721,8 +723,8 @@
                                 </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsT-AC-hxb">
-                                <rect key="frame" x="73" y="360" width="229" height="48"/>
-                                <color key="backgroundColor" red="0.92900000000000005" green="0.56499999999999995" blue="0.33200000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="73" y="660" width="229" height="48"/>
+                                <color key="backgroundColor" name="app-tint-large"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="12" maxX="20" maxY="12"/>
                                 <state key="normal" title="Share in social media">
@@ -886,6 +888,9 @@
             <color red="0.17700000107288361" green="0.17700000107288361" blue="0.17700000107288361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="app-tint">
+            <color red="0.74210279160830639" green="0.22022977042519623" blue="0.16632147090263322" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="app-tint-large">
             <color red="0.75199997425079346" green="0.22300000488758087" blue="0.1679999977350235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="footer-background">

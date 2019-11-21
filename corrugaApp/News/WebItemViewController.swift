@@ -23,9 +23,13 @@ class WebItemViewController:UIViewController {
         super.viewDidLoad()
         
         self.webView.navigationDelegate = self
+        self.loadHome()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         self.view.backgroundColor = Appearance.backgroundAppColor()
         self.webView.backgroundColor = self.view.backgroundColor
-        self.loadHome()
     }
     
     private func loadHome() {

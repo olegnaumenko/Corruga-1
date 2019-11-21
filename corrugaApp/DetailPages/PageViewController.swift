@@ -14,12 +14,16 @@ class PageViewController: UIPageViewController {
 //        print("Page Controller deinit")
 //    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = Appearance.backgroundAppColor()
-        
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.view.backgroundColor = Appearance.backgroundAppColor()
+//
+//    }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.view.backgroundColor = Appearance.backgroundAppColor()
+    }
 
     /*
     // MARK: - Navigation

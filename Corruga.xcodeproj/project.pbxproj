@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
 		6A149824234234310047BD63 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
+		6A3D339F2386AFA400E2537A /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D339E2386AFA400E2537A /* BackgroundTask.swift */; };
 		6A87341E2383447300327EC2 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
 		7C06CB722108923300FEEB52 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		7C06CB762108928000FEEB52 /* DictionaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */; };
@@ -31,7 +32,7 @@
 		7C4993F4213EBD6A00778429 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993F3213EBD6A00778429 /* MobileCoreServices.framework */; };
 		7C4B70762141830F00BC03C3 /* NewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */; };
 		7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70772141835700BC03C3 /* NewsViewController.swift */; };
-		7C5337912124371000465EF1 /* UIView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* UIView+Name.swift */; };
+		7C5337912124371000465EF1 /* String+ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* String+ImageName.swift */; };
 		7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53379221243A9000465EF1 /* ScrollManager.swift */; };
 		7C5BD3AD219EE31400337340 /* NewsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD3AC219EE31400337340 /* NewsSource.swift */; };
 		7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0047210889060025EF47 /* AppDelegate.swift */; };
@@ -102,6 +103,7 @@
 		646D76864E764D8B56345ACD /* Pods-CorrugaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CorrugaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CorrugaTests/Pods-CorrugaTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorController.swift; sourceTree = "<group>"; };
 		6A149823234234310047BD63 /* ConnectionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorView.swift; sourceTree = "<group>"; };
+		6A3D339E2386AFA400E2537A /* BackgroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		7C06CB712108923300FEEB52 /* DictModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictModel.swift; sourceTree = "<group>"; };
 		7C06CB732108925800FEEB52 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCoordinator.swift; sourceTree = "<group>"; };
@@ -132,7 +134,7 @@
 		7C4993F3213EBD6A00778429 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCoordinator.swift; sourceTree = "<group>"; };
 		7C4B70772141835700BC03C3 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
-		7C5337902124371000465EF1 /* UIView+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Name.swift"; sourceTree = "<group>"; };
+		7C5337902124371000465EF1 /* String+ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ImageName.swift"; sourceTree = "<group>"; };
 		7C53379221243A9000465EF1 /* ScrollManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollManager.swift; sourceTree = "<group>"; };
 		7C5BD3AA219EDCA600337340 /* NewsItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemEntity.swift; sourceTree = "<group>"; };
 		7C5BD3AC219EE31400337340 /* NewsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSource.swift; sourceTree = "<group>"; };
@@ -250,11 +252,10 @@
 				7C954172211CC9AE00CDD270 /* ImageProvider.swift */,
 				7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */,
 				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
+				6A3D339E2386AFA400E2537A /* BackgroundTask.swift */,
 				7C1CD35121444D0D006CF4C6 /* Client.swift */,
 				7CBB8E6E219C293800560397 /* VideoSource.swift */,
-				7C9D82D7228FDFBB0061DF1E /* BoardSource.swift */,
 				7C5BD3AC219EE31400337340 /* NewsSource.swift */,
-				7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -398,6 +399,8 @@
 		7C82620D22A193100067D653 /* Unused */ = {
 			isa = PBXGroup;
 			children = (
+				7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */,
+				7C9D82D7228FDFBB0061DF1E /* BoardSource.swift */,
 				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
 				7CF5B4C9211634B5004F2FDA /* WSColourScheme.swift */,
 			);
@@ -435,7 +438,7 @@
 		7CAB489A21271EF2003F97DA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7C5337902124371000465EF1 /* UIView+Name.swift */,
+				7C5337902124371000465EF1 /* String+ImageName.swift */,
 				7C82620B22A18E260067D653 /* UIStoryboard+Main.swift */,
 			);
 			path = Extensions;
@@ -730,7 +733,7 @@
 				7C16D3632199E09C00217626 /* AppAnalytics.swift in Sources */,
 				7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */,
 				7C5D73F4216774110022ABBC /* BoardViewController.swift in Sources */,
-				7C5337912124371000465EF1 /* UIView+Name.swift in Sources */,
+				7C5337912124371000465EF1 /* String+ImageName.swift in Sources */,
 				7C73FDDA2285734200DE4AE2 /* SelectViewController.m in Sources */,
 				7CDE18C622844744004D6964 /* DictionaryEntryTableViewCell.swift in Sources */,
 				7CC81CFE212867FB004D555E /* SpeechSynth.swift in Sources */,
@@ -745,6 +748,7 @@
 				7C5D0048210889060025EF47 /* AppDelegate.swift in Sources */,
 				7C1CD34A21443962006CF4C6 /* VideosCoordinator.swift in Sources */,
 				7C73FDD02285713200DE4AE2 /* SelectionPopoverViewController.swift in Sources */,
+				6A3D339F2386AFA400E2537A /* BackgroundTask.swift in Sources */,
 				7CF3B463211EEA1F00CFDFFF /* PhotoViewModel.swift in Sources */,
 				7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */,
 				7CDD61C32141797F000E864D /* AppTabCoordinator.swift in Sources */,
@@ -950,7 +954,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -974,7 +978,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

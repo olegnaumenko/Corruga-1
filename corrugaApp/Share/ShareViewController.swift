@@ -28,9 +28,6 @@ class ShareViewController: UIViewController {
 
         self.shareButton.layer.cornerRadius = 3
         self.shareButton.layer.masksToBounds = true
-        self.shareButton.backgroundColor = Appearance.appTintColor()
-//        self.closeButton.layer.cornerRadius = 3
-//        self.closeButton.layer.masksToBounds = true
         
         let swipeReco = UISwipeGestureRecognizer(target: self, action: #selector(onSwipe(_:)))
         swipeReco.direction = .down

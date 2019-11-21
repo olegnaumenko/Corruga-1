@@ -30,7 +30,7 @@ class AppTabCoordinator:NSObject {
         
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.backgroundAppColor()
-        tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintColor()
+        tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintLargeColor()
         tabBarController.tabBar.tintColor = Appearance.labelSecondaryColor()
         super.init()
         tabBarController.delegate = self;
@@ -47,7 +47,7 @@ class AppTabCoordinator:NSObject {
         navcontroller.navigationBar.barTintColor = Appearance.backgroundAppColor()
         let navigationBar = navcontroller.navigationBar
         let key = NSAttributedString.Key.foregroundColor
-        let color = Appearance.appTintColor()
+        let color = Appearance.appTintLargeColor()
         if var titleAttribs = navigationBar.titleTextAttributes {
             titleAttribs[key] = color
             navigationBar.titleTextAttributes = titleAttribs
