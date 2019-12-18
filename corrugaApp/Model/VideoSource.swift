@@ -82,7 +82,7 @@ class VideoSource {
                     self.videoEntities.append(contentsOf: entities)
                     self.onEntitiesChange()
                     
-                    print("got video items: \(entities.count), total: \(self.videoEntities.count)")
+//                    print("got video items: \(entities.count), total: \(self.videoEntities.count)")
                     
                     if let totalResults = (playlistDictionary["pageInfo"] as? [String:Any])?["totalResults"] as? Int,
                         totalResults <= self.videoEntities.count {

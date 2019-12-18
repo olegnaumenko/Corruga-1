@@ -18,7 +18,6 @@ import UIKit
         return UIColor(named: "app-background-secondary")!
     }
     
-    
     static func appTintColor() -> UIColor {
         return UIColor(named: "app-tint")!
     }
@@ -31,9 +30,7 @@ import UIKit
         return self.labelSecondaryColor()
     }
     
-    static func labelColor() -> UIColor {
-        return UIColor(named: "app-label")!
-    }
+    static let labelColor = UIColor(named: "app-label")!
     
     static func labelSecondaryColor() -> UIColor {
         return UIColor(named: "app-secondary-label")!

@@ -14,7 +14,7 @@ class NewsItemTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel:UILabel!
     @IBOutlet weak var excerptLabel:UILabel!
     @IBOutlet weak var viewsLabel:UILabel!
-    
+    @IBOutlet weak var adImageView:UIImageView!
     
     
     var newsItem:NewsItem! {
@@ -28,6 +28,14 @@ class NewsItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .gray
+    }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil;
+        dateLabel.text = nil
+        excerptLabel.text = nil
     }
 //
 //    override func setSelected(_ selected: Bool, animated: Bool) {

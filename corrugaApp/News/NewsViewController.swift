@@ -15,7 +15,8 @@ protocol NewsViewControllerDelegate:class {
 
 class NewsViewController: BaseFeatureViewController {
 
-    let cellId = "NewsItemTableViewCell"
+    let newsCellId = "NewsItemTableViewCell"
+    let adCellId = "AdPicTableViewCell"
     
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var logoLabel:UILabel?
@@ -99,17 +100,25 @@ extension NewsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsItemTableViewCell
-        cell.newsItem = viewModel.item(atIndex: indexPath.row)
-        return cell
+        let cellModel = viewModel.item(atIndex: indexPath.row)
+
+        switch cellModel.type {
+        case .newsType:
+            let cell = tableView.dequeueReusableCell(withIdentifier: newsCellId, for: indexPath) as! NewsItemTableViewCell
+            cell.newsItem = cellModel
+            return cell
+        case .adsType:
+            let cell = tableView.dequeueReusableCell(withIdentifier: adCellId, for: indexPath) as! AdPicTableViewCell
+            cell.viewModel = cellModel
+            return cell
+        }
     }
 }
 
 extension NewsViewController : UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationDelegate?.newsViewControllerDidSelect(item: viewModel.item(atIndex: indexPath.row))
+        let itemVM = viewModel.item(atIndex: indexPath.row)
+        self.navigationDelegate?.newsViewControllerDidSelect(item: itemVM)
     }
-    
 }
 

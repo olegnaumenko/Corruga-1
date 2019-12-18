@@ -15,6 +15,7 @@ class ImageProvider {
     private let kImagesEXT = "jpg"
     
     private var imageNames:[String] = []
+    private var partnerImagePaths:[String] = []
     
     init() {
         self.scanImages()

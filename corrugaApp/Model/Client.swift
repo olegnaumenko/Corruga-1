@@ -108,11 +108,11 @@ final class Client {
         }
     }
     
-    func getFeed(type:ItemType, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Error?) -> ())
+    func getFeed(type:SourceCategory, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Int, Error?) -> ())
     {
         var params:[String:Any] = ["per_page":10];
              
-        let client = type == .newsItemType ? newsClient : boardClient
+        let client = type == .news ? newsClient : boardClient
         
         if let pgIndex = pageIndex, pgIndex > 0 {
             params["page"] = pgIndex + 1
@@ -128,12 +128,12 @@ final class Client {
         client.get("/posts", parameters:params) { (jsonResult) in
             switch jsonResult {
             case .success(let response):
-                
-                completion(response.arrayBody, nil)
+                let totalItems = Int(response.headers["x-wp-total"] as! String) ?? 0
+                completion(response.arrayBody, totalItems,  nil)
                 
             case .failure(let response):
                 
-                completion(nil, response.error)
+                completion(nil, 0, response.error)
             }
             self.indicatorNotifier.decrement()
         }

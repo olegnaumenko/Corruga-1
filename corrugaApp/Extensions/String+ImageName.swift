@@ -16,4 +16,11 @@ extension String {
         return nsstring
     }
     
+    func lastPathComponentWithoutExtension() -> String
+    {
+        let url = URL(fileURLWithPath: self)
+        let url2 = url.deletingPathExtension()
+        return url2.lastPathComponent
+    }
+    
 }

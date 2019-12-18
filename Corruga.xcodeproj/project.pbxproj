@@ -10,6 +10,7 @@
 		6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
 		6A149824234234310047BD63 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
 		6A3D339F2386AFA400E2537A /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D339E2386AFA400E2537A /* BackgroundTask.swift */; };
+		6A86D5B023A9227900371F52 /* AdPicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */; };
 		6A87341E2383447300327EC2 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
 		7C06CB722108923300FEEB52 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		7C06CB762108928000FEEB52 /* DictionaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */; };
@@ -104,6 +105,7 @@
 		6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorController.swift; sourceTree = "<group>"; };
 		6A149823234234310047BD63 /* ConnectionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorView.swift; sourceTree = "<group>"; };
 		6A3D339E2386AFA400E2537A /* BackgroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
+		6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPicTableViewCell.swift; sourceTree = "<group>"; };
 		7C06CB712108923300FEEB52 /* DictModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictModel.swift; sourceTree = "<group>"; };
 		7C06CB732108925800FEEB52 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCoordinator.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */,
 				7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */,
 				7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */,
+				6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */,
 				7CDE18C422833469004D6964 /* LanguageModel.swift in Sources */,
 				7CE03234210B83A1001C9D78 /* DictionaryTableDataSource.swift in Sources */,
+				6A86D5B023A9227900371F52 /* AdPicTableViewCell.swift in Sources */,
 				7C1CD35221444D0D006CF4C6 /* Client.swift in Sources */,
 				7C06CB762108928000FEEB52 /* DictionaryCoordinator.swift in Sources */,
 				7CAB489821271EA6003F97DA /* DetailViewController.swift in Sources */,
@@ -954,7 +958,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -962,7 +966,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = corrugaApp/corruga_bridging_header.h;
@@ -978,7 +982,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -986,7 +990,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = corrugaApp/corruga_bridging_header.h;

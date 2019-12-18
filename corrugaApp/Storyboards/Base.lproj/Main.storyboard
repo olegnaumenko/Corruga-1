@@ -174,7 +174,7 @@
                                                     <color key="textColor" name="app-tint"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Excerpt" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0go-wc-Qm3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="247" verticalCompressionResistancePriority="751" text="Excerpt" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0go-wc-Qm3">
                                                     <rect key="frame" x="15" y="62.5" width="345" height="45.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="app-secondary-label"/>
@@ -200,10 +200,56 @@
                                             <outlet property="titleLabel" destination="Q5V-Wn-ERB" id="rMp-LS-nsP"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdPicTableViewCell" rowHeight="170" id="dqp-Fd-owy" customClass="AdPicTableViewCell" customModule="Corruga" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="151" width="375" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dqp-Fd-owy" id="Wj3-Wv-CE6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zq-xl-15e">
+                                                    <rect key="frame" x="15" y="16" width="345" height="138"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="D3d-gx-dic">
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="110"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="110" id="aho-J8-osA"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8f-6F-l6W">
+                                                            <rect key="frame" x="154" y="110" width="37.5" height="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="c8f-6F-l6W" firstAttribute="centerX" secondItem="9zq-xl-15e" secondAttribute="centerX" id="9Ya-ZE-0NV"/>
+                                                        <constraint firstItem="D3d-gx-dic" firstAttribute="top" secondItem="9zq-xl-15e" secondAttribute="top" id="Nvi-wx-hfz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="c8f-6F-l6W" secondAttribute="bottom" constant="16" id="S8R-kR-2uv"/>
+                                                        <constraint firstItem="c8f-6F-l6W" firstAttribute="top" secondItem="D3d-gx-dic" secondAttribute="bottom" id="hgK-al-RsW"/>
+                                                        <constraint firstItem="D3d-gx-dic" firstAttribute="leading" secondItem="9zq-xl-15e" secondAttribute="leading" id="huo-Kr-swz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="D3d-gx-dic" secondAttribute="trailing" id="oha-jB-Op1"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9zq-xl-15e" firstAttribute="top" secondItem="Wj3-Wv-CE6" secondAttribute="topMargin" constant="5" id="4Xy-LJ-p0y"/>
+                                                <constraint firstItem="9zq-xl-15e" firstAttribute="leading" secondItem="Wj3-Wv-CE6" secondAttribute="leadingMargin" id="6zN-P7-y4j"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9zq-xl-15e" secondAttribute="trailing" id="DaE-PZ-7Sg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9zq-xl-15e" secondAttribute="bottom" constant="5" id="tFg-Wj-rKW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="adImageView" destination="D3d-gx-dic" id="3D4-H4-HXL"/>
+                                            <outlet property="imageHeight" destination="aho-J8-osA" id="TC1-Nj-g3G"/>
+                                            <outlet property="titleLabel" destination="c8f-6F-l6W" id="cLV-Kl-edm"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="app-background"/>
                         <constraints>
                             <constraint firstItem="Qub-m8-JLj" firstAttribute="bottom" secondItem="pP8-Zv-e3j" secondAttribute="bottom" id="6wq-gF-0Fv"/>
                             <constraint firstItem="Qub-m8-JLj" firstAttribute="trailing" secondItem="pP8-Zv-e3j" secondAttribute="trailing" id="JCP-MZ-9R1"/>
@@ -244,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDS-UR-7lo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9" y="-477"/>
+            <point key="canvasLocation" x="8.8000000000000007" y="-477.21139430284859"/>
         </scene>
         <!--Dictionary-->
         <scene sceneID="4Un-7J-q90">
@@ -888,7 +934,7 @@
             <color red="0.17700000107288361" green="0.17700000107288361" blue="0.17700000107288361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="app-tint">
-            <color red="0.74210279160830639" green="0.22022977042519623" blue="0.16632147090263322" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74199998378753662" green="0.2199999988079071" blue="0.16599999368190765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="app-tint-large">
             <color red="0.75199997425079346" green="0.22300000488758087" blue="0.1679999977350235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -901,6 +947,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U1u-Lf-skt"/>
+        <segue reference="6lQ-sO-ygS"/>
     </inferredMetricsTieBreakers>
 </document>

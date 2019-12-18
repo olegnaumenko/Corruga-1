@@ -16,13 +16,19 @@ class NewsCoordinator: BaseFeatureCoordinator {
         self.newsViewController = newsViewController
         super.init()
         self.newsViewController.navigationDelegate = self
-        self.newsViewController.viewModel = NewsViewModel(itemSource: NewsSource(itemType: .newsItemType))
+        self.newsViewController.viewModel = NewsViewModel(itemSource: NewsSource(itemType: .news))
         self.start(viewController: newsViewController)
     }
 }
 
 extension NewsCoordinator:NewsViewControllerDelegate {
     func newsViewControllerDidSelect(item : NewsItem) {
+        
+        if item.type == .adsType, let url = URL(string: item.url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            return
+        }
+        
         let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewsItemViewController") as! WebItemViewController
         itemViewController.urlString = item.url
         itemViewController.title = item.title
