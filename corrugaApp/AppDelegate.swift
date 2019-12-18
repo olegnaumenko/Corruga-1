@@ -42,21 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coordinator.appDidFinishLaunching(application)
         return true
     }
-    
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        // pass the url to the handle deep link call
-//        let branchHandled = Branch.getInstance().application(application,
-//                                                             open: url,
-//                                                             sourceApplication: sourceApplication,
-//                                                             annotation: annotation
-//        )
-//        if (!branchHandled) {
-//            // If not handled by Branch, do other deep link routing for the Facebook SDK, Pinterest SDK, etc
-//        }
-//
-//        // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
-//        return true
-//    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // handler for Push Notifications
+        Branch.getInstance().handlePushNotification(userInfo)
+    }
     
     func application(_ app: UIApplication,
                      open url: URL,

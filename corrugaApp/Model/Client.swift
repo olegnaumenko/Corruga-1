@@ -62,6 +62,8 @@ final class Client {
             print(error)
             fatalError()
         }
+        newsClient.isErrorLoggingEnabled = false
+        boardClient.isErrorLoggingEnabled = false
     }
     
     deinit {

@@ -136,7 +136,7 @@ class NewsSource: NSObject {
                     if self.currentPageSize < 45 {
                         self.currentPageSize = 45
                     }
-                    print("got items: ", receivedPageIndex, na.count)
+//                    print("got items: ", receivedPageIndex, na.count)
 //                    if na.count == oldPageSize {
                     self.getNextItems()
 //                    } else {
