@@ -122,6 +122,8 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>branch_app_domain</key>
+	<string>corrugated.app.link</string>
 	<key>branch_key</key>
 	<dict>
 		<key>live</key>
@@ -129,7 +131,5 @@
 		<key>test</key>
 		<string>key_test_ldLfRNZ39H2BDbla9i8PVligFyazxV26</string>
 	</dict>
-    <key>branch_app_domain</key>
-    <string>corrugated.app.link</string>
 </dict>
 </plist>

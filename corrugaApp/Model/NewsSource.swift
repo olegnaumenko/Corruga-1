@@ -60,7 +60,11 @@ class NewsSource: NSObject {
         "logo_srp": "Holland",
         "logo_vega": "Italy",
         "logo_fosber": "Italy",
-        "logo_fossaluzza": "Italy"
+        "logo_fossaluzza": "Italy",
+        "logo_celmacch": "Italy",
+        "logo_premier": "USA",
+        "logo_techgene": "Taiwan",
+        "logo_wsa": "South Korea"
     ]
     
     lazy var adImages = Bundle.main.paths(forResourcesOfType: self.kImagesEXTPNG, inDirectory: self.kPartnerImagesDIR)
@@ -228,7 +232,6 @@ class NewsSource: NSObject {
         } else {
             currentAdImageIndex += 1
         }
-//        let index = Int(arc4random_uniform(UInt32(adImages.count)))
         let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
         let title = adImageCountryMap[file] ?? ""
         return NewsItem(id: 0, title: title, shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
