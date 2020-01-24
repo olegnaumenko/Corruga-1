@@ -189,7 +189,7 @@ class NewsSource: NSObject {
                 
                 var ind = 0;
                 arrayOfDicts.forEach({ (dict) in
-                    if ind % 4 == 0 {
+                    if ind % 2 == 0 {
                         items.append(self.adNewsItem())
                     }
                     if let item = self.newsItem(dict: dict as! [AnyHashable : Any]) {
@@ -232,9 +232,9 @@ class NewsSource: NSObject {
         } else {
             currentAdImageIndex += 1
         }
-        let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
-        let title = adImageCountryMap[file] ?? ""
-        return NewsItem(id: 0, title: title, shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
+//        let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
+//        let title = adImageCountryMap[file] ?? ""
+        return NewsItem(id: 0, title: "", shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
     }
     
     private func filterHtml(_ string:String) -> String {

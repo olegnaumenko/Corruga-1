@@ -23,7 +23,6 @@ class AdPicTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var imageHeight:NSLayoutConstraint!
     
-    
     var viewModel:NewsItem! {
         didSet {
             if let imagePath = viewModel.adImage {
@@ -32,7 +31,7 @@ class AdPicTableViewCell: UITableViewCell {
 //            if let image = self.adImageView.image {
 //                self.imageHeight.constant = self.frame.width / image.getImageRatio()
 //            }
-            self.titleLabel.text = viewModel.title
+            self.titleLabel.text = nil
         }
     }
 
