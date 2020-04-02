@@ -71,7 +71,7 @@ class NewsSource: NSObject {
     
     let itemType:SourceCategory
     
-    var currentPageSize = 10
+    var currentPageSize = 12
     var currentPageIndex = 0
     
     var currentAdImageIndex = 0
@@ -189,7 +189,7 @@ class NewsSource: NSObject {
                 
                 var ind = 0;
                 arrayOfDicts.forEach({ (dict) in
-                    if ind % 2 == 0 {
+                    if ind % 4 == 0 {
                         items.append(self.adNewsItem())
                     }
                     if let item = self.newsItem(dict: dict as! [AnyHashable : Any]) {
