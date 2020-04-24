@@ -28,10 +28,11 @@ class AdPicTableViewCell: UITableViewCell {
             if let imagePath = viewModel.adImage {
                 self.adImageView.image = UIImage(contentsOfFile: imagePath)
             }
-//            if let image = self.adImageView.image {
-//                self.imageHeight.constant = self.frame.width / image.getImageRatio()
-//            }
-            self.titleLabel.text = nil
+            if let image = self.adImageView.image {
+                let ratio = image.getImageRatio()
+                self.imageHeight.constant = (ratio > 2.5 ? 3.0 * self.frame.width / 4.0 : 2 * self.frame.width/3.0) / ratio
+            }
+            self.titleLabel.text = viewModel.title
         }
     }
 

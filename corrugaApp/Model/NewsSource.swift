@@ -54,17 +54,17 @@ class NewsSource: NSObject {
    private let kPartnerImagesDIR = "images/partners"
     private let kImagesEXTPNG = "png"
     let adImageCountryMap = [
-        "logo_mosca": "Germany",
-        "logo_tcy": "Taiwan",
-        "logo_asahi": "Japan",
-        "logo_srp": "Holland",
-        "logo_vega": "Italy",
-        "logo_fosber": "Italy",
-        "logo_fossaluzza": "Italy",
-        "logo_celmacch": "Italy",
-        "logo_premier": "USA",
-        "logo_techgene": "Taiwan",
-        "logo_wsa": "South Korea"
+        "1" : "ПЛОСКОВЫСЕКАТЕЛЬНЫЕ АВТОМАТЫ (ASAHI)",
+        "2" : "ОБОРУДОВАНИЕ ДЛЯ ПЕЧАТИ (CELLMACH)",
+        "3" : "ТРАНСПОРТНЫЕ СИСТЕМЫ (FOSSALUZZA)",
+        "4" : "КОМПЛЕКТНЫЕ ГОФРОАГРЕГАТЫ (FOSBER)",
+        "5" : "УПАКОВОЧНОЕ ОБОРУДОВАНИЕ (MOSCA)",
+        "6" : "ОБОРУДОВАНИЕ ДЛЯ ПРОИЗВОДСТВА И СБОРКИ РЕШЕТКИ ИЗ ГОФРИРОВАННОГО КАРТОНА/КАРТОНА ХРОМ-ЭРЗАЦ (PREMIER)",
+        "7" : "АВТОМАТИЧЕСКИЕ КЛЕЕВЫЕ КУХНИ (SRP)",
+        "8" : "ВЫСОКОСКОРОСТНЫЕ КОНВЕРТНЫЕ ЛИНИИ И ГОФРОАГРЕГАТЫ (TCY)",
+        "9" : "МАКУЛАТУРНЫЕ ПРЕССЫ (TECHGENE)",
+        "10" : "МНОГОТОЧЕЧНЫЕ ФАЛЬЦЕВАЛЬНО-СКЛЕИВАЮЩИЕ ЛИНИИ (VEGA)",
+        "11" : "ТРАНСПОРТНЫЕ СИСТЕМЫ (WSA)"
     ]
     
     lazy var adImages = Bundle.main.paths(forResourcesOfType: self.kImagesEXTPNG, inDirectory: self.kPartnerImagesDIR)
@@ -232,9 +232,9 @@ class NewsSource: NSObject {
         } else {
             currentAdImageIndex += 1
         }
-//        let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
-//        let title = adImageCountryMap[file] ?? ""
-        return NewsItem(id: 0, title: "", shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
+        let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
+        let title = adImageCountryMap[file] ?? ""
+        return NewsItem(id: 0, title: title, shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
     }
     
     private func filterHtml(_ string:String) -> String {
