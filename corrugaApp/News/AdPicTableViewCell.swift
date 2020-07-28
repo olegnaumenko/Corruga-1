@@ -30,7 +30,14 @@ class AdPicTableViewCell: UITableViewCell {
             }
             if let image = self.adImageView.image {
                 let ratio = image.getImageRatio()
-                self.imageHeight.constant = (ratio > 2.5 ? 3.0 * self.frame.width / 4.0 : 2 * self.frame.width/3.0) / ratio
+//                self.imageHeight.constant = (ratio > 2.5 ? 3.0 * self.frame.width / 4.0 : 2 * self.frame.width/3.0) / ratio
+                
+                let nominalHeight:CGFloat = 80.0
+                
+                
+                
+                let actualHeight = 1.7 * nominalHeight / sqrt(ratio)
+                self.imageHeight.constant = actualHeight
             }
             self.titleLabel.text = viewModel.title
         }

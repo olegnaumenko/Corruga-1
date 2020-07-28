@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = self.window else {
             fatalError()
         }
-        
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        }
         window.backgroundColor = Appearance.backgroundAppColor()
         let tabBarController = (window.rootViewController as! AppTabBarController)
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
