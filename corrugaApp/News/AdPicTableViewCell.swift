@@ -32,7 +32,7 @@ class AdPicTableViewCell: UITableViewCell {
                 let ratio = image.getImageRatio()
 //                self.imageHeight.constant = (ratio > 2.5 ? 3.0 * self.frame.width / 4.0 : 2 * self.frame.width/3.0) / ratio
                 
-                let nominalHeight:CGFloat = 80.0
+                let nominalHeight:CGFloat = 76.0
                 
                 
                 
