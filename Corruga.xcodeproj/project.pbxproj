@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
 		6A149824234234310047BD63 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
+		6A38091124D1C3B100104A83 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993ED213EB4DC00778429 /* CoreServices.framework */; };
 		6A3D339F2386AFA400E2537A /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D339E2386AFA400E2537A /* BackgroundTask.swift */; };
 		6A86D5B023A9227900371F52 /* AdPicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */; };
 		6A87341E2383447300327EC2 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
@@ -30,7 +31,6 @@
 		7C4993EE213EB4DC00778429 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993ED213EB4DC00778429 /* CoreServices.framework */; };
 		7C4993F0213EB4E300778429 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993EF213EB4E300778429 /* CoreSpotlight.framework */; };
 		7C4993F2213EBC0B00778429 /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */; };
-		7C4993F4213EBD6A00778429 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993F3213EBD6A00778429 /* MobileCoreServices.framework */; };
 		7C4B70762141830F00BC03C3 /* NewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */; };
 		7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70772141835700BC03C3 /* NewsViewController.swift */; };
 		7C5337912124371000465EF1 /* String+ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* String+ImageName.swift */; };
@@ -211,7 +211,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C4993F4213EBD6A00778429 /* MobileCoreServices.framework in Frameworks */,
 				7C4993F0213EB4E300778429 /* CoreSpotlight.framework in Frameworks */,
 				7C4993EE213EB4DC00778429 /* CoreServices.framework in Frameworks */,
 				7C424CD221088E0100D20563 /* AudioToolbox.framework in Frameworks */,
@@ -219,6 +218,7 @@
 				7C424CCE21088DF300D20563 /* Speech.framework in Frameworks */,
 				7C424CCC21088DED00D20563 /* SystemConfiguration.framework in Frameworks */,
 				DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */,
+				6A38091124D1C3B100104A83 /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

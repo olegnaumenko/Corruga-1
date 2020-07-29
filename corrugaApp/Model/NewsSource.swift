@@ -136,7 +136,7 @@ class NewsSource: NSObject {
                     self.newsItems.append(contentsOf: na)
                     self.onItemsChange()
                     self.currentPageIndex = receivedPageIndex + 1
-                    let oldPageSize = self.currentPageSize;
+//                    let oldPageSize = self.currentPageSize;
                     if self.currentPageSize < 45 {
                         self.currentPageSize = 45
                     }
