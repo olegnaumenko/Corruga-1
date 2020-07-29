@@ -22,16 +22,17 @@ class BoardCoordinator: BaseFeatureCoordinator {
 }
 
 extension BoardCoordinator: NewsViewControllerDelegate {
-    func newsViewControllerDidSelect(item : NewsItem) {
+    func newsViewControllerDidSelect(item : NewsItem) -> Bool {
         
         if item.type == .adsType, let url = URL(string: item.url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            return
+            return false
         }
         
         let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewsItemViewController") as! WebItemViewController
         itemViewController.urlString = item.url
         itemViewController.title = item.title
         self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
+        return true
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewsViewControllerDelegate:class {
-    func newsViewControllerDidSelect(item:NewsItem)
+    func newsViewControllerDidSelect(item:NewsItem) -> Bool
 }
 
 
@@ -118,7 +118,10 @@ extension NewsViewController : UITableViewDataSource {
 extension NewsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let itemVM = viewModel.item(atIndex: indexPath.row)
-        self.navigationDelegate?.newsViewControllerDidSelect(item: itemVM)
+        if let shouldKeepSelection = self.navigationDelegate?.newsViewControllerDidSelect(item: itemVM),
+           shouldKeepSelection == false {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 

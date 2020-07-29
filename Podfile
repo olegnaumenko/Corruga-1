@@ -14,7 +14,7 @@ target 'Corruga' do
   pod 'Branch'  
   pod 'ReachabilitySwift'
   pod 'FTLinearActivityIndicator'
-  pod 'RealmSwift'
+  #  pod 'RealmSwift'
   #  pod 'youtube-ios-player-helper', '~> 0.1.4'
   #  pod 'UIDevice-Hardware'
   #  pod 'FacebookSDK', '~> 4.44.1'

@@ -13,7 +13,7 @@ class WebItemViewController:UIViewController {
     
     @IBOutlet var webView:WKWebView!
     
-    @IBOutlet var logoLabel:UILabel?
+    @IBOutlet var loadingLabel:UILabel!
     
     @IBOutlet var loadingIndicator:UIActivityIndicatorView!
     
@@ -59,24 +59,26 @@ extension WebItemViewController:WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
+        self.loadingLabel?.text = "Please check connection"
         self.setupBackButton()
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.loadingIndicator.startAnimating()
-        self.loadingIndicator.isHidden = false
+        self.loadingIndicator.isHidden = true
         self.setupBackButton()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
+        self.loadingLabel?.isHidden = true;
         self.setupBackButton()
         
         UIView.animate(withDuration: 0.2, animations: {
-            self.logoLabel?.alpha = 0
+            self.loadingLabel?.alpha = 0
         }) { (finished) in
-            self.logoLabel?.removeFromSuperview()
+            self.loadingLabel?.removeFromSuperview()
         }
     }
 }

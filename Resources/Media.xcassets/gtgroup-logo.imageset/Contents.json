@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "gt-56.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "gt-112.jpeg",
+      "filename" : "gt-logo-56@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "gt-168.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }
