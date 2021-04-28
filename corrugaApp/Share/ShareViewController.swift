@@ -66,8 +66,8 @@ class ShareViewController: UIViewController {
     {
         sender.isEnabled = false
         sender.alpha = 0.6
-        let message = "This is link to Corruga app download: "
-        let activityController = UIActivityViewController(activityItems: [message, shareLink], applicationActivities: nil)
+//        let message = "This is link to Corruga app download: "
+        let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
         activityController.modalPresentationStyle = .popover
         activityController.popoverPresentationController?.sourceView = self.view
         activityController.popoverPresentationController?.sourceRect = sender.frame

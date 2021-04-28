@@ -113,7 +113,9 @@ final class Client {
     func getFeed(type:SourceCategory, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Int, Error?) -> ())
     {
         var params:[String:Any] = ["per_page":10];
-             
+        
+//        params["lang"] = "en"
+        
         let client = type == .news ? newsClient : boardClient
         
         if let pgIndex = pageIndex, pgIndex > 0 {
@@ -125,6 +127,8 @@ final class Client {
         if let searchTerm = search, searchTerm.count > 0 {
             params["search"] = searchTerm
         }
+        
+        
         self.indicatorNotifier.increment()
         
         client.get("/posts", parameters:params) { (jsonResult) in
