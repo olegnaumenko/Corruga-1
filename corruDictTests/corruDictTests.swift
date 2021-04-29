@@ -11,19 +11,24 @@ import XCTest
 
 class corruDictTests: XCTestCase {
 
+    static var classInstanceCounter = 0
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        corruDictTests.classInstanceCounter += 1
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        corruDictTests.classInstanceCounter -= 1
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        print("ctest 1: ", corruDictTests.classInstanceCounter)
     }
 
+    func testExample2() {
+        print("ctest 2: ", corruDictTests.classInstanceCounter)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

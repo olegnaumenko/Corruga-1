@@ -71,8 +71,10 @@ class NewsSource: NSObject {
     
     let itemType:SourceCategory
     
-    var currentPageSize = 12
-    var currentPageIndex = 0
+    var currentPageSize = 16
+    var currentOffset = 0
+    
+    var currentSearchOffset = 0
     
     var currentAdImageIndex = 0
     
@@ -112,15 +114,15 @@ class NewsSource: NSObject {
         if loadInProgress == true {
             return
         }
-        currentPageIndex = 0;
+        currentOffset = 0;
         newsItems.removeAll()
         onItemsChange()
         loadInProgress = true
-        getNextItems()
+        getNextItems(offset:currentOffset, count: currentPageSize, recursively: true)
     }
     
     func reloadSearch() {
-        currentPageIndex = 0;
+        currentSearchOffset = 0;
         currentPageSize = 10;
         searchItems.removeAll()
         onSearchItemsChange()
@@ -128,41 +130,53 @@ class NewsSource: NSObject {
         getNextSearchItems()
     }
     
-    func getNextItems() {
+    
+    private func appendItems(items:[NewsItem], offset:Int) {
+        if (offset >= self.newsItems.count) {
+            self.newsItems.append(contentsOf: items)
+        } else {
+            self.newsItems.replaceSubrange(offset..<self.newsItems.count, with: items)
+        }
+    }
+    
+    func getNextItems(offset:Int = 0, count:Int = 45, recursively:Bool = false) {
         
-        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize, search: nil) { [weak self] (newsArray, receivedPageIndex, totalItems, searchString) in
+        self.getNewsItems(offset: self.newsItems.count, count: count, search: nil) { [weak self] (newsArray, receivedOffset, totalItems, searchString) in
             if let self = self {
                 if let na = newsArray {
-                    self.newsItems.append(contentsOf: na)
+                    
+                    print("got items: ", receivedOffset, self.currentOffset, na.count, totalItems)
+                    
+                    self.appendItems(items: na, offset: receivedOffset)
                     self.onItemsChange()
-                    self.currentPageIndex = receivedPageIndex + 1
-//                    let oldPageSize = self.currentPageSize;
+                    self.currentOffset = receivedOffset + na.count
+                    
                     if self.currentPageSize < 45 {
                         self.currentPageSize = 45
                     }
-//                    print("got items: ", receivedPageIndex, na.count)
-//                    if na.count == oldPageSize {
-                    self.getNextItems()
-//                    } else {
-//                        self.loadInProgress = false
-//                    }
+                    if na.count != 0 && recursively == true {
+                        self.getNextItems(offset:self.currentOffset, count:self.currentPageSize, recursively: recursively)
+                    } else {
+                        self.loadInProgress = false
+                        print("finished loading items, total: \(self.currentOffset) items")
+                    }
                 } else {
                     self.loadInProgress = false
-                    print("finished loading items, total: \(self.currentPageIndex + 1) pages")
+                    print("finished loading items, total: \(self.currentOffset) items")
                 }
             }
         }
     }
     
     func getNextSearchItems() {
-        self.getNewsItems(pageIndex: currentPageIndex, pageItems: currentPageSize, search: searchTerm) { [weak self] (newsArray, receivedPageIndex, totalItems, searchString) in
+        self.getNewsItems(offset: currentSearchOffset, count: currentPageSize, search: searchTerm) { [weak self] (newsArray, receivedOffset, totalItems, searchString) in
             if let self = self {
                 if let na = newsArray {
                     if let ss = searchString, self.searchTerm == ss {
                         self.searchItems.append(contentsOf: na)
                         self.onSearchItemsChange()
                     }
-                    self.currentPageIndex = receivedPageIndex + 1
+                    self.currentSearchOffset = receivedOffset + na.count
                     let oldPageSize = self.currentPageSize;
                     if self.currentPageSize < 50 {
                         self.currentPageSize = 50
@@ -174,15 +188,15 @@ class NewsSource: NSObject {
                     }
                 } else {
                     self.loadInProgress = false
-                    print("finished loading search items, total: \(self.currentPageIndex + 1) pages")
+                    print("finished loading search items, total: \(self.currentSearchOffset + 1) items")
                 }
             }
         }
     }
     
-    func getNewsItems(pageIndex:Int, pageItems:Int, search:String? = nil, completion:@escaping ([NewsItem]?, Int, Int, String?)->()) {
+    func getNewsItems(offset:Int, count:Int?, search:String? = nil, completion:@escaping ([NewsItem]?, Int, Int, String?)->()) {
         
-        Client.shared.getFeed(type:itemType, pageIndex: pageIndex, itemsInPage: pageItems, search: search) { (dataArray, totalItems, error) in
+        Client.shared.getFeed(type:itemType, offset: offset, count: count, search: search) { (dataArray, totalItems, error) in
             if let arrayOfDicts = dataArray {
                 var items = [NewsItem]()
                 items.reserveCapacity(arrayOfDicts.count)
@@ -197,7 +211,7 @@ class NewsSource: NSObject {
                     }
                     ind += 1
                 })
-                completion(items, pageIndex, totalItems, search)
+                completion(items, offset, totalItems, search)
             } else {
                 completion(nil, 0, 0, nil)
                 
@@ -211,10 +225,13 @@ class NewsSource: NSObject {
     private func reportError(error:Error) {
         print("Error during news list request:")
         print(error)
+        print("Total loaded: \(newsItems.count)")
     }
     
+//    private var itemCount = 0
+    
     private func newsItem(dict:[AnyHashable:Any]) -> NewsItem? {
-        
+//        itemCount += 1
         if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
             let id = dict["id"] as? Int {
             let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String ?? ""
@@ -226,6 +243,7 @@ class NewsSource: NSObject {
     }
     
     private func adNewsItem() -> NewsItem {
+//        itemCount += 1
         let index = currentAdImageIndex
         if currentAdImageIndex >= adImages.count - 1 {
             currentAdImageIndex = 0

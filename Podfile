@@ -5,15 +5,15 @@ target 'Corruga' do
 
 #  pod 'youtube-ios-player-helper-swift'
   pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
-  pod 'Networking'
-  pod 'GoogleUtilities'
+  pod 'AFNetworking'
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'AltHanekeSwift'
-  pod 'Branch'  
-  pod 'ReachabilitySwift'
+  pod 'Branch'
   pod 'FTLinearActivityIndicator'
+  
+  #  pod 'ReachabilitySwift'
   #  pod 'RealmSwift'
   #  pod 'youtube-ios-player-helper', '~> 0.1.4'
   #  pod 'UIDevice-Hardware'
@@ -28,8 +28,7 @@ target 'CorrugaTests' do
   
 #  pod 'youtube-ios-player-helper-swift'
   pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
-  pod 'Networking'
-  pod 'GoogleUtilities'
+  pod 'AFNetworking'
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'

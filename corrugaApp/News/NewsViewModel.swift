@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Reachability
+import AFNetworking
 
 class NewsViewModel {
 
@@ -15,6 +15,8 @@ class NewsViewModel {
     var onReachabilityChange = {}
     var itemSource:NewsSource
     var isViewVisible = false
+    
+    private var lastRequestedOffset = -1;
     
     private var searchTerm:String? {
         didSet {
@@ -43,7 +45,7 @@ class NewsViewModel {
     private func subscribe() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onReachabilityStatus(_:)),
-                                               name: .reachabilityChanged,
+                                               name: .AFNetworkingReachabilityDidChange,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onItemsUpdate(_:)),
@@ -76,6 +78,19 @@ class NewsViewModel {
         }
     }
 
+    
+//    func prefetchItems(firstIndex:Int, lastIndex:Int) {
+//        
+//        print("prefetch: \(firstIndex) - \(lastIndex)")
+//        
+//        if (firstIndex == lastRequestedOffset) {
+//            return
+//        }
+//        
+//        lastRequestedOffset = firstIndex;
+//        
+//        self.itemSource.getNextItems(offset: firstIndex, count: 16)
+//    }
         
 // MARK: - Notification handlers
     

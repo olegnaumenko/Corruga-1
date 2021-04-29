@@ -46,6 +46,7 @@ class NewsViewController: BaseFeatureViewController {
        
         self.tableView.estimatedRowHeight = 220.0
         self.tableView.separatorColor = UIColor.clear
+        self.tableView.prefetchDataSource = self
         self.definesPresentationContext = true
         
         searchController.searchResultsUpdater = self
@@ -85,6 +86,7 @@ class NewsViewController: BaseFeatureViewController {
         self.loadingIndicator.stopAnimating()
         self.loadingIndicator.isHidden = true
         self.tableView.reloadData()
+        self.tableView.isHidden = self.tableView.numberOfRows(inSection: 0) == 0
     }
 }
 
@@ -123,5 +125,21 @@ extension NewsViewController : UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
+}
+
+extension NewsViewController : UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+//        guard let min = indexPaths.min()?.row, let max = indexPaths.max()?.row
+//        else {
+//            return
+//        }
+//        self.viewModel.prefetchItems(firstIndex: min, lastIndex: max)
+        
+
+//        print("prefetch: \(indexPaths) visible: \(tableView.indexPathsForVisibleRows)")
+    }
+    
+    
 }
 

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Networking
+import AFNetworking
+//import Networking
 
 class VideoTableViewModel: NSObject {
     
@@ -43,7 +44,7 @@ class VideoTableViewModel: NSObject {
     private func subscribe() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onReachabilityStatus(_:)),
-                                               name: .reachabilityChanged,
+                                               name: .AFNetworkingReachabilityDidChange,
                                                object: nil)
     }
     

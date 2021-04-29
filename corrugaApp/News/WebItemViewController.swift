@@ -51,7 +51,14 @@ class WebItemViewController:UIViewController {
     @objc func onBackButton(_ sender:Any) {
         self.webView.goBack()
     }
-    
+
+    private func hideLoadingLabel() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.loadingLabel?.alpha = 0
+        }) { (finished) in
+            self.loadingLabel?.removeFromSuperview()
+        }
+    }
 }
 
 extension WebItemViewController:WKNavigationDelegate {
@@ -75,11 +82,7 @@ extension WebItemViewController:WKNavigationDelegate {
         self.loadingLabel?.isHidden = true;
         self.setupBackButton()
         
-        UIView.animate(withDuration: 0.2, animations: {
-            self.loadingLabel?.alpha = 0
-        }) { (finished) in
-            self.loadingLabel?.removeFromSuperview()
-        }
+        self.hideLoadingLabel()
     }
 }
 

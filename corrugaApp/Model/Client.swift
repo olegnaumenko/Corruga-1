@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Networking
-import Reachability
 
 struct NetworkProgressNotifier {
     
@@ -38,46 +36,35 @@ final class Client {
     
     static let shared = Client()
     
-    
     private static let boardAPIURL = "https://market.gofro.expert/wp-json/wp/v2"
-    private static let newsAPIURL  = "https://novosti.gofro.expert/wp-json/wp/v2"
+    private static let newsAPIURL  = "https://gofro.expert/wp-json/wp/v2"//"https://novosti.gofro.expert/wp-json/wp/v2"
     private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
     
-    private let reachability:Reachability!
+//    private let reachability:Reachability!
 
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
     
-    private let ytClient = Networking(baseURL: youTubeAPIURL)
-    private let newsClient = Networking(baseURL: newsAPIURL)
-    private let boardClient = Networking(baseURL: boardAPIURL)
+    private let client:NetworkStackProtocol
     
     private var indicatorNotifier = NetworkProgressNotifier()
     
     private init() {
-        do {
-            try! self.reachability = Reachability()
-            try self.reachability.startNotifier()
-        } catch let error {
-            print(error)
-            fatalError()
-        }
-        newsClient.isErrorLoggingEnabled = false
-        boardClient.isErrorLoggingEnabled = false
+        self.client = Network()
     }
     
-    deinit {
-        reachability?.stopNotifier()
+    init(stack:NetworkStackProtocol) {
+        self.client = stack
     }
     
     func isNetworkReachable() -> Bool {
-        return self.reachability.connection != .unavailable
+        return self.client.networkIsAvailable
     }
     
     func getPlaylistVideos(nextPageToken:String?, resultsPerPage:Int, completion:@escaping ([String:Any]?, Error?)->())
     {
         let bundleId = Bundle.main.bundleIdentifier
-        ytClient.headerFields = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
+        let headers = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
         
         var params = [
             "key" : youTubeV3APIKey,
@@ -92,174 +79,62 @@ final class Client {
         
         self.indicatorNotifier.increment()
         
-        ytClient.get("/playlistItems", parameters: params) { (result) in
+        client.getJson(Client.youTubeAPIURL + "/playlistItems", parameters: params, headerFields: headers, completion: { (result) in
             
             switch result {
-            case .success(let response):
+            case .Success(let resource, _):
                 
-                completion(response.dictionaryBody, nil)
+                if let dict = resource as? [String:Any] {
+                    completion(dict, nil)
+                }
                 
-            case .failure(let response):
+            case .Failure(let error):
                 
-                let json = response.dictionaryBody
-                print("Error during request:")
-                print(json)
-                completion(nil, response.error)
+                print("Error on YT request: ", error)
+                completion(nil, error)
             }
             self.indicatorNotifier.decrement()
-        }
+        })
     }
     
-    func getFeed(type:SourceCategory, pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Int, Error?) -> ())
+    func getFeed(type:SourceCategory, offset:Int? = nil, count:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Int, Error?) -> ())
     {
-        var params:[String:Any] = ["per_page":10];
+        var params = [String:Any]();
         
-//        params["lang"] = "en"
+        let urlString = type == .news ? Client.newsAPIURL : Client.boardAPIURL
         
-        let client = type == .news ? newsClient : boardClient
+        params["tax_relations"] = "news"
         
-        if let pgIndex = pageIndex, pgIndex > 0 {
-            params["page"] = pgIndex + 1
+        if let offset = offset, offset > 0 {
+            params["offset"] = offset
         }
-        if let itemsCount = itemsInPage {
+        if let itemsCount = count {
             params["per_page"] = itemsCount;
         }
         if let searchTerm = search, searchTerm.count > 0 {
             params["search"] = searchTerm
         }
         
+        params["_fields"] = ["id","title","excerpt","date_gmt","link"]
+        params["status"] = "publish"
+        params["type"] = "post"
         
         self.indicatorNotifier.increment()
         
-        client.get("/posts", parameters:params) { (jsonResult) in
+        client.getJson("\(urlString)/posts", parameters:params, headerFields: nil) { (jsonResult) in
+            
             switch jsonResult {
-            case .success(let response):
-                let totalItems = Int(response.headers["x-wp-total"] as! String) ?? 0
-                completion(response.arrayBody, totalItems,  nil)
-                
-            case .failure(let response):
-                
-                completion(nil, 0, response.error)
+            case .Success(let resource, let response):
+                let totalHeader = response.allHeaderFields["x-wp-total"] as? String
+                let totalItems:Int = (totalHeader == nil ? 0 : Int(totalHeader!) ?? 0)
+                if let array = resource as? [Any] {
+                    completion(array, totalItems, nil)
+                }
+            case .Failure(let error):
+                completion(nil, 0, error)
+                print("error in response: ", error)
             }
             self.indicatorNotifier.decrement()
         }
     }
-    
-    
-//    func getNewsFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
-//
-//        var params:[String:Any] = ["per_page":10];
-//
-//        if let pgIndex = pageIndex, pgIndex > 0 {
-//            params["page"] = pgIndex + 1
-//        }
-//        if let itemsCount = itemsInPage {
-//            params["per_page"] = itemsCount;
-//        }
-//        if let searchTerm = search, searchTerm.count > 0 {
-//            params["search"] = searchTerm
-//        }
-//
-//        newsClient.get("/posts", parameters:params) { (jsonResult) in
-//            switch jsonResult {
-//            case .success(let response):
-//
-//                completion(response.arrayBody, nil)
-//
-//            case .failure(let response):
-//
-//                print("Error during news list request:")
-//                print(response.error)
-//                completion(nil, response.error)
-//            }
-//        }
-//    }
-//
-//    func getBoardFeed(pageIndex:Int? = nil, itemsInPage:Int? = nil, completion:@escaping ([Any]?, Error?) -> ()) {
-//
-//        var params = ["per_page":10];
-//
-//        if let pgIndex = pageIndex, pgIndex > 0 {
-//            params["page"] = pgIndex + 1
-//        }
-//        if let itemsCount = itemsInPage {
-//            params["per_page"] = itemsCount;
-//        }
-//        boardClient.get("/posts", parameters:params) { (jsonResult) in
-//            switch jsonResult {
-//            case .success(let response):
-//
-//                completion(response.arrayBody, nil)
-//
-//            case .failure(let response):
-//
-//                print("Error during news list request:")
-//                print(response.error)
-//                completion(nil, response.error)
-//            }
-//        }
-//    }
-    
-//
-//    func getPlaylistVideos( completion:@escaping ([String:Any]?, Error?)->())
-//    {
-//        let bundleId = Bundle.main.bundleIdentifier
-//        ytClient.headerFields = ["X-Ios-Bundle-Identifier":bundleId ?? ""]
-//
-//        let params = [
-//            "key" : youTubeV3APIKey,
-//            "playlistId" : gofroExpertPlaylistId,
-//            "part" : "snippet",
-//            "maxResults" : 50,
-////            "pageToken" : "0"
-//            ] as [String: AnyObject]
-//
-//        ytClient.get("/playlistItems", parameters: params) { (result) in
-//
-//            switch result {
-//            case .success(let response):
-//
-//                completion(response.dictionaryBody, nil)
-//
-//            case .failure(let response):
-//
-//                let json = response.dictionaryBody
-//                print("Error during request:")
-//                print(json)
-//                completion(nil, response.error)
-//            }
-//        }
-//    }
-
-    
-//    func getNewsFeed(completion:@escaping ([Any]?, Error?) -> ()) {
-//        let params = ["per_page":100]
-//        newsClient.get("/posts", parameters:params) { (jsonResult) in
-//            switch jsonResult {
-//            case .success(let response):
-//
-//                completion(response.arrayBody, nil)
-//
-//            case .failure(let response):
-//
-//                print("Error during news list request:")
-//                print(response.error)
-//                completion(nil, response.error)
-//            }
-//        }
-        
-//        newsClient.downloadData("/posts") { (dataResult) in
-//            switch dataResult {
-//            case .success(let response):
-//
-//                completion(response.data, nil)
-//
-//            case .failure(let response):
-//
-//                print("Error during news list request:")
-//                print(response.error)
-//                completion(nil, response.error)
-//            }
-//        }
-//    }
 }

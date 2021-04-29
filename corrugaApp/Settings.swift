@@ -20,6 +20,9 @@ class Settings
         case searchTerm = "CurrentSearchTerm"
         case fromLangID = "FromLanguageID"
         case   toLangID = "ToLanguageID"
+        case newsLastDate = "NewsLastDate"
+        case boardLastDate = "BoardLastDate"
+        case videoLastDate = "VideoLastDate"
         
         var key:String {
             return self.rawValue
@@ -54,6 +57,30 @@ class Settings
         defaults.register(defaults: [Keys.searchTerm.key : kDefaultSearchTerm,
                                      Keys.fromLangID.key : availableLangIDs[0],
                                      Keys.toLangID.key : availableLangIDs[1]])
+    }
+    
+    var newsLastUpdateDate:String? {
+        get {
+            return (defaults.object(forKey: Keys.newsLastDate.key) as? String)
+        } set {
+            defaults.setValue(newValue, forKey: Keys.newsLastDate.key)
+        }
+    }
+    
+    var boardLastUpdateDate:String? {
+        get {
+            return (defaults.object(forKey: Keys.boardLastDate.key) as? String)
+        } set {
+            defaults.setValue(newValue, forKey: Keys.boardLastDate.key)
+        }
+    }
+    
+    var videoLastUpdateDate:String? {
+        get {
+            return (defaults.object(forKey: Keys.videoLastDate.key) as? String)
+        } set {
+            defaults.setValue(newValue, forKey: Keys.videoLastDate.key)
+        }
     }
     
     var searchTerm:String {
