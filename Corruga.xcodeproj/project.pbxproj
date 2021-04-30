@@ -339,7 +339,7 @@
 				7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */,
 				7C4B7074214182FE00BC03C3 /* Video */,
 				7C4B7073214182F800BC03C3 /* News */,
-				7C5D73F0216773630022ABBC /* Classifieds */,
+				7C5D73F0216773630022ABBC /* Board */,
 				7CF1266721271D2F0024F099 /* Dictionary */,
 				7CAB489A21271EF2003F97DA /* Extensions */,
 				7C8EC17821285199000499C9 /* Protocols */,
@@ -366,13 +366,13 @@
 			path = corruDictTests;
 			sourceTree = "<group>";
 		};
-		7C5D73F0216773630022ABBC /* Classifieds */ = {
+		7C5D73F0216773630022ABBC /* Board */ = {
 			isa = PBXGroup;
 			children = (
 				7C5D73F12167737F0022ABBC /* BoardCoordinator.swift */,
 				7C5D73F3216774110022ABBC /* BoardViewController.swift */,
 			);
-			path = Classifieds;
+			path = Board;
 			sourceTree = "<group>";
 		};
 		7C73FDCE228570F300DE4AE2 /* SelectionPopover */ = {

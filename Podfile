@@ -18,7 +18,8 @@ target 'Corruga' do
   #  pod 'youtube-ios-player-helper', '~> 0.1.4'
   #  pod 'UIDevice-Hardware'
   #  pod 'FacebookSDK', '~> 4.44.1'
-  #  pod 'HTMLReader'
+  pod 'SwiftSoup'
+  pod 'SwiftEmoji'
 
 end
 

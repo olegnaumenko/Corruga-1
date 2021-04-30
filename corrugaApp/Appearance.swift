@@ -27,7 +27,7 @@ import UIKit
     }
     
     static func topButtonTint() -> UIColor {
-        return self.labelSecondaryColor()
+        return self.backgroundAppColor()
     }
     
     static let labelColor = UIColor(named: "app-label")!

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NewsViewControllerDelegate:class {
-    func newsViewControllerDidSelect(item:NewsItem) -> Bool
+    func newsViewControllerDidSelect(post:NewsOpenPost) -> Bool
 }
 
 
@@ -36,7 +36,6 @@ class NewsViewController: BaseFeatureViewController {
         }
     }
     
-    weak var navigationDelegate:NewsViewControllerDelegate?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -55,7 +54,7 @@ class NewsViewController: BaseFeatureViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.searchController = searchController
 
         self.tableView.dataSource = self
@@ -119,9 +118,7 @@ extension NewsViewController : UITableViewDataSource {
 
 extension NewsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let itemVM = viewModel.item(atIndex: indexPath.row)
-        if let shouldKeepSelection = self.navigationDelegate?.newsViewControllerDidSelect(item: itemVM),
-           shouldKeepSelection == false {
+        if (!viewModel.didSelecteItem(index: indexPath.row)) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }

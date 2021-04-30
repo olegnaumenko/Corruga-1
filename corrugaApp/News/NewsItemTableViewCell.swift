@@ -16,12 +16,34 @@ class NewsItemTableViewCell: UITableViewCell {
     @IBOutlet weak var viewsLabel:UILabel!
     @IBOutlet weak var adImageView:UIImageView!
     
+    let emojiHtmlRegex = "\\&#x(.*)\\;"
     
     var newsItem:NewsItem! {
         didSet {
             self.titleLabel.text = newsItem.title
             self.dateLabel.text = newsItem.date
-            self.excerptLabel.text = newsItem.shortText
+            let excerpt = newsItem.shortText
+            
+            
+            //replace emoji if any
+            do {
+                let regex = try NSRegularExpression(pattern: emojiHtmlRegex, options: [])
+                
+                let num = regex.numberOfMatches(in: newsItem.shortText, options: [], range: NSMakeRange(0, newsItem.shortText.count))
+                
+                if num == 0 {
+                    self.excerptLabel.text = excerpt
+                    return
+                }
+                
+                let range = NSRange(excerpt.startIndex..., in: excerpt)
+                let newExcerpt = regex.stringByReplacingMatches(in: excerpt, options: [], range: range, withTemplate: "")
+                //"\u{$1}"
+                self.excerptLabel.text = newExcerpt
+            } catch {
+
+                self.excerptLabel.text = excerpt
+            }
         }
     }
     

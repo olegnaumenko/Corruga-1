@@ -137,4 +137,35 @@ final class Client {
             self.indicatorNotifier.decrement()
         }
     }
+    
+    func getPost(id:Int, type:SourceCategory, completion:@escaping ([Any]?, Int, Error?) -> ()) {
+        var params = [String:Any]();
+        
+        let urlString = (type == .news ? Client.newsAPIURL : Client.boardAPIURL) + "/posts/\(id)"
+        
+        params["_fields"] = ["id", "title", "excerpt", "date_gmt", "link", "content"]
+        
+        self.indicatorNotifier.increment()
+        
+        client.getJson(urlString, parameters:params, headerFields: nil) { (jsonResult) in
+            
+            switch jsonResult {
+            case .Success(let resource, let response):
+                let totalHeader = response.allHeaderFields["x-wp-total"] as? String
+                let totalItems:Int = (totalHeader == nil ? 0 : Int(totalHeader!) ?? 0)
+                if let array = resource as? [Any] {
+                    completion(array, totalItems, nil)
+                } else if let dict = resource as? [String:Any] {
+                    completion([dict], totalItems, nil)
+                } else {
+                    let error = NSError(domain: kNetworkErrorDomain, code: 1002, userInfo: nil)
+                    completion(nil, 0, error)
+                }
+            case .Failure(let error):
+                completion(nil, 0, error)
+                print("error in response: ", error)
+            }
+            self.indicatorNotifier.decrement()
+        }
+    }
 }

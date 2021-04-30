@@ -45,6 +45,13 @@ struct NewsItem:TypedItem {
     var type: NewsItemType
 }
 
+struct NewsOpenPost {
+    let id:Int
+    let title:String
+    let content:String
+    let htmlURL:String
+}
+
 extension NSNotification.Name {
     public static let NewsSourceItemsUpdated = NSNotification.Name("NewsSourceItemsUpdated")
 }
@@ -219,6 +226,24 @@ class NewsSource: NSObject {
                     self.reportError(error: error)
                 }
             }
+        }
+    }
+    
+    func getNewsPost(id:Int, completion:@escaping (NewsOpenPost?, Error?)->()) {
+        Client.shared.getPost(id: id, type:itemType) { (dataArray, count, error) in
+            if let array = dataArray as [Any]?, array.count > 0, let dict = array[0] as? [String:Any] {
+                if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
+                   let content =  (dict["content"] as? [AnyHashable:Any])?["rendered"] as? String,
+                   let id = dict["id"] as? Int {
+                    
+                    let link = dict["link"] as? String ?? ""
+                    let post = NewsOpenPost(id: id, title: self.filterHtml(title), content: content, htmlURL: link)
+                    completion(post, nil)
+                    return
+                }
+            }
+            let error = NSError(domain: kNetworkErrorDomain, code: 1003, userInfo: nil)
+            completion(nil, error)
         }
     }
     
