@@ -8,75 +8,34 @@
 
 import UIKit
 import WebKit
-
-class PostStyleSchemeHandler: NSObject, WKURLSchemeHandler {
-    
-    func webView(_ webView: WKWebView, start startUrlSchemeTask: WKURLSchemeTask) {
-        
-    }
-    
-    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
-        
-    }
-    
-//    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
-//        let url = urlSchemeTask.request.url
-//        let mimeType = "text/\(url?.pathExtension ?? "")" //or whatever you need
-//        var response: URLResponse? = nil
-//        if let url = url {
-//            response = URLResponse(url: url, mimeType: mimeType, expectedContentLength: -1, textEncodingName: nil)
-//        }
-//        if let response = response {
-//            urlSchemeTask.didReceive(response)
-//        }
-//        let data = getResponseData()
-//        if let data = data {
-//            urlSchemeTask.didReceive(data)
-//        }
-//        urlSchemeTask.didFinish()
-//    }
-}
-
+import FTLinearActivityIndicator
 
 class WebItemViewController:UIViewController {
     
+    var viewModel:WebItemViewModel!
+    
     @IBOutlet var webView:WKWebView!
-    
-    @IBOutlet var loadingLabel:UILabel!
-    
-    @IBOutlet var loadingIndicator:UIActivityIndicatorView!
-    
-    var urlString:String!
-    
-    var content:String?
+    @IBOutlet var loadingIndicator:FTLinearActivityIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        var config = WKWebViewConfiguration()
-//        let handler = PostStyleSchemeHandler()
-//        config.setURLSchemeHandler(handler, forURLScheme: "file")
         self.webView.uiDelegate = self
         self.webView.navigationDelegate = self
-        self.loadHome()
+        self.webView.allowsBackForwardNavigationGestures = true
+        self.webView.allowsLinkPreview = true
+        
+        self.loadingIndicator.startAnimating()
+        
+        self.viewModel.loadContentBlock = { [weak self] content, baseURL in
+            self?.webView.loadHTMLString(content, baseURL: baseURL)
+        }
+        self.viewModel.viewDidLoad()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.view.backgroundColor = Appearance.backgroundAppColor()
         self.webView.backgroundColor = self.view.backgroundColor
-    }
-    
-    private func loadHome() {
-        let url = URL(string: self.urlString)
-        if let content = self.content {
-            let baseURL = url?.deletingLastPathComponent()
-            self.webView.loadHTMLString(content, baseURL: baseURL)
-            
-        } else {
-            let request = URLRequest(url: url!)
-            self.webView.load(request)
-        }
     }
     
     func setupBackButton() {
@@ -91,14 +50,6 @@ class WebItemViewController:UIViewController {
     @objc func onBackButton(_ sender:Any) {
         self.webView.goBack()
     }
-
-    private func hideLoadingLabel() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.loadingLabel?.alpha = 0
-        }) { (finished) in
-            self.loadingLabel?.removeFromSuperview()
-        }
-    }
     
     func presentError(error:Error) {
         let title = NSLocalizedString("Error loading this page:", comment: "")
@@ -109,6 +60,34 @@ class WebItemViewController:UIViewController {
                 alertController.dismiss(animated: true)
             }
         })
+    }
+    
+    @IBAction func onShareButton(sender:UIBarButtonItem) {
+        showShareActivity(sender)
+    }
+    
+    private func showShareActivity(_ sender:UIBarButtonItem)
+    {
+        guard let url = viewModel.baseURL else { return }
+        sender.isEnabled = false
+        
+        let items:[Any] = [url, viewModel.title]
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityController.title = NSLocalizedString("Sharing a link", comment: "")
+        activityController.modalPresentationStyle = .popover
+        activityController.popoverPresentationController?.barButtonItem = sender
+        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
+        
+        activityController.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, error) in
+            if (completed) {
+                self?.dismiss(animated: true, completion: nil)
+                AppAnalytics.shared.logEvent(name:"share_link_success", params:["activity":activityType ?? "nil"])
+            } else {
+                AppAnalytics.shared.logEvent(name:"share_link_decline", params:nil)
+            }
+            sender.isEnabled = true
+        }
+        self.present(activityController, animated: true, completion: nil)
     }
 }
 
@@ -132,8 +111,6 @@ extension WebItemViewController:WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
-        self.loadingLabel?.text = "Please check connection"
         self.setupBackButton()
         self.presentError(error: error)
     }
@@ -141,20 +118,16 @@ extension WebItemViewController:WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error)
         self.presentError(error: error)
+        self.loadingIndicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.loadingIndicator.startAnimating()
-        self.loadingIndicator.isHidden = true
+        self.loadingIndicator.stopAnimating()
         self.setupBackButton()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
-        self.loadingLabel?.isHidden = true;
         self.setupBackButton()
-        
-        self.hideLoadingLabel()
     }
 }

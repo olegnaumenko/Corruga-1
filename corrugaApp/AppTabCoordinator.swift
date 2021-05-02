@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-//import FTLinearActivityIndicator
 
 class AppTabCoordinator:NSObject {
     
@@ -30,8 +29,8 @@ class AppTabCoordinator:NSObject {
         
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.backgroundAppColor()
-        tabBarController.tabBar.unselectedItemTintColor = Appearance.appTintLargeColor()
-        tabBarController.tabBar.tintColor = Appearance.labelSecondaryColor()
+        tabBarController.tabBar.unselectedItemTintColor = Appearance.labelSecondaryColor()
+        tabBarController.tabBar.tintColor = Appearance.appTintLargeColor()
         super.init()
         tabBarController.delegate = self;
         
@@ -104,12 +103,10 @@ extension AppTabCoordinator
     // MARK: App lifecycle
     
     func appDidFinishLaunching(_ application: UIApplication) {
-        
-        //doesn't work well, creates one more window without root vc:
-//        UIApplication.configureLinearNetworkActivityIndicatorIfNeeded()
-        
-        DictModel.shared.setup()
-        VideoSource.shared.reload()
+        if application.applicationState != .background {
+            DictModel.shared.setup()
+            VideoSource.shared.reload()
+        }
     }
     
     func appWillResignActive(_ application: UIApplication) {

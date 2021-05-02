@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ShareViewController: UIViewController {
 
     let shareLink = "https://corrugated.app.link/185TmpFElV"
@@ -21,27 +22,27 @@ class ShareViewController: UIViewController {
     
     @IBOutlet var versionLabel:UILabel!
     
-    var onShare = {}
+    var onDismiss = {}
+    var onAppear = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.shareButton.layer.cornerRadius = 3
         self.shareButton.layer.masksToBounds = true
-        
-        let swipeReco = UISwipeGestureRecognizer(target: self, action: #selector(onSwipe(_:)))
-        swipeReco.direction = .down
-        self.view.addGestureRecognizer(swipeReco)
-        self.swipeReco = swipeReco
-        
+
         let verString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         self.versionLabel.text = String.init(format: "v. %@", verString)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let rightItem = UIBarButtonItem(image: UIImage(named: "qr_close"), style: .plain, target: self, action: #selector(ShareViewController.onClose(_:)))
-        self.navigationItem.rightBarButtonItem = rightItem
+        self.onAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.onDismiss()
     }
     
     @objc private func onSwipe(_ sender:UISwipeGestureRecognizer) {

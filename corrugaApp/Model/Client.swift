@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct NetworkProgressNotifier {
     
@@ -37,7 +38,9 @@ final class Client {
     static let shared = Client()
     
     private static let boardAPIURL = "https://market.gofro.expert/wp-json/wp/v2"
-    private static let newsAPIURL  = "https://gofro.expert/wp-json/wp/v2"//"https://novosti.gofro.expert/wp-json/wp/v2"
+//    https://novosti.gofro.expert/wp-json/wp/v2
+    private static let newsAPIURL  = "https://gofro.expert/wp-json/wp/v2"//"
+//    private static let newsAPIURL  = "https://novosti.gofro.expert/wp-json/wp/v2"
     private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
     
 //    private let reachability:Reachability!
@@ -97,13 +100,35 @@ final class Client {
         })
     }
     
+    func getFeedAfter(type:SourceCategory, dateString:String, completion:@escaping ([Any]?, Int, Error?) -> ()) {
+        var params = [String:Any]();
+        
+        let urlString = type == .news ? Client.newsAPIURL : Client.boardAPIURL
+        
+        params["after"] = dateString
+        params["_fields"] = ["id","date"]
+        
+        client.getJson("\(urlString)/posts", parameters: params, headerFields: nil) { (networkResult) in
+            
+            switch networkResult {
+            case .Success(let resource, let response):
+                let totalHeader = response.allHeaderFields["x-wp-total"] as? String
+                let totalItems:Int = (totalHeader == nil ? 0 : Int(totalHeader!) ?? 0)
+                if let array = resource as? [Any] {
+                    completion(array, totalItems, nil)
+                }
+            case .Failure(let error):
+                completion(nil, 0, error)
+                print("error in response: ", error)
+            }
+        }
+    }
+    
     func getFeed(type:SourceCategory, offset:Int? = nil, count:Int? = nil, search:String? = nil, completion:@escaping ([Any]?, Int, Error?) -> ())
     {
         var params = [String:Any]();
         
         let urlString = type == .news ? Client.newsAPIURL : Client.boardAPIURL
-        
-        params["tax_relations"] = "news"
         
         if let offset = offset, offset > 0 {
             params["offset"] = offset
@@ -114,16 +139,16 @@ final class Client {
         if let searchTerm = search, searchTerm.count > 0 {
             params["search"] = searchTerm
         }
-        
-        params["_fields"] = ["id","title","excerpt","date_gmt","link"]
+        params["categories"] = 1
+        params["_fields"] = ["id","title","excerpt","date","link"]
         params["status"] = "publish"
         params["type"] = "post"
         
         self.indicatorNotifier.increment()
         
-        client.getJson("\(urlString)/posts", parameters:params, headerFields: nil) { (jsonResult) in
+        client.getJson("\(urlString)/posts", parameters:params, headerFields: nil) { (networkResult) in
             
-            switch jsonResult {
+            switch networkResult {
             case .Success(let resource, let response):
                 let totalHeader = response.allHeaderFields["x-wp-total"] as? String
                 let totalItems:Int = (totalHeader == nil ? 0 : Int(totalHeader!) ?? 0)

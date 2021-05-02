@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var coordinator:AppTabCoordinator!// AppCoordinator!
+    var coordinator:AppTabCoordinator!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -42,6 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = (window.rootViewController as! AppTabBarController)
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
         self.coordinator.appDidFinishLaunching(application)
+        
+        application.setMinimumBackgroundFetchInterval(2*3600)
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: .badge) { (success, error) in }
+        
         return true
     }
 
@@ -54,8 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let handled = Branch.getInstance().application(app,
-                                                        open: url,
-                                                        options: options)
+                                                       open: url,
+                                                       options: options)
         return handled
     }
     
@@ -75,6 +80,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.coordinator.dictionaryCoordinator?.translate(term: title)
         }
         return true
+    }
+    
+    func application(_ application: UIApplication,
+                     performFetchWithCompletionHandler
+                        completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        let source = NewsSource(itemType: .news)
+        source.getLatestPosts { (count, errString) in
+            if errString == nil {
+                application.applicationIconBadgeNumber = count
+                completionHandler(count != 0 ? .newData : .noData)
+                print("Fetch: ", count)
+            } else {
+                completionHandler(.failed)
+            }
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

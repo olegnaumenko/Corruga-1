@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import FTLinearActivityIndicator
 
 protocol NewsViewControllerDelegate:class {
-    func newsViewControllerDidSelect(post:NewsOpenPost) -> Bool
+    func newsViewControllerDidSelect(item:NewsItem) -> Bool
 }
 
 
@@ -20,8 +21,10 @@ class NewsViewController: BaseFeatureViewController {
     
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var logoLabel:UILabel?
+    @IBOutlet weak var loadingIndicator:FTLinearActivityIndicator!
     
-    @IBOutlet var loadingIndicator:UIActivityIndicatorView!
+    let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
+    let overscrollLoadingIndicator = UIActivityIndicatorView()
     
     var viewModel:NewsViewModel!
         {
@@ -41,11 +44,12 @@ class NewsViewController: BaseFeatureViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadingIndicator.startAnimating()
        
+        self.setupFooter()
+        
         self.tableView.estimatedRowHeight = 220.0
         self.tableView.separatorColor = UIColor.clear
-        self.tableView.prefetchDataSource = self
+//        self.tableView.prefetchDataSource = self
         self.definesPresentationContext = true
         
         searchController.searchResultsUpdater = self
@@ -59,6 +63,7 @@ class NewsViewController: BaseFeatureViewController {
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +77,9 @@ class NewsViewController: BaseFeatureViewController {
         if let indexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
+        if self.tableView.numberOfRows(inSection: 0) == 0 {
+            self.loadingIndicator.startAnimating()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,13 +87,33 @@ class NewsViewController: BaseFeatureViewController {
         self.viewModel.onViewDidDissapear()
     }
     
+    private func setupFooter() {
+        self.overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.overscrollLoadingIndicator.stopAnimating()
+        self.footerView.addSubview(overscrollLoadingIndicator)
+        self.tableView.tableFooterView = self.footerView
+        self.footerView.autoresizingMask = [.flexibleWidth]
+        NSLayoutConstraint.activate([
+            overscrollLoadingIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+            overscrollLoadingIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor)
+        ])
+    }
+    
     
     private func refresh() {
         self.tableView.separatorColor = Appearance.appTintColor()
-        self.loadingIndicator.stopAnimating()
-        self.loadingIndicator.isHidden = true
         self.tableView.reloadData()
-        self.tableView.isHidden = self.tableView.numberOfRows(inSection: 0) == 0
+        let isEmpty = self.tableView.numberOfRows(inSection: 0) == 0
+        self.tableView.isHidden = isEmpty
+        if (isEmpty == false) {
+            self.loadingIndicator.stopAnimating()
+        }
+        self.overscrollLoadingIndicator.stopAnimating()
+    }
+    
+    private func overscroll() {
+        self.overscrollLoadingIndicator.startAnimating()
+        self.viewModel.onOverscroll()
     }
 }
 
@@ -124,19 +152,25 @@ extension NewsViewController : UITableViewDelegate {
     }
 }
 
-extension NewsViewController : UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
+extension NewsViewController : UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let ratio = (scrollView.contentOffset.y/(scrollView.contentSize.height - scrollView.frame.size.height))
+        if (ratio > 0.9) {
+            self.overscroll()
+        }
+    }
+}
+
+//extension NewsViewController : UITableViewDataSourcePrefetching {
+//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
 //        guard let min = indexPaths.min()?.row, let max = indexPaths.max()?.row
 //        else {
 //            return
 //        }
 //        self.viewModel.prefetchItems(firstIndex: min, lastIndex: max)
-        
-
 //        print("prefetch: \(indexPaths) visible: \(tableView.indexPathsForVisibleRows)")
-    }
-    
-    
-}
+//    }
+//}
+
+
 

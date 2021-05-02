@@ -11,23 +11,22 @@ import UIKit
 class NewsCoordinator: BaseFeatureCoordinator {
     
     let newsViewController:NewsViewController
+    let source = NewsSource(itemType: .news)
     
     init(newsViewController:NewsViewController) {
         self.newsViewController = newsViewController
         super.init()
-        self.newsViewController.viewModel = NewsViewModel(itemSource: NewsSource(itemType: .news))
+        self.newsViewController.viewModel = NewsViewModel(itemSource: source)
         self.newsViewController.viewModel.navigationDelegate = self
         self.start(viewController: newsViewController)
     }
 }
 
 extension NewsCoordinator:NewsViewControllerDelegate {
-    func newsViewControllerDidSelect(post : NewsOpenPost) -> Bool {
+    func newsViewControllerDidSelect(item:NewsItem) -> Bool {
         
         let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewsItemViewController") as! WebItemViewController
-        itemViewController.urlString = post.htmlURL
-//        itemViewController.title = post.title
-        itemViewController.content = post.content
+        itemViewController.viewModel = WebItemViewModel(item: item, source: source)
         self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
         return true
     }

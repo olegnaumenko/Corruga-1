@@ -25,6 +25,7 @@ protocol NetworkStackProtocol {
 class Network: NetworkStackProtocol {
     
     private let sessionManager = AFURLSessionManager(sessionConfiguration: URLSessionConfiguration.default)
+    private let requestSerializer = AFHTTPRequestSerializer()
     
     init() {
         self.sessionManager.responseSerializer = AFJSONResponseSerializer()
@@ -41,8 +42,6 @@ class Network: NetworkStackProtocol {
     
     func getJson(_ path: String, parameters: Any? = nil, headerFields: [String:String]? = nil, completion: @escaping (_ result: NetworkResult) -> Void) {
 
-//        var serializingError:Error? = nil
-        
         guard let url = URL(string: path) else {
             print("Could not crete URL from path:", path)
             return
@@ -50,8 +49,6 @@ class Network: NetworkStackProtocol {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        let requestSerializer = AFHTTPRequestSerializer()
         
         var nsErr: NSError?
         

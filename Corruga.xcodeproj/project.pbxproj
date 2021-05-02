@@ -84,6 +84,73 @@
 		7CFFDEB3219D827D006EEB47 /* BaseFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */; };
 		7CFFDEB5219D83B5006EEB47 /* BaseFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */; };
 		7CFFDEB8219D8894006EEB47 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */; };
+		840C7F12263D960E00F9F086 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD35121444D0D006CF4C6 /* Client.swift */; };
+		840C7F15263D961200F9F086 /* NewsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5BD3AC219EE31400337340 /* NewsSource.swift */; };
+		840C7F18263D961500F9F086 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421AFBE263A8F9D00644179 /* Network.swift */; };
+		840C7F1B263D961800F9F086 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D339E2386AFA400E2537A /* BackgroundTask.swift */; };
+		840C7F1E263D971B00F9F086 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADF82127EAAE009D3B4A /* Settings.swift */; };
+		840C7F21263D972100F9F086 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C978F77211F101F00D1B165 /* Appearance.swift */; };
+		840C7F24263D972400F9F086 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16D3622199E09C00217626 /* AppAnalytics.swift */; };
+		840C7F27263D976000F9F086 /* String+ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5337902124371000465EF1 /* String+ImageName.swift */; };
+		840C7F2A263D976800F9F086 /* UIStoryboard+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82620B22A18E260067D653 /* UIStoryboard+Main.swift */; };
+		840C7F2D263D976D00F9F086 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC17421282F8D000499C9 /* CoordinatorProtocol.swift */; };
+		840C7F30263D977B00F9F086 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB489721271EA6003F97DA /* DetailViewController.swift */; };
+		840C7F33263D978100F9F086 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D004B210889060025EF47 /* PhotoViewController.swift */; };
+		840C7F36263D978500F9F086 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */; };
+		840C7F39263D979000F9F086 /* SpeechSynth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC81CFD212867FB004D555E /* SpeechSynth.swift */; };
+		840C7F3C263D979500F9F086 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4F64C210C58410094C5B0 /* DetailViewModel.swift */; };
+		840C7F3F263D97AE00F9F086 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE18C322833469004D6964 /* LanguageModel.swift */; };
+		840C7F42263D97C000F9F086 /* VideoItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E70219C29E400560397 /* VideoItemEntity.swift */; };
+		840C7F45263D97DB00F9F086 /* PageViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372D211620CD008B774C /* PageViewDatasource.swift */; };
+		840C7F46263D97DB00F9F086 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDC372B2116206C008B774C /* PageViewController.swift */; };
+		840C7F47263D97DB00F9F086 /* PageViewControllerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC176212840AF000499C9 /* PageViewControllerObserver.swift */; };
+		840C7F48263D97DB00F9F086 /* PageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C72D110211EF27B00CDAD47 /* PageViewCoordinator.swift */; };
+		840C7F4B263D97E000F9F086 /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC81CFF21286D24004D555E /* AudioSession.swift */; };
+		840C7F4E263D97E600F9F086 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF3B462211EEA1F00CFDFFF /* PhotoViewModel.swift */; };
+		840C7F51263D980600F9F086 /* DictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDDE2285ABEF00DE4AE2 /* DictionaryViewModel.swift */; };
+		840C7F52263D980600F9F086 /* DictionaryTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE03233210B83A1001C9D78 /* DictionaryTableDataSource.swift */; };
+		840C7F53263D980600F9F086 /* FloatingHeaderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEABAD3215F70810011BB55 /* FloatingHeaderPresenter.swift */; };
+		840C7F54263D980600F9F086 /* DictionaryNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73DF216658BA0022ABBC /* DictionaryNavViewController.swift */; };
+		840C7F55263D980600F9F086 /* ScrollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C53379221243A9000465EF1 /* ScrollManager.swift */; };
+		840C7F56263D980600F9F086 /* ListViewControllerFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADFC2127FF1C009D3B4A /* ListViewControllerFinder.swift */; };
+		840C7F57263D980600F9F086 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0049210889060025EF47 /* DictionaryViewController.swift */; };
+		840C7F58263D980600F9F086 /* TotalLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC17221281A80000499C9 /* TotalLabelViewModel.swift */; };
+		840C7F59263D980600F9F086 /* SwapLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7ADFA2127FCEC009D3B4A /* SwapLangViewModel.swift */; };
+		840C7F5A263D980600F9F086 /* DictionaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB752108928000FEEB52 /* DictionaryCoordinator.swift */; };
+		840C7F5B263D980600F9F086 /* DictionaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE18C522844744004D6964 /* DictionaryEntryTableViewCell.swift */; };
+		840C7F60263D980D00F9F086 /* BoardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F12167737F0022ABBC /* BoardCoordinator.swift */; };
+		840C7F61263D980D00F9F086 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D73F3216774110022ABBC /* BoardViewController.swift */; };
+		840C7F64263D981000F9F086 /* NewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70752141830F00BC03C3 /* NewsCoordinator.swift */; };
+		840C7F65263D981000F9F086 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */; };
+		840C7F66263D981000F9F086 /* NewsItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */; };
+		840C7F67263D981000F9F086 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B70772141835700BC03C3 /* NewsViewController.swift */; };
+		840C7F68263D981000F9F086 /* AdPicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */; };
+		840C7F69263D981000F9F086 /* WebItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */; };
+		840C7F6C263D982300F9F086 /* VideoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEABAD1215F57B70011BB55 /* VideoItemTableViewCell.swift */; };
+		840C7F6F263D982600F9F086 /* VideoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEABACF215F56F80011BB55 /* VideoTableViewModel.swift */; };
+		840C7F72263D982900F9F086 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */; };
+		840C7F75263D982C00F9F086 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */; };
+		840C7F78263D982F00F9F086 /* VideosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CD34921443962006CF4C6 /* VideosCoordinator.swift */; };
+		840C7F7B263D984500F9F086 /* BaseFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */; };
+		840C7F7E263D984800F9F086 /* BaseFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */; };
+		840C7F81263D984E00F9F086 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD61C421417A2E000E864D /* AppTabBarController.swift */; };
+		840C7F84263D985100F9F086 /* AppTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD61C22141797F000E864D /* AppTabCoordinator.swift */; };
+		840C7F87263D985400F9F086 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D0047210889060025EF47 /* AppDelegate.swift */; };
+		840C7F8A263D986600F9F086 /* SelectionPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDCF2285713200DE4AE2 /* SelectionPopoverViewController.swift */; };
+		840C7F8B263D986600F9F086 /* SelectionPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD12285715200DE4AE2 /* SelectionPopoverViewModel.swift */; };
+		840C7F8E263D986B00F9F086 /* PopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD52285734200DE4AE2 /* PopoverBackgroundView.m */; };
+		840C7F8F263D986B00F9F086 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD62285734200DE4AE2 /* PopupViewController.m */; };
+		840C7F90263D986B00F9F086 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD42285734200DE4AE2 /* SelectViewController.m */; };
+		840C7F93263D987000F9F086 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
+		840C7F94263D987000F9F086 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
+		840C7FAD263D98EF00F9F086 /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */; };
+		840C7FAE263D98EF00F9F086 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
+		840C7FAF263D98EF00F9F086 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6E219C293800560397 /* VideoSource.swift */; };
+		840C7FB0263D98EF00F9F086 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C954172211CC9AE00CDD270 /* ImageProvider.swift */; };
+		840C7FB1263D98EF00F9F086 /* UserActivityFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4993EA213EACE800778429 /* UserActivityFabric.swift */; };
+		840C7FB7263D996500F9F086 /* corruObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FB6263D996500F9F086 /* corruObjCTests.m */; };
+		840C7FC2263D9D2400F9F086 /* WebItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */; };
+		840C7FC3263D9D2400F9F086 /* WebItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */; };
 		8421AFBF263A8F9D00644179 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421AFBE263A8F9D00644179 /* Network.swift */; };
 		9B32C2F9076AF448DCD672F7 /* Pods_CorrugaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
@@ -202,6 +269,9 @@
 		7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFeatureViewController.swift; sourceTree = "<group>"; };
 		7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFeatureCoordinator.swift; sourceTree = "<group>"; };
 		7CFFDEB7219D8894006EEB47 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		840C7FB6263D996500F9F086 /* corruObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = corruObjCTests.m; sourceTree = "<group>"; };
+		840C7FBC263D99F900F9F086 /* corruga_tests_bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = corruga_tests_bridging_header.h; sourceTree = "<group>"; };
+		840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebItemViewModel.swift; sourceTree = "<group>"; };
 		8421AFBE263A8F9D00644179 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9EA1BE279A8F14B1A1D1E275 /* Pods-Corruga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.release.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.release.xcconfig"; sourceTree = "<group>"; };
 		A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CorrugaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,12 +317,9 @@
 		7C06CB70210891F300FEEB52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C3A11832115CEEB00FB96A1 /* obsolete */,
 				7C7AA6AB211EE71B00A8110D /* Entities */,
 				7C06CB712108923300FEEB52 /* DictModel.swift */,
 				7CDE18C322833469004D6964 /* LanguageModel.swift */,
-				7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */,
-				7C06CB732108925800FEEB52 /* SpeechManager.swift */,
 				7C954172211CC9AE00CDD270 /* ImageProvider.swift */,
 				7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */,
 				7C4993EA213EACE800778429 /* UserActivityFabric.swift */,
@@ -281,6 +348,7 @@
 				7C4B70772141835700BC03C3 /* NewsViewController.swift */,
 				7C3FFA9E2289B4DA00EDF2BC /* NewsViewModel.swift */,
 				7C3FFA9A2286F90B00EDF2BC /* WebItemViewController.swift */,
+				840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */,
 				7C3FFA9C2286FB9000EDF2BC /* NewsItemTableViewCell.swift */,
 				6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */,
 			);
@@ -362,6 +430,8 @@
 			children = (
 				7C5D005E210889080025EF47 /* corruDictTests.swift */,
 				7C5D0060210889080025EF47 /* Info.plist */,
+				840C7FB6263D996500F9F086 /* corruObjCTests.m */,
+				840C7FBC263D99F900F9F086 /* corruga_tests_bridging_header.h */,
 			);
 			path = corruDictTests;
 			sourceTree = "<group>";
@@ -405,6 +475,9 @@
 		7C82620D22A193100067D653 /* Unused */ = {
 			isa = PBXGroup;
 			children = (
+				7C3A11762115C7B100FB96A1 /* LanguageStorage.swift */,
+				7C06CB732108925800FEEB52 /* SpeechManager.swift */,
+				7C3A11832115CEEB00FB96A1 /* obsolete */,
 				7CBAEA7D2286D1990000C8C6 /* NewsModel.swift */,
 				7C9D82D7228FDFBB0061DF1E /* BoardSource.swift */,
 				7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */,
@@ -736,6 +809,7 @@
 			files = (
 				7C5D004C210889060025EF47 /* PhotoViewController.swift in Sources */,
 				7CDD61C521417A2E000E864D /* AppTabBarController.swift in Sources */,
+				840C7FC2263D9D2400F9F086 /* WebItemViewModel.swift in Sources */,
 				7C16D3632199E09C00217626 /* AppAnalytics.swift in Sources */,
 				7C5D73E0216658BA0022ABBC /* DictionaryNavViewController.swift in Sources */,
 				7C5D73F4216774110022ABBC /* BoardViewController.swift in Sources */,
@@ -805,7 +879,73 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840C7F8E263D986B00F9F086 /* PopoverBackgroundView.m in Sources */,
+				840C7F51263D980600F9F086 /* DictionaryViewModel.swift in Sources */,
+				840C7F48263D97DB00F9F086 /* PageViewCoordinator.swift in Sources */,
+				840C7F36263D978500F9F086 /* ShareViewController.swift in Sources */,
+				840C7F1E263D971B00F9F086 /* Settings.swift in Sources */,
+				840C7F58263D980600F9F086 /* TotalLabelViewModel.swift in Sources */,
+				840C7F69263D981000F9F086 /* WebItemViewController.swift in Sources */,
+				840C7F56263D980600F9F086 /* ListViewControllerFinder.swift in Sources */,
+				840C7F2A263D976800F9F086 /* UIStoryboard+Main.swift in Sources */,
+				840C7F72263D982900F9F086 /* VideosViewController.swift in Sources */,
+				840C7FB1263D98EF00F9F086 /* UserActivityFabric.swift in Sources */,
+				840C7F5B263D980600F9F086 /* DictionaryEntryTableViewCell.swift in Sources */,
+				840C7F12263D960E00F9F086 /* Client.swift in Sources */,
+				840C7F3F263D97AE00F9F086 /* LanguageModel.swift in Sources */,
+				840C7F8F263D986B00F9F086 /* PopupViewController.m in Sources */,
+				840C7F65263D981000F9F086 /* NewsViewModel.swift in Sources */,
+				840C7F30263D977B00F9F086 /* DetailViewController.swift in Sources */,
+				840C7F39263D979000F9F086 /* SpeechSynth.swift in Sources */,
+				840C7F67263D981000F9F086 /* NewsViewController.swift in Sources */,
+				840C7F78263D982F00F9F086 /* VideosCoordinator.swift in Sources */,
+				840C7F94263D987000F9F086 /* ConnectionIndicatorController.swift in Sources */,
+				840C7F66263D981000F9F086 /* NewsItemTableViewCell.swift in Sources */,
 				7C5D005F210889080025EF47 /* corruDictTests.swift in Sources */,
+				840C7F4B263D97E000F9F086 /* AudioSession.swift in Sources */,
+				840C7F93263D987000F9F086 /* ConnectionIndicatorView.swift in Sources */,
+				840C7F27263D976000F9F086 /* String+ImageName.swift in Sources */,
+				840C7F18263D961500F9F086 /* Network.swift in Sources */,
+				840C7F53263D980600F9F086 /* FloatingHeaderPresenter.swift in Sources */,
+				840C7F64263D981000F9F086 /* NewsCoordinator.swift in Sources */,
+				840C7FB0263D98EF00F9F086 /* ImageProvider.swift in Sources */,
+				840C7F5A263D980600F9F086 /* DictionaryCoordinator.swift in Sources */,
+				840C7F2D263D976D00F9F086 /* CoordinatorProtocol.swift in Sources */,
+				840C7F4E263D97E600F9F086 /* PhotoViewModel.swift in Sources */,
+				840C7F81263D984E00F9F086 /* AppTabBarController.swift in Sources */,
+				840C7F57263D980600F9F086 /* DictionaryViewController.swift in Sources */,
+				840C7F8A263D986600F9F086 /* SelectionPopoverViewController.swift in Sources */,
+				840C7F47263D97DB00F9F086 /* PageViewControllerObserver.swift in Sources */,
+				840C7F61263D980D00F9F086 /* BoardViewController.swift in Sources */,
+				840C7F75263D982C00F9F086 /* VideoItemViewModel.swift in Sources */,
+				840C7FAE263D98EF00F9F086 /* DictModel.swift in Sources */,
+				840C7F6C263D982300F9F086 /* VideoItemTableViewCell.swift in Sources */,
+				840C7F46263D97DB00F9F086 /* PageViewController.swift in Sources */,
+				840C7FC3263D9D2400F9F086 /* WebItemViewModel.swift in Sources */,
+				840C7F84263D985100F9F086 /* AppTabCoordinator.swift in Sources */,
+				840C7F90263D986B00F9F086 /* SelectViewController.m in Sources */,
+				840C7F21263D972100F9F086 /* Appearance.swift in Sources */,
+				840C7F1B263D961800F9F086 /* BackgroundTask.swift in Sources */,
+				840C7F52263D980600F9F086 /* DictionaryTableDataSource.swift in Sources */,
+				840C7F24263D972400F9F086 /* AppAnalytics.swift in Sources */,
+				840C7F59263D980600F9F086 /* SwapLangViewModel.swift in Sources */,
+				840C7F68263D981000F9F086 /* AdPicTableViewCell.swift in Sources */,
+				840C7F15263D961200F9F086 /* NewsSource.swift in Sources */,
+				840C7FB7263D996500F9F086 /* corruObjCTests.m in Sources */,
+				840C7F42263D97C000F9F086 /* VideoItemEntity.swift in Sources */,
+				840C7F55263D980600F9F086 /* ScrollManager.swift in Sources */,
+				840C7F6F263D982600F9F086 /* VideoTableViewModel.swift in Sources */,
+				840C7F45263D97DB00F9F086 /* PageViewDatasource.swift in Sources */,
+				840C7F7B263D984500F9F086 /* BaseFeatureCoordinator.swift in Sources */,
+				840C7F33263D978100F9F086 /* PhotoViewController.swift in Sources */,
+				840C7F60263D980D00F9F086 /* BoardCoordinator.swift in Sources */,
+				840C7FAF263D98EF00F9F086 /* VideoSource.swift in Sources */,
+				840C7F8B263D986600F9F086 /* SelectionPopoverViewModel.swift in Sources */,
+				840C7F54263D980600F9F086 /* DictionaryNavViewController.swift in Sources */,
+				840C7FAD263D98EF00F9F086 /* SpotlightIndexer.swift in Sources */,
+				840C7F7E263D984800F9F086 /* BaseFeatureViewController.swift in Sources */,
+				840C7F3C263D979500F9F086 /* DetailViewModel.swift in Sources */,
+				840C7F87263D985400F9F086 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,7 +1102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -987,7 +1127,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Corruga.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = ZA6S8VA4XW;
 				INFOPLIST_FILE = corrugaApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1022,6 +1162,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruDictTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = corruDictTests/corruga_tests_bridging_header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Corruga.app/Corruga";
@@ -1045,6 +1186,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.naumenko.corruDictTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = corruDictTests/corruga_tests_bridging_header.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Corruga.app/Corruga";

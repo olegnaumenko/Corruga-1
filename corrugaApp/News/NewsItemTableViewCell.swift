@@ -21,8 +21,8 @@ class NewsItemTableViewCell: UITableViewCell {
     var newsItem:NewsItem! {
         didSet {
             self.titleLabel.text = newsItem.title
-            self.dateLabel.text = newsItem.date
-            let excerpt = newsItem.shortText
+            self.dateLabel.text = filterDate(newsItem.date)
+            let excerpt = newsItem.shortText + " ▶"
             
             
             //replace emoji if any
@@ -45,6 +45,10 @@ class NewsItemTableViewCell: UITableViewCell {
                 self.excerptLabel.text = excerpt
             }
         }
+    }
+    
+    private func filterDate(_ string:String) -> String {
+        return string.replacingOccurrences(of: "T", with: " ")
     }
     
     override func awakeFromNib() {

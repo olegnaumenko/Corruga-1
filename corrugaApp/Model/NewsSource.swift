@@ -88,10 +88,16 @@ class NewsSource: NSObject {
     var newsItems = [NewsItem]()
     var searchItems = [NewsItem]()
     
-    private var backgroundTask = BackgroundTask(name:"news.source")
     private var loadInProgress = false {
         didSet {
-            backgroundTask.inProgress = loadInProgress
+            if newsItems.count != 0 && loadInProgress == false {
+                for item in newsItems {
+                    if item.date.isEmpty == false {
+                        Settings.s.newsLastUpdateDate = item.date
+                        break
+                    }
+                }
+            }
         }
     }
     
@@ -125,7 +131,10 @@ class NewsSource: NSObject {
         newsItems.removeAll()
         onItemsChange()
         loadInProgress = true
-        getNextItems(offset:currentOffset, count: currentPageSize, recursively: true)
+        
+        if UIApplication.shared.applicationState != .background {
+            getNextItems(offset:currentOffset, count: currentPageSize, recursively: false)
+        }
     }
     
     func reloadSearch() {
@@ -143,6 +152,23 @@ class NewsSource: NSObject {
             self.newsItems.append(contentsOf: items)
         } else {
             self.newsItems.replaceSubrange(offset..<self.newsItems.count, with: items)
+        }
+    }
+    
+    func getLatestPosts(completion:@escaping (Int, Error?)->()) {
+        if let latestPostDateString = Settings.s.newsLastUpdateDate {
+            Client.shared.getFeedAfter(type: .news, dateString: latestPostDateString) { (itemsArray, total, error) in
+                if error != nil {
+                    completion(0, error)
+                } else if let items = itemsArray, items.count > 0 {
+                    completion(items.count, nil)
+                    if let dict = items.first as? [String:Any], let date = dict["date"] as? String {
+                        Settings.s.newsLastUpdateDate = date
+                    }
+                } else {
+                    completion(0, nil)
+                }
+            }
         }
     }
     
@@ -173,6 +199,14 @@ class NewsSource: NSObject {
                 }
             }
         }
+    }
+    
+    func getMoreItemsOnOverscroll() {
+        if (loadInProgress) {
+            return
+        }
+        loadInProgress = true
+        getNextItems(offset: newsItems.count, count: 45, recursively: false)
     }
     
     func getNextSearchItems() {
@@ -260,9 +294,9 @@ class NewsSource: NSObject {
         if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
             let id = dict["id"] as? Int {
             let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String ?? ""
-            let date = dict["date_gmt"] as? String ?? ""
+            let date = dict["date"] as? String ?? ""
             let url = dict["link"] as? String ?? ""
-            return NewsItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:filterDate(date), views:0, url:url, type: .newsType)
+            return NewsItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:date, views:0, url:url, type: .newsType)
         }
         return nil;
     }
@@ -281,16 +315,11 @@ class NewsSource: NSObject {
     }
     
     private func filterHtml(_ string:String) -> String {
-        
         let regexString = "&[#]?\\w{3,4};|<[/]?[p|b]>|\n"
         if let regex = try? NSRegularExpression(pattern: regexString, options: .caseInsensitive) {
-            let modString = regex.stringByReplacingMatches(in: string, options: [], range: NSRange(location: 0, length:  string.count), withTemplate: "")
+            let modString = regex.stringByReplacingMatches(in: string, options: [], range: NSRange(location: 0, length:  string.count), withTemplate: "").replacingOccurrences(of: "<br>", with: "")
             return modString
         }
         return ""
-    }
-    
-    private func filterDate(_ string:String) -> String {
-        return string.replacingOccurrences(of: "T", with: " ")
     }
 }

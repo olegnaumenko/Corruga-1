@@ -14,25 +14,33 @@ class corruDictTests: XCTestCase {
     static var classInstanceCounter = 0
     
     override func setUp() {
-        corruDictTests.classInstanceCounter += 1
     }
 
     override func tearDown() {
-        corruDictTests.classInstanceCounter -= 1
     }
 
     func testExample() {
-        print("ctest 1: ", corruDictTests.classInstanceCounter)
     }
 
     func testExample2() {
-        print("ctest 2: ", corruDictTests.classInstanceCounter)
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
+        
         self.measure {
             // Put the code you want to measure the time of here.
+            
+
+            let sema = DispatchSemaphore(value: 0)
+            
+            let source = NewsSource(itemType: .news)
+            source.getNewsItems(offset: 0, count: 45) { (items, count, total, errString) in
+                
+                XCTAssertTrue(items?.count ?? 0 > 0)
+                sema.signal()
+            }
+            sema.wait()
         }
     }
 

@@ -14,12 +14,12 @@ target 'Corruga' do
   pod 'FTLinearActivityIndicator'
   
   #  pod 'ReachabilitySwift'
-  #  pod 'RealmSwift'
+#    pod 'RealmSwift'
   #  pod 'youtube-ios-player-helper', '~> 0.1.4'
   #  pod 'UIDevice-Hardware'
   #  pod 'FacebookSDK', '~> 4.44.1'
   pod 'SwiftSoup'
-  pod 'SwiftEmoji'
+#  pod 'SwiftEmoji'
 
 end
 
@@ -35,6 +35,7 @@ target 'CorrugaTests' do
   pod 'Firebase/Database'
   pod 'AltHanekeSwift'
   pod 'Branch'
+  pod 'SwiftSoup'
   
 end
   
