@@ -54,6 +54,10 @@ class NewsViewModel {
                                                selector: #selector(onItemsUpdate(_:)),
                                                name: .NewsSourceItemsUpdated,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onItemsError(_:)),
+                                               name: .NewsSourceItemsLoadingError,
+                                               object: nil)
     }
     
     private func unSubscribe() {
@@ -61,7 +65,6 @@ class NewsViewModel {
     }
     
     func onViewWillAppear() {
-        self.onReachabilityChange()
         self.reloadIfNeeded()
         self.subscribe()
         isViewVisible = true
@@ -106,13 +109,18 @@ class NewsViewModel {
     }
     
     private func reloadIfNeeded() {
-        if self.isNetworkReachable && self.arrayForDisplay().count == 0 {
+        if self.arrayForDisplay().count == 0 {
             self.itemSource.reload()
         }
     }
 
     @objc private func onItemsUpdate(_ n:Notification) {
         self.onRefreshNeeded()
+        self.onReachabilityChange()
+    }
+    
+    @objc private func onItemsError(_ n:Notification) {
+        self.onReachabilityChange()
     }
     
     private func arrayForDisplay() -> [NewsItem] {

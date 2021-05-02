@@ -53,7 +53,9 @@ struct NewsOpenPost {
 }
 
 extension NSNotification.Name {
+    public static let NewsSourceItemsStartedLoading = NSNotification.Name("NewsSourceStartedLoading")
     public static let NewsSourceItemsUpdated = NSNotification.Name("NewsSourceItemsUpdated")
+    public static let NewsSourceItemsLoadingError = NSNotification.Name("NewsSourceItemsLoadingError")
 }
 
 class NewsSource: NSObject {
@@ -117,6 +119,10 @@ class NewsSource: NSObject {
     
     private func onItemsChange() {
         NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil)
+    }
+    
+    private func onLoadingError() {
+        NotificationCenter.default.post(name: .NewsSourceItemsLoadingError, object: nil)
     }
     
     private func onSearchItemsChange() {
@@ -195,6 +201,7 @@ class NewsSource: NSObject {
                     }
                 } else {
                     self.loadInProgress = false
+                    self.onLoadingError()
                     print("finished loading items, total: \(self.currentOffset) items")
                 }
             }
@@ -229,6 +236,7 @@ class NewsSource: NSObject {
                     }
                 } else {
                     self.loadInProgress = false
+                    self.onLoadingError()
                     print("finished loading search items, total: \(self.currentSearchOffset + 1) items")
                 }
             }

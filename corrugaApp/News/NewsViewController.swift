@@ -33,7 +33,11 @@ class NewsViewController: BaseFeatureViewController {
                 self.refresh()
             }
             self.viewModel.onReachabilityChange = { [unowned self] in
-                self.setReachabilityIndicator(visible:!self.viewModel.isNetworkReachable)
+                let reachable = self.viewModel.isNetworkReachable
+                self.setReachabilityIndicator(visible:!reachable)
+                if reachable == false {
+                    self.loadingIndicator.stopAnimating()
+                }
             }
             self.title = self.viewModel.title
         }
@@ -64,6 +68,9 @@ class NewsViewController: BaseFeatureViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        if self.tableView.numberOfRows(inSection: 0) == 0 {
+            self.loadingIndicator.startAnimating()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,9 +83,6 @@ class NewsViewController: BaseFeatureViewController {
         
         if let indexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: indexPath, animated: true)
-        }
-        if self.tableView.numberOfRows(inSection: 0) == 0 {
-            self.loadingIndicator.startAnimating()
         }
     }
     
