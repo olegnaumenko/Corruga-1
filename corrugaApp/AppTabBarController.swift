@@ -17,7 +17,10 @@ class AppTabBarController: UITabBarController {
                       "tab-bar-dictionary-title",
                       "tab-bar-board-title"]
         for i in 0..<titles.count {
-            self.viewControllers?[i].title = titles[i].n10
+            if let nvc = self.viewControllers?[i] as? UINavigationController {
+                nvc.title = titles[i].n10
+                nvc.topViewController?.title = nvc.title
+            }
         }
     }
     

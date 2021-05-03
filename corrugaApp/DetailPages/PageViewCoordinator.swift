@@ -47,7 +47,7 @@ class PageViewCoordinator
     private func imageTappedInDetailView(imagePath:String) {
         
         let photoVC = UIStoryboard.photoViewController()
-        photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "Please visit company website")
+        photoVC.photoViewModel = PhotoViewModel(imagePath: imagePath, description: "image-zoom-view-visit-company-website".n10)
         photoVC.modalPresentationStyle = .pageSheet
         self.pageViewController.present(photoVC, animated: true)
 

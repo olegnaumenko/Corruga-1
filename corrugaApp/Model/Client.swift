@@ -45,8 +45,6 @@ final class Client {
     
     private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
     
-//    private let reachability:Reachability!
-
     private let gofroExpertPlaylistId = "UUK_ntS5EmUV5jiy6Es2mTgA"
     private let youTubeV3APIKey = "AIzaSyA3ab1v-VGofBAetGA4l_QUtHzmMlTK28c"
     

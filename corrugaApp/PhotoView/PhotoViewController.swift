@@ -33,6 +33,7 @@ class PhotoViewController: UIViewController {
         gr.direction = .down
         self.view.addGestureRecognizer(gr)
         self.view.backgroundColor = Appearance.darkAppColor()
+        self.closeButton.setTitle("image-zoom-view-close".n10, for: .normal)
     }
     
     @objc func onSwipe(sender:UIGestureRecognizer) {
