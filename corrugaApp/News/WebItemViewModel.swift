@@ -15,6 +15,8 @@ class WebItemViewModel {
     private var htmlContent:String?
     private let source:NewsSource
     
+    private let screenScale = UIScreen.main.scale
+    
     var loadContentBlock: (String, URL)->() = {_,_ in }
     
     private(set) var baseURL: URL?
@@ -71,13 +73,30 @@ class WebItemViewModel {
     private func parseHtml(post:NewsOpenPost) -> String {
         let content = post.content
         let doc: Document = try! SwiftSoup.parse(content)
-        print("======")
+//        print("======")
 
+        let color = Appearance.appTintColor()
+        var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+        let colorString = "rgb(\(Int(256*r)),\(Int(256*g)),\(Int(256*b)))"
+        
+        let fontSize = Int(18 * screenScale)
+        let dateFontSize = Int(16 * screenScale)
+        let bodyMargin = Int(19 * screenScale)
+        let marginImgHorizontal = Int(20 * screenScale)
+        let marginImgVertical = Int(4 * screenScale)
+        
+        
+        //text-align:right;
+        
         let styleText = """
-            body{font-size:36px;font-family:-apple-system;margin:38px;}
+            body{font-size:\(fontSize)px;font-family:-apple-system;margin:\(bodyMargin)px;}
             p{text-align:justify}
-            img.alignleft {float:left;margin-right:40px;margin-bottom:16px;margin-top:8px;width:48%;height:auto;}
-            img.alignright{float:right;margin-left:40px;margin-bottom:16px;margin-top:8px;width:44%;height:auto;}
+            p.date{color:\(colorString);font-size:\(dateFontSize)}
+            img.alignleft{float:left;margin-right:\(marginImgHorizontal)px;
+            margin-bottom:\(2 * marginImgVertical)px;margin-top:\(marginImgVertical)px;width:48%;height:auto;}
+            img.alignright{float:right;margin-left:\(marginImgHorizontal)px;
+            margin-bottom:\(2 * marginImgVertical)px;margin-top:\(marginImgVertical)px;width:44%;height:auto;}
             img.aligncenter{float:none;}
             img.size-full,img.size-large {max-width:100%;height:auto;}
             div.fitvids-video{max-width:100%;height:auto;position:relative}
@@ -87,7 +106,10 @@ class WebItemViewModel {
         try! head?.appendElement("style").appendText(styleText)
         let body = doc.body()
         
-        try! body?.prepend("<h2>\(post.title)</h2>")
+        if let date = item.date.components(separatedBy: "T").first {
+            try! body?.prepend("<p class=date>􀉉 \(date)</p>")
+        }
+        try! body?.prepend("<h1>\(post.title)</h1>")
         
         var foundTitleImage = false
         
@@ -115,7 +137,7 @@ class WebItemViewModel {
         }
         
         let html = try! doc.html()
-        print(html)
+//        print(html)
 //        print("======")
         return html
     }

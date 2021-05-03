@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Corruga' do
-  platform :ios, '11.0'
+  platform :ios, '12.3'
 
 #  pod 'youtube-ios-player-helper-swift'
   pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
@@ -25,7 +25,7 @@ end
 
 target 'CorrugaTests' do
   
-  platform :ios, '11.0'
+  platform :ios, '12.3'
   
 #  pod 'youtube-ios-player-helper-swift'
   pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
@@ -39,3 +39,10 @@ target 'CorrugaTests' do
   
 end
   
+post_install do |lib|
+    lib.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        end
+    end
+end

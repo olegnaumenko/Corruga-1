@@ -43,11 +43,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coordinator = AppTabCoordinator(tabBarController: tabBarController)
         self.coordinator.appDidFinishLaunching(application)
         
-        application.setMinimumBackgroundFetchInterval(2*3600)
+        application.setMinimumBackgroundFetchInterval(3600)
         
         UNUserNotificationCenter.current().requestAuthorization(options: .badge) { (success, error) in }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onNewDataAvailable(n:)), name: .NewsSourceItemsUpdated, object: nil)
+        
         return true
+    }
+    
+    @objc private func onNewDataAvailable(n:Notification) {
+        if let userInfo = n.userInfo, let count = userInfo["total-items"] as? Int, count > 0 {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -90,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if errString == nil {
                 application.applicationIconBadgeNumber = count
                 completionHandler(count != 0 ? .newData : .noData)
-                print("Fetch: ", count)
             } else {
                 completionHandler(.failed)
             }
@@ -125,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         self.coordinator.appWillTerminate()
+        NotificationCenter.default.removeObserver(self)
     }
 
 

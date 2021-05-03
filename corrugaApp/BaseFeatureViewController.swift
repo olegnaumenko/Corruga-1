@@ -9,7 +9,8 @@
 import UIKit
 
 protocol BaseFeatureViewControllerDelegate:class {
-    func baseFeatureWantsShareScreen()
+    func presentAsAPage(vc:PresentationReportingViewController)
+    func presentShareViewController()
 }
 
 protocol ReachabilityAwareViewController {
@@ -23,7 +24,7 @@ class BaseFeatureViewController: UIViewController, ReachabilityAwareViewControll
     lazy var connectionIndicatorController = ConnectionIndicatorController(parentViewController: self)
     
     @IBAction func onQRButton(_ sender:UIBarButtonItem) {
-        self.delegate?.baseFeatureWantsShareScreen()
+        self.delegate?.presentShareViewController()
     }
 
 //    override func viewWillAppear(_ animated: Bool) {

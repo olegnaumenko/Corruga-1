@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import FTLinearActivityIndicator
 
-class WebItemViewController:UIViewController {
+class WebItemViewController:PresentationReportingViewController {
     
     var viewModel:WebItemViewModel!
     
@@ -29,6 +29,7 @@ class WebItemViewController:UIViewController {
         self.viewModel.loadContentBlock = { [weak self] content, baseURL in
             self?.webView.loadHTMLString(content, baseURL: baseURL)
         }
+        self.title = self.viewModel.title
         self.viewModel.viewDidLoad()
     }
     

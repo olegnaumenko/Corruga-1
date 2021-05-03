@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ShareViewController: UIViewController {
+class ShareViewController: PresentationReportingViewController {
 
     let shareLink = "https://corrugated.app.link/185TmpFElV"
     
@@ -22,8 +22,6 @@ class ShareViewController: UIViewController {
     
     @IBOutlet var versionLabel:UILabel!
     
-    var onDismiss = {}
-    var onAppear = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()

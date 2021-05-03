@@ -118,7 +118,7 @@ class NewsSource: NSObject {
     }
     
     private func onItemsChange() {
-        NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil)
+        NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil, userInfo: ["total-items" : newsItems.count])
     }
     
     private func onLoadingError() {
@@ -126,7 +126,7 @@ class NewsSource: NSObject {
     }
     
     private func onSearchItemsChange() {
-        self.onItemsChange()
+        NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil, userInfo: ["total-search-items" : searchItems.count])
     }
     
     func reload() {

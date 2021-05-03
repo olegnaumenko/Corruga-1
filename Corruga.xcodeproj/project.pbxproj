@@ -152,6 +152,7 @@
 		840C7FC2263D9D2400F9F086 /* WebItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */; };
 		840C7FC3263D9D2400F9F086 /* WebItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */; };
 		8421AFBF263A8F9D00644179 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421AFBE263A8F9D00644179 /* Network.swift */; };
+		8434761C263FD43000258CAB /* PresentationReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434761B263FD43000258CAB /* PresentationReportingViewController.swift */; };
 		9B32C2F9076AF448DCD672F7 /* Pods_CorrugaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
 /* End PBXBuildFile section */
@@ -273,6 +274,7 @@
 		840C7FBC263D99F900F9F086 /* corruga_tests_bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = corruga_tests_bridging_header.h; sourceTree = "<group>"; };
 		840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebItemViewModel.swift; sourceTree = "<group>"; };
 		8421AFBE263A8F9D00644179 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		8434761B263FD43000258CAB /* PresentationReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationReportingViewController.swift; sourceTree = "<group>"; };
 		9EA1BE279A8F14B1A1D1E275 /* Pods-Corruga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.release.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.release.xcconfig"; sourceTree = "<group>"; };
 		A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CorrugaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05FA882528DA78405BF5054 /* Pods_Corruga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Corruga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,6 +407,7 @@
 				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */,
 				7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */,
+				8434761B263FD43000258CAB /* PresentationReportingViewController.swift */,
 				7C4B7074214182FE00BC03C3 /* Video */,
 				7C4B7073214182F800BC03C3 /* News */,
 				7C5D73F0216773630022ABBC /* Board */,
@@ -816,6 +819,7 @@
 				7C5337912124371000465EF1 /* String+ImageName.swift in Sources */,
 				7C73FDDA2285734200DE4AE2 /* SelectViewController.m in Sources */,
 				7CDE18C622844744004D6964 /* DictionaryEntryTableViewCell.swift in Sources */,
+				8434761C263FD43000258CAB /* PresentationReportingViewController.swift in Sources */,
 				7CC81CFE212867FB004D555E /* SpeechSynth.swift in Sources */,
 				7C53379321243A9000465EF1 /* ScrollManager.swift in Sources */,
 				7CDE18C422833469004D6964 /* LanguageModel.swift in Sources */,
@@ -1030,7 +1034,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1085,7 +1089,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

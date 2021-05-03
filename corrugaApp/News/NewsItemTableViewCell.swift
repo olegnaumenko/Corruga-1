@@ -15,6 +15,7 @@ class NewsItemTableViewCell: UITableViewCell {
     @IBOutlet weak var excerptLabel:UILabel!
     @IBOutlet weak var viewsLabel:UILabel!
     @IBOutlet weak var adImageView:UIImageView!
+    @IBOutlet weak var dateImageView:UIImageView!
     
     let emojiHtmlRegex = "\\&#x(.*)\\;"
     
@@ -22,8 +23,8 @@ class NewsItemTableViewCell: UITableViewCell {
         didSet {
             self.titleLabel.text = newsItem.title
             self.dateLabel.text = filterDate(newsItem.date)
-            let excerpt = newsItem.shortText + " ▶"
-            
+            let space = newsItem.shortText.count == 0 ? "" : " "
+            let excerpt = newsItem.shortText + space + "‣"
             
             //replace emoji if any
             do {
@@ -48,6 +49,9 @@ class NewsItemTableViewCell: UITableViewCell {
     }
     
     private func filterDate(_ string:String) -> String {
+        if let date = string.components(separatedBy: "T").first {
+            return date
+        }
         return string.replacingOccurrences(of: "T", with: " ")
     }
     
