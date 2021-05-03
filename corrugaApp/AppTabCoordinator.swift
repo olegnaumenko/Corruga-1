@@ -29,7 +29,7 @@ class AppTabCoordinator:NSObject {
         
         self.tabBarController = tabBarController
         tabBarController.tabBar.barTintColor = Appearance.backgroundAppColor()
-        tabBarController.tabBar.unselectedItemTintColor = Appearance.labelSecondaryColor()
+        tabBarController.tabBar.unselectedItemTintColor = Appearance.inactiveTintColor()
         tabBarController.tabBar.tintColor = Appearance.appTintLargeColor()
         super.init()
         tabBarController.delegate = self;

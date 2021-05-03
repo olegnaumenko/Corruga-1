@@ -119,7 +119,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="W4h-VH-aBc">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="vLR-R5-OU8">
-                            <color key="tintColor" name="app-label"/>
+                            <color key="tintColor" name="app-secondary-label"/>
                             <connections>
                                 <action selector="onShareButtonWithSender:" destination="f5i-Jq-Mbc" id="501-vb-vPe"/>
                             </connections>
@@ -284,7 +284,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="News" id="Aty-XY-M7H">
                         <barButtonItem key="rightBarButtonItem" image="qr_button" id="k9c-Ic-ETV">
-                            <color key="tintColor" name="app-label"/>
+                            <color key="tintColor" name="app-secondary-label"/>
                             <connections>
                                 <action selector="onQRButton:" destination="XzW-sk-HGx" id="NmU-m8-THB"/>
                             </connections>
@@ -816,12 +816,13 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOp-B8-Ofr">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOp-B8-Ofr">
                                 <rect key="frame" x="305" y="60" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="4NX-2R-X0e"/>
                                     <constraint firstAttribute="height" constant="54" id="a34-D9-Rqu"/>
                                 </constraints>
+                                <color key="tintColor" name="app-secondary-label"/>
                                 <state key="normal" image="qr_close"/>
                                 <connections>
                                     <action selector="onClose:" destination="1fV-TK-hQh" eventType="touchUpInside" id="n86-Zz-Qgb"/>

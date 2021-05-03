@@ -36,6 +36,10 @@ import UIKit
         return UIColor(named: "app-secondary-label")!
     }
     
+    static func inactiveTintColor() -> UIColor {
+        return UIColor(named: "app-secondary-label")!
+    }
+    
     static func footerTextColor() -> UIColor {
         return self.labelSecondaryColor()
     }
