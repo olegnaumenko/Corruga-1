@@ -105,8 +105,11 @@ final class Client {
         
         let urlString = type == .news ? Client.newsAPIURL : Client.boardAPIURL
         
+        params["categories"] = 1
+        params["status"] = "publish"
         params["after"] = dateString
         params["_fields"] = ["id","date"]
+        params["type"] = "post"
         
         client.getJson("\(urlString)/posts", parameters: params, headerFields: nil) { (networkResult) in
             

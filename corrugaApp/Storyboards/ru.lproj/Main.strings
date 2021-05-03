@@ -1,0 +1,132 @@
+
+/* Class = "UILabel"; text = "Excerpt"; ObjectID = "0go-wc-Qm3"; */
+"0go-wc-Qm3.text" = "Excerpt";
+
+/* Class = "UILabel"; text = "Transcription"; ObjectID = "2hL-0t-FaM"; */
+"2hL-0t-FaM.text" = "Transcription";
+
+/* Class = "UILabel"; text = "Transcription"; ObjectID = "7tf-h9-MoE"; */
+"7tf-h9-MoE.text" = "Transcription";
+
+/* Class = "UILabel"; text = "пластина, изготовленная из жидкой фотополимеризационно-способной композиции"; ObjectID = "8da-wc-dE1"; */
+"8da-wc-dE1.text" = "пластина, изготовленная из жидкой фотополимеризационно-способной композиции";
+
+/* Class = "UILabel"; text = "lightweight recycled fluting internal steam distributor piping high pressure steam from boiler"; ObjectID = "9XZ-rw-3bf"; */
+"9XZ-rw-3bf.text" = "lightweight recycled fluting internal steam distributor piping high pressure steam from boiler";
+
+/* Class = "UINavigationItem"; title = "News"; ObjectID = "Aty-XY-M7H"; */
+"Aty-XY-M7H.title" = "News";
+
+/* Class = "UIViewController"; title = "Videos"; ObjectID = "Au4-2j-55G"; */
+"Au4-2j-55G.title" = "Videos";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ba8-bA-mpu"; */
+"Ba8-bA-mpu.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "EGe-be-Wg0"; */
+"EGe-be-Wg0.text" = "Label";
+
+/* Class = "UIViewController"; title = "Photo"; ObjectID = "Fn2-Ht-UuG"; */
+"Fn2-Ht-UuG.title" = "Photo";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "GEG-0M-mot"; */
+"GEG-0M-mot.normalTitle" = "Close";
+
+/* Class = "UITabBarItem"; title = "Video"; ObjectID = "H0W-1w-l8i"; */
+"H0W-1w-l8i.title" = "Video";
+
+/* Class = "UIPageViewController"; title = "Translations"; ObjectID = "HG4-LF-zL2"; */
+"HG4-LF-zL2.title" = "Translations";
+
+/* Class = "UILabel"; text = "v.1.1"; ObjectID = "ITE-c6-yz2"; */
+"ITE-c6-yz2.text" = "v.1.1";
+
+/* Class = "UINavigationItem"; title = "Videos"; ObjectID = "Ify-51-Yjw"; */
+"Ify-51-Yjw.title" = "Videos";
+
+/* Class = "UITabBarItem"; title = "Board"; ObjectID = "MXq-wV-XaB"; */
+"MXq-wV-XaB.title" = "Board";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ojv-fN-8bP"; */
+"Ojv-fN-8bP.text" = "Label";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Q5V-Wn-ERB"; */
+"Q5V-Wn-ERB.text" = "Title";
+
+/* Class = "UINavigationController"; title = "News"; ObjectID = "QGJ-NK-jL4"; */
+"QGJ-NK-jL4.title" = "News";
+
+/* Class = "UIButton"; normalTitle = "RU"; ObjectID = "Rhw-Q4-1Uw"; */
+"Rhw-Q4-1Uw.normalTitle" = "RU";
+
+/* Class = "UINavigationController"; title = "Corruga"; ObjectID = "RpL-Pe-Tnq"; */
+"RpL-Pe-Tnq.title" = "Corruga";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aYy-ho-2a2"; */
+"aYy-ho-2a2.text" = "Label";
+
+/* Class = "UILabel"; text = "Share Corruga  in social & messengers:"; ObjectID = "bIW-5y-6QP"; */
+"bIW-5y-6QP.text" = "Share Corruga  in social & messengers:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "c8f-6F-l6W"; */
+"c8f-6F-l6W.text" = "Label";
+
+/* Class = "UILabel"; text = "To download Corruga,  point Your camera here:"; ObjectID = "c8w-mM-b9y"; */
+"c8w-mM-b9y.text" = "To download Corruga,  point Your camera here:";
+
+/* Class = "UIButton"; normalTitle = "  Share Corruga"; ObjectID = "dsT-AC-hxb"; */
+"dsT-AC-hxb.normalTitle" = "  Share Corruga";
+
+/* Class = "UIViewController"; title = "News"; ObjectID = "f5i-Jq-Mbc"; */
+"f5i-Jq-Mbc.title" = "News";
+
+/* Class = "UILabel"; text = "Share Corruga"; ObjectID = "f74-Gh-Tup"; */
+"f74-Gh-Tup.text" = "Share Corruga";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "fyD-WN-vra"; */
+"fyD-WN-vra.title" = "Detail";
+
+/* Class = "UITextField"; placeholder = "search term"; ObjectID = "g1p-mp-qtp"; */
+"g1p-mp-qtp.placeholder" = "search term";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gar-VU-sBW"; */
+"gar-VU-sBW.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "News"; ObjectID = "h2w-a4-K1F"; */
+"h2w-a4-K1F.title" = "News";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "icY-8E-VXp"; */
+"icY-8E-VXp.text" = "Label";
+
+/* Class = "UINavigationController"; title = "Classifieds"; ObjectID = "jL8-rr-LHg"; */
+"jL8-rr-LHg.title" = "Classifieds";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "jcc-M2-73n"; */
+"jcc-M2-73n.title" = "Back";
+
+/* Class = "UIViewController"; title = "Dictionary"; ObjectID = "kSo-jW-rff"; */
+"kSo-jW-rff.title" = "Dictionary";
+
+/* Class = "UINavigationController"; title = "Video"; ObjectID = "oMk-rC-usb"; */
+"oMk-rC-usb.title" = "Video";
+
+/* Class = "UIButton"; normalTitle = " ⇄ "; ObjectID = "p3T-kx-KLF"; */
+"p3T-kx-KLF.normalTitle" = " ⇄ ";
+
+/* Class = "UILabel"; text = "Copyright Gofro.Expert 2021"; ObjectID = "rev-aZ-OJN"; */
+"rev-aZ-OJN.text" = "Copyright Gofro.Expert 2021";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ubN-ni-Xrg"; */
+"ubN-ni-Xrg.text" = "Label";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "vrk-oN-KWe"; */
+"vrk-oN-KWe.text" = "Date";
+
+/* Class = "UITabBarItem"; title = "Dictionary"; ObjectID = "w3n-bV-O64"; */
+"w3n-bV-O64.title" = "Dictionary";
+
+/* Class = "UIButton"; normalTitle = "EN"; ObjectID = "ym2-5J-Z48"; */
+"ym2-5J-Z48.normalTitle" = "EN";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ztM-9L-pN8"; */
+"ztM-9L-pN8.text" = "Label";
