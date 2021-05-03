@@ -11,5 +11,14 @@ import UIKit
 
 class AppTabBarController: UITabBarController {
     
-
+    override func awakeFromNib() {
+        let titles = ["tab-bar-news-title",
+                      "tab-bar-video-title",
+                      "tab-bar-dictionary-title",
+                      "tab-bar-board-title"]
+        for i in 0..<titles.count {
+            self.viewControllers?[i].title = titles[i].n10
+        }
+    }
+    
 }

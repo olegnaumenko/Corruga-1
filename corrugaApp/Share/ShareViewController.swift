@@ -20,6 +20,9 @@ class ShareViewController: PresentationReportingViewController {
     @IBOutlet var closeButton:UIButton!
     @IBOutlet var qrImageView:UIImageView!
     
+    @IBOutlet var qrTitleLabel:UILabel!
+    @IBOutlet var shareTextLabel:UILabel!
+    
     @IBOutlet var versionLabel:UILabel!
     
     
@@ -28,6 +31,10 @@ class ShareViewController: PresentationReportingViewController {
 
         self.shareButton.layer.cornerRadius = 3
         self.shareButton.layer.masksToBounds = true
+        titleLabel.text = "share-view-share-title".n10
+        shareButton.setTitle("share-view-share-button-title".n10, for: .normal)
+        qrTitleLabel.text = "share-view-point-camera-text".n10
+        shareTextLabel.text = "share-view-share-social-text".n10
 
         let verString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         self.versionLabel.text = String.init(format: "v. %@", verString)

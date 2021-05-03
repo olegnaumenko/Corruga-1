@@ -10,4 +10,7 @@ import UIKit
 
 class BoardViewController: NewsViewController {
     
+    override func awakeFromNib() {
+        self.title = "tab-bar-board-title".n10
+    }
 }

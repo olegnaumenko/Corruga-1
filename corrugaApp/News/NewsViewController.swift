@@ -39,7 +39,6 @@ class NewsViewController: BaseFeatureViewController {
                     self.loadingIndicator.stopAnimating()
                 }
             }
-            self.title = self.viewModel.title
         }
     }
     

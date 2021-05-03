@@ -38,9 +38,11 @@ final class Client {
     static let shared = Client()
     
     private static let boardAPIURL = "https://market.gofro.expert/wp-json/wp/v2"
-//    https://novosti.gofro.expert/wp-json/wp/v2
+
     private static let newsAPIURL  = "https://gofro.expert/wp-json/wp/v2"//"
+//    private static let newsAPIURL  = "http://en.gofro.expert/wp-json/wp/v2"
 //    private static let newsAPIURL  = "https://novosti.gofro.expert/wp-json/wp/v2"
+    
     private static let youTubeAPIURL = "https://www.googleapis.com/youtube/v3"
     
 //    private let reachability:Reachability!

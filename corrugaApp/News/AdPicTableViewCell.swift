@@ -34,7 +34,7 @@ class AdPicTableViewCell: UITableViewCell {
                 let actualHeight = 1.7 * nominalHeight / sqrt(ratio)
                 self.imageHeight.constant = actualHeight
             }
-            self.titleLabel.text = viewModel.title
+            self.titleLabel.text = viewModel.title.n10
             self.selectionStyle = .none
         }
     }

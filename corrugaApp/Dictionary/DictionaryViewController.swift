@@ -64,7 +64,7 @@ class DictionaryViewController: BaseFeatureViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.searchTextField?.placeholder = "dict-view-search-placeholder".n10
         self.searchTextField?.delegate = self
         self.searchTextField?.text = viewModel.searchTerm
         self.searchTextField?.addTarget(self,

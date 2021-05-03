@@ -17,9 +17,9 @@ extension SourceCategory {
     var title:String {
         switch self {
         case .board:
-            return "Board"
+            return "tab-bar-board-title"
         default:
-            return "News"
+            return "tab-bar-news-title"
         }
     }
 }
@@ -63,17 +63,17 @@ class NewsSource: NSObject {
    private let kPartnerImagesDIR = "images/partners"
     private let kImagesEXTPNG = "png"
     let adImageCountryMap = [
-        "1" : "ПЛОСКОВЫСЕКАТЕЛЬНЫЕ АВТОМАТЫ (ASAHI)",
-        "2" : "ОБОРУДОВАНИЕ ДЛЯ ПЕЧАТИ (CELLMACH)",
-        "3" : "ТРАНСПОРТНЫЕ СИСТЕМЫ (FOSSALUZZA)",
-        "4" : "КОМПЛЕКТНЫЕ ГОФРОАГРЕГАТЫ (FOSBER)",
-        "5" : "УПАКОВОЧНОЕ ОБОРУДОВАНИЕ (MOSCA)",
-        "6" : "ОБОРУДОВАНИЕ ДЛЯ ПРОИЗВОДСТВА И СБОРКИ РЕШЕТКИ ИЗ ГОФРИРОВАННОГО КАРТОНА/КАРТОНА ХРОМ-ЭРЗАЦ (PREMIER)",
-        "7" : "АВТОМАТИЧЕСКИЕ КЛЕЕВЫЕ КУХНИ (SRP)",
-        "8" : "ВЫСОКОСКОРОСТНЫЕ КОНВЕРТНЫЕ ЛИНИИ И ГОФРОАГРЕГАТЫ (TCY)",
-        "9" : "МАКУЛАТУРНЫЕ ПРЕССЫ (TECHGENE)",
-        "10" : "МНОГОТОЧЕЧНЫЕ ФАЛЬЦЕВАЛЬНО-СКЛЕИВАЮЩИЕ ЛИНИИ (VEGA)",
-        "11" : "ТРАНСПОРТНЫЕ СИСТЕМЫ (WSA)"
+        "1"  : "ad-pic-title-1",
+        "2"  : "ad-pic-title-2",
+        "3"  : "ad-pic-title-3",
+        "4"  : "ad-pic-title-4",
+        "5"  : "ad-pic-title-5",
+        "6"  : "ad-pic-title-6",
+        "7"  : "ad-pic-title-7",
+        "8"  : "ad-pic-title-8",
+        "9"  : "ad-pic-title-9",
+        "10" : "ad-pic-title-10",
+        "11" : "ad-pic-title-11"
     ]
     
     lazy var adImages = Bundle.main.paths(forResourcesOfType: self.kImagesEXTPNG, inDirectory: self.kPartnerImagesDIR)

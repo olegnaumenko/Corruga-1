@@ -29,6 +29,7 @@ class PageViewCoordinator
         self.pageViewController = pageViewController
         self.pageViewDataSource = dataSource
         
+        pageViewController.title = "translation-view-title".n10
         pageViewController.delegate = self.pageViewControllerObserver
         self.pageViewControllerObserver.delegate = self
     }

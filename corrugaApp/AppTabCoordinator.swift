@@ -41,7 +41,6 @@ class AppTabCoordinator:NSObject {
         }
     }
     
-    
     fileprivate func decorateNavbarIn(navcontroller:UINavigationController) {
         navcontroller.navigationBar.barTintColor = Appearance.backgroundAppColor()
         let navigationBar = navcontroller.navigationBar
@@ -79,14 +78,14 @@ extension AppTabCoordinator:UITabBarControllerDelegate {
             if let newsVC = rootViewController as? NewsViewController, self.newsCoordinator == nil {
                 self.newsCoordinator = NewsCoordinator(newsViewController: newsVC)
                 eventName = "open_news"
-            } else if let newVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
-                self.videosCoordinator = VideosCoordinator(videosViewController: newVC)
+            } else if let videoVC = rootViewController as? VideosViewController, self.videosCoordinator == nil {
+                self.videosCoordinator = VideosCoordinator(videosViewController: videoVC)
                 eventName = "open_video"
             } else if let dictVC = rootViewController as? DictionaryViewController, self.dictionaryCoordinator == nil {
                 self.dictionaryCoordinator = DictionaryCoordinator(navController: dictVC.navigationController!)
                 eventName = "open_dict"
-            } else if let classVC = rootViewController as? NewsViewController, index == 3, self.boardCoordinator == nil {
-                self.boardCoordinator = BoardCoordinator(newsViewController: classVC)
+            } else if let boardVC = rootViewController as? NewsViewController, index == 3, self.boardCoordinator == nil {
+                self.boardCoordinator = BoardCoordinator(newsViewController: boardVC)
                 eventName = "open_board"
             }
             if (eventName.count > 0) {

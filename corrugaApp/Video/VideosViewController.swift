@@ -21,7 +21,6 @@ class VideosViewController: BaseFeatureViewController {
     
     var tableViewModel:VideoTableViewModel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

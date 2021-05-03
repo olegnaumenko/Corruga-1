@@ -25,7 +25,7 @@ class BoardCoordinator: BaseFeatureCoordinator {
 extension BoardCoordinator: NewsViewControllerDelegate {
     func newsViewControllerDidSelect(item:NewsItem) -> Bool {
         
-        let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewsItemViewController") as! WebItemViewController
+        let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WebItemViewController") as! WebItemViewController
         itemViewController.viewModel = WebItemViewModel(item: item, source: source)
         self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
         return true

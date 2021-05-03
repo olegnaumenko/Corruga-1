@@ -40,12 +40,6 @@ class WebItemViewController:PresentationReportingViewController {
     }
     
     func setupBackButton() {
-        if self.webView.canGoBack {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(onBackButton(_:)))
-            self.navigationItem.leftBarButtonItem?.tintColor = Appearance.topButtonTint()
-        } else {
-            self.navigationItem.leftBarButtonItem = nil
-        }
     }
     
     @objc func onBackButton(_ sender:Any) {
