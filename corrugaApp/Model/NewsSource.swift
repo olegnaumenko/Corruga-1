@@ -138,9 +138,7 @@ class NewsSource: NSObject {
         onItemsChange()
         loadInProgress = true
         
-        if UIApplication.shared.applicationState != .background {
-            getNextItems(offset:currentOffset, count: currentPageSize, recursively: false)
-        }
+        getNextItems(offset:currentOffset, count: currentPageSize, recursively: false)
     }
     
     func reloadSearch() {
