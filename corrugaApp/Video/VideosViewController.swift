@@ -33,12 +33,18 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
         self.playerView.delegate = self
         
         self.tableViewModel.onNeedRefresh = { [weak self] in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            if !self.isLoaded && self.tableViewModel.isNetworkReachable == true {
+                self.loadOnStart()
+            }
         }
+        
         self.tableView.dataSource = self.tableViewModel
         self.tableView.delegate = self
         
-        self.tableViewModel.onReachabilityChange = { [unowned self] in
+        self.tableViewModel.onReachabilityChange = { [weak self] in
+            guard let self = self else { return }
             let reachable = self.tableViewModel.isNetworkReachable
             self.setReachabilityIndicator(visible:!reachable)
             if !self.isLoaded && reachable {
@@ -52,11 +58,6 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.view.backgroundColor = Appearance.backgroundAppColor()
-//        var inset = self.tableView.contentInset
-//        inset.top = self.playerView.frame.maxY + 10
-//        tableView.contentInset = inset
-//        tableView.contentOffset = CGPoint(x:0, y:-inset.top)
-        
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -8,14 +8,10 @@
 
 import UIKit
 import AFNetworking
-//import Networking
 
 class VideoTableViewModel: NSObject {
     
-//    let videoSource:VideoSource!
-//    var currentItemIndex = -1;
     var currentVideoID:String?
-    
     var onNeedRefresh = {}
     var onReachabilityChange = {}
     
@@ -60,15 +56,12 @@ class VideoTableViewModel: NSObject {
     
     // MARK: - Notification handlers
     
-    var wasUnreachable = false
-    
     @objc private func onReachabilityStatus(_ n:Notification) {
         self.onReachabilityChange()
         let reachable = Client.shared.isNetworkReachable()
         if reachable && VideoSource.shared.videoItemsCount == 0 {
             VideoSource.shared.reload()
         }
-        self.wasUnreachable = !reachable
     }
     
 }
@@ -84,7 +77,6 @@ extension VideoTableViewModel : UITableViewDataSource {
             
             cell.viewModel = self.cellViewModel(index: indexPath.row)
             cell.isSelected = (cell.viewModel.videoId == currentVideoID)
-//            cell.setHighlighted(cell.viewModel.videoId == currentVideoID, animated: true)
             return cell
         }
         return UITableViewCell(frame: .zero)
@@ -96,13 +88,4 @@ extension VideoTableViewModel : UITableViewDataSource {
         }
         return nil
     }
-    
-//    func tappedCell(indexPath:IndexPath) -> Bool {
-//        if self.cellViewModel(index: indexPath.row) != nil {
-//            self.currentItemIndex = indexPath.row
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
 }

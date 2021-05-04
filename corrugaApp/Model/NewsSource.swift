@@ -104,6 +104,8 @@ class NewsSource: NSObject {
         }
     }
     
+    private var searchTasksCount = 0
+    
     var searchTerm:String? {
         didSet {
             if let searchTerm = self.searchTerm, searchTerm.count > 2 {
@@ -147,7 +149,6 @@ class NewsSource: NSObject {
         currentPageSize = 10;
         searchItems.removeAll()
         onSearchItemsChange()
-        loadInProgress = true
         getNextSearchItems()
     }
     
@@ -196,12 +197,12 @@ class NewsSource: NSObject {
                         self.getNextItems(offset:self.currentOffset, count:self.currentPageSize, recursively: recursively)
                     } else {
                         self.loadInProgress = false
-                        print("finished loading items, total: \(self.currentOffset) items")
+                        print("finished loading items, total: \(self.newsItems.count) items")
                     }
                 } else {
                     self.loadInProgress = false
                     self.onLoadingError()
-                    print("finished loading items, total: \(self.currentOffset) items")
+                    print("finished loading items, total: \(self.newsItems.count) items")
                 }
             }
         }
@@ -216,27 +217,28 @@ class NewsSource: NSObject {
     }
     
     func getNextSearchItems() {
+        searchTasksCount += 1
         self.getNewsItems(offset: currentSearchOffset, count: 45, search: searchTerm) { [weak self] (newsArray, receivedOffset, totalItems, searchString) in
             if let self = self {
-                if let na = newsArray {
-                    if let ss = searchString, self.searchTerm == ss {
-                        self.searchItems.append(contentsOf: na)
-                        self.onSearchItemsChange()
-                    }
+                if let na = newsArray, let ss = searchString, self.searchTerm == ss {
+                    
+                    self.searchItems.append(contentsOf: na)
+                    self.onSearchItemsChange()
+                    
                     self.currentSearchOffset = receivedOffset + na.count
                     if self.currentPageSize < 50 {
                         self.currentPageSize = 50
                     }
-                    if na.count != 0 {
+                    if na.count != 0 && searchString == self.searchTerm {
                         self.getNextSearchItems()
                     } else {
-                        self.loadInProgress = false
-                        print("finished loading search items, total: \(self.currentSearchOffset + 1) items")
+                        self.searchTasksCount -= 1
+                        print("finished loading search items for '\(searchString ?? "<none>")\', total: \(self.currentSearchOffset) items")
                     }
                 } else {
-                    self.loadInProgress = false
+                    self.searchTasksCount -= 1
                     self.onLoadingError()
-                    print("finished loading search items, total: \(self.currentSearchOffset + 1) items")
+                    print("finished loading search items for '\(searchString ?? "<none>")\', total: \(receivedOffset) items")
                 }
             }
         }
