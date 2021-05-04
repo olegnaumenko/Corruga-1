@@ -42,8 +42,9 @@ class VideoTableViewModel: NSObject {
         VideoSource.shared.getNextVideosPage()
     }
     
-    func onOverscroll() {
+    func onOverscroll() -> Bool {
         VideoSource.shared.getNextVideosPage()
+        return true
     }
     
     private func subscribe() {

@@ -15,7 +15,7 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
     let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
     let overscrollLoadingIndicator = UIActivityIndicatorView()
 
-    @IBOutlet weak var playerView:WKYTPlayerView!
+    private var playerView = WKYTPlayerView()
     @IBOutlet weak var tableView:UITableView!
     
     var isLoaded:Bool = false
@@ -26,6 +26,7 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        definesPresentationContext = true
         
         self.tableViewModel = VideoTableViewModel()
         
@@ -51,6 +52,11 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.view.backgroundColor = Appearance.backgroundAppColor()
+//        var inset = self.tableView.contentInset
+//        inset.top = self.playerView.frame.maxY + 10
+//        tableView.contentInset = inset
+//        tableView.contentOffset = CGPoint(x:0, y:-inset.top)
+        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -59,8 +65,8 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
         self.tableViewModel.onViewWillAppear()
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 
@@ -92,14 +98,14 @@ class VideosViewController: BaseFeatureViewController, BasicOverScrollViewContro
     
     func loadItem(video:VideoItemViewModel) {
         AudioSession().activate()
-        self.isLoaded = self.playerView.load(withVideoId: video.videoId)
+        self.isLoaded = self.playerView.load(withVideoId: video.videoId, playerVars: ["playsinline" : 1])
         if (isLoaded) {
             self.tableViewModel.currentVideoID = video.videoId
         }
     }
     
-    func onOverscroll() {
-        tableViewModel.onOverscroll()
+    func onOverscroll() -> Bool {
+        return tableViewModel.onOverscroll()
     }
     
 //    func updateItemSelection() {
@@ -163,9 +169,15 @@ extension VideosViewController : UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.playerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let width = tableView.frame.size.width
+        let height = width / 16 * 9
+        return height
+    }
 }
 
 extension VideosViewController: UIScrollViewDelegate {

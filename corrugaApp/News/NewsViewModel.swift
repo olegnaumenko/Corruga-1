@@ -80,8 +80,8 @@ class NewsViewModel {
             self.searchTerm = term
         } else {
             self.searchTerm = nil
-            self.onRefreshNeeded()
         }
+        self.onRefreshNeeded()
     }
 
     func didSelecteItem(index:Int) -> Bool {
@@ -93,11 +93,13 @@ class NewsViewModel {
         }
         return self.navigationDelegate?.newsViewControllerDidSelect(item: item) ?? false        
     }
-
-        
     
-    func onOverscroll() {
+    func onOverscroll() -> Bool {
+        if searchTerm != nil {
+            return false
+        }
         self.itemSource.getMoreItemsOnOverscroll()
+        return true
     }
     
     
@@ -111,6 +113,8 @@ class NewsViewModel {
     private func reloadIfNeeded() {
         if self.arrayForDisplay().count == 0 {
             self.itemSource.reload()
+        } else {
+            self.onRefreshNeeded()
         }
     }
 

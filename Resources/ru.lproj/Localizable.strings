@@ -12,6 +12,8 @@
 "tab-bar-board-title"="Объявления";
 
 "dict-view-search-placeholder"="искать термин";
+"dict-view-search-no-results"="Нычего не найдено. Попробуйте снова.";
+"dict-view-search-total-found"="Всего найдено терминов:";
 "translation-view-title"="Перевод";
 
 "image-zoom-view-visit-company-website"="Пожалуйста, зайдите на сайт компании";

@@ -52,13 +52,13 @@ class DictionaryViewModel {
     }
 
     func footerTotal() -> String {
-        return TotalLabelViewModel(total: self.dictModel.searchResults?.count ?? 0).output
+        let loaded = dictModel.fromLangModel.loaded && dictModel.toLangModel.loaded
+        return TotalLabelViewModel(total: self.dictModel.searchResults?.count ?? 0, loaded: loaded).output
     }
     
     func fromLanguageLabel() -> String {
         return self.dictModel.fromLangModel.shortName
     }
-    
     
     func toLanguageLabel() -> String {
         return self.dictModel.toLangModel.shortName

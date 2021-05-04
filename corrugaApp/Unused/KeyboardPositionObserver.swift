@@ -31,14 +31,14 @@ class KeyboardPositionObserver:NSObject
     }
     
     
-    @objc func keyboardWillShow(n:Notification) {
+    @objc private func keyboardWillShow(n:Notification) {
         if let value = n.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue {
             let rect = value.cgRectValue
             self.onKeyboardHeightChange(rect.size.height)
         }
     }
     
-    @objc func keyboardWillHide() {
+    @objc private func keyboardWillHide() {
         self.onKeyboardHeightChange(0.0)
     }
 }

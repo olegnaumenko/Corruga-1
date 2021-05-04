@@ -59,8 +59,8 @@
             <objects>
                 <navigationController title="News" id="QGJ-NK-jL4" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="news_tab" id="h2w-a4-K1F"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hvo-Ho-VGh">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hvo-Ho-VGh">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="app-secondary-label"/>
                         <color key="barTintColor" name="app-background"/>
@@ -141,10 +141,10 @@
             <objects>
                 <viewController storyboardIdentifier="NewsViewController" id="XzW-sk-HGx" customClass="NewsViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qcj-rZ-n5b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qub-m8-JLj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qub-m8-JLj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                                 <color key="backgroundColor" name="app-background"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -307,7 +307,7 @@
             <objects>
                 <viewController storyboardIdentifier="DictionaryViewController" title="Dictionary" id="kSo-jW-rff" customClass="DictionaryViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pN6-T1-xoO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="55" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Gy-fP-Voc">
@@ -718,8 +718,8 @@
             <objects>
                 <navigationController title="Classifieds" id="jL8-rr-LHg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Board" image="board_tab" id="MXq-wV-XaB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="V4g-4A-zb8">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="V4g-4A-zb8">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="app-secondary-label"/>
                         <color key="barTintColor" name="app-background"/>
@@ -743,13 +743,16 @@
             <objects>
                 <navigationController title="Video" id="oMk-rC-usb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Video" image="video_tab" id="H0W-1w-l8i"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oo1-df-mSZ">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Oo1-df-mSZ">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="app-secondary-label"/>
+                        <color key="tintColor" name="app-secondary-label"/>
                         <color key="barTintColor" name="app-background"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -892,19 +895,11 @@
             <objects>
                 <viewController storyboardIdentifier="VideosViewController" title="Video" id="Au4-2j-55G" customClass="VideosViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e0k-FJ-teI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCw-c5-BvB" customClass="WKYTPlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
-                                <color key="backgroundColor" name="app-background"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="XCw-c5-BvB" secondAttribute="height" multiplier="16:9" id="GnL-EM-qUn"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57A-nZ-nfm">
-                                <rect key="frame" x="0.0" y="211" width="375" height="430"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                                 <color key="separatorColor" name="app-tint"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -961,16 +956,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="57A-nZ-nfm" firstAttribute="bottom" secondItem="p2J-il-zgy" secondAttribute="bottom" id="8y3-aE-RE3"/>
-                            <constraint firstItem="57A-nZ-nfm" firstAttribute="top" secondItem="XCw-c5-BvB" secondAttribute="bottom" id="E6z-rt-Q0W"/>
-                            <constraint firstItem="XCw-c5-BvB" firstAttribute="trailing" secondItem="p2J-il-zgy" secondAttribute="trailing" id="MV6-h1-nAN"/>
-                            <constraint firstItem="XCw-c5-BvB" firstAttribute="top" secondItem="p2J-il-zgy" secondAttribute="top" id="VYJ-Xy-5rC"/>
+                            <constraint firstItem="57A-nZ-nfm" firstAttribute="top" secondItem="p2J-il-zgy" secondAttribute="top" id="E6z-rt-Q0W"/>
                             <constraint firstItem="57A-nZ-nfm" firstAttribute="trailing" secondItem="p2J-il-zgy" secondAttribute="trailing" id="crH-Hj-trL"/>
                             <constraint firstItem="57A-nZ-nfm" firstAttribute="leading" secondItem="p2J-il-zgy" secondAttribute="leading" id="r08-AB-sbh"/>
-                            <constraint firstItem="XCw-c5-BvB" firstAttribute="leading" secondItem="p2J-il-zgy" secondAttribute="leading" id="tZx-M7-q2J"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Videos" id="Ify-51-Yjw">
+                    <navigationItem key="navigationItem" title="Video" id="Ify-51-Yjw">
                         <barButtonItem key="rightBarButtonItem" image="qr_button" id="xa4-nQ-LRr">
                             <color key="tintColor" name="app-label"/>
                             <connections>
@@ -979,7 +971,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="playerView" destination="XCw-c5-BvB" id="YPL-3J-W6U"/>
                         <outlet property="tableView" destination="57A-nZ-nfm" id="h8Z-HN-Qid"/>
                     </connections>
                 </viewController>

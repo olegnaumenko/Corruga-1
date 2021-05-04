@@ -72,6 +72,10 @@ class LanguageModel {
         }
     }
     
+    var loaded:Bool {
+        return entryModels.count > 0
+    }
+    
     var shortName:String {
         return LanguageModel.shortDisplayName(langId: self.languageID)
     }

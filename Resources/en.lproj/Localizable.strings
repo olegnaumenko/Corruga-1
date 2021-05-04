@@ -13,6 +13,8 @@
 "tab-bar-board-title"="Board";
 
 "dict-view-search-placeholder"="search term";
+"dict-view-search-no-results"="No results found. Try again.";
+"dict-view-search-total-found"="Total terms found:";
 "translation-view-title"="Translation";
 
 "image-zoom-view-visit-company-website"="Please visit company website";

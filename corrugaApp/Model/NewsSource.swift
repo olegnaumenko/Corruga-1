@@ -106,7 +106,7 @@ class NewsSource: NSObject {
     
     var searchTerm:String? {
         didSet {
-            if let searchTerm = self.searchTerm, searchTerm.count > 0 {
+            if let searchTerm = self.searchTerm, searchTerm.count > 2 {
                 reloadSearch()
             } 
         }
@@ -216,7 +216,7 @@ class NewsSource: NSObject {
     }
     
     func getNextSearchItems() {
-        self.getNewsItems(offset: currentSearchOffset, count: currentPageSize, search: searchTerm) { [weak self] (newsArray, receivedOffset, totalItems, searchString) in
+        self.getNewsItems(offset: currentSearchOffset, count: 45, search: searchTerm) { [weak self] (newsArray, receivedOffset, totalItems, searchString) in
             if let self = self {
                 if let na = newsArray {
                     if let ss = searchString, self.searchTerm == ss {
@@ -224,14 +224,14 @@ class NewsSource: NSObject {
                         self.onSearchItemsChange()
                     }
                     self.currentSearchOffset = receivedOffset + na.count
-                    let oldPageSize = self.currentPageSize;
                     if self.currentPageSize < 50 {
                         self.currentPageSize = 50
                     }
-                    if na.count == oldPageSize {
+                    if na.count != 0 {
                         self.getNextSearchItems()
                     } else {
                         self.loadInProgress = false
+                        print("finished loading search items, total: \(self.currentSearchOffset + 1) items")
                     }
                 } else {
                     self.loadInProgress = false

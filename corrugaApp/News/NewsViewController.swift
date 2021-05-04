@@ -16,15 +16,15 @@ protocol NewsViewControllerDelegate:class {
 
 class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
 
-    let newsCellId = "NewsItemTableViewCell"
-    let adCellId = "AdPicTableViewCell"
+    private let newsCellId = "NewsItemTableViewCell"
+    private let adCellId = "AdPicTableViewCell"
     
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var logoLabel:UILabel?
     @IBOutlet weak var loadingIndicator:FTLinearActivityIndicator!
     
-    let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
-    let overscrollLoadingIndicator = UIActivityIndicatorView()
+    internal let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
+    internal let overscrollLoadingIndicator = UIActivityIndicatorView()
     
     var viewModel:NewsViewModel!
         {
@@ -42,8 +42,8 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         }
     }
     
-    
-    let searchController = UISearchController(searchResultsController: nil)
+    private var keyboardObserver:KeyboardPositionObserver?
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +65,11 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
             loadingIndicator.startAnimating()
         }
         
+        self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { (height) in
+            var insets = self.tableView.contentInset
+            insets.bottom = height
+            self.tableView.contentInset = insets
+        })
         setupFooter()
     }
 
@@ -111,8 +116,8 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         self.setIndicator(on: false)
     }
     
-    internal func onOverscroll() {
-        self.viewModel.onOverscroll()
+    internal func onOverscroll() ->Bool {
+        return self.viewModel.onOverscroll()
     }
 }
 

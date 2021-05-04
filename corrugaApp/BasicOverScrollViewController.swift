@@ -15,7 +15,7 @@ protocol BasicOverScrollViewController:UIScrollViewDelegate {
     
     var footerView:UITableViewHeaderFooterView { get }
     var overscrollLoadingIndicator:UIActivityIndicatorView { get }
-    func onOverscroll()
+    func onOverscroll() -> Bool
 }
 
 extension BasicOverScrollViewController {
@@ -32,8 +32,9 @@ extension BasicOverScrollViewController {
     }
     
     func onOverscrollInternal() {
-        self.overscrollLoadingIndicator.startAnimating()
-        self.onOverscroll()
+        if (self.onOverscroll() == true) {
+            self.overscrollLoadingIndicator.startAnimating()
+        }
     }
     
     func setIndicator(on:Bool) {

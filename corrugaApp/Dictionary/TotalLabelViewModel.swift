@@ -12,12 +12,18 @@ struct TotalLabelViewModel {
     
     var total:Int
     
+    var loaded:Bool
+    
     var output:String {
         get {
-            if (total == 0) {
-                return "No results found. Try again."
+            if (loaded == false) {
+                return ""
             }
-            return "Total terms found: \(total)"
+            
+            if (total == 0) {
+                return "dict-view-search-no-results".n10
+            }
+            return "dict-view-search-total-found".n10 + " \(total)"
         }
     }
 }

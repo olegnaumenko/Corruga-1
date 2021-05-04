@@ -13,6 +13,8 @@
 "tab-bar-board-title"="Об'яви";
 
 "dict-view-search-placeholder"="шукати термін";
+"dict-view-search-no-results"="Нічого не знайдено. Спробуйте ще.";
+"dict-view-search-total-found"="Всього знайдено термінів:";
 "translation-view-title"="Переклад";
 
 "image-zoom-view-visit-company-website"="Будьласка, зайдіть на сайт компанії";

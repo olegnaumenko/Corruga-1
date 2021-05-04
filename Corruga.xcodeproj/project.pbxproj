@@ -155,6 +155,8 @@
 		8494E3E726403C1C000A60A9 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494E3E626403C1C000A60A9 /* Localization.swift */; };
 		84AB1273264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */; };
 		84AB1274264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */; };
+		84AB12872641D84100AF2315 /* KeyboardPositionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */; };
+		84AB128A2641D84200AF2315 /* KeyboardPositionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C29C930212722B200D22D66 /* KeyboardPositionObserver.swift */; };
 		9B32C2F9076AF448DCD672F7 /* Pods_CorrugaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
 /* End PBXBuildFile section */
@@ -885,6 +887,7 @@
 				7CEABAD0215F56F80011BB55 /* VideoTableViewModel.swift in Sources */,
 				7CBB8E6F219C293800560397 /* VideoSource.swift in Sources */,
 				7C5D73F22167737F0022ABBC /* BoardCoordinator.swift in Sources */,
+				84AB12872641D84100AF2315 /* KeyboardPositionObserver.swift in Sources */,
 				7CEABAD5215F7A530011BB55 /* FloatingHeaderPresenter.swift in Sources */,
 				7C06CB722108923300FEEB52 /* DictModel.swift in Sources */,
 				7C4993F2213EBC0B00778429 /* SpotlightIndexer.swift in Sources */,
@@ -959,6 +962,7 @@
 				840C7FAF263D98EF00F9F086 /* VideoSource.swift in Sources */,
 				840C7F8B263D986600F9F086 /* SelectionPopoverViewModel.swift in Sources */,
 				840C7F54263D980600F9F086 /* DictionaryNavViewController.swift in Sources */,
+				84AB128A2641D84200AF2315 /* KeyboardPositionObserver.swift in Sources */,
 				840C7FAD263D98EF00F9F086 /* SpotlightIndexer.swift in Sources */,
 				840C7F7E263D984800F9F086 /* BaseFeatureViewController.swift in Sources */,
 				840C7F3C263D979500F9F086 /* DetailViewModel.swift in Sources */,
