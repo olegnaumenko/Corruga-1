@@ -9,6 +9,12 @@
 import Foundation
 //import RealmSwift
 
+extension NSNotification.Name {
+    public static let VideoSourceItemsStartedLoading = NSNotification.Name("VideoSourceItemsStartedLoading")
+    public static let VideoSourceItemsUpdated = NSNotification.Name("VideoSourceItemsUpdated")
+    public static let VideoSourceItemsLoadingError = NSNotification.Name("VideoSourceItemsLoadingError")
+}
+
 class VideoSource {
     
     static let shared = VideoSource()
@@ -17,11 +23,7 @@ class VideoSource {
 //    var observeToken:NotificationToken?
     
     private var backgroundTask = BackgroundTask(name: "videos.source")
-    private var loadInProgress = false {
-        didSet {
-            backgroundTask.inProgress = loadInProgress
-        }
-    }
+    private var loadInProgress = false
     private var nextPageToken:String?
     private var currentResultsPerPage = 10
     var totalItems:Int = 0
@@ -55,7 +57,7 @@ class VideoSource {
         
     }
     
-    func getNextVideosPage() {
+    func getNextVideosPage(recursively:Bool = false) {
         
         loadInProgress = true
         Client.shared.getPlaylistVideos(nextPageToken: self.nextPageToken, resultsPerPage: self.currentResultsPerPage) { (playlistDict, error) in
@@ -66,7 +68,6 @@ class VideoSource {
             } else if let playlistDictionary = playlistDict {
                 
                 self.nextPageToken = playlistDictionary["nextPageToken"] as? String
-                
                 
                 if let items = playlistDictionary["items"] as? [[String:Any]] {
                     
@@ -93,7 +94,9 @@ class VideoSource {
                     if self.currentResultsPerPage < 50 {
                         self.currentResultsPerPage = 50
                     }
-                    self.getNextVideosPage()
+                    if (recursively == true) {
+                        self.getNextVideosPage(recursively: true)
+                    }
                 }
             }
         }

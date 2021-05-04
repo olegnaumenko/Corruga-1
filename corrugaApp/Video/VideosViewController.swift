@@ -10,7 +10,10 @@ import UIKit
 import YoutubePlayer_in_WKWebView
 //import youtube_ios_player_helper_swift
 
-class VideosViewController: BaseFeatureViewController {
+class VideosViewController: BaseFeatureViewController, BasicOverScrollViewController {
+    
+    let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
+    let overscrollLoadingIndicator = UIActivityIndicatorView()
 
     @IBOutlet weak var playerView:WKYTPlayerView!
     @IBOutlet weak var tableView:UITableView!
@@ -41,7 +44,7 @@ class VideosViewController: BaseFeatureViewController {
                 self.loadOnStart()
             }
         }
-        
+        self.setupFooter()
         self.loadOnStart()
     }
     
@@ -56,6 +59,7 @@ class VideosViewController: BaseFeatureViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
         self.tableViewModel.onViewWillAppear()
     }
     
@@ -92,6 +96,10 @@ class VideosViewController: BaseFeatureViewController {
         if (isLoaded) {
             self.tableViewModel.currentVideoID = video.videoId
         }
+    }
+    
+    func onOverscroll() {
+        tableViewModel.onOverscroll()
     }
     
 //    func updateItemSelection() {
@@ -158,4 +166,10 @@ extension VideosViewController : UITableViewDelegate {
 //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 //        
 //    }
+}
+
+extension VideosViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.basicScrollViewDidScroll(scrollView)
+    }
 }

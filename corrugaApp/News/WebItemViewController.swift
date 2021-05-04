@@ -29,14 +29,23 @@ class WebItemViewController:PresentationReportingViewController {
         self.viewModel.loadContentBlock = { [weak self] content, baseURL in
             self?.webView.loadHTMLString(content, baseURL: baseURL)
         }
-        self.title = self.viewModel.title
+        self.updateUI()
         self.viewModel.viewDidLoad()
+    }
+    
+    private func updateUI() {
+        self.title = self.viewModel.title
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.view.backgroundColor = Appearance.backgroundAppColor()
         self.webView.backgroundColor = self.view.backgroundColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func setupBackButton() {
@@ -66,12 +75,12 @@ class WebItemViewController:PresentationReportingViewController {
         guard let url = viewModel.baseURL else { return }
         sender.isEnabled = false
         
-        let items:[Any] = [url, viewModel.title]
+        let items:[Any] = [url]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityController.title = NSLocalizedString("Sharing a link", comment: "")
         activityController.modalPresentationStyle = .popover
         activityController.popoverPresentationController?.barButtonItem = sender
-        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
+//        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
         
         activityController.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, error) in
             if (completed) {
@@ -92,11 +101,19 @@ extension WebItemViewController:WKUIDelegate {
     //https://nemecek.be/blog/1/how-to-open-target_blank-links-in-wkwebview-in-ios
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let frame = navigationAction.targetFrame,
-            frame.isMainFrame {
+        if let frame = navigationAction.targetFrame, frame.isMainFrame {
             return nil
         }
-        webView.load(navigationAction.request)
+        guard let url = navigationAction.request.url else { return nil }
+        
+        viewModel.navigationFromThisPage(url: url) { (title, url, error) in
+            if let _ = title {
+                self.updateUI()
+                self.navigationController?.navigationItem.title = self.viewModel.title
+            } else {
+                webView.load(navigationAction.request)
+            }
+        }
         return nil
     }
 

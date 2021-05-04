@@ -168,10 +168,24 @@ final class Client {
     
     func getPost(id:Int, type:SourceCategory, completion:@escaping ([Any]?, Int, Error?) -> ()) {
         var params = [String:Any]();
+        params["_fields"] = ["id", "title", "excerpt", "date", "link", "content"]
         
         let urlString = (type == .news ? Client.newsAPIURL : Client.boardAPIURL) + "/posts/\(id)"
         
-        params["_fields"] = ["id", "title", "excerpt", "date_gmt", "link", "content"]
+        getPostJsonAndProcess(urlString: urlString, params: params, headerfields: nil, completion: completion)
+    }
+    
+    func getPost(slug:String, type:SourceCategory, completion:@escaping ([Any]?, Int, Error?) -> ()) {
+        var params = [String:Any]();
+        params["_fields"] = ["id", "title", "excerpt", "date", "link", "content"]
+        params["slug"] = slug
+        
+        let urlString = (type == .news ? Client.newsAPIURL : Client.boardAPIURL) + "/posts/"
+        
+        getPostJsonAndProcess(urlString: urlString, params: params, headerfields: nil, completion: completion)
+    }
+    
+    private func getPostJsonAndProcess(urlString:String, params:[AnyHashable:Any]?, headerfields:[String:String]?, completion:@escaping ([Any]?, Int, Error?) -> ()) {
         
         self.indicatorNotifier.increment()
         

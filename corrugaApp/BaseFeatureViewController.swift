@@ -21,7 +21,7 @@ class BaseFeatureViewController: UIViewController, ReachabilityAwareViewControll
 
     weak var delegate:BaseFeatureViewControllerDelegate?
     
-    lazy var connectionIndicatorController = ConnectionIndicatorController(parentViewController: self)
+    lazy var connectionIndicatorController = ReachabilityIndicatorController(parentViewController: self)
     
     @IBAction func onQRButton(_ sender:UIBarButtonItem) {
         self.delegate?.presentShareViewController()

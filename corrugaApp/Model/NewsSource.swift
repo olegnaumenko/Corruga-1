@@ -50,6 +50,7 @@ struct NewsOpenPost {
     let title:String
     let content:String
     let htmlURL:String
+    let date:String
 }
 
 extension NSNotification.Name {
@@ -269,15 +270,17 @@ class NewsSource: NSObject {
         }
     }
     
-    func getNewsPost(id:Int, completion:@escaping (NewsOpenPost?, Error?)->()) {
+    func getPostBy(id:Int, completion:@escaping (NewsOpenPost?, Error?)->()) {
         Client.shared.getPost(id: id, type:itemType) { (dataArray, count, error) in
             if let array = dataArray as [Any]?, array.count > 0, let dict = array[0] as? [String:Any] {
                 if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
                    let content =  (dict["content"] as? [AnyHashable:Any])?["rendered"] as? String,
                    let id = dict["id"] as? Int {
                     
+                    let date = dict["date"] as? String ?? ""
                     let link = dict["link"] as? String ?? ""
-                    let post = NewsOpenPost(id: id, title: self.filterHtml(title), content: content, htmlURL: link)
+                    
+                    let post = NewsOpenPost(id: id, title: self.filterHtml(title), content: content, htmlURL: link, date: date)
                     completion(post, nil)
                     return
                 }
@@ -286,6 +289,26 @@ class NewsSource: NSObject {
             completion(nil, error)
         }
     }
+    
+    func getPostBy(slug:String, completion:@escaping (NewsOpenPost?, Error?)->()) {
+        Client.shared.getPost(slug: slug, type:itemType) { (dataArray, count, error) in
+            if let array = dataArray as [Any]?, array.count > 0, let dict = array[0] as? [String:Any] {
+                if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
+                   let content =  (dict["content"] as? [AnyHashable:Any])?["rendered"] as? String,
+                   let id = dict["id"] as? Int {
+                    
+                    let date = dict["date"] as? String ?? ""
+                    let link = dict["link"] as? String ?? ""
+                    let post = NewsOpenPost(id: id, title: self.filterHtml(title), content: content, htmlURL: link, date: date)
+                    completion(post, nil)
+                    return
+                }
+            }
+            let error = NSError(domain: kNetworkErrorDomain, code: 1003, userInfo: nil)
+            completion(nil, error)
+        }
+    }
+    
     
     private func reportError(error:Error) {
         print("Error during news list request:")

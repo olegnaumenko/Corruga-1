@@ -103,7 +103,7 @@ extension AppTabCoordinator
     
     func appDidFinishLaunching(_ application: UIApplication) {
         if application.applicationState != .background {
-            DictModel.shared.setup()
+//            DictModel.shared.setup()
             VideoSource.shared.reload()
         }
     }

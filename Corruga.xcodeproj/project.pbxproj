@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
+		6A1498222342319F0047BD63 /* ReachabilityIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ReachabilityIndicatorController.swift */; };
 		6A149824234234310047BD63 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
 		6A38091124D1C3B100104A83 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4993ED213EB4DC00778429 /* CoreServices.framework */; };
 		6A3D339F2386AFA400E2537A /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D339E2386AFA400E2537A /* BackgroundTask.swift */; };
@@ -140,7 +140,7 @@
 		840C7F8F263D986B00F9F086 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD62285734200DE4AE2 /* PopupViewController.m */; };
 		840C7F90263D986B00F9F086 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C73FDD42285734200DE4AE2 /* SelectViewController.m */; };
 		840C7F93263D987000F9F086 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A149823234234310047BD63 /* ConnectionIndicatorView.swift */; };
-		840C7F94263D987000F9F086 /* ConnectionIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */; };
+		840C7F94263D987000F9F086 /* ReachabilityIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1498212342319F0047BD63 /* ReachabilityIndicatorController.swift */; };
 		840C7FAD263D98EF00F9F086 /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4993F1213EBC0B00778429 /* SpotlightIndexer.swift */; };
 		840C7FAE263D98EF00F9F086 /* DictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06CB712108923300FEEB52 /* DictModel.swift */; };
 		840C7FAF263D98EF00F9F086 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB8E6E219C293800560397 /* VideoSource.swift */; };
@@ -153,6 +153,8 @@
 		8434761C263FD43000258CAB /* PresentationReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434761B263FD43000258CAB /* PresentationReportingViewController.swift */; };
 		8494E3DF264039AB000A60A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8494E3E1264039AB000A60A9 /* Localizable.strings */; };
 		8494E3E726403C1C000A60A9 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494E3E626403C1C000A60A9 /* Localization.swift */; };
+		84AB1273264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */; };
+		84AB1274264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */; };
 		9B32C2F9076AF448DCD672F7 /* Pods_CorrugaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */; };
 		DC7508341CADBBE31D160072 /* Pods_Corruga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05FA882528DA78405BF5054 /* Pods_Corruga.framework */; };
 /* End PBXBuildFile section */
@@ -171,7 +173,7 @@
 		306A93973DE71D1A5FEBF77B /* Pods-Corruga.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.debug.xcconfig"; sourceTree = "<group>"; };
 		4418B3CE00B3E53837CACDB2 /* Pods-CorrugaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CorrugaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CorrugaTests/Pods-CorrugaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		646D76864E764D8B56345ACD /* Pods-CorrugaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CorrugaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CorrugaTests/Pods-CorrugaTests.release.xcconfig"; sourceTree = "<group>"; };
-		6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorController.swift; sourceTree = "<group>"; };
+		6A1498212342319F0047BD63 /* ReachabilityIndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityIndicatorController.swift; sourceTree = "<group>"; };
 		6A149823234234310047BD63 /* ConnectionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionIndicatorView.swift; sourceTree = "<group>"; };
 		6A3D339E2386AFA400E2537A /* BackgroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		6A86D5AF23A9227900371F52 /* AdPicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPicTableViewCell.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		8494E3E4264039AD000A60A9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8494E3E5264039C3000A60A9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8494E3E626403C1C000A60A9 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOverScrollViewController.swift; sourceTree = "<group>"; };
 		9EA1BE279A8F14B1A1D1E275 /* Pods-Corruga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corruga.release.xcconfig"; path = "Pods/Target Support Files/Pods-Corruga/Pods-Corruga.release.xcconfig"; sourceTree = "<group>"; };
 		A2160B0E9EA4633C1557DB68 /* Pods_CorrugaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CorrugaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05FA882528DA78405BF5054 /* Pods_Corruga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Corruga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -314,7 +317,7 @@
 		6A1498202342316E0047BD63 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				6A1498212342319F0047BD63 /* ConnectionIndicatorController.swift */,
+				6A1498212342319F0047BD63 /* ReachabilityIndicatorController.swift */,
 				6A149823234234310047BD63 /* ConnectionIndicatorView.swift */,
 			);
 			path = CustomViews;
@@ -367,8 +370,8 @@
 				7C1CD34921443962006CF4C6 /* VideosCoordinator.swift */,
 				7C1CD34D214448DA006CF4C6 /* VideoItemViewModel.swift */,
 				7C1CD34B2144397D006CF4C6 /* VideosViewController.swift */,
-				7C1CD34F21444A4A006CF4C6 /* VideosDataSource.swift */,
 				7CEABACF215F56F80011BB55 /* VideoTableViewModel.swift */,
+				7C1CD34F21444A4A006CF4C6 /* VideosDataSource.swift */,
 				7CEABAD1215F57B70011BB55 /* VideoItemTableViewCell.swift */,
 			);
 			path = Video;
@@ -412,6 +415,7 @@
 				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */,
 				7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */,
+				84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */,
 				8434761B263FD43000258CAB /* PresentationReportingViewController.swift */,
 				7C4B7074214182FE00BC03C3 /* Video */,
 				7C4B7073214182F800BC03C3 /* News */,
@@ -847,10 +851,11 @@
 				7C4B70782141835700BC03C3 /* NewsViewController.swift in Sources */,
 				7CDD61C32141797F000E864D /* AppTabCoordinator.swift in Sources */,
 				7CC81D0021286D24004D555E /* AudioSession.swift in Sources */,
+				84AB1273264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */,
 				7C1CD34E214448DA006CF4C6 /* VideoItemViewModel.swift in Sources */,
 				7CD7ADF92127EAAE009D3B4A /* Settings.swift in Sources */,
 				7C72D111211EF27B00CDAD47 /* PageViewCoordinator.swift in Sources */,
-				6A1498222342319F0047BD63 /* ConnectionIndicatorController.swift in Sources */,
+				6A1498222342319F0047BD63 /* ReachabilityIndicatorController.swift in Sources */,
 				7C1CD34C2144397D006CF4C6 /* VideosViewController.swift in Sources */,
 				7C8EC17521282F8D000499C9 /* CoordinatorProtocol.swift in Sources */,
 				7C73FDDF2285ABEF00DE4AE2 /* DictionaryViewModel.swift in Sources */,
@@ -911,7 +916,7 @@
 				840C7F39263D979000F9F086 /* SpeechSynth.swift in Sources */,
 				840C7F67263D981000F9F086 /* NewsViewController.swift in Sources */,
 				840C7F78263D982F00F9F086 /* VideosCoordinator.swift in Sources */,
-				840C7F94263D987000F9F086 /* ConnectionIndicatorController.swift in Sources */,
+				840C7F94263D987000F9F086 /* ReachabilityIndicatorController.swift in Sources */,
 				840C7F66263D981000F9F086 /* NewsItemTableViewCell.swift in Sources */,
 				7C5D005F210889080025EF47 /* corruDictTests.swift in Sources */,
 				840C7F4B263D97E000F9F086 /* AudioSession.swift in Sources */,
@@ -920,6 +925,7 @@
 				840C7F18263D961500F9F086 /* Network.swift in Sources */,
 				840C7F53263D980600F9F086 /* FloatingHeaderPresenter.swift in Sources */,
 				840C7F64263D981000F9F086 /* NewsCoordinator.swift in Sources */,
+				84AB1274264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */,
 				840C7FB0263D98EF00F9F086 /* ImageProvider.swift in Sources */,
 				840C7F5A263D980600F9F086 /* DictionaryCoordinator.swift in Sources */,
 				840C7F2D263D976D00F9F086 /* CoordinatorProtocol.swift in Sources */,

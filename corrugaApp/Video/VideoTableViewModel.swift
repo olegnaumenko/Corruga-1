@@ -39,6 +39,11 @@ class VideoTableViewModel: NSObject {
     
     func onViewWillAppear() {
         self.onReachabilityChange()
+        VideoSource.shared.getNextVideosPage()
+    }
+    
+    func onOverscroll() {
+        VideoSource.shared.getNextVideosPage()
     }
     
     private func subscribe() {

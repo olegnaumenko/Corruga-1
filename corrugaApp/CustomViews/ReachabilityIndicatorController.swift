@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ConnectionIndicatorController: NSObject {
+final class ReachabilityIndicatorController: NSObject {
 
     private let indicatorHeight:CGFloat = 48
     private let parentViewController:UIViewController

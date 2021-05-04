@@ -14,7 +14,7 @@ protocol NewsViewControllerDelegate:class {
 }
 
 
-class NewsViewController: BaseFeatureViewController {
+class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
 
     let newsCellId = "NewsItemTableViewCell"
     let adCellId = "AdPicTableViewCell"
@@ -47,13 +47,11 @@ class NewsViewController: BaseFeatureViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        self.setupFooter()
+        definesPresentationContext = true
         
-        self.tableView.estimatedRowHeight = 220.0
-        self.tableView.separatorColor = UIColor.clear
-//        self.tableView.prefetchDataSource = self
-        self.definesPresentationContext = true
+        tableView.estimatedRowHeight = 220.0
+        tableView.dataSource = self
+        tableView.delegate = self
         
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
@@ -61,61 +59,59 @@ class NewsViewController: BaseFeatureViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
 
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        
-        if self.tableView.numberOfRows(inSection: 0) == 0 {
-            self.loadingIndicator.startAnimating()
+        if tableView.numberOfRows(inSection: 0) == 0 {
+            loadingIndicator.startAnimating()
         }
+        
+        setupFooter()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.onViewWillAppear()
+        tableView.separatorColor = Appearance.appTintColor()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        viewModel.onViewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let indexPath = self.tableView.indexPathForSelectedRow {
-            self.tableView.deselectRow(at: indexPath, animated: true)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.viewModel.onViewDidDissapear()
+        viewModel.onViewDidDissapear()
     }
     
-    private func setupFooter() {
-        self.overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.overscrollLoadingIndicator.stopAnimating()
-        self.footerView.addSubview(overscrollLoadingIndicator)
-        self.tableView.tableFooterView = self.footerView
-        self.footerView.autoresizingMask = [.flexibleWidth]
-        NSLayoutConstraint.activate([
-            overscrollLoadingIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            overscrollLoadingIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor)
-        ])
-    }
+//    internal func setupFooter() {
+//        self.overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+//        self.overscrollLoadingIndicator.stopAnimating()
+//        self.footerView.addSubview(overscrollLoadingIndicator)
+//        self.tableView.tableFooterView = self.footerView
+//        self.footerView.autoresizingMask = [.flexibleWidth]
+//        NSLayoutConstraint.activate([
+//            overscrollLoadingIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+//            overscrollLoadingIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor)
+//        ])
+//    }
     
     
     private func refresh() {
-        self.tableView.separatorColor = Appearance.appTintColor()
         self.tableView.reloadData()
         let isEmpty = self.tableView.numberOfRows(inSection: 0) == 0
         self.tableView.isHidden = isEmpty
         if (isEmpty == false) {
             self.loadingIndicator.stopAnimating()
         }
-        self.overscrollLoadingIndicator.stopAnimating()
+        self.setIndicator(on: false)
     }
     
-    private func overscroll() {
-        self.overscrollLoadingIndicator.startAnimating()
+    internal func onOverscroll() {
         self.viewModel.onOverscroll()
     }
 }
@@ -157,23 +153,9 @@ extension NewsViewController : UITableViewDelegate {
 
 extension NewsViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let ratio = (scrollView.contentOffset.y/(scrollView.contentSize.height - scrollView.frame.size.height))
-        if (ratio > 0.9) {
-            self.overscroll()
-        }
+        basicScrollViewDidScroll(scrollView)
     }
 }
-
-//extension NewsViewController : UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        guard let min = indexPaths.min()?.row, let max = indexPaths.max()?.row
-//        else {
-//            return
-//        }
-//        self.viewModel.prefetchItems(firstIndex: min, lastIndex: max)
-//        print("prefetch: \(indexPaths) visible: \(tableView.indexPathsForVisibleRows)")
-//    }
-//}
 
 
 

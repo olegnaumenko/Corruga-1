@@ -26,6 +26,10 @@ import UIKit
         return UIColor(named: "app-tint-large")!
     }
     
+    static func appTintDespiteTheme() -> UIColor {
+        return UIColor(named: "app-tint-no-theme")!
+    }
+    
     static func topButtonTint() -> UIColor {
         return self.backgroundAppColor()
     }

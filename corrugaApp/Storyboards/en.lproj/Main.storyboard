@@ -141,7 +141,7 @@
             <objects>
                 <viewController storyboardIdentifier="NewsViewController" id="XzW-sk-HGx" customClass="NewsViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qcj-rZ-n5b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qub-m8-JLj">
@@ -157,25 +157,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5V-Wn-ERB">
-                                                    <rect key="frame" x="16" y="15" width="343" height="24"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <color key="textColor" name="app-label"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrk-oN-KWe">
-                                                    <rect key="frame" x="40.666666666666664" y="44" width="24.999999999999993" height="13.666666666666664"/>
+                                                    <rect key="frame" x="39.666666666666664" y="40" width="24.999999999999993" height="13.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="app-tint"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="247" verticalCompressionResistancePriority="751" text="Excerpt" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0go-wc-Qm3">
-                                                    <rect key="frame" x="16" y="62.666666666666657" width="343" height="45.333333333333343"/>
+                                                    <rect key="frame" x="16" y="61.666666666666657" width="343" height="46.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="app-secondary-label"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-Ad-1EV">
-                                                    <rect key="frame" x="16" y="42.333333333333329" width="20.666666666666671" height="17.333333333333336"/>
+                                                    <rect key="frame" x="15.000000000000002" y="39.333333333333329" width="20.666666666666671" height="17.333333333333336"/>
                                                     <color key="tintColor" name="app-tint"/>
                                                 </imageView>
                                             </subviews>
@@ -183,12 +183,12 @@
                                                 <constraint firstItem="0go-wc-Qm3" firstAttribute="trailing" secondItem="T3l-J1-beM" secondAttribute="trailingMargin" id="0Tv-We-bft"/>
                                                 <constraint firstItem="0go-wc-Qm3" firstAttribute="leading" secondItem="T3l-J1-beM" secondAttribute="leadingMargin" id="9Hj-7X-YYi"/>
                                                 <constraint firstItem="Q5V-Wn-ERB" firstAttribute="trailing" secondItem="T3l-J1-beM" secondAttribute="trailingMargin" id="CrZ-uB-oq3"/>
-                                                <constraint firstItem="vwX-Ad-1EV" firstAttribute="leading" secondItem="T3l-J1-beM" secondAttribute="leadingMargin" id="DHX-1u-jn3"/>
-                                                <constraint firstItem="0go-wc-Qm3" firstAttribute="top" secondItem="vrk-oN-KWe" secondAttribute="bottom" constant="5" id="HlL-F4-ZNQ"/>
+                                                <constraint firstItem="vwX-Ad-1EV" firstAttribute="leading" secondItem="T3l-J1-beM" secondAttribute="leadingMargin" constant="-1" id="DHX-1u-jn3"/>
+                                                <constraint firstItem="0go-wc-Qm3" firstAttribute="top" secondItem="vrk-oN-KWe" secondAttribute="bottom" constant="8" id="HlL-F4-ZNQ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="0go-wc-Qm3" secondAttribute="bottom" constant="4" id="M9t-oz-HqC"/>
-                                                <constraint firstItem="Q5V-Wn-ERB" firstAttribute="top" secondItem="T3l-J1-beM" secondAttribute="topMargin" constant="4" id="QTb-Qg-iTT"/>
+                                                <constraint firstItem="Q5V-Wn-ERB" firstAttribute="top" secondItem="T3l-J1-beM" secondAttribute="topMargin" id="QTb-Qg-iTT"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vrk-oN-KWe" secondAttribute="trailing" constant="20" symbolic="YES" id="Qpu-3t-Wit"/>
-                                                <constraint firstItem="vwX-Ad-1EV" firstAttribute="centerY" secondItem="vrk-oN-KWe" secondAttribute="centerY" id="d6c-GZ-SNK"/>
+                                                <constraint firstItem="vwX-Ad-1EV" firstAttribute="centerY" secondItem="vrk-oN-KWe" secondAttribute="centerY" constant="1" id="d6c-GZ-SNK"/>
                                                 <constraint firstItem="Q5V-Wn-ERB" firstAttribute="leading" secondItem="T3l-J1-beM" secondAttribute="leadingMargin" id="wWI-ey-5lF"/>
                                                 <constraint firstItem="vrk-oN-KWe" firstAttribute="leading" secondItem="vwX-Ad-1EV" secondAttribute="trailing" constant="4" id="x3b-rT-7gm"/>
                                                 <constraint firstItem="vrk-oN-KWe" firstAttribute="top" secondItem="Q5V-Wn-ERB" secondAttribute="bottom" constant="5" id="xOg-R3-otX"/>
@@ -259,6 +259,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="XzW-sk-HGx" id="yMo-oz-kA2"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQf-Gx-Izx" customClass="FTLinearActivityIndicator" customModule="FTLinearActivityIndicator">
                                 <rect key="frame" x="107.66666666666669" y="316.66666666666669" width="160" height="8"/>
@@ -304,7 +307,7 @@
             <objects>
                 <viewController storyboardIdentifier="DictionaryViewController" title="Dictionary" id="kSo-jW-rff" customClass="DictionaryViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pN6-T1-xoO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="55" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Gy-fP-Voc">
@@ -884,12 +887,12 @@
             </objects>
             <point key="canvasLocation" x="-799.20000000000005" y="999.01477832512319"/>
         </scene>
-        <!--Videos-->
+        <!--Video-->
         <scene sceneID="Mu1-tS-qZd">
             <objects>
-                <viewController storyboardIdentifier="VideosViewController" title="Videos" id="Au4-2j-55G" customClass="VideosViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideosViewController" title="Video" id="Au4-2j-55G" customClass="VideosViewController" customModule="Corruga" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e0k-FJ-teI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCw-c5-BvB" customClass="WKYTPlayerView">
@@ -902,6 +905,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57A-nZ-nfm">
                                 <rect key="frame" x="0.0" y="211" width="375" height="430"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" name="app-tint"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoItemTableViewCell" id="WJK-r9-9E0" customClass="VideoItemTableViewCell" customModule="Corruga" customModuleProvider="target">
@@ -911,13 +915,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-bA-mpu">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-bA-mpu">
                                                     <rect key="frame" x="143" y="12.999999999999998" width="216" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="app-label"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojv-fN-8bP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Ojv-fN-8bP">
                                                     <rect key="frame" x="143" y="33.333333333333336" width="216" height="15.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="app-secondary-label"/>
@@ -985,7 +989,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="U1u-Lf-skt"/>
+        <segue reference="6lQ-sO-ygS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="board_tab" width="24" height="24"/>

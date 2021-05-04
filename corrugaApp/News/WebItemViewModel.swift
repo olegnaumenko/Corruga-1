@@ -11,15 +11,18 @@ import SwiftSoup
 
 class WebItemViewModel {
     
-    private let item:NewsItem
-    private var htmlContent:String?
+    private(set) var item:NewsItem
+//    private var htmlContent:String?
     private let source:NewsSource
     
-    private let screenScale = UIScreen.main.scale
+    var baseURL: URL? {
+       return URL(string: item.url)
+    }
+    
+    private let baseWebsiteHost = "gofro.expert"
     
     var loadContentBlock: (String, URL)->() = {_,_ in }
     
-    private(set) var baseURL: URL?
     
     var title:String {
         return item.title
@@ -37,7 +40,6 @@ class WebItemViewModel {
     init(item:NewsItem, source:NewsSource) {
         self.item = item
         self.source = source
-        self.baseURL = URL(string: item.url)
     }
     
     func viewDidLoad() {
@@ -45,13 +47,32 @@ class WebItemViewModel {
     }
     
     func load() {
-        self.source.getNewsPost(id: item.id) { (post, error) in
+        self.source.getPostBy(id: item.id) { (post, error) in
             if let post = post {
-                let content = self.parseHtml(post: post)
-                if let url = self.baseURL {
+                if let url = self.baseURL, let content = try? self.parseHtml(post: post) {
                     self.loadContentBlock(content, url.deletingLastPathComponent())
                 }
             }
+        }
+    }
+    
+    func navigationFromThisPage(url:URL, completion:@escaping(String?, URL?, Error?)->()) {
+        
+        if url.host == baseWebsiteHost {
+            let slug = url.lastPathComponent
+            source.getPostBy(slug: slug) { [weak self] (post, error) in
+                guard let self = self else { return }
+                
+                if let post = post, let url = URL(string: post.htmlURL) {
+                    self.item = NewsItem(id: post.id, title: post.title, shortText: "", date: post.date, views: 0, url: url.absoluteString, imageURL: nil, adImage: nil, type: .newsType)
+                    self.load()
+                    completion(post.title, url, nil)
+                } else {
+                    completion(nil, nil, error)
+                }
+            }
+        } else {
+            completion(nil, nil, nil)
         }
     }
     
@@ -70,24 +91,22 @@ class WebItemViewModel {
 //    font: -apple-system-tall-body
 
     
-    private func parseHtml(post:NewsOpenPost) -> String {
+    private func parseHtml(post:NewsOpenPost) throws -> String {
         let content = post.content
         let doc: Document = try! SwiftSoup.parse(content)
 //        print("======")
 
-        let color = Appearance.appTintColor()
+        let color = Appearance.appTintDespiteTheme()
         var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
         color.getRed(&r, green: &g, blue: &b, alpha: &a)
         let colorString = "rgb(\(Int(256*r)),\(Int(256*g)),\(Int(256*b)))"
         
-        let fontSize = Int(18 * screenScale)
-        let dateFontSize = Int(16 * screenScale)
-        let bodyMargin = Int(19 * screenScale)
-        let marginImgHorizontal = Int(20 * screenScale)
-        let marginImgVertical = Int(4 * screenScale)
-        
-        
-        //text-align:right;
+        let scale = 2
+        let fontSize = Int(18 * scale)
+        let dateFontSize = Int(12 * scale)
+        let bodyMargin = Int(19 * scale)
+        let marginImgHorizontal = Int(20 * scale)
+        let marginImgVertical = Int(4 * scale)
         
         let styleText = """
             body{font-size:\(fontSize)px;font-family:-apple-system;margin:\(bodyMargin)px;}
@@ -100,28 +119,29 @@ class WebItemViewModel {
             img.aligncenter{float:none;}
             img.size-full,img.size-large {max-width:100%;height:auto;}
             div.fitvids-video{max-width:100%;height:auto;position:relative}
+            iframe{width:100%;}
+            figure.aligncenter{width:100%;height:auto;margin:0px}
+            figcaption{font-size:\(fontSize - 2)px;text-align:center;color:gray}
             """
 
         let head = doc.head()
-        try! head?.appendElement("style").appendText(styleText)
+        try head?.appendElement("style").appendText(styleText)
         let body = doc.body()
         
         if let date = item.date.components(separatedBy: "T").first {
-            try! body?.prepend("<p class=date>􀉉 \(date)</p>")
+            try body?.prepend("<p class=date>􀉉 \(date)</p>")
         }
-        try! body?.prepend("<h1>\(post.title)</h1>")
+        try body?.prepend("<h2>\(post.title)</h2>")
         
         var foundTitleImage = false
         
-        try! doc.select("p").forEach { (element) in
+        try doc.select("p").forEach { (element) in
             
-            var pHtml = try! element.html()
+            var pHtml = try element.html()
             
-            pHtml = pHtml.replacingOccurrences(of: "</strong>", with: "");
-            pHtml = pHtml.replacingOccurrences(of: "<strong>", with: "");
-            pHtml = pHtml.replacingOccurrences(of: "&nbsp;", with: " ");
+            pHtml = pHtml.replacingOccurrences(of: "</strong>", with: "").replacingOccurrences(of: "<strong>", with: "").replacingOccurrences(of: "&nbsp;", with: " ");
 
-            try! element.html(pHtml)
+            try element.html(pHtml)
             
 //            print(try! element.html())
             
@@ -134,6 +154,10 @@ class WebItemViewModel {
                 }
             }
 //            print("======")
+        }
+        
+        try? doc.select("figure").forEach { (element) in
+            try element.removeAttr("style")
         }
         
         let html = try! doc.html()
