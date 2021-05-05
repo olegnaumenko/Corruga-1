@@ -151,6 +151,9 @@
 		840C7FC3263D9D2400F9F086 /* WebItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */; };
 		8421AFBF263A8F9D00644179 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421AFBE263A8F9D00644179 /* Network.swift */; };
 		8434761C263FD43000258CAB /* PresentationReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434761B263FD43000258CAB /* PresentationReportingViewController.swift */; };
+		845507442642B0550026BC82 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845507432642B0550026BC82 /* Global.swift */; };
+		845507452642B0550026BC82 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845507432642B0550026BC82 /* Global.swift */; };
+		8455074A2642BC880026BC82 /* PresentationReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434761B263FD43000258CAB /* PresentationReportingViewController.swift */; };
 		8494E3DF264039AB000A60A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8494E3E1264039AB000A60A9 /* Localizable.strings */; };
 		8494E3E726403C1C000A60A9 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494E3E626403C1C000A60A9 /* Localization.swift */; };
 		84AB1273264160F800AF2315 /* BasicOverScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */; };
@@ -277,6 +280,7 @@
 		840C7FC1263D9D2400F9F086 /* WebItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebItemViewModel.swift; sourceTree = "<group>"; };
 		8421AFBE263A8F9D00644179 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		8434761B263FD43000258CAB /* PresentationReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationReportingViewController.swift; sourceTree = "<group>"; };
+		845507432642B0550026BC82 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		8494E3D92640390D000A60A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8494E3DA2640390D000A60A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8494E3E0264039AB000A60A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -409,12 +413,13 @@
 				7C73FDCE228570F300DE4AE2 /* SelectionPopover */,
 				7CFFDEB6219D887F006EEB47 /* Share */,
 				7C5D0047210889060025EF47 /* AppDelegate.swift */,
+				845507432642B0550026BC82 /* Global.swift */,
+				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				8494E3E626403C1C000A60A9 /* Localization.swift */,
+				7C978F77211F101F00D1B165 /* Appearance.swift */,
+				7C16D3622199E09C00217626 /* AppAnalytics.swift */,
 				7CDD61C22141797F000E864D /* AppTabCoordinator.swift */,
 				7CDD61C421417A2E000E864D /* AppTabBarController.swift */,
-				7C16D3622199E09C00217626 /* AppAnalytics.swift */,
-				7C978F77211F101F00D1B165 /* Appearance.swift */,
-				7CD7ADF82127EAAE009D3B4A /* Settings.swift */,
 				7CFFDEB2219D827D006EEB47 /* BaseFeatureViewController.swift */,
 				7CFFDEB4219D83B5006EEB47 /* BaseFeatureCoordinator.swift */,
 				84AB1272264160F800AF2315 /* BasicOverScrollViewController.swift */,
@@ -877,6 +882,7 @@
 				7C3FFA9F2289B4DA00EDF2BC /* NewsViewModel.swift in Sources */,
 				7C73FDDC2285734200DE4AE2 /* PopupViewController.m in Sources */,
 				7C3FFA9B2286F90B00EDF2BC /* WebItemViewController.swift in Sources */,
+				845507442642B0550026BC82 /* Global.swift in Sources */,
 				7CDC372C2116206C008B774C /* PageViewController.swift in Sources */,
 				7C3FFA9D2286FB9000EDF2BC /* NewsItemTableViewCell.swift in Sources */,
 				7C954173211CC9AE00CDD270 /* ImageProvider.swift in Sources */,
@@ -942,6 +948,7 @@
 				840C7F6C263D982300F9F086 /* VideoItemTableViewCell.swift in Sources */,
 				840C7F46263D97DB00F9F086 /* PageViewController.swift in Sources */,
 				840C7FC3263D9D2400F9F086 /* WebItemViewModel.swift in Sources */,
+				8455074A2642BC880026BC82 /* PresentationReportingViewController.swift in Sources */,
 				840C7F84263D985100F9F086 /* AppTabCoordinator.swift in Sources */,
 				840C7F90263D986B00F9F086 /* SelectViewController.m in Sources */,
 				840C7F21263D972100F9F086 /* Appearance.swift in Sources */,
@@ -952,6 +959,7 @@
 				840C7F68263D981000F9F086 /* AdPicTableViewCell.swift in Sources */,
 				840C7F15263D961200F9F086 /* NewsSource.swift in Sources */,
 				840C7FB7263D996500F9F086 /* corruObjCTests.m in Sources */,
+				845507452642B0550026BC82 /* Global.swift in Sources */,
 				840C7F42263D97C000F9F086 /* VideoItemEntity.swift in Sources */,
 				840C7F55263D980600F9F086 /* ScrollManager.swift in Sources */,
 				840C7F6F263D982600F9F086 /* VideoTableViewModel.swift in Sources */,

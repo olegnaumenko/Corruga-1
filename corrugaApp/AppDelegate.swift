@@ -94,10 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      performFetchWithCompletionHandler
                         completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         let source = NewsSource(itemType: .news)
-        source.getLatestPosts { (count, errString) in
+        source.fetchRecentPostsCount { (count, errString) in
             if errString == nil {
                 application.applicationIconBadgeNumber = count
                 completionHandler(count != 0 ? .newData : .noData)
+                DLog("Fetch: \(count)")
             } else {
                 completionHandler(.failed)
             }

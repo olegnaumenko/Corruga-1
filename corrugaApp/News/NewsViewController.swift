@@ -13,16 +13,6 @@ protocol NewsViewControllerDelegate:class {
     func newsViewControllerDidSelect(item:NewsItem) -> Bool
 }
 
-@discardableResult func apply<T>(_ it:T, f:(T)->()) -> T {
-    f(it)
-    return it
-}
-
-infix operator => //: AssignmentPrecedence
-func => <T:AnyObject>(left:T, right:(T)->()) {
-    right(left)
-}
-
 class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
 
     private let newsCellId = "NewsItemTableViewCell"
@@ -31,7 +21,6 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
     private var headerLabel = UILabel()
     
     @IBOutlet weak var tableView:UITableView!
-    @IBOutlet weak var logoLabel:UILabel?
     @IBOutlet weak var loadingIndicator:FTLinearActivityIndicator!
     
     internal let footerView = UITableViewHeaderFooterView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 100, height: 60)))
@@ -60,6 +49,8 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         tableView.dataSource = self
         tableView.delegate = self
         
+        overscrollLoadingIndicator.style = .gray
+        
         searchController => {
             $0.searchResultsUpdater = self
             $0.hidesNavigationBarDuringPresentation = true
@@ -70,7 +61,6 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         
         navigationItem.searchController = searchController
 
-        
         self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { (height) in
             var insets = self.tableView.contentInset
             insets.bottom = height

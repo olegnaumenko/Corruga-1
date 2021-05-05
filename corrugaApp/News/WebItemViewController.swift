@@ -14,8 +14,11 @@ class WebItemViewController:PresentationReportingViewController {
     
     var viewModel:WebItemViewModel!
     
+    private var progressTimer:Timer?
+    
     @IBOutlet var webView:WKWebView!
     @IBOutlet var loadingIndicator:FTLinearActivityIndicator!
+    @IBOutlet var progressIndicator:UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +32,12 @@ class WebItemViewController:PresentationReportingViewController {
         self.viewModel.loadContentBlock = { [weak self] content, baseURL in
             self?.webView.loadHTMLString(content, baseURL: baseURL)
         }
-        self.updateUI()
-        self.viewModel.viewDidLoad()
+        updateUI()
+        viewModel.viewDidLoad()
     }
     
     private func updateUI() {
+        updateProgress()
         self.title = self.viewModel.title
     }
     
@@ -49,6 +53,24 @@ class WebItemViewController:PresentationReportingViewController {
     }
     
     func setupBackButton() {
+    }
+    
+    private func updateProgressTimer() {
+        if (webView.isLoading) {
+            progressTimer = Timer.scheduledTimer(withTimeInterval: 0.064, repeats: true, block: { (timer) in
+                self.updateProgress()
+            })
+        } else {
+            progressTimer?.invalidate()
+            progressTimer = nil
+            updateProgress()
+        }
+    }
+    
+    private func updateProgress() {
+        let progress = Float(webView.estimatedProgress)
+        progressIndicator.isHidden = !(webView.isLoading)
+        progressIndicator.progress = progress
     }
     
     @objc func onBackButton(_ sender:Any) {
@@ -125,21 +147,25 @@ extension WebItemViewController:WKNavigationDelegate {
         self.loadingIndicator.stopAnimating()
         self.setupBackButton()
         self.presentError(error: error)
+        updateProgressTimer()
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error)
         self.presentError(error: error)
         self.loadingIndicator.stopAnimating()
+        updateProgressTimer()
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.loadingIndicator.stopAnimating()
         self.setupBackButton()
+        updateProgressTimer()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.loadingIndicator.stopAnimating()
         self.setupBackButton()
+        self.updateProgressTimer()
     }
 }

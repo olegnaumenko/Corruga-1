@@ -174,18 +174,16 @@ class NewsSource: NSObject {
         }
     }
     
-    func getLatestPosts(completion:@escaping (Int, Error?)->()) {
+    func fetchRecentPostsCount(completion:@escaping (Int, Error?)->()) {
         if let latestPostDateString = Settings.s.newsLastUpdateDate {
-            Client.shared.getFeedAfter(type: .news, dateString: latestPostDateString) { (itemsArray, total, error) in
+            Client.shared.fetchFeedAfter(type: .news, dateString: latestPostDateString) { (itemsArray, total, error) in
                 if error != nil {
                     completion(0, error)
-                } else if let items = itemsArray, items.count > 0 {
+                } else if let items = itemsArray {
                     completion(items.count, nil)
-                    if let dict = items.first as? [String:Any], let date = dict["date"] as? String {
-                        Settings.s.newsLastUpdateDate = date
-                    }
-                } else {
-                    completion(0, nil)
+//                    if let dict = items.first as? [String:Any], let date = dict["date"] as? String {
+//                        Settings.s.newsLastUpdateDate = date
+//                    }
                 }
             }
         }

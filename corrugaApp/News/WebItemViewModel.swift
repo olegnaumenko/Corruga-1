@@ -108,16 +108,18 @@ class WebItemViewModel {
         let marginImgHorizontal = Int(20 * scale)
         let marginImgVertical = Int(4 * scale)
         
+        // img.size-large{max-width:100%;height:auto;}
+        
         let styleText = """
             body{font-size:\(fontSize)px;font-family:-apple-system;margin:\(bodyMargin)px;}
             p{text-align:justify}
             p.date{color:\(colorString);font-size:\(dateFontSize)}
+            img.size-full{width:100%;height:auto;}
             img.alignleft{float:left;margin-right:\(marginImgHorizontal)px;
             margin-bottom:\(2 * marginImgVertical)px;margin-top:\(marginImgVertical)px;width:48%;height:auto;}
             img.alignright{float:right;margin-left:\(marginImgHorizontal)px;
             margin-bottom:\(2 * marginImgVertical)px;margin-top:\(marginImgVertical)px;width:44%;height:auto;}
             img.aligncenter{float:none;}
-            img.size-full,img.size-large {max-width:100%;height:auto;}
             div.fitvids-video{max-width:100%;height:auto;position:relative}
             iframe{width:100%;}
             figure.aligncenter{width:100%;height:auto;margin:0px}

@@ -12,7 +12,6 @@ import UIKit
 protocol BasicOverScrollViewController:UIScrollViewDelegate {
     
     var tableView:UITableView! { get set }
-    
     var footerView:UITableViewHeaderFooterView { get }
     var overscrollLoadingIndicator:UIActivityIndicatorView { get }
     func onOverscroll() -> Bool
@@ -20,11 +19,11 @@ protocol BasicOverScrollViewController:UIScrollViewDelegate {
 
 extension BasicOverScrollViewController {
     func setupFooter() {
-        self.overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.overscrollLoadingIndicator.stopAnimating()
-        self.footerView.addSubview(overscrollLoadingIndicator)
-        self.tableView.tableFooterView = self.footerView
-        self.footerView.autoresizingMask = [.flexibleWidth]
+        overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        overscrollLoadingIndicator.stopAnimating()
+        footerView.addSubview(overscrollLoadingIndicator)
+        footerView.autoresizingMask = [.flexibleWidth]
+        tableView.tableFooterView = footerView
         NSLayoutConstraint.activate([
             overscrollLoadingIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             overscrollLoadingIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor)
@@ -32,8 +31,8 @@ extension BasicOverScrollViewController {
     }
     
     func onOverscrollInternal() {
-        if (self.onOverscroll() == true) {
-            self.overscrollLoadingIndicator.startAnimating()
+        if (onOverscroll() == true) {
+            overscrollLoadingIndicator.startAnimating()
         }
     }
     
@@ -44,7 +43,7 @@ extension BasicOverScrollViewController {
     func basicScrollViewDidScroll(_ scrollView: UIScrollView) {
         let ratio = (scrollView.contentOffset.y/(scrollView.contentSize.height - scrollView.frame.size.height))
         if (ratio > 0.9) {
-            self.onOverscrollInternal()
+            onOverscrollInternal()
         }
     }
 }

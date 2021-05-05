@@ -100,7 +100,7 @@ final class Client {
         })
     }
     
-    func getFeedAfter(type:SourceCategory, dateString:String, completion:@escaping ([Any]?, Int, Error?) -> ()) {
+    func fetchFeedAfter(type:SourceCategory, dateString:String, completion:@escaping ([Any]?, Int, Error?) -> ()) {
         var params = [String:Any]();
         
         let urlString = type == .news ? Client.newsAPIURL : Client.boardAPIURL
