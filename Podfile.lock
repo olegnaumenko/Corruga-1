@@ -119,7 +119,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FTLinearActivityIndicator
   - SwiftSoup
-  - YoutubePlayer-in-WKWebView (~> 0.3.0)
+  - YoutubePlayer-in-WKWebView
 
 SPEC REPOS:
   trunk:
@@ -162,6 +162,6 @@ SPEC CHECKSUMS:
   SwiftSoup: f97bc4e988c7729d6457f9642f974c617a6e2510
   YoutubePlayer-in-WKWebView: cfbf46da51d7370662a695a8f351e5fa1d3e1008
 
-PODFILE CHECKSUM: 3583b4d777011c84017246a0cee6d7e9fb70c476
+PODFILE CHECKSUM: 0e3eb458940740400c4b835948f3bc7f59d0a58b
 
 COCOAPODS: 1.10.1

@@ -113,6 +113,10 @@ class NewsViewModel {
         return self.navigationDelegate?.newsViewControllerDidSelect(item: item) ?? false        
     }
     
+    func viewControllerForPickItem(index:Int) -> UIViewController? {
+        return self.navigationDelegate?.newsViewControllerDidPick(item: item(atIndex: index))
+    }
+    
     func onOverscroll() -> Bool {
         if searchTerm != nil {
             return false

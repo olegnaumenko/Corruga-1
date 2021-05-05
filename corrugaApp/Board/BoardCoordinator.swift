@@ -20,14 +20,23 @@ class BoardCoordinator: BaseFeatureCoordinator {
         self.newsViewController.viewModel.navigationDelegate = self
         self.start(viewController: newsViewController)
     }
+    
+    func createWebViewController(item:NewsItem) -> UIViewController {
+        let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WebItemViewController") as! WebItemViewController
+        itemViewController.viewModel = WebItemViewModel(item: item, source: source)
+        return itemViewController
+    }
 }
 
 extension BoardCoordinator: NewsViewControllerDelegate {
+    func newsViewControllerDidPick(item: NewsItem) -> UIViewController? {
+        return createWebViewController(item: item)
+    }
+    
     func newsViewControllerDidSelect(item:NewsItem) -> Bool {
         
-        let itemViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WebItemViewController") as! WebItemViewController
-        itemViewController.viewModel = WebItemViewModel(item: item, source: source)
-        self.newsViewController.navigationController?.pushViewController(itemViewController, animated: true)
+        let webItemViewController = createWebViewController(item: item)
+        self.newsViewController.navigationController?.pushViewController(webItemViewController, animated: true)
         return true
     }
 }

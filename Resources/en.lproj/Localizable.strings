@@ -18,6 +18,8 @@
 "translation-view-title"="Translation";
 
 "news-view-search-found"="Found:";
+"news-coord-open-on-website"="Open on website";
+"news-coord-share-post-link"="Share link";
 
 "image-zoom-view-visit-company-website"="Please visit company website";
 "image-zoom-view-close"="Close";
@@ -34,3 +36,5 @@
 "ad-pic-title-9"="PAPER PRESSES (TECHGENE)";
 "ad-pic-title-10"="MULTI-POINT FOLDER GLUER LINES (VEGA)";
 "ad-pic-title-11"="TRANSPORT MACHINERY (WSA)";
+
+"reachability-indicator-text"="No internet connection";

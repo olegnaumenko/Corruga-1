@@ -13,6 +13,7 @@ import FTLinearActivityIndicator
 class WebItemViewController:PresentationReportingViewController {
     
     var viewModel:WebItemViewModel!
+    var previewActions = [UIPreviewAction]()
     
     private var progressTimer:Timer?
     
@@ -28,6 +29,7 @@ class WebItemViewController:PresentationReportingViewController {
         self.webView.allowsLinkPreview = true
         
         self.loadingIndicator.startAnimating()
+        progressIndicator.progress = 0.01
         
         self.viewModel.loadContentBlock = { [weak self] content, baseURL in
             self?.webView.loadHTMLString(content, baseURL: baseURL)
@@ -36,8 +38,11 @@ class WebItemViewController:PresentationReportingViewController {
         viewModel.viewDidLoad()
     }
     
+    deinit {
+        progressTimer?.invalidate()
+    }
+    
     private func updateUI() {
-        updateProgress()
         self.title = self.viewModel.title
     }
     
@@ -57,7 +62,7 @@ class WebItemViewController:PresentationReportingViewController {
     
     private func updateProgressTimer() {
         if (webView.isLoading) {
-            progressTimer = Timer.scheduledTimer(withTimeInterval: 0.064, repeats: true, block: { (timer) in
+            progressTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
                 self.updateProgress()
             })
         } else {
@@ -69,7 +74,6 @@ class WebItemViewController:PresentationReportingViewController {
     
     private func updateProgress() {
         let progress = Float(webView.estimatedProgress)
-        progressIndicator.isHidden = !(webView.isLoading)
         progressIndicator.progress = progress
     }
     
@@ -89,31 +93,18 @@ class WebItemViewController:PresentationReportingViewController {
     }
     
     @IBAction func onShareButton(sender:UIBarButtonItem) {
-        showShareActivity(sender)
-    }
-    
-    private func showShareActivity(_ sender:UIBarButtonItem)
-    {
-        guard let url = viewModel.baseURL else { return }
         sender.isEnabled = false
-        
+        guard let url = viewModel.baseURL else { return }
         let items:[Any] = [url]
-        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityController.title = NSLocalizedString("Sharing a link", comment: "")
-        activityController.modalPresentationStyle = .popover
-        activityController.popoverPresentationController?.barButtonItem = sender
-//        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
-        
-        activityController.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, error) in
+        let title = NSLocalizedString("Sharing a link", comment: "")
+        showShareActivity(sender, items: items, title: title) { completed, activityType in
+            sender.isEnabled = true
             if (completed) {
-                self?.dismiss(animated: true, completion: nil)
                 AppAnalytics.shared.logEvent(name:"share_link_success", params:["activity":activityType ?? "nil"])
             } else {
                 AppAnalytics.shared.logEvent(name:"share_link_decline", params:nil)
             }
-            sender.isEnabled = true
         }
-        self.present(activityController, animated: true, completion: nil)
     }
 }
 
@@ -166,6 +157,12 @@ extension WebItemViewController:WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.loadingIndicator.stopAnimating()
         self.setupBackButton()
-        self.updateProgressTimer()
+        updateProgressTimer()
+    }
+}
+
+extension WebItemViewController {
+    override var previewActionItems: [UIPreviewActionItem] {
+        return self.previewActions
     }
 }

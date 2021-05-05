@@ -7,10 +7,12 @@
 //
 
 import UIKit
+
 import FTLinearActivityIndicator
 
 protocol NewsViewControllerDelegate:class {
     func newsViewControllerDidSelect(item:NewsItem) -> Bool
+    func newsViewControllerDidPick(item:NewsItem) -> UIViewController?
 }
 
 class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
@@ -48,6 +50,8 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         tableView.estimatedRowHeight = 220.0
         tableView.dataSource = self
         tableView.delegate = self
+        
+        registerForPreviewing(with: self, sourceView: tableView)
         
         overscrollLoadingIndicator.style = .gray
         
@@ -164,6 +168,23 @@ extension NewsViewController : UITableViewDataSource {
             cell.viewModel = cellModel
             return cell
         }
+    }
+}
+
+extension NewsViewController : UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tv = previewingContext.sourceView as? UITableView
+        else { return nil }
+        
+        if let indexPath = tv.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tv.rectForRow(at: indexPath)
+            return viewModel.viewControllerForPickItem(index: indexPath.row)
+        }
+        return nil
+}
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.show(viewControllerToCommit, sender: nil)
     }
 }
 

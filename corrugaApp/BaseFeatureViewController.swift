@@ -8,6 +8,28 @@
 
 import UIKit
 
+extension UIViewController {
+    func showShareActivity(_ sender:Any, items:[Any], title:String?, completion:@escaping (_ completed:Bool, _ activityType:UIActivity.ActivityType?)->())
+    {
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityController.modalPresentationStyle = .popover
+        activityController.title = title
+        
+        if let barButton = sender as? UIBarButtonItem {
+            activityController.popoverPresentationController?.barButtonItem = barButton
+        } else if let sourceView = sender as? UIView {
+            activityController.popoverPresentationController?.sourceView = sourceView
+        }
+        
+//        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
+        
+        activityController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            completion(completed, activityType)
+        }
+        self.present(activityController, animated: true, completion: nil)
+    }
+}
+
 protocol BaseFeatureViewControllerDelegate:class {
     func presentAsAPage(vc:PresentationReportingViewController)
     func presentShareViewController()

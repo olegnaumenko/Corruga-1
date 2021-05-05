@@ -4,7 +4,7 @@ target 'Corruga' do
   platform :ios, '12.3'
 
 #  pod 'youtube-ios-player-helper-swift'
-  pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
+  pod "YoutubePlayer-in-WKWebView"#, "~> 0.3.0"
   pod 'AFNetworking'
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
@@ -19,6 +19,7 @@ target 'Corruga' do
   #  pod 'UIDevice-Hardware'
   #  pod 'FacebookSDK', '~> 4.44.1'
   pod 'SwiftSoup'
+#  pod 'PeekPop'
 #  pod 'SwiftEmoji'
 
 end
@@ -28,7 +29,7 @@ target 'CorrugaTests' do
   platform :ios, '12.3'
   
 #  pod 'youtube-ios-player-helper-swift'
-  pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
+  pod "YoutubePlayer-in-WKWebView"#, "~> 0.3.0"
   pod 'AFNetworking'
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'

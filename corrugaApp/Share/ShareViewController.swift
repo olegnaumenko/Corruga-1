@@ -57,7 +57,18 @@ class ShareViewController: PresentationReportingViewController {
     }
     
     @IBAction func onShare(_ sender:UIButton) {
-        self.showShareActivity(sender)
+        sender.alpha = 0.65
+        sender.isEnabled = false
+        self.showShareActivity(sender, items: [shareLink], title: nil) { [weak self] (completed, activityType) in
+            if (completed) {
+                AppAnalytics.shared.logEvent(name:"share_success", params:["activity":activityType ?? "nil"])
+                self?.dismiss(animated: true, completion: nil)
+            } else {
+                AppAnalytics.shared.logEvent(name:"share_decline", params:nil)
+                sender.isEnabled = true
+                sender.alpha = 1
+            }
+        }
     }
     
     @objc @IBAction func onClose(_ sender:Any) {
@@ -66,29 +77,5 @@ class ShareViewController: PresentationReportingViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
-    }
-    
-    private func showShareActivity(_ sender:UIButton)
-    {
-        sender.isEnabled = false
-        sender.alpha = 0.6
-//        let message = "This is link to Corruga app download: "
-        let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
-        activityController.modalPresentationStyle = .popover
-        activityController.popoverPresentationController?.sourceView = self.view
-        activityController.popoverPresentationController?.sourceRect = sender.frame
-        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray
-        
-        activityController.completionWithItemsHandler = { [weak self] (activityType, completed, returnedItems, error) in
-            if (completed) {
-                self?.dismiss(animated: true, completion: nil)
-                AppAnalytics.shared.logEvent(name:"share_success", params:["activity":activityType ?? "nil"])
-            } else {
-                AppAnalytics.shared.logEvent(name:"share_decline", params:nil)
-            }
-            sender.isEnabled = true
-            sender.alpha = 1
-        }
-        self.present(activityController, animated: true, completion: nil)
     }
 }

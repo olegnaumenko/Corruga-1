@@ -26,7 +26,7 @@ class ConnectionIndicatorView: UIView {
         self.alpha = 0.75
         label.textColor = .white
         label.textAlignment = .center
-        label.text = "No internet connection!"
+        label.text = "reachability-indicator-text".n10
         label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
         NSLayoutConstraint.activate([
