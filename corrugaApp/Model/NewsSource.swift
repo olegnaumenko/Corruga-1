@@ -113,7 +113,7 @@ class NewsSource: NSObject {
     
     var searchTerm:String? {
         didSet {
-            if let searchTerm = self.searchTerm, searchTerm.count > 0 {
+            if let searchTerm = self.searchTerm, searchTerm.count > 0, oldValue != searchTerm {
                 reloadSearch()
             } 
         }

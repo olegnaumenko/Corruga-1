@@ -135,7 +135,11 @@ class NewsViewModel {
     
     private func reloadIfNeeded() {
         if self.arrayForDisplay().count == 0 {
-            self.itemSource.reload()
+            if (searchTerm == nil) {
+                self.itemSource.reload()
+            } else {
+                self.itemSource.reloadSearch()
+            }
         } else {
             self.onRefreshNeeded()
         }

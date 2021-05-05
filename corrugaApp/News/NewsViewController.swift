@@ -15,7 +15,7 @@ protocol NewsViewControllerDelegate:class {
     func newsViewControllerDidPick(item:NewsItem) -> UIViewController?
 }
 
-class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
+class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController  {
 
     private let newsCellId = "NewsItemTableViewCell"
     private let adCellId = "AdPicTableViewCell"
@@ -51,7 +51,10 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         tableView.dataSource = self
         tableView.delegate = self
         
-        registerForPreviewing(with: self, sourceView: tableView)
+        if #available(iOS 13.0, *) {
+        } else {
+            registerForPreviewing(with: self, sourceView: tableView)
+        }
         
         overscrollLoadingIndicator.style = .gray
         
@@ -59,7 +62,6 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
             $0.searchResultsUpdater = self
             $0.hidesNavigationBarDuringPresentation = true
             $0.obscuresBackgroundDuringPresentation = false
-            $0.dimsBackgroundDuringPresentation = false
             $0.searchBar.sizeToFit()
         }
         
@@ -202,6 +204,19 @@ extension NewsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.isInSearchMode ? 32 : 0
     }
+    
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if viewModel.item(atIndex: indexPath.row).type == .newsType {
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: {
+                return self.viewModel.viewControllerForPickItem(index: indexPath.row)
+            } , actionProvider: { suggestedElements in
+                return self.makeContextMenu(indexPath: indexPath)
+            })
+        } else {
+            return nil
+        }
+    }
 }
 
 extension NewsViewController : UIScrollViewDelegate {
@@ -210,5 +225,39 @@ extension NewsViewController : UIScrollViewDelegate {
     }
 }
 
+extension NewsViewController {
+    @available(iOS 13.0, *)
+    func makeContextMenu(indexPath:IndexPath) -> UIMenu? {
 
+        let item = viewModel.item(atIndex: indexPath.row)
+        
+        guard let url = URL(string: item.url) else {
+            return nil
+        }
+        
+        let open = UIAction(title: "Read", image: UIImage(systemName: "newspaper")) { [weak self] action in
+            guard let self = self else { return }
+            if (!self.viewModel.didSelecteItem(index: indexPath.row)) {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
+        let share = UIAction(title: "news-coord-share-post-link".n10, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+            guard let self = self else { return }
+            self.showShareActivity(self, items: [url], title: nil) { (completed, activityType) in
+                if (completed) {
+                    AppAnalytics.shared.logEvent(name:"share_link_success", params:["activity":activityType ?? "nil"])
+                } else {
+                    AppAnalytics.shared.logEvent(name:"share_link_decline", params:nil)
+                }
+            }
+        }
 
+        let openWeb = UIAction(title: "news-coord-open-on-website".n10, image: UIImage(systemName: "safari")) { action in
+            let opts = [UIApplication.OpenExternalURLOptionsKey : Any]()
+            UIApplication.shared.open(url, options: opts, completionHandler: nil)
+        }
+        
+        return UIMenu(children: [open, share, openWeb])
+    }
+}

@@ -32,7 +32,7 @@ class ShareViewController: PresentationReportingViewController {
         self.shareButton.layer.cornerRadius = 3
         self.shareButton.layer.masksToBounds = true
         titleLabel.text = "share-view-share-title".n10
-        shareButton.setTitle("share-view-share-button-title".n10, for: .normal)
+        shareButton.setTitle("  " + "share-view-share-button-title".n10, for: .normal)
         qrTitleLabel.text = "share-view-point-camera-text".n10
         shareTextLabel.text = "share-view-share-social-text".n10
 
