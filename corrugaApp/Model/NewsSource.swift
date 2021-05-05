@@ -208,12 +208,12 @@ class NewsSource: NSObject {
                         self.getNextItems(offset:self.currentOffset, count:self.currentPageSize, recursively: recursively)
                     } else {
                         self.loadInProgress = false
-                        print("finished loading items, total: \(self.newsItems.count) items")
+                        dprint("finished loading items, total: \(self.newsItems.count) items")
                     }
                 } else {
                     self.loadInProgress = false
                     self.onLoadingError()
-                    print("finished loading items, total: \(self.newsItems.count) items")
+                    dprint("finished loading items, total: \(self.newsItems.count) items")
                 }
             }
         }
@@ -244,14 +244,14 @@ class NewsSource: NSObject {
                         self.getNextSearchItems()
                     } else {
                         self.searchTasksCount -= 1
-                        print("finished loading search items for '\(searchString ?? "<none>")\', total: \(self.currentSearchOffset) items")
+                        dprint("finished loading search items for '\(searchString ?? "<none>")\', total: \(self.currentSearchOffset) items")
                         self.onSearchItemsLoadFinished()
                     }
                 } else {
                     self.searchTasksCount -= 1
                     self.onLoadingError()
                     self.onSearchItemsLoadFinished()
-                    print("finished loading search items for '\(searchString ?? "<none>")\', total: \(receivedOffset) items")
+                    dprint("finished loading search items for '\(searchString ?? "<none>")\', total: \(receivedOffset) items")
                 }
             }
         }

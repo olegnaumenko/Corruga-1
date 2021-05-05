@@ -121,9 +121,11 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
     
     private func updateLoadingIndicator() {
         if (viewModel.showLoadingIndicator == false)  {
-            self.loadingIndicator.stopAnimating()
-        } else {
-            self.loadingIndicator.startAnimating()
+            if loadingIndicator.isAnimating {
+                loadingIndicator.stopAnimating()
+            }
+        } else if !loadingIndicator.isAnimating {
+            loadingIndicator.startAnimating()
         }
     }
     

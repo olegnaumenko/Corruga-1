@@ -30,3 +30,9 @@ func DLog(_ str:String) {
     NSLog(str)
 #endif
 }
+
+func dprint(_ str:String) {
+#if DEBUG
+    print(str)
+#endif
+}
