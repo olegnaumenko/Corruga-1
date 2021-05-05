@@ -57,6 +57,7 @@ extension NSNotification.Name {
     public static let NewsSourceItemsStartedLoading = NSNotification.Name("NewsSourceStartedLoading")
     public static let NewsSourceItemsUpdated = NSNotification.Name("NewsSourceItemsUpdated")
     public static let NewsSourceItemsLoadingError = NSNotification.Name("NewsSourceItemsLoadingError")
+    public static let NewsSourceItemsLoadingFinished = NSNotification.Name("NewsSourceItemsLoadingFinished")
 }
 
 class NewsSource: NSObject {
@@ -91,12 +92,16 @@ class NewsSource: NSObject {
     var newsItems = [NewsItem]()
     var searchItems = [NewsItem]()
     
+    private var lastDateCheckTime = CFAbsoluteTime(0)
+    
     private var loadInProgress = false {
         didSet {
-            if newsItems.count != 0 && loadInProgress == false {
+            let currentTime = CFAbsoluteTimeGetCurrent()
+            if newsItems.count != 0 && loadInProgress == false && currentTime - lastDateCheckTime > 60 {
                 for item in newsItems {
                     if item.date.isEmpty == false {
                         Settings.s.newsLastUpdateDate = item.date
+                        lastDateCheckTime = currentTime
                         break
                     }
                 }
@@ -108,7 +113,7 @@ class NewsSource: NSObject {
     
     var searchTerm:String? {
         didSet {
-            if let searchTerm = self.searchTerm, searchTerm.count > 2 {
+            if let searchTerm = self.searchTerm, searchTerm.count > 0 {
                 reloadSearch()
             } 
         }
@@ -130,6 +135,14 @@ class NewsSource: NSObject {
     
     private func onSearchItemsChange() {
         NotificationCenter.default.post(name: .NewsSourceItemsUpdated, object: nil, userInfo: ["total-search-items" : searchItems.count])
+    }
+    
+    private func onItemsLoadFinished() {
+        NotificationCenter.default.post(name: .NewsSourceItemsLoadingFinished, object: nil, userInfo: ["total-items" : newsItems.count])
+    }
+    
+    private func onSearchItemsLoadFinished() {
+        NotificationCenter.default.post(name: .NewsSourceItemsLoadingFinished, object: nil, userInfo: ["total-search-items" : searchItems.count])
     }
     
     func reload() {
@@ -229,15 +242,17 @@ class NewsSource: NSObject {
                     if self.currentPageSize < 50 {
                         self.currentPageSize = 50
                     }
-                    if na.count != 0 && searchString == self.searchTerm {
+                    if na.count != 0 {
                         self.getNextSearchItems()
                     } else {
                         self.searchTasksCount -= 1
                         print("finished loading search items for '\(searchString ?? "<none>")\', total: \(self.currentSearchOffset) items")
+                        self.onSearchItemsLoadFinished()
                     }
                 } else {
                     self.searchTasksCount -= 1
                     self.onLoadingError()
+                    self.onSearchItemsLoadFinished()
                     print("finished loading search items for '\(searchString ?? "<none>")\', total: \(receivedOffset) items")
                 }
             }

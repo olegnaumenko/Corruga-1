@@ -13,6 +13,7 @@ import AFNetworking
 class NewsViewModel {
 
     var onRefreshNeeded = {}
+    var onLoadingFinished = {}
     var onReachabilityChange = {}
     var itemSource:NewsSource
     var isViewVisible = false
@@ -37,6 +38,19 @@ class NewsViewModel {
         }
     }
     
+    var isInSearchMode:Bool {
+        if let searchTerm = self.searchTerm {
+            return searchTerm.count > 0
+        }
+        return false
+    }
+    
+    private var _loading = false
+    
+    var showLoadingIndicator:Bool {
+        return (arrayForDisplay().count == 0 && _loading == true && isNetworkReachable)
+    }
+    
     init(itemSource:NewsSource) {
         self.itemSource = itemSource
     }
@@ -57,6 +71,10 @@ class NewsViewModel {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onItemsError(_:)),
                                                name: .NewsSourceItemsLoadingError,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onItemsLoadingFinished(_:)),
+                                               name: .NewsSourceItemsLoadingFinished,
                                                object: nil)
     }
     
@@ -81,6 +99,7 @@ class NewsViewModel {
         } else {
             self.searchTerm = nil
         }
+        _loading = true
         self.onRefreshNeeded()
     }
 
@@ -116,6 +135,7 @@ class NewsViewModel {
         } else {
             self.onRefreshNeeded()
         }
+        _loading = true
     }
 
     @objc private func onItemsUpdate(_ n:Notification) {
@@ -124,7 +144,13 @@ class NewsViewModel {
     }
     
     @objc private func onItemsError(_ n:Notification) {
+        _loading = false
         self.onReachabilityChange()
+    }
+    
+    @objc private func onItemsLoadingFinished(_ n:Notification) {
+        _loading = false
+        self.onLoadingFinished()
     }
     
     private func arrayForDisplay() -> [NewsItem] {

@@ -13,11 +13,22 @@ protocol NewsViewControllerDelegate:class {
     func newsViewControllerDidSelect(item:NewsItem) -> Bool
 }
 
+@discardableResult func apply<T>(_ it:T, f:(T)->()) -> T {
+    f(it)
+    return it
+}
+
+infix operator => //: AssignmentPrecedence
+func => <T:AnyObject>(left:T, right:(T)->()) {
+    right(left)
+}
 
 class NewsViewController: BaseFeatureViewController, BasicOverScrollViewController {
 
     private let newsCellId = "NewsItemTableViewCell"
     private let adCellId = "AdPicTableViewCell"
+    
+    private var headerLabel = UILabel()
     
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var logoLabel:UILabel?
@@ -33,11 +44,7 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
                 self.refresh()
             }
             self.viewModel.onReachabilityChange = { [unowned self] in
-                let reachable = self.viewModel.isNetworkReachable
-                self.setReachabilityIndicator(visible:!reachable)
-                if reachable == false {
-                    self.loadingIndicator.stopAnimating()
-                }
+                self.reachabilityRefresh()
             }
         }
     }
@@ -53,17 +60,16 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         tableView.dataSource = self
         tableView.delegate = self
         
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
+        searchController => {
+            $0.searchResultsUpdater = self
+            $0.hidesNavigationBarDuringPresentation = true
+            $0.obscuresBackgroundDuringPresentation = false
+            $0.dimsBackgroundDuringPresentation = false
+            $0.searchBar.sizeToFit()
+        }
         
         navigationItem.searchController = searchController
 
-        if tableView.numberOfRows(inSection: 0) == 0 {
-            loadingIndicator.startAnimating()
-        }
         
         self.keyboardObserver = KeyboardPositionObserver(onHeightChange: { (height) in
             var insets = self.tableView.contentInset
@@ -78,6 +84,7 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         tableView.separatorColor = Appearance.appTintColor()
         navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.onViewWillAppear()
+        updateLoadingIndicator()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,27 +100,49 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
         viewModel.onViewDidDissapear()
     }
     
-//    internal func setupFooter() {
-//        self.overscrollLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-//        self.overscrollLoadingIndicator.stopAnimating()
-//        self.footerView.addSubview(overscrollLoadingIndicator)
-//        self.tableView.tableFooterView = self.footerView
-//        self.footerView.autoresizingMask = [.flexibleWidth]
-//        NSLayoutConstraint.activate([
-//            overscrollLoadingIndicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-//            overscrollLoadingIndicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor)
-//        ])
-//    }
+    internal func setupHeader() -> UITableViewHeaderFooterView? {
+        let isSearch = viewModel.isInSearchMode
+        if (isSearch) {
+            let header = tableView.headerView(forSection: 0) ?? UITableViewHeaderFooterView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 32)))
+            headerLabel => {
+                $0.font = UIFont.systemFont(ofSize: 14)
+                $0.textColor = Appearance.labelSecondaryColor()
+                $0.textAlignment = .center
+                $0.text = "news-view-search-found".n10 + " \(viewModel.numberOfItems)"
+                $0.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                $0.frame = header.bounds
+            }
+            if (headerLabel.superview != header) {
+                headerLabel.removeFromSuperview()
+                header.addSubview(headerLabel)
+            }
+            return header
+        } else {
+            headerLabel.removeFromSuperview()
+        }
+        return nil
+    }
     
+    private func updateLoadingIndicator() {
+        if (viewModel.showLoadingIndicator == false)  {
+            self.loadingIndicator.stopAnimating()
+        } else {
+            self.loadingIndicator.startAnimating()
+        }
+    }
     
     private func refresh() {
         self.tableView.reloadData()
         let isEmpty = self.tableView.numberOfRows(inSection: 0) == 0
-        self.tableView.isHidden = isEmpty
-        if (isEmpty == false) {
-            self.loadingIndicator.stopAnimating()
-        }
+        self.tableView.isHidden = isEmpty && !viewModel.isInSearchMode
+        self.updateLoadingIndicator()
         self.setIndicator(on: false)
+    }
+    
+    private func reachabilityRefresh() {
+        let reachable = self.viewModel.isNetworkReachable
+        self.setReachabilityIndicator(visible:!reachable)
+        self.updateLoadingIndicator()
     }
     
     internal func onOverscroll() ->Bool {
@@ -153,6 +182,14 @@ extension NewsViewController : UITableViewDelegate {
         if (!viewModel.didSelecteItem(index: indexPath.row)) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return setupHeader()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.isInSearchMode ? 32 : 0
     }
 }
 
