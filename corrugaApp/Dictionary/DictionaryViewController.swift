@@ -141,7 +141,7 @@ class DictionaryViewController: BaseFeatureViewController {
     
     @objc private func inputModeDidChange(n:Notification) {
         if let lang = self.searchTextField?.textInputMode?.primaryLanguage,
-            let text = self.searchTextField?.text {
+           let text = self.searchTextField?.text, !text.isEmpty {
             self.viewModel.inputModeChange(locale: lang, text: text)
         }
     }
