@@ -54,6 +54,10 @@ class DictModel {
         }
     }
     
+    var currentShortLanguageDirection:String {
+        return "\(fromLangModel.shortName) ▶ \(toLangModel.shortName)"
+    }
+    
     private func update() {
         if (currentSearchTerm == "") {
             self.fromLangModel.allTranslationEntities() { translationEntityModels in

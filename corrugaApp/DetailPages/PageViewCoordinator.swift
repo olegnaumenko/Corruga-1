@@ -29,7 +29,8 @@ class PageViewCoordinator
         self.pageViewController = pageViewController
         self.pageViewDataSource = dataSource
         
-        pageViewController.title = "translation-view-title".n10
+        let dictModel = pageViewDataSource.dictModel
+        pageViewController.title = "translation-view-title".n10 + ": \(dictModel.currentShortLanguageDirection)"
         pageViewController.delegate = self.pageViewControllerObserver
         self.pageViewControllerObserver.delegate = self
     }

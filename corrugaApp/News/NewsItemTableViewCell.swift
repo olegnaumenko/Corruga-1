@@ -24,7 +24,7 @@ class NewsItemTableViewCell: UITableViewCell {
             self.titleLabel.text = newsItem.title
             self.dateLabel.text = filterDate(newsItem.date)
             let space = newsItem.shortText.count == 0 ? "" : " "
-            let excerpt = newsItem.shortText + space + "‣"
+            let excerpt = newsItem.shortText + space + "‣‣‣"
             
             //replace emoji if any
             do {

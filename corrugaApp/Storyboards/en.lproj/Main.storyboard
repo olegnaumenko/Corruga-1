@@ -333,35 +333,36 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="N9p-Ii-vic">
-                                                    <rect key="frame" x="16" y="10" width="396" height="54"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="icY-8E-VXp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="396" height="19.333333333333332"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" name="app-label"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="ztM-9L-pN8">
-                                                            <rect key="frame" x="0.0" y="21.333333333333332" width="396" height="9"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" name="app-tint"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="gar-VU-sBW">
-                                                            <rect key="frame" x="0.0" y="32.333333333333336" width="396" height="21.666666666666664"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                                            <color key="textColor" name="app-secondary-label"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="icY-8E-VXp">
+                                                    <rect key="frame" x="16" y="6" width="396" height="19.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" name="app-label"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="ztM-9L-pN8">
+                                                    <rect key="frame" x="16" y="27.333333333333332" width="396" height="8.9999999999999964"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" name="app-tint"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="gar-VU-sBW">
+                                                    <rect key="frame" x="16" y="44.333333333333336" width="396" height="21.666666666666664"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <color key="textColor" name="app-secondary-label"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="N9p-Ii-vic" firstAttribute="leading" secondItem="2wq-bO-HZ4" secondAttribute="leading" constant="16" id="Drt-Tq-iuu"/>
-                                                <constraint firstAttribute="trailing" secondItem="N9p-Ii-vic" secondAttribute="trailing" constant="16" id="pAp-n6-QUU"/>
-                                                <constraint firstItem="N9p-Ii-vic" firstAttribute="top" secondItem="2wq-bO-HZ4" secondAttribute="top" constant="10" id="v4p-qg-oDL"/>
-                                                <constraint firstAttribute="bottom" secondItem="N9p-Ii-vic" secondAttribute="bottom" constant="10" id="vqk-xG-Ecn"/>
+                                                <constraint firstItem="gar-VU-sBW" firstAttribute="top" secondItem="ztM-9L-pN8" secondAttribute="bottom" constant="8" id="9RR-56-jgf"/>
+                                                <constraint firstAttribute="bottom" secondItem="gar-VU-sBW" secondAttribute="bottom" constant="8" id="JEV-fN-A0j"/>
+                                                <constraint firstItem="icY-8E-VXp" firstAttribute="leading" secondItem="2wq-bO-HZ4" secondAttribute="leading" constant="16" id="PuD-gJ-oYX"/>
+                                                <constraint firstItem="icY-8E-VXp" firstAttribute="top" secondItem="2wq-bO-HZ4" secondAttribute="top" constant="6" id="hMO-qu-bSf"/>
+                                                <constraint firstItem="gar-VU-sBW" firstAttribute="leading" secondItem="2wq-bO-HZ4" secondAttribute="leading" constant="16" id="hnn-Gj-y5J"/>
+                                                <constraint firstAttribute="trailing" secondItem="gar-VU-sBW" secondAttribute="trailing" constant="16" id="lxt-P7-sk5"/>
+                                                <constraint firstItem="ztM-9L-pN8" firstAttribute="leading" secondItem="2wq-bO-HZ4" secondAttribute="leading" constant="16" id="ror-VX-u7C"/>
+                                                <constraint firstItem="ztM-9L-pN8" firstAttribute="top" secondItem="icY-8E-VXp" secondAttribute="bottom" constant="2" id="s97-Bj-XFV"/>
+                                                <constraint firstAttribute="trailing" secondItem="ztM-9L-pN8" secondAttribute="trailing" constant="16" id="tvi-Oo-MJ1"/>
+                                                <constraint firstAttribute="trailing" secondItem="icY-8E-VXp" secondAttribute="trailing" constant="16" id="u5g-Ga-BjL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -482,7 +483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZh-fa-sv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125.59999999999999" y="-1326.3868065967017"/>
+            <point key="canvasLocation" x="124.7663551401869" y="-1326.9978401727863"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Itr-hS-KQc">

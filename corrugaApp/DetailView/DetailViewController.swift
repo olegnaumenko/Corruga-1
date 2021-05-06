@@ -69,9 +69,7 @@ class DetailViewController: UIViewController {
             let offset = viewSize.height - height
             
             photoLabelTopConstraint.constant = -offset/2 - 54;
-        } else {
-            dprint("SSS")
-        }
+        } 
     }
     
     private func frame(for image: UIImage, inImageViewAspectFit imageView: UIImageView) -> CGRect {
