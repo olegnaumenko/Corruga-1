@@ -146,6 +146,12 @@ class NewsViewController: BaseFeatureViewController, BasicOverScrollViewControll
     internal func onOverscroll() ->Bool {
         return self.viewModel.onOverscroll()
     }
+    
+    private func didSelectRowAt(indexPath:IndexPath) {
+        if (!self.viewModel.didSelecteItem(index: indexPath.row)) {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
 }
 
 extension NewsViewController : UISearchResultsUpdating {
@@ -175,28 +181,9 @@ extension NewsViewController : UITableViewDataSource {
     }
 }
 
-extension NewsViewController : UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let tv = previewingContext.sourceView as? UITableView
-        else { return nil }
-        
-        if let indexPath = tv.indexPathForRow(at: location) {
-            previewingContext.sourceRect = tv.rectForRow(at: indexPath)
-            return viewModel.viewControllerForPickItem(index: indexPath.row)
-        }
-        return nil
-}
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.show(viewControllerToCommit, sender: nil)
-    }
-}
-
 extension NewsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (!viewModel.didSelecteItem(index: indexPath.row)) {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        didSelectRowAt(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -210,20 +197,42 @@ extension NewsViewController : UITableViewDelegate {
     @available(iOS 13.0, *)
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if viewModel.item(atIndex: indexPath.row).type == .newsType {
-            return UIContextMenuConfiguration(identifier: nil, previewProvider: {
+            return UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: {
                 return self.viewModel.viewControllerForPickItem(index: indexPath.row)
-            } , actionProvider: { suggestedElements in
+            }, actionProvider: { suggestedElements in
                 return self.makeContextMenu(indexPath: indexPath)
             })
         } else {
-            return nil
+            return UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil)
         }
+    }
+    
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        didSelectRowAt(indexPath: indexPath)
     }
 }
 
 extension NewsViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         basicScrollViewDidScroll(scrollView)
+    }
+}
+
+extension NewsViewController : UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let tv = previewingContext.sourceView as? UITableView else { return nil }
+        
+        if let indexPath = tv.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tv.rectForRow(at: indexPath)
+            return viewModel.viewControllerForPickItem(index: indexPath.row)
+        }
+        return nil
+}
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.show(viewControllerToCommit, sender: nil)
     }
 }
 
@@ -239,9 +248,7 @@ extension NewsViewController {
         
         let open = UIAction(title: "Read", image: UIImage(systemName: "newspaper")) { [weak self] action in
             guard let self = self else { return }
-            if (!self.viewModel.didSelecteItem(index: indexPath.row)) {
-                self.tableView.deselectRow(at: indexPath, animated: true)
-            }
+            self.didSelectRowAt(indexPath: indexPath)
         }
         
         let share = UIAction(title: "news-coord-share-post-link".n10, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in

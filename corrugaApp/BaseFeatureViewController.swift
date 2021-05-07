@@ -19,6 +19,7 @@ extension UIViewController {
             activityController.popoverPresentationController?.barButtonItem = barButton
         } else if let sourceView = sender as? UIView {
             activityController.popoverPresentationController?.sourceView = sourceView
+            activityController.popoverPresentationController?.sourceRect = sourceView.bounds
         }
         
 //        activityController.popoverPresentationController?.backgroundColor = UIColor.lightGray

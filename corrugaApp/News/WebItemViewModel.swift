@@ -161,6 +161,19 @@ class WebItemViewModel {
         try? doc.select("figure").forEach { (element) in
             try element.removeAttr("style")
         }
+        try? doc.select("iframe").forEach { (element) in
+           
+//            let src = try element.attr("src")
+//            let components = src.components(separatedBy: "&url=")
+//            if components.count > 1 {
+//                let href = components[1]
+//                if (!href.isEmpty) {
+//                    try element.attr("src", href)
+//                }
+//            }
+            try element.attr("style", "width=100%;height:600px;")
+            
+        }
         
         let html = try! doc.html()
 //        print(html)

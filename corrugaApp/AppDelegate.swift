@@ -56,11 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc private func onNewDataAvailable(n:Notification) {
         let app = UIApplication.shared
-        if app.applicationState != .background {
-            return
-        }
+
+        if app.applicationIconBadgeNumber == 0 { return }
+        
         if let userInfo = n.userInfo, let count = userInfo["total-items"] as? Int, count > 0 {
-            needsResetBadgeCountOnApear = true
+            if app.applicationState == .background {
+                needsResetBadgeCountOnApear = true
+            } else {
+                app.applicationIconBadgeNumber = 0
+            }
         }
     }
 
@@ -100,13 +104,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      performFetchWithCompletionHandler
                         completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         let source = NewsSource(itemType: .news)
-        source.fetchRecentPostsCount { (count, errString) in
-            if errString == nil {
+        source.fetchRecentPostsCount { (count, error) in
+            if error == nil {
                 application.applicationIconBadgeNumber = count
                 completionHandler(count != 0 ? .newData : .noData)
                 DLog("Fetch: \(count)")
             } else {
                 completionHandler(.failed)
+                DLog("Background fetch failed: " + error.debugDescription)
             }
         }
     }

@@ -527,7 +527,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="contentEdgeInsets" minX="4" minY="8" maxX="4" maxY="8"/>
-                                <state key="normal" image="speaker"/>
+                                <state key="normal" image="speaker.2" catalog="system"/>
                                 <state key="disabled">
                                     <color key="titleColor" red="0.83595732872588824" green="0.69803965834694814" blue="0.41725614236409714" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1006,7 +1006,7 @@
         <image name="news_tab" width="24" height="24"/>
         <image name="qr_button" width="24" height="24"/>
         <image name="qr_close" width="24" height="24"/>
-        <image name="speaker" width="24" height="24"/>
+        <image name="speaker.2" catalog="system" width="128" height="90"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="static_qr_code" width="300" height="300"/>
         <image name="video_tab" width="24" height="24"/>

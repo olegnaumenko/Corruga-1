@@ -9,6 +9,7 @@ target 'Corruga' do
   pod 'Firebase/Core'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
+#  pod 'Firebase/Crashlytics'
   pod 'AltHanekeSwift'
   pod 'Branch'
   pod 'FTLinearActivityIndicator'
