@@ -242,10 +242,6 @@ extension NewsViewController {
 
         let item = viewModel.item(atIndex: indexPath.row)
         
-        guard let url = URL(string: item.url) else {
-            return nil
-        }
-        
         let open = UIAction(title: "Read", image: UIImage(systemName: "newspaper")) { [weak self] action in
             guard let self = self else { return }
             self.didSelectRowAt(indexPath: indexPath)
@@ -253,7 +249,7 @@ extension NewsViewController {
         
         let share = UIAction(title: "news-coord-share-post-link".n10, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
             guard let self = self else { return }
-            self.showShareActivity(self, items: [url], title: nil) { (completed, activityType) in
+            self.showShareActivity(self, items: [item.url], title: nil) { (completed, activityType) in
                 if (completed) {
                     AppAnalytics.shared.logEvent(name:"share_link_success", params:["activity":activityType ?? "nil"])
                 } else {
@@ -264,7 +260,7 @@ extension NewsViewController {
 
         let openWeb = UIAction(title: "news-coord-open-on-website".n10, image: UIImage(systemName: "safari")) { action in
             let opts = [UIApplication.OpenExternalURLOptionsKey : Any]()
-            UIApplication.shared.open(url, options: opts, completionHandler: nil)
+            UIApplication.shared.open(item.url, options: opts, completionHandler: nil)
         }
         
         return UIMenu(children: [open, share, openWeb])

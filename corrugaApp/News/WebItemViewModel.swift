@@ -8,20 +8,22 @@
 
 import Foundation
 import SwiftSoup
+import AltHaneke
 
 class WebItemViewModel {
     
     private(set) var item:NewsItem
-//    private var htmlContent:String?
     private let source:NewsSource
     
-    var baseURL: URL? {
-       return URL(string: item.url)
+    var baseURL: URL {
+       return item.url
     }
     
+    private let cacheFormat = Format<Data>(name: HanekeGlobals.Cache.OriginalFormatName, diskCapacity: 300*1024*1024)
     private let baseWebsiteHost = "gofro.expert"
     
     var loadContentBlock: (String, URL)->() = {_,_ in }
+    var loadDataBlock: (Data, URL)->() = {_,_ in }
     
     
     var title:String {
@@ -40,6 +42,7 @@ class WebItemViewModel {
     init(item:NewsItem, source:NewsSource) {
         self.item = item
         self.source = source
+        Shared.dataCache.addFormat(self.cacheFormat)
     }
     
     func viewDidLoad() {
@@ -47,13 +50,58 @@ class WebItemViewModel {
     }
     
     func load() {
+        
+        let url = baseURL
+        
+        //external links from other domains are not cached anyway:
+        if url.host != baseWebsiteHost {
+            loadFromWeb()
+            dprint("external, loading from web: \(url)")
+            return
+        }
+        
+        Shared.dataCache.fetch(key: url.absoluteString, formatName: HanekeGlobals.Cache.OriginalFormatName) { [weak self] (error) in
+            self?.loadFromWeb()
+            dprint("not in cache, loading from web: \(url)")
+        } success: { [weak self] (data) in
+            self?.loadDataBlock(data, url)
+            dprint("loaded from cache: \(url)")
+        }
+    }
+    
+    func loadFromWeb() {
+        let url = baseURL
         self.source.getPostBy(id: item.id) { (post, error) in
             if let post = post {
-                if let url = self.baseURL, let content = try? self.parseHtml(post: post) {
-                    self.loadContentBlock(content, url.deletingLastPathComponent())
+                if let content = try? self.parseHtml(post: post) {
+                    self.loadContentBlock(content, url)
                 }
             }
         }
+    }
+    
+    func loadFinished(result:Result<Data, Error>, url:URL) {
+        
+        //cache only internal website posts:
+        if url.host != baseWebsiteHost {
+            return
+        }
+        
+        if url != self.baseURL {
+            return
+        }
+        
+        switch result {
+        case .success(let data):
+            saveToCache(data: data)
+            dprint("Saved to cache: \(url)")
+        case .failure(let error):
+            dprint(error.localizedDescription)
+        }
+    }
+    
+    private func saveToCache(data:Data) {
+        Shared.dataCache.set(value: data, key: baseURL.absoluteString)
     }
     
     func navigationFromThisPage(url:URL, completion:@escaping(String?, URL?, Error?)->()) {
@@ -64,7 +112,7 @@ class WebItemViewModel {
                 guard let self = self else { return }
                 
                 if let post = post, let url = URL(string: post.htmlURL) {
-                    self.item = NewsItem(id: post.id, title: post.title, shortText: "", date: post.date, views: 0, url: url.absoluteString, imageURL: nil, adImage: nil, type: .newsType)
+                    self.item = NewsItem(id: post.id, title: post.title, shortText: "", date: post.date, views: 0, url: url, imageURL: nil, adImage: nil, type: .newsType)
                     self.load()
                     completion(post.title, url, nil)
                 } else {
@@ -131,7 +179,7 @@ class WebItemViewModel {
         let body = doc.body()
         
         if let date = item.date.components(separatedBy: "T").first {
-            try body?.prepend("<p class=date>􀉉 \(date)</p>")
+            try body?.prepend("<p class=date>📅 \(date)</p>")
         }
         try body?.prepend("<h2>\(post.title)</h2>")
         

@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import UniformTypeIdentifiers
 import FTLinearActivityIndicator
 
 class WebItemViewController:PresentationReportingViewController {
@@ -31,8 +32,15 @@ class WebItemViewController:PresentationReportingViewController {
         self.loadingIndicator.startAnimating()
         progressIndicator.progress = 0.01
         
-        self.viewModel.loadContentBlock = { [weak self] content, baseURL in
+        viewModel.loadContentBlock = { [weak self] content, baseURL in
             self?.webView.loadHTMLString(content, baseURL: baseURL)
+        }
+        viewModel.loadDataBlock = { [weak self] data, baseURL in
+            if #available(iOS 14.0, *) {
+                if let mime = UTType.webArchive.preferredMIMEType {
+                    self?.webView.load(data, mimeType: mime, characterEncodingName: "utf-8", baseURL: baseURL)
+                }
+            }
         }
         updateUI()
         viewModel.viewDidLoad()
@@ -94,7 +102,7 @@ class WebItemViewController:PresentationReportingViewController {
     
     @IBAction func onShareButton(sender:UIBarButtonItem) {
         sender.isEnabled = false
-        guard let url = viewModel.baseURL else { return }
+        let url = viewModel.baseURL
         let items:[Any] = [url]
         let title = NSLocalizedString("Sharing a link", comment: "")
         showShareActivity(sender, items: items, title: title) { completed, activityType in
@@ -158,6 +166,16 @@ extension WebItemViewController:WKNavigationDelegate {
         self.loadingIndicator.stopAnimating()
         self.setupBackButton()
         updateProgressTimer()
+        
+        if #available(iOS 14.0, *) {
+            guard let url = webView.url else { return }
+            
+            if (webView.estimatedProgress == 1.0) {
+                webView.createWebArchiveData { [weak self] (result) in
+                    self?.viewModel.loadFinished(result: result, url: url)
+                }
+            }
+        }
     }
 }
 

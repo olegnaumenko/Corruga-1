@@ -56,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc private func onNewDataAvailable(n:Notification) {
         let app = UIApplication.shared
-
         if app.applicationIconBadgeNumber == 0 { return }
         
         if let userInfo = n.userInfo, let count = userInfo["total-items"] as? Int, count > 0 {

@@ -106,8 +106,8 @@ class NewsViewModel {
     func didSelecteItem(index:Int) -> Bool {
         
         let item = arrayForDisplay()[index]
-        if item.type == .adsType, let url = URL(string: item.url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if item.type == .adsType {
+            UIApplication.shared.open(item.url, options: [:], completionHandler: nil)
             return false
         }
         return self.navigationDelegate?.newsViewControllerDidSelect(item: item) ?? false        

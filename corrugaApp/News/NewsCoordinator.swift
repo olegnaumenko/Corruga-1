@@ -23,7 +23,8 @@ class NewsCoordinator: BaseFeatureCoordinator {
     
     private func webItemPreviewActions(_ webItemViewModel:WebItemViewModel) -> [UIPreviewAction] {
         let shareAction = UIPreviewAction(title: "news-coord-share-post-link".n10, style: .default) { [weak self] (action, controller) in
-            guard let self = self, let url = webItemViewModel.baseURL else { return }
+            guard let self = self else { return }
+            let url = webItemViewModel.baseURL.absoluteString
             self.newsViewController.showShareActivity(self.newsViewController, items: [url], title: nil) { (completed, activityType) in
                 if (completed) {
                     AppAnalytics.shared.logEvent(name:"share_link_success", params:["activity":activityType ?? "nil"])
@@ -34,7 +35,7 @@ class NewsCoordinator: BaseFeatureCoordinator {
         }
         
         let openAction = UIPreviewAction(title: "news-coord-open-on-website".n10, style: .default) { (action, controller) in
-            guard let url = webItemViewModel.baseURL else { return }
+            let url = webItemViewModel.baseURL
             let opts = [UIApplication.OpenExternalURLOptionsKey : Any]()
             UIApplication.shared.open(url, options: opts, completionHandler: nil)
         }

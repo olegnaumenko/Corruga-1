@@ -39,7 +39,7 @@ struct NewsItem:TypedItem {
     let shortText:String
     let date:String
     let views:Int
-    let url:String
+    let url:URL
     var imageURL:String?
     var adImage:String?
     var type: NewsItemType
@@ -336,10 +336,11 @@ class NewsSource: NSObject {
     private func newsItem(dict:[AnyHashable:Any]) -> NewsItem? {
 //        itemCount += 1
         if let title = (dict["title"] as? [AnyHashable:Any])?["rendered"] as? String,
-            let id = dict["id"] as? Int {
+            let id = dict["id"] as? Int,
+            let urlStr = dict["link"] as? String, let url = URL(string: urlStr) {
             let excerpt = (dict["excerpt"] as? [AnyHashable:Any])?["rendered"] as? String ?? ""
             let date = dict["date"] as? String ?? ""
-            let url = dict["link"] as? String ?? ""
+            
             return NewsItem(id:id, title:filterHtml(title), shortText:filterHtml(excerpt), date:date, views:0, url:url, type: .newsType)
         }
         return nil;
@@ -355,7 +356,7 @@ class NewsSource: NSObject {
         }
         let file = adImages[index].lastPathComponentWithoutExtension().lowercased()
         let title = adImageCountryMap[file] ?? ""
-        return NewsItem(id: 0, title: title, shortText: "", date: "", views: 0, url: "https://gofrotech.ru", imageURL: nil, adImage: adImages[index], type: .adsType)
+        return NewsItem(id: 0, title: title, shortText: "", date: "", views: 0, url: URL(string: "https://gofrotech.ru")!, imageURL: nil, adImage: adImages[index], type: .adsType)
     }
     
     private func filterHtml(_ string:String) -> String {
